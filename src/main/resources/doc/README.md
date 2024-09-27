@@ -1,4 +1,4 @@
-# Project Name
+# UML Visual SDK
 
 ## Table of Contents
 1. [Overview](#overview)
