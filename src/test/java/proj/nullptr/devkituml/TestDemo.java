@@ -2,6 +2,7 @@ package proj.nullptr.devkituml;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -43,4 +44,10 @@ public class TestDemo {
     assertEquals(null, exception.getMessage(), "Expected error message");
   }
 
+  @Test
+  @Timeout(5)
+  public void test (){
+    var expected = true;
+    var actual = expected;
+  }
 }
