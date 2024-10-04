@@ -1,4 +1,4 @@
-package proj.nullptr.devkituml;
+package proj.TeamNull.UMLdevkit;
 
 import static org.junit.jupiter.api.Assertions.*;
 

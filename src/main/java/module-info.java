@@ -12,6 +12,6 @@ module proj.nullptr.devkituml {
   requires eu.hansolo.tilesfx;
   requires com.almasb.fxgl.all;
 
-  opens proj.nullptr.devkituml to javafx.fxml;
-  exports proj.nullptr.devkituml;
+  opens proj.TeamNull.UMLdevkit to javafx.fxml;
+  exports proj.TeamNull.UMLdevkit;
 }

@@ -1,4 +1,4 @@
-package proj.nullptr.devkituml;
+package proj.TeamNull.UMLdevkit;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
