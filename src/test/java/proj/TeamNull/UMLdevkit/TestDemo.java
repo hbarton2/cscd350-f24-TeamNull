@@ -9,7 +9,7 @@ public class TestDemo {
   @Test
   @Timeout(1)
   public void timeOutDemo() {
-    int[] numbers = new int[1000000000];
+    int[] numbers = new int[200]; // reduced size for "toaster" machines
     for (int i = 0; i < numbers.length; i++) {
       if (numbers[i] == 10) {
         numbers[i] = 0;
