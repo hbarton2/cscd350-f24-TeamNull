@@ -2,9 +2,11 @@ package proj.TeamNull.UMLdevkit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.google.gson.Gson;
+import java.io.IOException;
 import org.junit.jupiter.api.*;
 
-public class TestDemo {
+public class TestDemo<module> {
 
   @Test
   @Timeout(1)
@@ -43,8 +45,31 @@ public class TestDemo {
 
   @Test
   @Timeout(5)
-  public void test (){
+  public void test() {
     var expected = true;
     var actual = expected;
+  }
+
+  @Test
+  public void testGsonSerializationAndDeserialization() {
+
+    // Create a new Gson instance
+    Gson gson = new Gson();
+
+    // Create a sample Person object
+    Person person = new Person("John Doe", 30, "New York");
+
+    // Serialize the Person object to JSON
+    String json = gson.toJson(person);
+    System.out.println("Serialized JSON: " + json);
+
+    // Deserialize the JSON back to a Person object
+    Person deserializedPerson = gson.fromJson(json, Person.class);
+
+    // Assert that the original and deserialized Person objects are equal
+    assertNotNull(deserializedPerson);
+    assertEquals(person.getName(), deserializedPerson.getName());
+    assertEquals(person.getAge(), deserializedPerson.getAge());
+    assertEquals(person.getCity(), deserializedPerson.getCity());
   }
 }
