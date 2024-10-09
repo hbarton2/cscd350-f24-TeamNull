@@ -11,7 +11,11 @@ module proj.nullptr.devkituml {
   requires org.kordamp.bootstrapfx.core;
   requires eu.hansolo.tilesfx;
   requires com.almasb.fxgl.all;
+  requires com.google.gson;
 
   opens proj.TeamNull.UMLdevkit to javafx.fxml;
   exports proj.TeamNull.UMLdevkit;
+
 }
+
+
