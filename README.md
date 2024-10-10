@@ -138,7 +138,7 @@ Please follow our contribution guidelines for more details.
 ---
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+Please see LICENSE.md
 
 ---
 
