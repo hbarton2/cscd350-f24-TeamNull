@@ -1,12 +1,16 @@
-package proj.TeamNull.UMLdevkit;
+package proj.TeamNull.UMLdevkkit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.google.gson.Gson;
-import java.io.IOException;
-import org.junit.jupiter.api.*;
+import org.junit.Test;
+import org.junit.jupiter.api.Timeout;
+import proj.TeamNull.UMLdevkit.Person;
 
-public class TestDemo<module> {
+
+public class DemoTest<module> {
 
   @Test
   @Timeout(1)
@@ -30,17 +34,10 @@ public class TestDemo<module> {
   }
 
   @Test
-  public void testNullPointerDemo() {
-    String username = null;
+  public void testPrintNullString() {
+    String name = null;
 
-    // Use assertThrows to catch the expected NullPointerException
-    NullPointerException exception = assertThrows(NullPointerException.class, () -> {
-      // Code that should throw the exception
-      username.length();  // This will throw NullPointerException because username is null
-    });
-
-    // Verify the exception message (optional, depends on the scenario)
-    assertEquals(null, exception.getMessage(), "Expected error message");
+    assertNull(name);
   }
 
   @Test

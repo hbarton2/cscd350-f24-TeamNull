@@ -22,6 +22,7 @@ public class EntryPoint extends Application {
     stage.show();
   }
 
+  // add if statement for GUI or Command-line Interface
   public static void main(String[] args) {
 
     Thread javafxThread = new Thread(() -> Application.launch(EntryPoint.class, args));

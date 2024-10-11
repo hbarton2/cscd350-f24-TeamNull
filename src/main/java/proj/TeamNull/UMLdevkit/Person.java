@@ -1,18 +1,21 @@
 package proj.TeamNull.UMLdevkit;
 
 public class Person {
+
   public String name;
   public int age;
   public String city;
 
   // Constructors, getters, and setters
-  public Person() {}
+  public Person() {
+  }
 
   public Person(String name, int age, String city) {
     this.name = name;
     this.age = age;
     this.city = city;
   }
+
   public String getName() {
     return name;
   }
