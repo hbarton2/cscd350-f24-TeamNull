@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UmlClass {
+
   private String name;
   private List<String> attributes;
   private List<String> methods;

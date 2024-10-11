@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UmlDiagram {
+
   // List to store UML classes
   private List<UmlClass> classes = new ArrayList<>();
 
