@@ -17,4 +17,9 @@ public class UmlDiagram {
   public void setClasses(List<UmlClass> classes) {
     this.classes = classes;
   }
+
+  //adds a class to the classes in the diagram
+  public void addClass(UmlClass myClass){
+    this.classes.add(myClass);
+  }
 }

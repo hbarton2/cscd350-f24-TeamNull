@@ -1,33 +1,41 @@
 package proj.TeamNull.UMLdevkit;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-public class EntryPoint extends Application {
+import com.google.gson.Gson;
+//import javafx.application.Application;
+//import javafx.fxml.FXMLLoader;
+//import javafx.scene.Scene;
+//import javafx.stage.Stage;
 
-  @Override
-  public void start(Stage stage) throws IOException {
+public class EntryPoint{
 
-    FXMLLoader fxmlLoader = new FXMLLoader(EntryPoint.class.getResource("HomeScene.fxml"));
-    Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+//  @Override
+//  public void start(Stage stage) throws IOException {
+//
+//    FXMLLoader fxmlLoader = new FXMLLoader(EntryPoint.class.getResource("HomeScene.fxml"));
+//    Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+//
+//    stage.setTitle("UML Development Kit");
+//    stage.setScene(scene);
+//    stage.show();
+//  }
 
-    stage.setTitle("UML Development Kit");
-    stage.setScene(scene);
-    stage.show();
-  }
+  //The GSon obj that will serialize and deserialize objects and JSon files.
+  private static Gson save_load = new Gson();
+  private static UmlDiagram classes = new UmlDiagram();
 
   // add if statement for GUI or Command-line Interface
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
 
-    Thread javafxThread = new Thread(() -> Application.launch(EntryPoint.class, args));
-    javafxThread.setDaemon(true);
-    javafxThread.start();
+
+//    Thread javafxThread = new Thread(() -> Application.launch(EntryPoint.class, args));
+//    javafxThread.setDaemon(true);
+//    javafxThread.start();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -38,16 +46,22 @@ public class EntryPoint extends Application {
       if (command.equalsIgnoreCase("exit")) {
         System.out.println("Exiting...");
         break;
-      }
-
-      if (command.equalsIgnoreCase("create class")) {
+      }else if (command.equalsIgnoreCase("create class")) {
         createClassTemplate(scanner);
+      } else if (command.equalsIgnoreCase("save")) {
+        System.out.println("Please enter a valid file name: ");
+        save(scanner);
+        System.out.println(classes);
+      }else if (command.equalsIgnoreCase("load")) {
+        System.out.println("Please enter the name of the file: ");
+        load(scanner);
+        System.out.println(classes);
       } else {
         System.out.println("Unknown command.");
       }
     }
-
     scanner.close();
+    System.exit(0);
   }
 
   public static void createClassTemplate(Scanner scanner) {
@@ -79,6 +93,10 @@ public class EntryPoint extends Application {
       methods.add(method);
     }
 
+    //Append the list of classes in UmlDiagram 'classes'
+    UmlClass myClass = new UmlClass(className, attributes, methods);
+    classes.addClass(myClass);
+
     // Display the UML class template
     displayClassTemplate(className, attributes, methods);
   }
@@ -108,5 +126,26 @@ public class EntryPoint extends Application {
     }
 
     System.out.println("+-----------------------+");
+  }
+
+  //Saves the UML diagram to a JSon format using the GSon library
+  public static void save(Scanner scanner) throws Exception {
+      try {
+        String fileName = scanner.nextLine();
+        save_load.toJson(classes, new FileWriter(fileName));
+      }catch (Exception e){
+        throw e;
+      }
+  }
+
+  //Loads the UML diagram to a JSon format using the GSon library
+  public static void load(Scanner scanner) throws Exception{
+    classes = new UmlDiagram();
+    try {
+      String fileName = scanner.nextLine();
+      classes = save_load.fromJson(fileName, UmlDiagram.class);
+    }catch (Exception e){
+      throw e;
+    }
   }
 }
