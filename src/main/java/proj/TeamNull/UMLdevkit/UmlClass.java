@@ -23,7 +23,7 @@ public class UmlClass {
 
   // Getter and Setter for name
   public String getName() {
-    return name;
+    return this.name;
   }
 
   public void setName(String name) {
@@ -32,7 +32,7 @@ public class UmlClass {
 
   // Getter for attributes
   public List<String> getAttributes() {
-    return attributes;
+    return this.attributes;
   }
 
   public void setAttributes(List<String> attributes) {
@@ -41,10 +41,48 @@ public class UmlClass {
 
   // Getter for methods
   public List<String> getMethods() {
-    return methods;
+    return this.methods;
   }
 
   public void setMethods(List<String> methods) {
     this.methods = methods;
+  }
+
+  //Creates String[] from this.attributes.
+  public String[] toSonAtrribs(){
+    String[] attribs = new String[this.attributes.size()];
+
+    //for each loop that takes each attribute string and puts it into a String[] to be returned.
+    int i = 0;
+    for (String s:
+            this.attributes) {
+      attribs[i] = s;
+      i++;
+    }
+
+    //returns the string array.
+    return attribs;
+  }
+
+  //Creates and returns a String[] generated from method Strings.
+  public String[] toSonMethods(){
+    String[] methods = new String[this.methods.size()];
+
+    //for each loop that fills out the method String[] array.
+    int i = 0;
+    for (String s:
+            this.methods) {
+      methods[i] = s;
+      i++;
+    }
+    //returns String[] methods.
+    return methods;
+  }
+
+  //returns String[] array of the class name.
+  public String[] toSonName(){
+    String[] name = {this.name};
+    //Although it seems unnecessary, it needs to be this way in order to adhere to the toSon() format in UmlDiagram.
+    return name;
   }
 }

@@ -61,6 +61,9 @@ public class EntryPoint{
       }
     }
     scanner.close();
+//    System.out.println(classes.toSon());
+//    Object[][] test = classes.toSon();
+//    System.out.println(test);
     System.exit(0);
   }
 
@@ -132,7 +135,8 @@ public class EntryPoint{
   public static void save(Scanner scanner) throws Exception {
       try {
         String fileName = scanner.nextLine();
-        save_load.toJson(classes, new FileWriter(fileName));
+        ArrayList<ArrayList<String[]>> toSon = classes.toSon();
+        save_load.toJson(toSon, new FileWriter(fileName));
       }catch (Exception e){
         throw e;
       }
