@@ -2,31 +2,30 @@ package proj.TeamNull.UMLdevkit;
 
 public class Help {
 
-    public String MethodHelp(){
-        return null;    //add,remove,rename information
+    public enum HelpType{
+        METHOD,
+        FIELD,
+        PARAMETER,
+        CLASS,
+        DISPLAY,
+        GENERAL
     }
 
-    public String FieldHelp(){
-        return null;    //add,remove,rename information
-    }
 
-    public String ClassHelp(){
-        return null;    //add,remove,rename information
-    }
+    public String getHelp(HelpType type) {
 
-    public String SaveLoadHelp(){
-        return null;    //how to save and load
-    }
+        if(type == null){
+            return "Invalid help type.";
+        }
 
-    public String ParameterHelp(){
-        return null;    //add,remove,rename information
-    }
-
-    public String DisplayHelp(){
-        return null;    //how to understand the display
-    }
-
-    public String GeneralHelp(){
-        return null;    //how to use the application
+        switch (type) {
+            case METHOD: return "Method help info.";
+            case FIELD: return "Field help info.";
+            case PARAMETER: return "Parameter help info.";
+            case CLASS: return "Class help info.";
+            case DISPLAY: return "Display help info.";
+            case GENERAL: return "General help info.";
+            default: return "Invalid help type.";
+        }
     }
 }
