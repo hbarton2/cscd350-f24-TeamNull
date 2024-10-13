@@ -11,9 +11,11 @@ import java.util.List;
 public class UMLMethod extends UMLComponent {
     private List<UMLComponent> parameters = new ArrayList<>(); // Method can have parameters
 
+
     public UMLMethod(String name) {
         super(name);
     }
+
 
     @Override
     public void add(UMLComponent component) {
@@ -24,10 +26,12 @@ public class UMLMethod extends UMLComponent {
         }
     }
 
+
     @Override
     public void remove(UMLComponent component) {
         parameters.remove(component);
     }
+
 
     @Override
     public UMLComponent getChild(String name) {
@@ -36,6 +40,7 @@ public class UMLMethod extends UMLComponent {
                 .findFirst()
                 .orElse(null);
     }
+
 
     // Additional UMLMethod-specific methods
     public List<UMLComponent> getParameters() {

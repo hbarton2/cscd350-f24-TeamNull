@@ -12,9 +12,11 @@ public class UMLClass extends UMLComponent {
     private List<UMLComponent> components = new ArrayList<>();  // Fields and methods
     private List<UMLRelationship> relationships = new ArrayList<>();  // Relationships for this class
 
+
     public UMLClass(String name) {
         super(name);
     }
+
 
     @Override
     public void add(UMLComponent component) {
@@ -40,6 +42,7 @@ public class UMLClass extends UMLComponent {
     public List<UMLRelationship> getRelationships() {
         return relationships;
     }
+
 
     @Override
     public void remove(UMLComponent component) {
