@@ -7,16 +7,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test Class for UMLParameter
- * @param <module>
  */
-public class UMLParameterTest<module> {
+public class UMLParameterTest{
 
   private final int TIMEOUT = 1000;
   private UMLParameter umlParameter;
 
+
+  public void setUp() {
+    umlParameter = new UMLParameter("param");
+  }
+
   @Test (timeout = TIMEOUT)
   public void testAdd() {
-
+    setUp();
     UMLParameter parameter = new UMLParameter("int");
 
     // Test that add operation throws an exception
@@ -25,7 +29,7 @@ public class UMLParameterTest<module> {
 
   @Test (timeout = TIMEOUT)
   public void testRemove() {
-
+    setUp();
     UMLParameter parameter = new UMLParameter("int");
 
     // Test that remove operation throws an exception
@@ -34,7 +38,7 @@ public class UMLParameterTest<module> {
 
   @Test (timeout = TIMEOUT)
   public void testGetChild() {
-
+    setUp();
     // Test that getChild operation throws an exception
     assertThrows(UnsupportedOperationException.class, () -> umlParameter.getChild("child"));
   }
