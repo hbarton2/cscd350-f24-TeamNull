@@ -6,10 +6,7 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 
 public class UMLField extends UMLComponent {
 
-    /**
-     * Field Constructor
-     * @param name field name
-     */
+
     public UMLField(String name) {
         super(name);
     }
