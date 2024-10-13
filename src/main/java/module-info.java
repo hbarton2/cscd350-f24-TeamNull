@@ -49,4 +49,6 @@ module proj.nullptr.devkituml {
   // Export the main package for other modules to access
   exports proj.TeamNull.UMLdevkit;
   exports proj.TeamNull.UMLdevkit.UIhandler;
+  exports proj.TeamNull.UMLdevkit.DemoOnly;
+  exports proj.TeamNull.UMLdevkit.Menu;
 }

@@ -1,12 +1,9 @@
-package proj.TeamNull.UMLdevkit;
-/**
- * PLEASE DON'T BUILD OFF THIS WAS JUST A DEMO
- * IF you want to know how JavaFX is doing the magic UIhandler.TerminalHandler -> Menu.Menu
- */
+package proj.TeamNull.UMLdevkit.DemoOnly;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+/**
+ * PLEASE DON'T BUILD OFF THIS WAS JUST A DEMO IF you want to know how JavaFX is doing the magic
+ * UIhandler.TerminalHandler -> Menu.Menu
+ */
 
 public class UMLClassTemplate {
 

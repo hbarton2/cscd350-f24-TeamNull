@@ -1,12 +1,11 @@
 package proj.TeamNull.UMLdevkit.UIhandler;
 
+import java.io.PrintStream;
+import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-import java.io.PrintStream;
-import java.util.Scanner;
 import proj.TeamNull.UMLdevkit.Menu.Menu;
 
 public class TerminalHandler {
