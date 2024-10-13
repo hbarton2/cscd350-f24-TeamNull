@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+  style="-fx-background-color: #696969;"
+  xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="proj.TeamNull.UMLdevkit.UIhandler.TerminalHandler">
+
+   <ImageView fitHeight="71.0" fitWidth="109.0" layoutX="483.0" layoutY="8.0"
+     pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../icons/airplaneInTheCold.jpg" />
+   </ImageView>
+
+   <TextArea fx:id="terminalOutput" layoutX="15.0" layoutY="80.0"
+     prefHeight="280.0" prefWidth="569.0" editable="false"
+     style="-fx-background-color: #FFFFFF;" wrapText="true"/>
+
+   <TextField fx:id="terminalInput" layoutX="15.0" layoutY="365.0"
+     prefHeight="30.0" prefWidth="569.0"
+     promptText="Enter a command and press Enter"
+     onAction="#handleTerminalInput" />
+
+   <Text fill="#00ff1e" layoutX="14.0" layoutY="29.0"
+     strokeType="OUTSIDE" strokeWidth="0.0"
+     text="Terminal" textAlignment="CENTER">
+      <font>
+         <Font name="Cascadia Mono Regular" size="16.0" />
+      </font>
+   </Text>
+</AnchorPane>
