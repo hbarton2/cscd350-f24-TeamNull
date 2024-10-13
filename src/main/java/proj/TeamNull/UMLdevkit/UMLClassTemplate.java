@@ -49,7 +49,7 @@ public class UMLClassTemplate {
   }
 
   // Linear search for class name
-  // Used
+  // Used linear search because names may not be sorted.
   public static void searchClassName(  String[] array, String key){
     if (array == null || array.length == 0) {
       System.out.println("There is nothing in the list");
