@@ -7,14 +7,26 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 public abstract class UMLComponent {
     protected String name;
 
+    /**
+     * Constructs Component
+     * @param name component name
+     */
     public UMLComponent(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name
+     * @param name of component
+     */
     public void setName(String name) {
         this.name = name;
     }

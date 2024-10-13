@@ -11,10 +11,18 @@ import java.util.List;
 public class UMLMethod extends UMLComponent {
     private List<UMLComponent> parameters = new ArrayList<>(); // Method can have parameters
 
+    /**
+     * Method Constructor
+     * @param name  name of method
+     */
     public UMLMethod(String name) {
         super(name);
     }
 
+    /**
+     * Add component to method (only parameters)
+     * @param component parameter to be added
+     */
     @Override
     public void add(UMLComponent component) {
         if (component instanceof UMLParameter && !parameters.contains(component)) {
@@ -24,11 +32,20 @@ public class UMLMethod extends UMLComponent {
         }
     }
 
+    /**
+     * Remove component from method
+     * @param component parameter to be removed
+     */
     @Override
     public void remove(UMLComponent component) {
         parameters.remove(component);
     }
 
+    /**
+     * Gets child (parameter) from method
+     * @param name of child to be retrieved
+     * @return parameters
+     */
     @Override
     public UMLComponent getChild(String name) {
         return parameters.stream()
@@ -36,6 +53,7 @@ public class UMLMethod extends UMLComponent {
                 .findFirst()
                 .orElse(null);
     }
+
 
     // Additional UMLMethod-specific methods
     public List<UMLComponent> getParameters() {

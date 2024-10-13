@@ -5,6 +5,10 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
  */
 public class UMLParameter extends UMLComponent {
 
+    /**
+     * Parameter Constructor
+     * @param name of constructor
+     */
     public UMLParameter(String name) {
         super(name);
     }
