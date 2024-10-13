@@ -4,7 +4,7 @@ import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Test;
-import proj.TeamNull.UMLdevkit.Help;
+import proj.TeamNull.UMLdevkit.Menu.Help;
 
 public class HelpTest {
     private Help help;

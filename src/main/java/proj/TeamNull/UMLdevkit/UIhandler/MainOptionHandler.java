@@ -2,10 +2,8 @@ package proj.TeamNull.UMLdevkit.UIhandler;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import proj.TeamNull.UMLdevkit.EntryPoint;

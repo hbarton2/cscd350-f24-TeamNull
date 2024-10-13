@@ -1,4 +1,4 @@
-package proj.TeamNull.UMLdevkit;
+package proj.TeamNull.UMLdevkit.DemoOnly;
 
 import com.google.gson.Gson;
 import java.io.FileReader;
