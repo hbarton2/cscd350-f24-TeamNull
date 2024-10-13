@@ -43,20 +43,32 @@ public class UMLClassTemplate {
 
     // Display the UML class template
     displayClassTemplate(className, attributes, methods);
-    System.out.println("Do you want to search for class ?");
+
 
     scanner.close();
   }
-  // Search class name
-  public static void searchClassName(String key){
 
-    if(key.isEmpty()){
-       System.out.println("Please enter a class name.");
-       return;
-     }
-    if(key.equalsIgnoreCase("Book") ){}
+  // Linear search for class name
+  // Used
+  public static void searchClassName(  String[] array, String key){
+    if (array == null || array.length == 0) {
+      System.out.println("There is nothing in the list");
+      return;
+    }
+    boolean found = false;  // Track if the key is found
+    for (int i = 0; i < array.length; i++) {
 
-  }
+      if (array[i].equals(key)) {
+        System.out.println("Found: " + array[i] + " at index " + i);
+        found = true;
+        break;  // Exit after finding the first match
+      }
+    }
+    if (!found) {
+      System.out.println("Class name not found.");
+    }
+
+  }//End of method
 
   public static void displayClassTemplate(String className, List<String> attributes,
     List<String> methods) {
