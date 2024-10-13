@@ -35,6 +35,7 @@ public class EntryPoint extends Application {
       System.out.println("Enter a command: ");
       String command = scanner.nextLine();
 
+
       if (command.equalsIgnoreCase("exit")) {
         System.out.println("Exiting...");
         break;

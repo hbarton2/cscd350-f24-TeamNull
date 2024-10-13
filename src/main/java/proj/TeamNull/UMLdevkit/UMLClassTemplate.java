@@ -13,6 +13,10 @@ public class UMLClassTemplate {
     System.out.print("Enter class name: ");
     String className = scanner.nextLine();
 
+    // Storing class names
+    ArrayList<String> classes = new ArrayList<>();
+    classes.add(className);
+
     // Input for attributes
     List<String> attributes = new ArrayList<>();
     System.out.println("Enter attributes (type 'done' when finished): ");
@@ -39,8 +43,19 @@ public class UMLClassTemplate {
 
     // Display the UML class template
     displayClassTemplate(className, attributes, methods);
+    System.out.println("Do you want to search for class ?");
 
     scanner.close();
+  }
+  // Search class name
+  public static void searchClassName(String key){
+
+    if(key.isEmpty()){
+       System.out.println("Please enter a class name.");
+       return;
+     }
+    if(key.equalsIgnoreCase("Book") ){}
+
   }
 
   public static void displayClassTemplate(String className, List<String> attributes,
