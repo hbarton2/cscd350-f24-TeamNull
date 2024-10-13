@@ -1,5 +1,6 @@
 package proj.TeamNull.UMLdevkit;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,35 +8,21 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
-//import javafx.application.Application;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Scene;
-//import javafx.stage.Stage;
 
 public class EntryPoint{
 
-//  @Override
-//  public void start(Stage stage) throws IOException {
-//
-//    FXMLLoader fxmlLoader = new FXMLLoader(EntryPoint.class.getResource("HomeScene.fxml"));
-//    Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-//
-//    stage.setTitle("UML Development Kit");
-//    stage.setScene(scene);
-//    stage.show();
-//  }
 
   //The GSon obj that will serialize and deserialize objects and JSon files.
   private static Gson save_load = new Gson();
+
+  // The json String will be used to capture the output of Gson save_load.
+  // It captures both the save and load states.
+  private static String json;
   private static UmlDiagram classes = new UmlDiagram();
 
   // add if statement for GUI or Command-line Interface
   public static void main(String[] args) throws Exception {
 
-
-//    Thread javafxThread = new Thread(() -> Application.launch(EntryPoint.class, args));
-//    javafxThread.setDaemon(true);
-//    javafxThread.start();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -51,20 +38,16 @@ public class EntryPoint{
       } else if (command.equalsIgnoreCase("save")) {
         System.out.println("Please enter a valid file name: ");
         save(scanner);
-        System.out.println(classes);
+        //System.out.println(classes);
       }else if (command.equalsIgnoreCase("load")) {
         System.out.println("Please enter the name of the file: ");
         load(scanner);
-        System.out.println(classes);
+        //System.out.println(classes);
       } else {
         System.out.println("Unknown command.");
       }
     }
     scanner.close();
-//    System.out.println(classes.toSon());
-//    Object[][] test = classes.toSon();
-//    System.out.println(test);
-    System.exit(0);
   }
 
   public static void createClassTemplate(Scanner scanner) {
@@ -131,24 +114,48 @@ public class EntryPoint{
     System.out.println("+-----------------------+");
   }
 
-  //Saves the UML diagram to a JSon format using the GSon library
+  //Saves the UML diagram to a JSon format using the GSon library.
   public static void save(Scanner scanner) throws Exception {
       try {
-        String fileName = scanner.nextLine();
-        ArrayList<ArrayList<String[]>> toSon = classes.toSon();
-        save_load.toJson(toSon, new FileWriter(fileName));
-      }catch (Exception e){
+        // Creates a new Gson instance for save_load.
+        save_load = new Gson();
+        String fileName = scanner.nextLine() + ".json";  // captures the file-nae to save to.
+        FileWriter fOut = new FileWriter(fileName); // creates an output writer based off of fileName.
+        ArrayList<ArrayList<String[]>> toSon = classes.toSon(); //prepares data in UmlDiagram for output.
+        json = save_load.toJson(toSon); //generates the json formatted String for output.
+
+        fOut.write(json); // writes the String to the file.
+        fOut.flush(); //flushes output.
+        fOut.close(); // closes the file.
+      }catch (Exception e){ // error handling.
         throw e;
       }
   }
 
-  //Loads the UML diagram to a JSon format using the GSon library
+  //Loads the UML diagram from a JSon format using the GSon library.
   public static void load(Scanner scanner) throws Exception{
-    classes = new UmlDiagram();
+    classes = new UmlDiagram(); // clears the current data in UmlDiagram.
     try {
-      String fileName = scanner.nextLine();
-      classes = save_load.fromJson(fileName, UmlDiagram.class);
-    }catch (Exception e){
+      save_load = new Gson(); // creates a new Gson instance for save_load.
+      String fileName = scanner.nextLine() + ".json"; // gets the fileName from the user.
+      FileReader fIn = new FileReader(fileName);// Creates a object to read in the data from the file.
+      ArrayList<ArrayList<String[]>> fromJson = save_load.fromJson(fIn, ArrayList.class); // grabs the exact structure in the Json and loads it in.
+      UmlDiagram diagram = new UmlDiagram(); //creates a temporary diagram place-holder
+
+      //loops through the whole ArrayList and grabs each ArrayList to be put into a new UmlClass.
+      for (int i = 0; i <= fromJson.size() - 1; i++){
+        ArrayList myClass = fromJson.get(i); // grabs the 'class' (ArrayList<String[]>)
+        ArrayList name = (ArrayList) myClass.get(0); //This looks weird, bc it is. In order to grab the actual data, we need to put it into arrayList 1rst.
+        String addName = (String) name.get(0); // gets the name of the 'class'
+        ArrayList attribs = (ArrayList) myClass.get(1);//Class constructor takes an arrayList, so we can just grab this tuple.
+        ArrayList methods = (ArrayList) myClass.get(2);// Same comment as line above this one.
+        UmlClass myUml = new UmlClass(addName, attribs, methods);//finally generates the 'new' UmlClass.
+        diagram.addClass(myUml); // appends diagram ArrayList with the new class.
+      }
+      classes = diagram;// sets the static UmlDiagram to be the newly loaded in one.
+      fIn.close();//closes the file.
+
+    }catch (Exception e){//error handling.
       throw e;
     }
   }
