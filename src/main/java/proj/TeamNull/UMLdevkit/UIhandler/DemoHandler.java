@@ -1,15 +1,15 @@
-package proj.TeamNull.UMLdevkit;
+package proj.TeamNull.UMLdevkit.UIhandler;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HomeController {
+public class DemoHandler {
 
   @FXML
   private Label welcomeText;
 
   @FXML
   protected void onHelloButtonClick() {
-    welcomeText.setText("Welcome to JavaFX Application!");
+    welcomeText.setText("Welcome to JavaFX Void!");
   }
 }
