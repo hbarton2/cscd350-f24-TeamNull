@@ -6,9 +6,11 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 
 public class UMLField extends UMLComponent {
 
+
     public UMLField(String name) {
         super(name);
     }
+
 
     @Override
     public void add(UMLComponent component) {

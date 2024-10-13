@@ -9,12 +9,14 @@ public class UMLRelationship extends UMLComponent {
     private UMLClass destination;
     private String type;  // For now, we can store the type of relationship as a string
 
+
     public UMLRelationship(String name, UMLClass source, UMLClass destination, String type) {
         super(name);  // The relationship name could be something like "Person-Address Association"
         this.source = source;
         this.destination = destination;
         this.type = type;
     }
+
 
     public UMLClass getSource() {
         return source;
@@ -23,6 +25,7 @@ public class UMLRelationship extends UMLComponent {
     public UMLClass getDestination() {
         return destination;
     }
+
 
     public String getType() {
         return type;
