@@ -8,28 +8,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0"
-  style="-fx-background-color: #696969;"
-  xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-  fx:controller="proj.TeamNull.UMLdevkit.UIhandler.TerminalHandler">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.TeamNull.UMLdevkit.UIhandler.TerminalHandler">
 
-   <ImageView fitHeight="71.0" fitWidth="109.0" layoutX="483.0" layoutY="8.0"
-     pickOnBounds="true" preserveRatio="true">
-      <Image url="@../../../icons/airplaneInTheCold.jpg" />
+   <ImageView fitHeight="71.0" fitWidth="454.0" layoutX="515.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../icons/terminal.jpg" />
    </ImageView>
 
-   <TextArea fx:id="terminalOutput" layoutX="15.0" layoutY="80.0"
-     prefHeight="280.0" prefWidth="569.0" editable="false"
-     style="-fx-background-color: #FFFFFF;" wrapText="true"/>
+   <TextArea fx:id="terminalOutput" editable="false" layoutX="15.0" layoutY="80.0" prefHeight="280.0" prefWidth="569.0" style="-fx-background-color: #FFFFFF;" wrapText="true" />
 
-   <TextField fx:id="terminalInput" layoutX="15.0" layoutY="365.0"
-     prefHeight="30.0" prefWidth="569.0"
-     promptText="Enter a command and press Enter"
-     onAction="#handleTerminalInput" />
+   <TextField fx:id="terminalInput" layoutX="15.0" layoutY="365.0" onAction="#handleTerminalInput" prefHeight="30.0" prefWidth="569.0" promptText="Enter a command and press Enter" />
 
-   <Text fill="#00ff1e" layoutX="14.0" layoutY="29.0"
-     strokeType="OUTSIDE" strokeWidth="0.0"
-     text="Terminal" textAlignment="CENTER">
+   <Text fill="#00ff1e" layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Terminal" textAlignment="CENTER">
       <font>
          <Font name="Cascadia Mono Regular" size="16.0" />
       </font>
