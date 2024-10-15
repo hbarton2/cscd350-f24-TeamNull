@@ -12,6 +12,7 @@ public class UMLMethod extends UMLComponent {
     private List<UMLComponent> parameters = new ArrayList<>(); // Method can have parameters
 
 
+
     public UMLMethod(String name) {
         super(name);
     }
