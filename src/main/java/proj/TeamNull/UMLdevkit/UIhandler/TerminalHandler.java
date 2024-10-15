@@ -37,7 +37,7 @@ public class TerminalHandler {
       System.out.println("User: " + input);  // Print user input to terminal.
       terminalInput.clear();  // Clear the input field.
 
-      menu.processInput(input);  // Send input to the menu for processing.
+      Menu.processMainMenuInput(input);  // Send input to the menu for processing.
     }
   }
 
@@ -62,11 +62,11 @@ public class TerminalHandler {
     // Launch the menu in a new thread.
     new Thread(() -> {
       Scanner scanner = new Scanner(System.in);
-      menu.displayMenu();  // Display the initial menu.
+      Menu.displayMainMenu();  // Display the initial menu.
 
       while (scanner.hasNextLine()) {
         String input = scanner.nextLine();
-        menu.processInput(input);  // Handle input via the Menu class.
+        menu.processMainMenuInput(input);  // Handle input via the Menu class.
       }
     }).start();
   }

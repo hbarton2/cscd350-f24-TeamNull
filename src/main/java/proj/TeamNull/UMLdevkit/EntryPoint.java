@@ -9,10 +9,13 @@ package proj.TeamNull.UMLdevkit;
  */
 
 import java.io.IOException;
+import java.util.Scanner;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import proj.TeamNull.UMLdevkit.Menu.Menu;
 
 public class EntryPoint extends Application {
 
@@ -31,9 +34,19 @@ public class EntryPoint extends Application {
     stage.show();
   }
 
-  // add if statement for GUI or Command-line Interface
+  /**
+   * Start Menu Here!
+   */
   public static void main(String[] args) {
-    launch();
+
+    Scanner scanner = new Scanner(System.in);
+
+    Menu.displayMainMenu();
+    Menu.processMainMenuInput(scanner.nextLine());
+
+    //launch(); <------- confused what this is doing! -kate
+
+
 //    Thread javafxThread = new Thread(() -> Void.launch(EntryPoint.class, args));
 //    javafxThread.setDaemon(true);
 //    javafxThread.start();
