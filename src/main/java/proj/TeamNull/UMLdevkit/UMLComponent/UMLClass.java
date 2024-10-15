@@ -2,7 +2,6 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * UMLClass extends UMLComponent. Represents class in UML Editor.
  * Will manage other components like Fields and Methods.
