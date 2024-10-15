@@ -16,8 +16,8 @@ public class UMLRelationshipTest {
 
   // Helper method to create UMLRelationship object
   private void relationshipCreationHelper() {
-    UMLClass sourceClass = new UMLClass("Person");
-    UMLClass destinationClass = new UMLClass("Address");
+    UMLClass sourceClass = new UMLClass("Person", null);
+    UMLClass destinationClass = new UMLClass("Address", null);
     umlRelationship = new UMLRelationship("Person-Address Association", sourceClass, destinationClass, "Association");
   }
 
@@ -56,7 +56,7 @@ public class UMLRelationshipTest {
     relationshipCreationHelper();
 
     // Test that add(UMLComponent) is unsupported
-    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.add(new UMLClass("NewClass")));
+    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.add(new UMLClass("NewClass", null)));
   }
 
   @Test (timeout = TIMEOUT)
@@ -64,7 +64,7 @@ public class UMLRelationshipTest {
     relationshipCreationHelper();
 
     // Test that remove(UMLComponent) is unsupported
-    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.remove(new UMLClass("NewClass")));
+    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.remove(new UMLClass("NewClass", null)));
   }
 
   @Test (timeout = TIMEOUT)

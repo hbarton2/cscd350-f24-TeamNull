@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.jupiter.api.Timeout;
-import proj.TeamNull.UMLdevkit.Person;
+import proj.TeamNull.UMLdevkit.DemoOnly.Person;
 
 
 public class DemoTest<module> {

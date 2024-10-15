@@ -21,15 +21,15 @@ public class UMLMethodTest<module> {
 
   // Helper method to create UMLMethod object
   private void methodCreationHelper() {
-    umlMethod = new UMLMethod("calculate");
+    umlMethod = new UMLMethod("calculate", null);
   }
 
   @Test (timeout = TIMEOUT)
   public void testAddParameter() {
     methodCreationHelper();
 
-    UMLParameter param1 = new UMLParameter("x");
-    UMLParameter param2 = new UMLParameter("y");
+    UMLParameter param1 = new UMLParameter("x", "int");
+    UMLParameter param2 = new UMLParameter("y", "int");
 
     // Add parameters to the method
     umlMethod.add(param1);
@@ -46,7 +46,7 @@ public class UMLMethodTest<module> {
   public void testAddDuplicateParameter() {
     methodCreationHelper();
 
-    UMLParameter param1 = new UMLParameter("x");
+    UMLParameter param1 = new UMLParameter("x", "int");
 
     // Add parameter once
     umlMethod.add(param1);
@@ -60,8 +60,8 @@ public class UMLMethodTest<module> {
   public void testRemoveParameter() {
     methodCreationHelper();
 
-    UMLParameter param1 = new UMLParameter("x");
-    UMLParameter param2 = new UMLParameter("y");
+    UMLParameter param1 = new UMLParameter("x", "int");
+    UMLParameter param2 = new UMLParameter("y", "int");
 
     // Add parameters to the method
     umlMethod.add(param1);
@@ -80,7 +80,7 @@ public class UMLMethodTest<module> {
   public void testGetChild() {
     methodCreationHelper();
 
-    UMLParameter param1 = new UMLParameter("x");
+    UMLParameter param1 = new UMLParameter("x", "int");
 
     // Add a parameter
     umlMethod.add(param1);

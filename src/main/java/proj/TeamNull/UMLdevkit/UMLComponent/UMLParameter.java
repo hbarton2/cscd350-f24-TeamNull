@@ -2,11 +2,11 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 
 /**
  * UMLParameter extends UMLComponent. Represents a Parameter in a Method.
+ * add parameter type as well
  */
 public class UMLParameter extends UMLComponent {
 
-
-    public UMLParameter(String name) {
+    public UMLParameter(String name, String type) {
         super(name);
     }
 

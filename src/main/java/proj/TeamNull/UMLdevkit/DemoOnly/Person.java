@@ -1,4 +1,4 @@
-package proj.TeamNull.UMLdevkit;
+package proj.TeamNull.UMLdevkit.DemoOnly;
 
 public class Person {
 
