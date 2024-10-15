@@ -30,6 +30,12 @@ public abstract class UMLComponent {
     // Other common operations
     public boolean isValidName(String name) {
         // You can add logic for name validation
-        return name != null && !name.trim().isEmpty();
+        if(name == null)
+            return false;
+        if(name.length() > 50 || name.length() <= 1)
+            return false;
+        if(name.charAt(0) == '@')
+            return false;
+        return !name.isBlank();
     }
 }
