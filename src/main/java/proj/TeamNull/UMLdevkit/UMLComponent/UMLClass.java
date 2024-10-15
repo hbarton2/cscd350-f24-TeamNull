@@ -28,7 +28,6 @@ public class UMLClass extends UMLComponent {
         }
     }
 
-
     @Override
     public void remove(UMLComponent component) {
         if (component instanceof UMLField || component instanceof UMLMethod || component instanceof UMLRelationship) {
