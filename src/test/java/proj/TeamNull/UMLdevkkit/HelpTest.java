@@ -1,6 +1,7 @@
 package proj.TeamNull.UMLdevkkit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,4 +32,15 @@ public class HelpTest {
             assertFalse("Help info should not be empty for type: " + type, result.isEmpty());
         }
     }
+
+    @Test
+    public void testHelpTypeFromInt() {
+        assertEquals(Help.HelpType.METHOD, Help.HelpType.fromInt(1));
+        assertEquals(Help.HelpType.FIELD, Help.HelpType.fromInt(2));
+        assertEquals(Help.HelpType.PARAMETER, Help.HelpType.fromInt(3));
+        assertEquals(Help.HelpType.CLASS, Help.HelpType.fromInt(4));
+        assertEquals(Help.HelpType.DISPLAY, Help.HelpType.fromInt(5));
+        assertEquals(Help.HelpType.GENERAL, Help.HelpType.fromInt(6));
+        assertNull(Help.HelpType.fromInt(7));
+        }
 }
