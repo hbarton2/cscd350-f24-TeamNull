@@ -6,8 +6,7 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 
 public class UMLField extends UMLComponent {
 
-
-    public UMLField(String name) {
+    public UMLField(String name, String type) {
         super(name);
     }
 

@@ -16,13 +16,13 @@ public class UMLFieldTest {
 
   // Helper method to initialize UMLField
   private void fieldCreationHelper() {
-    umlField = new UMLField("size");
+    umlField = new UMLField("size", "int");
   }
 
   @Test (timeout = TIMEOUT)
   public void testAdd() {
     fieldCreationHelper();
-    UMLField nameField = new UMLField("name");
+    UMLField nameField = new UMLField("name", "String");
 
     // Test that add operation throws an exception
     assertThrows(UnsupportedOperationException.class, () -> umlField.add(nameField));
@@ -31,7 +31,7 @@ public class UMLFieldTest {
   @Test (timeout = TIMEOUT)
   public void testRemove() {
     fieldCreationHelper();
-    UMLField nameField = new UMLField("name");
+    UMLField nameField = new UMLField("name", "String");
 
     // Test that remove operation throws an exception
     assertThrows(UnsupportedOperationException.class, () -> umlField.remove(nameField));

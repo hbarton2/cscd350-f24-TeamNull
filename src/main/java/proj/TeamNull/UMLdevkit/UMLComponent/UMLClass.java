@@ -6,47 +6,44 @@ import java.util.List;
 /**
  * UMLClass extends UMLComponent. Represents class in UML Editor.
  * Will manage other components like Fields and Methods.
- *
  */
 public class UMLClass extends UMLComponent {
-    private List<UMLComponent> components = new ArrayList<>();  // Fields and methods
-    private List<UMLRelationship> relationships = new ArrayList<>();  // Relationships for this class
+    private List<UMLComponent> components = new ArrayList<>();
 
-
-    public UMLClass(String name) {
+    public UMLClass(String name, List<UMLComponent> components) {
         super(name);
+        if(components != null)
+            this.components.addAll(components);
     }
-
 
     @Override
     public void add(UMLComponent component) {
-        if (component instanceof UMLField || component instanceof UMLMethod) {
+        if (component instanceof UMLField || component instanceof UMLMethod || component instanceof UMLRelationship) {
+            if (component instanceof UMLField && components.stream().anyMatch(c -> c.getName().equals(component.getName()))) {
+                throw new IllegalArgumentException("Field with name " + component.getName() + " already exists");
+            }
             components.add(component);
         } else {
-            throw new IllegalArgumentException("Only fields or methods can be added to a class.");
+            throw new IllegalArgumentException("Only fields, methods, or relationships can be added to a class.");
         }
-    }
-
-    public void addRelationship(UMLRelationship relationship) {
-        if (!relationships.contains(relationship)) {
-            relationships.add(relationship);
-        } else {
-            System.out.println("Relationship already exists.");
-        }
-    }
-
-    public void removeRelationship(UMLRelationship relationship) {
-        relationships.remove(relationship);
-    }
-
-    public List<UMLRelationship> getRelationships() {
-        return relationships;
     }
 
 
     @Override
     public void remove(UMLComponent component) {
-        components.remove(component);
+        if (component instanceof UMLField || component instanceof UMLMethod || component instanceof UMLRelationship) {
+            components.remove(component);
+        } else {
+            throw new IllegalArgumentException("Only fields, methods, or relationships can be removed from a class.");
+        }
+    }
+
+    //Still needs to check if name exists already
+    public void setNewName(String newName){
+        if(isValidName(newName))
+            this.name = newName;
+        else
+            throw new IllegalArgumentException("New Name is not valid");
     }
 
     @Override

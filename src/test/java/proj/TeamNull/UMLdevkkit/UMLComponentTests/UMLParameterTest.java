@@ -15,13 +15,13 @@ public class UMLParameterTest{
 
 
   public void setUp() {
-    umlParameter = new UMLParameter("param");
+    umlParameter = new UMLParameter("param", "int");
   }
 
   @Test (timeout = TIMEOUT)
   public void testAdd() {
     setUp();
-    UMLParameter parameter = new UMLParameter("int");
+    UMLParameter parameter = new UMLParameter("int", "int");
 
     // Test that add operation throws an exception
     assertThrows(UnsupportedOperationException.class, () -> umlParameter.add(parameter));
@@ -30,7 +30,7 @@ public class UMLParameterTest{
   @Test (timeout = TIMEOUT)
   public void testRemove() {
     setUp();
-    UMLParameter parameter = new UMLParameter("int");
+    UMLParameter parameter = new UMLParameter("int", "int");
 
     // Test that remove operation throws an exception
     assertThrows(UnsupportedOperationException.class, () -> umlParameter.remove(parameter));
