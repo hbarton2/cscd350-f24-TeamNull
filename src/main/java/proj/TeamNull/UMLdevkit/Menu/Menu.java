@@ -36,8 +36,7 @@ public class Menu {
         Help.printHelpMenu();
         break;
       case "3":
-        //TODO: address about statement. Should this say more?
-        System.out.println("About: This application was built using JavaFX.");
+        System.out.println("About: This application was built using JavaFX. ");
         break;
       case "4":
         System.out.println("Exiting the menu...");
@@ -90,9 +89,11 @@ public class Menu {
         return;
       case "5":
         System.out.println("Save to JSON file");
+        System.out.println("------------ run saveJSONFile method -----------");
         break;
       case "6":
         System.out.println("Load from JSON file");
+        System.out.println("------------ run loadJSONFile method -----------");
         break;
       case "7":
         System.out.println("Returning to Main Menu...");
@@ -133,18 +134,22 @@ public class Menu {
       case "2":
         System.out.println("Delete Class: ");
         // delete class method
+        System.out.println("------------ run deleteClass method -----------");
         break;
       case "3":
         System.out.println("Rename Class: ");
         // rename class method
+        System.out.println("------------ run renameClass method -----------");
         break;
       case "4":
         System.out.println("Add Class Relationship: ");
         // add class relationship method
+        System.out.println("------------ run addClassRelationship method -----------");
         break;
       case "5":
         System.out.println("Remove Class Relationship: ");
         // delete class relationship method
+        System.out.println("------------ run removeClassRelationship method -----------");
         break;
       case "6":
         System.out.println("Returning to UML Menu...");
@@ -176,14 +181,17 @@ public class Menu {
       case "1":
         System.out.println("Add Field: ");
         // add field method
+        System.out.println("------------ run addField method -----------");
         break;
       case "2":
         System.out.println("Delete Field: ");
         // delete field method
+        System.out.println("------------ run deleteField method -----------");
         break;
       case "3":
         System.out.println("Rename Field: ");
         // rename field method
+        System.out.println("------------ run renameField method -----------");
         break;
       case "4":
         System.out.println("Returning to UML Menu...");
@@ -218,26 +226,32 @@ public class Menu {
       case "1":
         System.out.println("Add Method: ");
         // addMethod method
+        System.out.println("------------ run addMethod method -----------");
         break;
       case "2":
         System.out.println("Delete Method: ");
         // deleteMethod method
+        System.out.println("------------ run deleteMethod -----------");
         break;
       case "3":
         System.out.println("Rename Method: ");
         // renameMethod method
+        System.out.println("------------ run renameMethod -----------");
         break;
       case "4":
         System.out.println("Add Method Parameter: ");
         // addMethodParameter method
+        System.out.println("------------ run addMethodParameter method -----------");
         break;
       case "5":
         System.out.println("Remove Method Parameter: ");
         // removeMethodParameter method
+        System.out.println("------------ run removeMethodParameter method -----------");
         break;
       case "6":
         System.out.println("Update Method Parameter: ");
         // updateMethodParameter method
+        System.out.println("------------ run upMethod -----------");
         break;
       case "7":
         System.out.println("Returning to UML Menu...");
