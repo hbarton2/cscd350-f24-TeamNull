@@ -28,8 +28,7 @@ public class Menu {
         processUMLMenuInput(sc.nextLine());
         return;
       case "2":
-        //TODO : Call the Help menu
-        System.out.println("Help: This is a sample help message.");
+        Help.printHelpMenu();
         break;
       case "3":
         //TODO: address about statement. Should this say more?
