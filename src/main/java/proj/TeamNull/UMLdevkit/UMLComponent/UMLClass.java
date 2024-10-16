@@ -36,13 +36,7 @@ public class UMLClass extends UMLComponent {
         }
     }
 
-    //Still needs to check if name exists already
-    public void setNewName(String newName){
-        if(isValidName(newName))
-            this.name = newName;
-        else
-            throw new IllegalArgumentException("New Name is not valid");
-    }
+
 
     @Override
     public UMLComponent getChild(String name) {

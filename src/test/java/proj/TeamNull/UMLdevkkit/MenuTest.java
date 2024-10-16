@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Timeout;
+import proj.TeamNull.UMLdevkit.DemoOnly.Person;
 import proj.TeamNull.UMLdevkit.Menu.Menu;
 
 import java.io.ByteArrayInputStream;
@@ -18,7 +19,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MenuTest {
 
-    private final int TIMEOUT = 1000;
+    @Test
+    @Timeout(1)
+    public void timeOutDemo() {
+        int[] numbers = new int[200]; // reduced size for "toaster" machines
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] == 10) {
+                numbers[i] = 0;
+            }
+        }
+    }
+
+
+
+    @Test
+    public void testPrintNullString() {
+        String name = null;
+
+        assertNull(name);
+    }
+
+    @Test
+    @Timeout(5)
+    public void test() {
+        var expected = true;
+        var actual = expected;
+    }
 
 
 }

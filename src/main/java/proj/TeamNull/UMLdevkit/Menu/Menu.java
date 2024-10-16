@@ -1,4 +1,6 @@
 package proj.TeamNull.UMLdevkit.Menu;
+import proj.TeamNull.UMLdevkit.UMLComponent.UMLComponentManager;
+
 import java.util.Scanner;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Scanner;
 public class Menu {
 
   static Scanner sc = new Scanner(System.in);
+  public static UMLComponentManager classes;
 
   public static void displayMainMenu() {
     System.out.println("+-----------------------------+");
@@ -122,6 +125,7 @@ public class Menu {
       case "1":
         System.out.println("Add Class: ");
         // add class method
+        classes.addClass(sc.nextLine());
         break;
       case "2":
         System.out.println("Delete Class: ");
