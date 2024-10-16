@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Menu {
 
   static Scanner sc = new Scanner(System.in);
-  public static UMLComponentManager classes;
+  public static UMLComponentManager classes = new UMLComponentManager();
+
+
 
   public static void displayMainMenu() {
     System.out.println("+-----------------------------+");
@@ -125,7 +127,8 @@ public class Menu {
       case "1":
         System.out.println("Add Class: ");
         // add class method
-        classes.addClass(sc.nextLine());
+        String className = sc.nextLine();
+        classes.addClass(className);
         break;
       case "2":
         System.out.println("Delete Class: ");
