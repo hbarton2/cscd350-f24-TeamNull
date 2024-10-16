@@ -1,303 +1,324 @@
 package proj.TeamNull.UMLdevkit.Menu;
-import proj.TeamNull.UMLdevkit.UMLComponent.UMLComponentManager;
 
-import java.util.Scanner;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import javafx.application.Platform;
+import proj.TeamNull.UMLdevkit.UMLComponent.UMLClass;
+import proj.TeamNull.UMLdevkit.UMLComponent.UMLComponentManager;
+import proj.TeamNull.UMLdevkit.UIhandler.TerminalHandler;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
- * Menu Class to handle user input through menu operations
+ * Menu Class to handle user input through JavaFX operations
  */
 public class Menu {
 
-  static Scanner sc = new Scanner(System.in);
-  public static UMLComponentManager classes = new UMLComponentManager();
+  private static UMLComponentManager classes = new UMLComponentManager();
+  private static TerminalHandler terminalHandler;  // Instance of TerminalHandler
 
-
+  // Inject TerminalHandler instance
+  public static void setTerminalHandler(TerminalHandler handler) {
+    terminalHandler = handler;
+  }
 
   public static void displayMainMenu() {
-    System.out.println("+-----------------------------+");
-    System.out.println("|       Main Menu             |");
-    System.out.println("+-----------------------------+");
-    System.out.println("| 1. UML Diagram Menu         |");
-    System.out.println("| 2. Help                     |");
-    System.out.println("| 3. About                    |");
-    System.out.println("| 4. Exit                     |");
-    System.out.println("+-----------------------------+");
-    System.out.print("Enter your choice:  ");
+    String menu = "+-----------------------------+\n" +
+      "|       Main Menu             |\n" +
+      "+-----------------------------+\n" +
+      "| 1. UML Diagram Menu         |\n" +
+      "| 2. Help                     |\n" +
+      "| 3. About                    |\n" +
+      "| 4. Exit                     |\n" +
+      "+-----------------------------+\n" +
+      "Enter your choice: ";
+    printToTerminal(menu);
   }
 
   public static void processMainMenuInput(String input) {
     switch (input) {
       case "1":
-        System.out.println("UML Diagram: loading UML creation menu...");
         displayUMLMenu();
-        processUMLMenuInput(sc.nextLine());
-        return;
+        break;
       case "2":
-        Help.printHelpMenu();
+        printToTerminal("Help Menu: This application is used to create UML Diagrams.");
         break;
       case "3":
-        System.out.println("About: This application was built using JavaFX. ");
+        printToTerminal("About: This application was built using JavaFX.");
         break;
       case "4":
-        System.out.println("Exiting the menu...");
-        System.exit(0);   // Terminate the application.
+        printToTerminal("Exiting the menu...");
+        Platform.exit();  // Properly exit the JavaFX application
         break;
       default:
-        System.out.println("Invalid choice. Please try again.");
+        printToTerminal("Invalid choice. Please try again.");
+        displayMainMenu();  // Redisplay the menu after invalid input
+        break;
     }
-
-    displayMainMenu();  // Re-display the menu after processing input.
-    processMainMenuInput(sc.nextLine());
   }
 
-  public static void displayUMLMenu(){
-    System.out.println("+-------------------------------------+");
-    System.out.println("|            UML Menu                 |");
-    System.out.println("+-------------------------------------+");
-    System.out.println("| 1.  Class                           |");
-    System.out.println("| 2.  Field                           |");
-    System.out.println("| 3.  Method                          |");
-    System.out.println("| 4.  Display                         |");
-    System.out.println("| 5.  Save UML Diagram                |");
-    System.out.println("| 6.  Load UML Diagram                |");
-    System.out.println("| 7.  Return to Main Menu             |");
-    System.out.println("+-------------------------------------+");
-    System.out.println("Enter your choice:");
+  public static void displayUMLMenu() {
+    String umlMenu = "+-------------------------------------+\n" +
+      "|            UML Menu                 |\n" +
+      "+-------------------------------------+\n" +
+      "| 1.  Class                           |\n" +
+      "| 2.  Field                           |\n" +
+      "| 3.  Method                          |\n" +
+      "| 4.  Display                         |\n" +
+      "| 5.  Save UML Diagram                |\n" +
+      "| 6.  Load UML Diagram                |\n" +
+      "| 7.  Return to Main Menu             |\n" +
+      "+-------------------------------------+\n" +
+      "Enter your choice: ";
+    printToTerminal(umlMenu);
+
+    // Wait for the user's input and call processUMLMenuInput()
+    terminalHandler.waitForInput(Menu::processUMLMenuInput);  // Capture the input in processUMLMenuInput
   }
 
   public static void processUMLMenuInput(String input) {
     switch (input) {
       case "1":
-        System.out.println("Open Class menu ");
         displayClassMenu();
-        processClassMenuInput(sc.nextLine());
-        return; // return after handling submenus
+        break;
       case "2":
-        System.out.println("Open Field menu ");
         displayFieldMenu();
-        processFieldMenuInput(sc.nextLine());
-        return;
+        break;
       case "3":
-        System.out.println("Open Method menu ");
         displayMethodMenu();
-        processMethodMenuInput(sc.nextLine());
-        return;
+        break;
       case "4":
-        System.out.println("open Display menu ");
         displayDisplayMenu();
-        processDisplayMenuInput(sc.nextLine());
-        return;
+        break;
       case "5":
-        System.out.println("Save to JSON file");
-        System.out.println("------------ run saveJSONFile method -----------");
+        saveJSONFile();  // Call save JSON method
         break;
       case "6":
-        System.out.println("Load from JSON file");
-        System.out.println("------------ run loadJSONFile method -----------");
+        loadJSONFile();  // Call load JSON method
         break;
       case "7":
-        System.out.println("Returning to Main Menu...");
         displayMainMenu();
-        processMainMenuInput(sc.nextLine());
-        return;
+        break;
       default:
-        System.out.println("Invalid choice. Please try again.");
+        printToTerminal("Invalid choice. Please try again.");
+        displayUMLMenu();  // Re-display the menu after processing input
         break;
     }
-
-    displayUMLMenu();  // Re-display the menu after processing input.
-    processUMLMenuInput(sc.nextLine());
   }
 
-  public static void displayClassMenu(){
-    System.out.println("+-------------------------------------+");
-    System.out.println("|            UML Menu: Class          |");
-    System.out.println("+-------------------------------------+");
-    System.out.println("| 1.  Add Class                       |");
-    System.out.println("| 2.  Delete Class                    |");
-    System.out.println("| 3.  Rename Class                    |");
-    System.out.println("| 4.  Add Class Relationship          |");
-    System.out.println("| 5.  Remove Class Relationship       |");
-    System.out.println("| 6.  Return                          |");
-    System.out.println("+-------------------------------------+");
-    System.out.print("Enter your choice: ");
+  public static void displayClassMenu() {
+    String classMenu = "+-------------------------------------+\n" +
+      "|            UML Menu: Class          |\n" +
+      "+-------------------------------------+\n" +
+      "| 1.  Add Class                       |\n" +
+      "| 2.  Delete Class                    |\n" +
+      "| 3.  Rename Class                    |\n" +
+      "| 4.  Return                          |\n" +
+      "+-------------------------------------+\n" +
+      "Enter your choice: ";
+    printToTerminal(classMenu);
+    // Wait for user input and pass it to processClassMenuInput
+    terminalHandler.waitForInput(Menu::processClassMenuInput);
   }
 
   public static void processClassMenuInput(String input) {
     switch (input) {
       case "1":
-        System.out.println("Add Class: ");
-        // add class method
-        String className = sc.nextLine();
-        classes.addClass(className);
+        printToTerminal("Enter class name to add: ");
+        terminalHandler.waitForInput(className -> {
+          classes.addClass(className);
+          printToTerminal("Class added: " + className);
+          displayClassMenu();  // Redisplay the menu
+        });
         break;
       case "2":
-        System.out.println("Delete Class: ");
-        // delete class method
-        System.out.println("------------ run deleteClass method -----------");
+        printToTerminal("Enter class name to delete: ");
+        terminalHandler.waitForInput(className -> {
+          classes.removeClass(className);
+          printToTerminal("Class deleted: " + className);
+          displayClassMenu();  // Redisplay the menu
+        });
         break;
       case "3":
-        System.out.println("Rename Class: ");
-        // rename class method
-        System.out.println("------------ run renameClass method -----------");
+        printToTerminal("Enter old class name: ");
+        terminalHandler.waitForInput(oldName -> {
+          printToTerminal("Enter new class name: ");
+          terminalHandler.waitForInput(newName -> {
+            classes.renameClass(oldName, newName);
+            printToTerminal("Class renamed from " + oldName + " to " + newName);
+            displayClassMenu();  // Redisplay the menu
+          });
+        });
         break;
       case "4":
-        System.out.println("Add Class Relationship: ");
-        // add class relationship method
-        System.out.println("------------ run addClassRelationship method -----------");
+        displayUMLMenu();  // Return to UML menu
         break;
-      case "5":
-        System.out.println("Remove Class Relationship: ");
-        // delete class relationship method
-        System.out.println("------------ run removeClassRelationship method -----------");
-        break;
-      case "6":
-        System.out.println("Returning to UML Menu...");
-        displayUMLMenu();
-        processUMLMenuInput(sc.nextLine());   // return to Main Menu
-        return;
       default:
-        System.out.println("Invalid choice. Please try again.");
+        printToTerminal("Invalid choice. Please try again.");
+        displayClassMenu();  // Redisplay the menu
         break;
     }
-    displayClassMenu();  // Re-display the menu after processing input.
-    processClassMenuInput(sc.nextLine());
   }
 
-  public static void displayFieldMenu(){
-    System.out.println("+-------------------------------------+");
-    System.out.println("|            UML Menu: Field          |");
-    System.out.println("+-------------------------------------+");
-    System.out.println("| 1.  Add Field                       |");
-    System.out.println("| 2.  Delete Field                    |");
-    System.out.println("| 3.  Rename Field                    |");
-    System.out.println("| 4.  Return                          |");
-    System.out.println("+-------------------------------------+");
-    System.out.print("Enter your choice: ");
+  public static void displayFieldMenu() {
+    String fieldMenu = "+-------------------------------------+\n" +
+      "|            UML Menu: Field          |\n" +
+      "+-------------------------------------+\n" +
+      "| 1.  Add Field                       |\n" +
+      "| 2.  Delete Field                    |\n" +
+      "| 3.  Rename Field                    |\n" +
+      "| 4.  Return                          |\n" +
+      "+-------------------------------------+\n" +
+      "Enter your choice: ";
+    printToTerminal(fieldMenu);
+    // Wait for user input and pass it to processFieldMenuInput
+    terminalHandler.waitForInput(Menu::processFieldMenuInput);
   }
 
   public static void processFieldMenuInput(String input) {
     switch (input) {
       case "1":
-        System.out.println("Add Field: ");
-        // add field method
-        System.out.println("------------ run addField method -----------");
+        printToTerminal("Add Field: ");
+        printToTerminal("------------ run addField method -----------");
         break;
       case "2":
-        System.out.println("Delete Field: ");
-        // delete field method
-        System.out.println("------------ run deleteField method -----------");
+        printToTerminal("Delete Field: ");
+        printToTerminal("------------ run deleteField method -----------");
         break;
       case "3":
-        System.out.println("Rename Field: ");
-        // rename field method
-        System.out.println("------------ run renameField method -----------");
+        printToTerminal("Rename Field: ");
+        printToTerminal("------------ run renameField method -----------");
         break;
       case "4":
-        System.out.println("Returning to UML Menu...");
-        displayUMLMenu();
-        processUMLMenuInput(sc.nextLine());   // return to Main Menu
-        return;
+        printToTerminal("Returning to UML Menu...");
+        displayUMLMenu();  // Return to UML menu
+        break;
       default:
-        System.out.println("Invalid choice. Please try again.");
+        printToTerminal("Invalid choice. Please try again.");
+        displayFieldMenu();  // Redisplay the menu
         break;
     }
-    displayFieldMenu();  // Re-display the menu after processing input.
-    processFieldMenuInput(sc.nextLine());
   }
 
-  public static void displayMethodMenu(){
-    System.out.println("+-------------------------------------+");
-    System.out.println("|            UML Menu: Method         |");
-    System.out.println("+-------------------------------------+");
-    System.out.println("| 1.  Add Method                      |");
-    System.out.println("| 2.  Delete Method                   |");
-    System.out.println("| 3.  Rename Method                   |");
-    System.out.println("| 4.  Add Method Parameter            |");
-    System.out.println("| 5.  Remove Method Parameter         |");
-    System.out.println("| 6.  Update Method Parameter         |");
-    System.out.println("| 7.  Return                          |");
-    System.out.println("+-------------------------------------+");
-    System.out.print("Enter your choice: ");
+  public static void displayMethodMenu() {
+    String methodMenu = "+-------------------------------------+\n" +
+      "|            UML Menu: Method         |\n" +
+      "+-------------------------------------+\n" +
+      "| 1.  Add Method                      |\n" +
+      "| 2.  Delete Method                   |\n" +
+      "| 3.  Rename Method                   |\n" +
+      "| 4.  Add Method Parameter            |\n" +
+      "| 5.  Remove Method Parameter         |\n" +
+      "| 6.  Update Method Parameter         |\n" +
+      "| 7.  Return                          |\n" +
+      "+-------------------------------------+\n" +
+      "Enter your choice: ";
+    printToTerminal(methodMenu);
+    // Wait for user input and pass it to processMethodMenuInput
+    terminalHandler.waitForInput(Menu::processMethodMenuInput);
   }
 
   public static void processMethodMenuInput(String input) {
     switch (input) {
       case "1":
-        System.out.println("Add Method: ");
-        // addMethod method
-        System.out.println("------------ run addMethod method -----------");
+        printToTerminal("Add Method: ");
+        printToTerminal("------------ run addMethod method -----------");
         break;
       case "2":
-        System.out.println("Delete Method: ");
-        // deleteMethod method
-        System.out.println("------------ run deleteMethod -----------");
+        printToTerminal("Delete Method: ");
+        printToTerminal("------------ run deleteMethod method -----------");
         break;
       case "3":
-        System.out.println("Rename Method: ");
-        // renameMethod method
-        System.out.println("------------ run renameMethod -----------");
+        printToTerminal("Rename Method: ");
+        printToTerminal("------------ run renameMethod method -----------");
         break;
       case "4":
-        System.out.println("Add Method Parameter: ");
-        // addMethodParameter method
-        System.out.println("------------ run addMethodParameter method -----------");
+        printToTerminal("Add Method Parameter: ");
+        printToTerminal("------------ run addMethodParameter method -----------");
         break;
       case "5":
-        System.out.println("Remove Method Parameter: ");
-        // removeMethodParameter method
-        System.out.println("------------ run removeMethodParameter method -----------");
+        printToTerminal("Remove Method Parameter: ");
+        printToTerminal("------------ run removeMethodParameter method -----------");
         break;
       case "6":
-        System.out.println("Update Method Parameter: ");
-        // updateMethodParameter method
-        System.out.println("------------ run upMethod -----------");
+        printToTerminal("Update Method Parameter: ");
+        printToTerminal("------------ run updateMethodParameter method -----------");
         break;
       case "7":
-        System.out.println("Returning to UML Menu...");
-        displayUMLMenu();
-        processUMLMenuInput(sc.nextLine());   // return to Main Menu
-        return;
+        printToTerminal("Returning to UML Menu...");
+        displayUMLMenu();  // Return to UML menu
+        break;
       default:
-        System.out.println("Invalid choice. Please try again.");
+        printToTerminal("Invalid choice. Please try again.");
+        displayMethodMenu();  // Redisplay the menu
         break;
     }
-    displayMethodMenu();  // Re-display the menu after processing input.
-    processMethodMenuInput(sc.nextLine());
   }
 
-  public static void displayDisplayMenu(){
-    System.out.println("+-------------------------------------------+");
-    System.out.println("|            UML Menu: Display              |");
-    System.out.println("+-------------------------------------------+");
-    System.out.println("| 1.  Display Single Class and Its Contents |");
-    System.out.println("| 2.  Display All Classes and Contents      |");
-    System.out.println("| 3.  Return                                |");
-    System.out.println("+-------------------------------------------+");
-    System.out.print("Enter your choice: ");
+  public static void displayDisplayMenu() {
+    String displayMenu = "+-------------------------------------------+\n" +
+      "|            UML Menu: Display              |\n" +
+      "+-------------------------------------------+\n" +
+      "| 1.  Display Single Class and Its Contents |\n" +
+      "| 2.  Display All Classes and Contents      |\n" +
+      "| 3.  Return                                |\n" +
+      "+-------------------------------------------+\n" +
+      "Enter your choice: ";
+    printToTerminal(displayMenu);
+    // Wait for user input and pass it to processDisplayMenuInput
+    terminalHandler.waitForInput(Menu::processDisplayMenuInput);
   }
 
   public static void processDisplayMenuInput(String input) {
     switch (input) {
       case "1":
-        System.out.println("Display Single Class and Its Contents: ");
+        printToTerminal("Display Single Class and Its Contents: ");
         // single class display method
         break;
       case "2":
-        System.out.println("Display All Classes and Contents: ");
+        printToTerminal("Display All Classes and Contents: ");
         // display all classes and contents method
         break;
       case "3":
-        System.out.println("Returning to UML Menu...");
-        displayUMLMenu();
-        processUMLMenuInput(sc.nextLine());   // return to Main Menu
-        return;
+        printToTerminal("Returning to UML Menu...");
+        displayUMLMenu();  // Return to UML menu
+        break;
       default:
-        System.out.println("Invalid choice. Please try again.");
+        printToTerminal("Invalid choice. Please try again.");
+        displayDisplayMenu();  // Redisplay the menu
         break;
     }
-    displayDisplayMenu();  // Re-display the menu after processing input.
-    processDisplayMenuInput(sc.nextLine());
   }
 
+  // Example methods for save/load JSON functionality
+  public static void saveJSONFile() {
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    try (FileWriter writer = new FileWriter("uml_diagram.json")) {
+      gson.toJson(classes, writer);  // Serialize UMLComponentManager to JSON
+      printToTerminal("Successfully saved UML diagram to uml_diagram.json");
+    } catch (IOException e) {
+      printToTerminal("Error saving UML diagram: " + e.getMessage());
+    }
+  }
+
+  public static void loadJSONFile() {
+    Gson gson = new Gson();
+    try (FileReader reader = new FileReader("uml_diagram.json")) {
+      classes = gson.fromJson(reader, UMLComponentManager.class);  // Deserialize JSON to UMLComponentManager
+      printToTerminal("Successfully loaded UML diagram from uml_diagram.json");
+    } catch (IOException e) {
+      printToTerminal("Error loading UML diagram: " + e.getMessage());
+    }
+  }
+
+  // Utility method to print to terminal
+  private static void printToTerminal(String message) {
+    if (terminalHandler != null) {
+      terminalHandler.printToTerminal(message);  // Output to JavaFX TextArea via TerminalHandler
+    } else {
+      System.out.println(message);  // Fallback to console if terminalHandler is not set
+    }
+  }
 }
