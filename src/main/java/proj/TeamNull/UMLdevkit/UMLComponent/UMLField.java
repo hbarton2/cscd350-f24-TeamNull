@@ -6,24 +6,23 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 
 public class UMLField extends UMLComponent {
 
-    public UMLField(String name, String type) {
-        super(name);
-    }
+  public UMLField(String name, String type) {
+    super(name);
+  }
 
+  @Override
+  public void add(UMLComponent component) {
+    throw new UnsupportedOperationException("Cannot add components to a field.");
+  }
 
-    @Override
-    public void add(UMLComponent component) {
-        throw new UnsupportedOperationException("Cannot add components to a field.");
-    }
+  @Override
+  public void remove(UMLComponent component) {
+    throw new UnsupportedOperationException("Cannot remove components from a field.");
+  }
 
-    @Override
-    public void remove(UMLComponent component) {
-        throw new UnsupportedOperationException("Cannot remove components from a field.");
-    }
-
-    @Override
-    public UMLComponent getChild(String name) {
-        throw new UnsupportedOperationException("No child components in a field.");
-    }
+  @Override
+  public UMLComponent getChild(String name) {
+    throw new UnsupportedOperationException("No child components in a field.");
+  }
 }
 

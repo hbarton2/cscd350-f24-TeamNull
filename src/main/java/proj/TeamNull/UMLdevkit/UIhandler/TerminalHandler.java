@@ -1,6 +1,7 @@
 package proj.TeamNull.UMLdevkit.UIhandler;
 
 import com.google.gson.Gson;
+import java.util.function.Consumer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -8,10 +9,46 @@ import javafx.scene.control.TextField;
 import proj.TeamNull.UMLdevkit.Menu.Menu;
 
 /**
- * @class This class launches the terminal and utilize JSON to store input data
+ * This class launches the terminal and utilizes JSON to store input data
  */
-
 public class TerminalHandler {
+
+//  @FXML
+//  private TextArea terminalOutput;
+//
+//  @FXML
+//  private TextField terminalInput;
+//
+//  public TerminalHandler() {
+//    Menu.setTerminalHandler(this);  // Pass this TerminalHandler instance to Menu
+//  }
+//
+//  @FXML
+//  public void initialize() {
+//    displayInitialMenu();
+//  }
+//
+//  @FXML
+//  private void handleTerminalInput() {
+//    String input = terminalInput.getText().trim();
+//
+//    if (!input.isEmpty()) {
+//      terminalInput.clear();  // Clear the input field
+//      printToTerminal("User: " + input);
+//
+//      // Pass the input to the menu for processing
+//      Menu.processMainMenuInput(input);
+//    }
+//  }
+//
+//  private void displayInitialMenu() {
+//    Menu.displayMainMenu();  // Display the main menu
+//  }
+//
+//  // Method to print output to JavaFX terminal
+//  public void printToTerminal(String message) {
+//    Platform.runLater(() -> terminalOutput.appendText(message + "\n"));
+//  }
 
   @FXML
   private TextArea terminalOutput;
@@ -19,40 +56,43 @@ public class TerminalHandler {
   @FXML
   private TextField terminalInput;
 
-  private final Gson gson;
-
   public TerminalHandler() {
-    this.gson = new Gson();  // Initialize Gson instance
-    Menu menu = new Menu();  // Initialize the Menu class
+    Menu.setTerminalHandler(this);  // Set the TerminalHandler instance in the Menu class
   }
 
   @FXML
   public void initialize() {
-    displayInitialMenu();
+    Menu.displayMainMenu();  // Display the initial main menu in the terminal
   }
 
   @FXML
   private void handleTerminalInput() {
-    String input = terminalInput.getText().trim();
+    String input = terminalInput.getText().trim();  // Get user input
 
     if (!input.isEmpty()) {
       terminalInput.clear();  // Clear the input field
+
+      // Print the user input to the terminal
       printToTerminal("User: " + input);
 
-      // Serialize the input to JSON and print it to the terminal
-      String jsonInput = gson.toJson(input);
-      printToTerminal("JSON Input: " + jsonInput);
-
-      // Pass the input to the menu for processing
-      Menu.processMainMenuInput(input);
+      // Process the input in the menu (adjust according to which menu is currently active)
+      Menu.processMainMenuInput(input);  // Start by processing the main menu
     }
   }
 
-  private void displayInitialMenu() {
-    Platform.runLater(Menu::displayMainMenu);
+  public void printToTerminal(String message) {
+    terminalOutput.appendText(message + "\n");  // Append message to the TextArea (JavaFX terminal)
   }
 
-  private void printToTerminal(String message) {
-    Platform.runLater(() -> terminalOutput.appendText(message + "\n"));
+  public void waitForInput(Consumer<String> inputHandler) {
+    terminalInput.setOnAction(event -> {
+      String input = terminalInput.getText().trim();
+      terminalInput.clear();  // Clear the input field
+      if (!input.isEmpty()) {
+        printToTerminal("User: " + input);
+        inputHandler.accept(input);  // Pass the input to the provided handler method
+      }
+    });
   }
+
 }

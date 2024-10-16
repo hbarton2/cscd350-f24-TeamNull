@@ -1,25 +1,32 @@
-# UML Visual SDK
+# Universal Modeling Language Software Development Kit
+
+* v1.0.29
+* How to read version # Version main branch.release branch.pull request changes'
+* Login Information: username: admin password: password it's "currently hard coded" (future Gson/SQL)
+* What's New
+* 1. Application can be launched in GUI
 
 ## Table of Contents
 1. [Overview](#overview)
 2. [Features](#features)
-3. [Technologies](#technologies)
+3. [Getting Started](#getting-started)
 4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Configuration](#configuration)
-7. [Testing](#testing)
-8. [Contributing](#contributing)
-9. [License](#license)
-10. [Contact](#contact)
+5. [Running the Application](#running-the-application)
+6. [Usage](#usage)
+7. [Configuration](#configuration)
+8. [Testing](#testing)
+9. [Contributing](#contributing)
+10. [License](#license)
+11. [Contact](#contact)
 
 ---
 
 ## Overview
 
-**Project Name** is a brief description of what your project does and its purpose. Mention key objectives or problems it solves.
-DEVELOPERS DEVELOPERS DEVELOPERS!
-> Example:
-> The **Electronic Flight Bag** (EFB) is a JavaFX-based tool designed to replace traditional paper-based flight management, providing pilots with an interactive, streamlined system to access essential flight information, weather updates, charts, and more.
+DevKitUML is a unified modeling language (UML) software development kit (SDK) designed to simplify the process of generating, managing, and interacting with UML diagrams for developers. This project leverages JavaFX for a rich graphical user interface and integrates a console-based interface for additional functionality.
+
+This SDK is intended to streamline the experience of creating class diagrams, modifying them, and saving/loading project data using JSON format for persistence.
+
 
 ### Screenshots
 
@@ -30,39 +37,61 @@ _A brief description of the screenshot._
 
 ## Features
 
-- Feature 1: Describe the main features or functionality of the project.
-- Feature 2: Additional tools or options available in the project.
-- Feature 3: Mention unique selling points, if applicable.
+- **Graphical User Interface (GUI):** Built with JavaFX, users can interact with the software to create and manage UML diagrams.
+- **Command-Line Interface (CLI):** Provides a terminal-like environment where users can execute commands within the JavaFX terminal window.
+- **Customizable Menus:** The software includes a fully interactive menu system for managing settings, help sections, and other tools.
+- **JSON Integration:** Uses Gson for saving/loading the project data in JSON format.
+- **Multi-platform Support:** Designed to work on Windows, macOS, and Linux with cross-platform capabilities.
 
 ---
 
-## Technologies
+## Getting Started
 
-This project is built with:
+### Prerequisites
 
-- **Java** 22
-- **JavaFX** 22
-- **Maven** for build automation
-- **JUnit** for testing
-- Additional libraries: `ControlsFX`, `TilesFX`, `Ikonli`, etc.
+To build and run this project, you'll need:
 
+- **JDK 22** (configured in Maven with JavaFX dependencies)
+- **Maven** for dependency management and building the project
+
+### Dependencies
+
+The project uses the following dependencies, which are defined in the `pom.xml` file:
+
+- **JavaFX (v21.0.1)** for graphical interface (controls, graphics, fxml, media, web, swing).
+- **Gson (v2.8.9)** for handling JSON serialization/deserialization.
+- **JUnit (v5.10.2)** for unit testing.
+- **ControlsFX (v11.2.1)** for additional UI controls.
+- **TilesFX (v21.0.3)** for dashboard-like tiles.
+- **FXGL (v21.1)** for game development capabilities (future feature extensions).
+
+See the `pom.xml` file for full details on dependencies.
+
+### Building the Project
+
+<!--You can build the project using Maven. From the project root directory, run:
+
+```bash
+mvn clean install
+```
+-->
 ---
 
 ## Installation
 
 ### Prerequisites
 
-Ensure you have the following installed:
+Before running the project, ensure you have the following installed:
 
-- Java 22 SDK
-- Maven 3.6+
-- JavaFX SDK 22.0.1
+- **Java JDK 22** or later
+- **Maven 3.6** or later
+- **JavaFX** (already managed through Maven dependencies)
 
 ### Step-by-Step Instructions
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/projectname.git
+   git clone https://github.com/hbarton2/cscd350-f24-TeamNull.git
    cd projectname
 2. Build the project using Maven:
    ```bash
@@ -73,29 +102,38 @@ Ensure you have the following installed:
 
 ---
 
-## Usage
+## Running the Application
+To run the project, execute the following command:
 
-### Basic Usage
-
-1. Launch the application using the command:
-   ```bash
-   mvn javafx:run
-2. After launching, select your desired module from the main menu, such as weather updates, flight information, or charts.
-3. Use the toolbar for quick access to:
-   - Load Charts: For loading flight charts.
-   - Weather: To get the latest weather updates.
-
-### Command-line Options
-You can also run the application with additional options:
 ```bash
-java -jar target/projectname.jar --option1 value1 --option2 value2
+mvn javafx:run
+```
+Alternatively, you can use your favorite IDE, such as IntelliJ IDEA, with Maven integration.
+
+## Usage
+### Console Interaction 
+The application includes an in-app terminal/console feature, allowing users to input commands within the JavaFX interface. Users can enter specific commands for various operations such as creating, renaming, and removing classes, attributes, and methods.
+
+- Help Menu: Users can access the help menu for detailed guidance.
+- Command-Line Operations: Integration of the command-line terminal where you can execute operations directly without leaving the graphical interface.
+
+### JSON Integration
+The project uses Gson for storing and loading UML project data as JSON files. The data includes class names, attributes, and methods, allowing for an easily shareable format.
+
+### Unit Testing
+JUnit is used for unit testing throughout the project. To run the tests, use:
+
+```bash
+mvn test
 ```
 ---
 
 ## Configuration
+<!--
 Configuration files can be found under the /config directory. You can customize the following:
 - config.properties: Contains default application settings (e.g., UI themes, API keys, etc.).
 - logback.xml: Logging configuration for controlling log levels and outputs.
+
 
 ### Example Configuration
 ```bash
@@ -104,6 +142,7 @@ api_key=your-api-key
 default_airport_code=JFK
 ```
 ---
+-->
 
 ## Testing
 To run unit tests, execute the following command:
@@ -120,6 +159,7 @@ You can find tests under the src/test directory.
 
 ## Contributing
 
+<!--
 We welcome contributions! Here's how you can help:
 1. Fork the repository.
 2. Create a new branch:
@@ -134,7 +174,7 @@ We welcome contributions! Here's how you can help:
 5.Open a Pull Request.
 
 Please follow our contribution guidelines for more details.
-
+-->
 ---
 
 ## License
@@ -146,16 +186,10 @@ Please see LICENSE.md
 
 For any inquiries, feel free to reach out to:
 
-- Name: Your Name
-- Email: your.email@example.com
-- GitHub: your-github-profile
+- TEAM NULL
+- GitHub: https://github.com/hbarton2/cscd350-f24-TeamNull
 
 ---
 
 ## Acknowledgments
-- Special thanks to contributors, libraries, and resources used in this project.
-- Thanks to Iconli for providing icon support.
-```bash
-You can customize this layout to fit your project's needs, filling in specific details for each section as required.
-```
-DEVELOPERS!!!
+- Special thanks to DEVELOPERS, DEVELOPERS, DEVELOPERS!!!

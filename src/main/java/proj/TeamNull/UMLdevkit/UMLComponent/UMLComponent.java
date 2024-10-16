@@ -2,40 +2,43 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 
 /**
  * UMLComponent abstract class that provides interface for components of UML Editor:
- *      - UMLClases, UMLFields, UMLMethods, UMLParameter, UMLRelationships
+ * - UMLClases, UMLFields, UMLMethods, UMLParameter, UMLRelationships
  */
 public abstract class UMLComponent {
-    protected String name;
 
+  protected String name;
 
-    public UMLComponent(String name) {
-        this.name = name;
+  public UMLComponent(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  // Basic operations that subclasses can override
+  public abstract void add(UMLComponent component);
+
+  public abstract void remove(UMLComponent component);
+
+  public abstract UMLComponent getChild(String name);
+
+  // Other common operations
+  public boolean isValidName(String name) {
+    // You can add logic for name validation
+    if (name == null) {
+      return false;
     }
-
-
-    public String getName() {
-        return name;
+    if (name.length() > 50 || name.length() <= 1) {
+      return false;
     }
-
-
-    public void setName(String name) {
-        this.name = name;
+    if (name.charAt(0) == '@') {
+      return false;
     }
-
-    // Basic operations that subclasses can override
-    public abstract void add(UMLComponent component);
-    public abstract void remove(UMLComponent component);
-    public abstract UMLComponent getChild(String name);
-
-    // Other common operations
-    public boolean isValidName(String name) {
-        // You can add logic for name validation
-        if(name == null)
-            return false;
-        if(name.length() > 50 || name.length() <= 1)
-            return false;
-        if(name.charAt(0) == '@')
-            return false;
-        return !name.isBlank();
-    }
+    return !name.isBlank();
+  }
 }

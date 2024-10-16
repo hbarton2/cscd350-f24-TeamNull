@@ -46,6 +46,9 @@ module proj.nullptr.devkituml {
   // Open the handler packages to allow access for FXML loading
   opens proj.TeamNull.UMLdevkit.UIhandler to javafx.fxml;
 
+  // need this to save your classes
+  opens proj.TeamNull.UMLdevkit.UMLComponent to com.google.gson;
+  opens proj.TeamNull.UMLdevkit.DemoOnly to com.google.gson;
   // Export the main package for other modules to access
   exports proj.TeamNull.UMLdevkit;
   exports proj.TeamNull.UMLdevkit.UIhandler;
