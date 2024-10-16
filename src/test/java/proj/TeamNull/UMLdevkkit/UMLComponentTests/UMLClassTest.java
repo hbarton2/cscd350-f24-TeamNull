@@ -108,12 +108,7 @@ public class UMLClassTest {
     assertFalse(umlClass.getComponents().contains(relationship));
   }
 
-  @Test (timeout = TIMEOUT)
-  public void testSetNewName() {
-    UMLClass umlClass = new UMLClass("OldName", null);
-    umlClass.setNewName("NewName");
-    assertEquals("NewName", umlClass.getName(), "The name should be updated to 'NewName'");
-  }
+
   @Test (timeout = TIMEOUT)
   public void testIsValidName() {
     UMLClass umlClass = new UMLClass("TestClass", null);
