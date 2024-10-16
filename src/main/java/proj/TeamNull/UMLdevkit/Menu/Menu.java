@@ -11,6 +11,8 @@ public class Menu {
   static Scanner sc = new Scanner(System.in);
   public static UMLComponentManager classes = new UMLComponentManager();
 
+
+
   public static void displayMainMenu() {
     System.out.println("+-----------------------------+");
     System.out.println("|       Main Menu             |");
@@ -31,8 +33,7 @@ public class Menu {
         processUMLMenuInput(sc.nextLine());
         return;
       case "2":
-        //TODO : Call the Help menu
-        System.out.println("Help: This is a sample help message.");
+        Help.printHelpMenu();
         break;
       case "3":
         //TODO: address about statement. Should this say more?
