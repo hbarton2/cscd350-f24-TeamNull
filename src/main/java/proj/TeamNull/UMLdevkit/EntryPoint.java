@@ -1,7 +1,8 @@
 package proj.TeamNull.UMLdevkit;
 
-/**
- * v0.0.11
+/*
+ * v0.0.22
+ * How to read version # Version[main branch].[release branch].[pull request changes]
  * Login Information: username: admin password: password it's [currently hard coded]
  * What's New
  * 1. Application now has GUI
@@ -44,7 +45,7 @@ public class EntryPoint extends Application {
     Menu.displayMainMenu();
     Menu.processMainMenuInput(scanner.nextLine());
 
-    //launch(); <------- confused what this is doing! -kate
+//    launch(); // <-- confused what this is doing! -kate, this is how to start JavaScenes - Jimmy
 
 
 //    Thread javafxThread = new Thread(() -> Void.launch(EntryPoint.class, args));
