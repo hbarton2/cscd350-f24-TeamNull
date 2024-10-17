@@ -2,7 +2,12 @@ package proj.TeamNull.UMLdevkit.UMLComponent;
 
 /**
  * UMLField extends UMLComponent. Represents a Field in a class.
+ * A UMLField should not be able to exist without being in a UMLClass
+ * UMLField class only has a constructor that intakes the name of the field and the field's type
+ * UMLFields cannot be in the same class and have the same name
+ * TODO add change field name and change field type methods
  */
+
 
 public class UMLField extends UMLComponent {
 
