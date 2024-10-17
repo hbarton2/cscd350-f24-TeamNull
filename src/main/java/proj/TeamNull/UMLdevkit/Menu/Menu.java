@@ -12,7 +12,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Menu Class to handle user input through JavaFX operations
+ * Menu Class to handle user input through menu operations
+ * Class should have very little logic implemented, almost all high level logic should be handled by method calls
+ * outside of this class.
+ * <p>
+ * TODO Refactor menu to be command line, list commands, user types in command they wish to execute.
  */
 public class Menu {
 

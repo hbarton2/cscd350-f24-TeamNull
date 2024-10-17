@@ -9,8 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * UMLClass extends UMLComponent. Represents class in UML Editor. Will manage other components like
- * Fields and Methods.
+ * UMLClass extends UMLComponent. Represents class in UML Editor.
+ * Used to create a UMLClass object or add or remove any components from an already created class
+ * <p>
+ * components list contains all Fields, Methods, and Relationships represented in this class
+ * Constructor receives name of class and list of all Fields, Methods, and Relationships
+ * Add: takes object of type UMLComponent and adds to components field
+ * remove: takes object of type UMLComponent and removes from component field
+ * <p>
+ * TODO Break up components list into seperate lists for Fields, Methods, Relationships.
+ * <p>
+ * TODO We have no way of creating UMLField, UMLMethod, UMLRelationship objects within this class,
+ *  implement method that will use user input to create these objects then call add()
  */
 public class UMLClass extends UMLComponent {
 

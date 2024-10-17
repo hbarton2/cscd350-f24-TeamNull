@@ -1,8 +1,12 @@
 package proj.TeamNull.UMLdevkit.UMLComponent;
 
 /**
- * UMLParameter extends UMLComponent. Represents a Parameter in a Method. add parameter type as
- * well
+ * UMLParameter extends UMLComponent. Represents a Parameter in a Method.
+ * A UMLParameter should not be able to exist without being in a UMLMethod
+ * UML Parameter only has a constructor that will create a UMLParameter object with a name and a type
+ * UMLParameters cannot be in the same method and have the same name
+ * TODO add change name and change type methods
+ *
  */
 public class UMLParameter extends UMLComponent {
 
