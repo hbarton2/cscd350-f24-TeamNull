@@ -5,7 +5,10 @@ import java.util.ArrayList;
 /**
  *This class represent RenameClass feature
  * It takes an Arraylist of storage, list of all classes, oldClassName and newClassName as input
- *
+ * Precondition, this method checks the array list to make sure it is not empty
+ * Checks both old class name and new class name to make sure string is not empty
+ * If class name found in the list, it renames it and confirms with a message to the user
+ * If not found it displays a message to the user.
  */
 public class RenameClass {
     public void renameClassName(ArrayList<Object> storage, String oldClassName, String newClassName) {
