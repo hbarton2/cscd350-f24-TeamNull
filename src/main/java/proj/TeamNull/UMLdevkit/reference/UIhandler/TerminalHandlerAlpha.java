@@ -7,6 +7,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import proj.TeamNull.UMLdevkit.reference.Menu.Menu;
 
+import static proj.TeamNull.UMLdevkit.reference.Menu.Menu.displayMenu;
+import static proj.TeamNull.UMLdevkit.reference.Menu.Menu.processMenuInput;
+
 /**
  * @class This class launches the terminal and utilize JSON to store input data
  */
@@ -46,13 +49,13 @@ public class TerminalHandlerAlpha {
       // Run the menu processing in a background thread
       new Thread(() -> {
         // Pass the input to the menu for processing
-        Menu.processMainMenuInput(input);
+        processMenuInput(input);
 
         // After processing, you may need to update the terminal output or display the next menu.
         // Ensure UI updates are done on the JavaFX Application Thread.
         Platform.runLater(() -> {
           printToTerminal("Menu processing completed.");
-          Menu.displayMainMenu();
+          displayMenu();
         });
       }).start();
     }
@@ -60,7 +63,7 @@ public class TerminalHandlerAlpha {
 
 
   private void displayInitialMenu() {
-    Platform.runLater(Menu::displayMainMenu);
+    Platform.runLater(Menu::displayMenu);
   }
 
   private void printToTerminal(String message) {
