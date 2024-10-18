@@ -2,15 +2,24 @@ package proj.TeamNull.UMLdevkit.reference.Utility;
 
 import java.util.ArrayList;
 
+/**
+ *This class represent RenameClass feature
+ * It takes an Arraylist of storage, list of all classes, oldClassName and newClassName as input
+ * Precondition, this method checks the array list to make sure it is not empty
+ * Checks both old class name and new class name to make sure string is not empty
+ * If class name found in the list, it renames it and confirms with a message to the user
+ * If not found it displays a message to the user.
+ */
 public class RenameClass {
-    public static void renameClassName(ArrayList<Object> allClasses, String oldClassName, String newClassName) {
-        if (allClasses == null || allClasses.size() == 0) {
-            System.out.println("There are no classes in the list.");
+    public void renameClassName(ArrayList<Object> storage, String oldClassName, String newClassName) {
+        if (storage == null || storage.isEmpty() || oldClassName.isEmpty() || newClassName.isEmpty()) {
+            System.out.println("Error class list or old class name or new class name is empty");
             return;
         }
+
         boolean found = false; // Track if the old class name is found
-        for (int i = 0; i < allClasses.size(); i++) {
-            ArrayList<Object> classData = (ArrayList<Object>) allClasses.get(i);
+        for (Object classNameInList : storage) {
+            ArrayList<Object> classData = (ArrayList<Object>) classNameInList;
             String className = (String) classData.get(0); // Get class name from index 0
             if (className.equalsIgnoreCase(oldClassName)) {
                 classData.set(0, newClassName); // Update class name
