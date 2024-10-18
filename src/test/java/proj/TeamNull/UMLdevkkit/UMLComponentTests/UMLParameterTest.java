@@ -1,7 +1,7 @@
 package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
 import org.junit.Test;
-import proj.TeamNull.UMLdevkit.UMLComponent.UMLParameter;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLParameter;
 
 import static org.junit.jupiter.api.Assertions.*;
 

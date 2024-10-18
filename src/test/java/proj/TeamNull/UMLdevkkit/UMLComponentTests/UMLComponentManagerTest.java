@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import proj.TeamNull.UMLdevkit.UMLComponent.UMLComponentManager;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLComponentManager;
 
 
 

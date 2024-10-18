@@ -5,13 +5,11 @@ package proj.TeamNull.UMLdevkit;
  */
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import proj.TeamNull.UMLdevkit.Menu.Menu;
 
 public class EntryPoint extends Application {
 
@@ -35,12 +33,13 @@ public class EntryPoint extends Application {
    */
   public static void main(String[] args) {
 
+    System.out.println("WAZZZZZZ UPPPP! Love you guys =) see you tomorrow");
 //    Scanner scanner = new Scanner(System.in);
 //
 //    Menu.displayMainMenu();
 //    Menu.processMainMenuInput(scanner.nextLine());
 
-    launch(); // <-- confused what this is doing! -kate, this is how to start JavaScenes - Jimmy
+//    launch(); // <-- confused what this is doing! -kate, this is how to start JavaScenes - Jimmy
 
   }
 }
