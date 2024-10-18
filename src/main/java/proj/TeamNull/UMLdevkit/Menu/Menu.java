@@ -37,6 +37,7 @@ public class Menu {
     printToTerminal(menu);
   }
 
+  
   public static void processMainMenuInput(String input) {
     switch (input) {
       case "1":
