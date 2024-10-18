@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import proj.TeamNull.UMLdevkit.Menu.Help;
+import proj.TeamNull.UMLdevkit.reference.Menu.Help;
 
 public class HelpTest {
     private Help help;

@@ -2,7 +2,7 @@ package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
 
 import org.junit.Test;
-import proj.TeamNull.UMLdevkit.UMLComponent.*;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
 
 import static org.junit.jupiter.api.Assertions.*;
 

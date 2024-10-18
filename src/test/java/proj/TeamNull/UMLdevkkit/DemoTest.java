@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.google.gson.Gson;
+import java.util.Vector;
 import org.junit.Test;
 import org.junit.jupiter.api.Timeout;
-import proj.TeamNull.UMLdevkit.DemoOnly.Person;
+import proj.TeamNull.UMLdevkit.reference.badcode.Person;
 
 
 public class DemoTest<module> {
@@ -45,6 +46,7 @@ public class DemoTest<module> {
   public void test() {
     var expected = true;
     var actual = expected;
+
   }
 
   @Test
@@ -68,5 +70,15 @@ public class DemoTest<module> {
     assertEquals(person.getName(), deserializedPerson.getName());
     assertEquals(person.getAge(), deserializedPerson.getAge());
     assertEquals(person.getCity(), deserializedPerson.getCity());
+  }
+
+  @Test
+  @Timeout(5)
+  public void vector_test() {
+    Vector<Object> vector = new Vector<>();
+    Person person = new Person("John Doe", 30, "New York");
+
+
+    System.out.println(vector);
   }
 }

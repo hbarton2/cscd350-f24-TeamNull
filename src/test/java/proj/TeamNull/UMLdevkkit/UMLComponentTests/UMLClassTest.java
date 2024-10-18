@@ -1,10 +1,13 @@
 package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
 import org.junit.Test;
-import proj.TeamNull.UMLdevkit.UMLComponent.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLClass;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLComponent;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLMethod;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLParameter;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLRelationship;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -2,9 +2,9 @@ package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
 
 import org.junit.Test;
-import proj.TeamNull.UMLdevkit.UMLComponent.UMLMethod;
-import proj.TeamNull.UMLdevkit.UMLComponent.UMLParameter;
-import proj.TeamNull.UMLdevkit.UMLComponent.*;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLComponent;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLMethod;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLParameter;
 
 import java.util.List;
 
