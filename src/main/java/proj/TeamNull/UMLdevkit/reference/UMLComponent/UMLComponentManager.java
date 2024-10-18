@@ -16,7 +16,8 @@ public class UMLComponentManager {
 
 
   /**
-   * Creates a class and adds it to ArrayList Requires a name. Will fail if duplicate
+   * Creates a class and adds it to ArrayList
+   * Requires a name. Will fail if duplicate
    *
    * @param name class to be added
    */
@@ -34,10 +35,19 @@ public class UMLComponentManager {
     System.out.println("Class " + name + " added");
   }
 
+  /**
+   * Gets classes list
+   * @return classes
+   */
   public List<UMLClass> getClasses() {
     return classes;
   }
 
+  /**
+   * Retrieves class by name from list
+   * @param name of class to be retrieved
+   * @return class object retrieved
+   */
   public UMLClass getClassByName(String name) {
     return classes.stream()
       .filter(umlClass -> umlClass.getName().equals(name))
@@ -53,6 +63,13 @@ public class UMLComponentManager {
     //  throw new IllegalArgumentException("New Name is not valid");
   }
 
+  /**
+   * Removes class from classes list
+   * Searches list for class
+   * If not found, checks if string is null
+   * If not null, prints "class not found"
+   * @param classToDelete
+   */
   public void removeClass(String classToDelete) {
     // Find the class to remove by name, case-insensitive
     UMLClass classToRemove = classes.stream()
@@ -68,6 +85,15 @@ public class UMLComponentManager {
     }
   }
 
+  /**
+   * Updates the name of a class
+   * Checks classes list for name to be changed,
+   * if name is null, tells user class not found and returns
+   * If new name exists already, informs user and returns
+   * If valid, sets the new name and informs user
+   * @param oldName original name of class
+   * @param newName new name of class
+   */
   public void renameClass(String oldName, String newName) {
     // Find the class to rename by old name, case-insensitive
     UMLClass classToRename = classes.stream()
