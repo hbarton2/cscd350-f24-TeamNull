@@ -1,19 +1,27 @@
 package proj.TeamNull.UMLdevkit.reference.Utility;
 
-import proj.TeamNull.UMLdevkit.Storage;
 import java.util.ArrayList;
 
+/**
+ * This class represent a feature to delete class by name
+ * deleteClassByName method takes an Array list of type Object and String classNameToDelete as parameter
+ * Precondition: This method first check the arraylist to make it is not empty and the String classNameToDelete is not empty
+ * If class name is found, it deletes it from the list then prints a confirmation message
+ * If not found it returns a message on the screen
+ */
+
 public class DeleteClass {
-    // Assuming storage is a singleton instance
-    private static Storage storage = Storage.getInstance();
+
 
     // Method to delete a class by its name
     public static void deleteClassByName(ArrayList<Object> storageList, String classNameToDelete) {
-        if (storageList == null || storageList.isEmpty()) {
-            System.out.println("There are no classes in the list.");
+
+        if (storageList == null || storageList.isEmpty() || classNameToDelete.isEmpty()) {
+            System.out.println("Storage array list is empty.");
             return;
         }
 
+        //tracks class name in the storage list
         boolean classFound = false;
 
         // Iterate through the list to find the class by its name
@@ -25,7 +33,7 @@ public class DeleteClass {
 
                 if (className.equalsIgnoreCase(classNameToDelete)) {
                     storageList.remove(i); // Remove the class from the list
-                    System.out.println("\nClass '" + classNameToDelete + "' deleted successfully.\n");
+                    System.out.println("\nClass ' " + classNameToDelete + " ' deleted successfully.\n");
                     classFound = true;
                     break; // Exit loop after deleting the class
                 }
@@ -34,6 +42,7 @@ public class DeleteClass {
 
         if (!classFound) {
             System.out.println("Class '" + classNameToDelete + "' not found.");
+            System.out.println("Please make sure the exist & is spelled correctly.");
         }
     }
 }
