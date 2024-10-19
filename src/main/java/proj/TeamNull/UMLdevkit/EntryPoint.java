@@ -10,6 +10,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLClass;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
 
 public class EntryPoint extends Application {
 
@@ -34,12 +36,26 @@ public class EntryPoint extends Application {
   public static void main(String[] args) {
 
     System.out.println("WAZZZZZZ UPPPP! Love you guys =) see you tomorrow");
-//    Scanner scanner = new Scanner(System.in);
-//
-//    Menu.displayMainMenu();
-//    Menu.processMainMenuInput(scanner.nextLine());
+    //    Scanner scanner = new Scanner(System.in);
+    //
+    //    Menu.displayMainMenu();
+    //    Menu.processMainMenuInput(scanner.nextLine());
 
-//    launch(); // <-- confused what this is doing! -kate, this is how to start JavaScenes - Jimmy
+    //    launch(); // <-- confused what this is doing! -kate, this is how to start JavaScenes -
+    // Jimmy
 
+    /*
+     * Sample code I've written to test out the add utility.
+     * It literally just creates an object, throws it into the UMLClass.add() and then prints it out.
+     * This is just test code, so feel free to remove it later.(In fact, PLEASE remove it later!!!)
+     * */
+
+    UMLClass myClass = new UMLClass("Steve");
+    System.out.println(myClass);
+    UMLField field = new UMLField("int", "age");
+    myClass.add(field);
+    System.out.println(myClass);
+
+    System.exit(0);
   }
 }

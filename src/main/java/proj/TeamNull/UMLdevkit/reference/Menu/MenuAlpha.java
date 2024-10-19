@@ -178,7 +178,7 @@ public class MenuAlpha {
       case "1":
         System.out.println("Add Class: ");
         String className = sc.nextLine();
-        classes.addClass(String.valueOf(new UMLClass(className, null)));
+        classes.addClass(String.valueOf(new UMLClass(className))); //<-- Shane wuz here(extra param was not needed)
         System.out.println("Class added: " + className);
         break;
       case "2":
