@@ -1,8 +1,10 @@
 package proj.TeamNull.UMLdevkit.reference.UMLComponent;
 
+import java.lang.reflect.Type;
+
 /**
  * UMLComponent abstract class that provides interface for components of UML Editor:
- * - UMLClases, UMLFields, UMLMethods, UMLParameter, UMLRelationships
+ * - UMLClasses, UMLFields, UMLMethods, UMLParameter, UMLRelationships
  */
 public abstract class UMLComponent {
 
@@ -15,6 +17,9 @@ public abstract class UMLComponent {
    * @param name name of component
    */
   public UMLComponent(String name) {
+    if (name.isEmpty() || name == null){
+      throw new IllegalArgumentException("Error, can not leave name as empty or null!");
+    }
     this.name = name;
   }
 
@@ -23,7 +28,7 @@ public abstract class UMLComponent {
    * @return component's name
    */
   public String getName() {
-    return name;
+    return this.name;
   }
 
   /**
@@ -41,21 +46,21 @@ public abstract class UMLComponent {
    * Adds a child component to this UML component
    * @param component what component will be added
    */
-  public abstract void add(UMLComponent component);
+  public abstract void add(Object component);
 
   /**
    * Abstract method
    * Removes a child component from this component
    * @param component to be removed
    */
-  public abstract void remove(UMLComponent component);
+  public abstract void remove(Object component);
 
-  /**
-   * Gets the child component of this component
-   * @param name of component to be retrieved
-   * @return
-   */
-  public abstract UMLComponent getChild(String name);
+//  /**
+//   * Gets the child component of this component
+//   * @param name of component to be retrieved
+//   * @return
+//   */
+//  public abstract UMLComponent getChild(String name);
 
   // Other common operations
 

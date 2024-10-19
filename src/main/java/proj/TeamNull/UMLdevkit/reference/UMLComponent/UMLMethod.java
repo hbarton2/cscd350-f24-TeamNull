@@ -19,39 +19,40 @@ import java.util.List;
  */
 public class UMLMethod extends UMLComponent {
 
-  private List<UMLComponent> parameters = new ArrayList<>(); // Method can have parameters
+  private List<UMLParameter> parameters = new ArrayList<>(); // Method can have parameters  <-- Shane wuz here
 
   public UMLMethod(String name, List<UMLComponent> parameters) {
     super(name);
   }
 
   @Override
-  public void add(UMLComponent component) {
+  public void add(Object component) {
     if (component instanceof UMLParameter && !parameters.contains(component)) {
-      parameters.add(component);
+      parameters.add((UMLParameter) component);
     } else {
       throw new IllegalArgumentException("Invalid or duplicate parameter.");
     }
   }
 
 
+
   @Override
-  public void remove(UMLComponent component) {
+  public void remove(Object component) {
     parameters.remove(component);
   }
 
 
-  @Override
-  public UMLComponent getChild(String name) {
-    return parameters.stream()
-      .filter(param -> param.getName().equals(name))
-      .findFirst()
-      .orElse(null);
-  }
+//  @Override
+//  public UMLComponent getChild(String name) {
+//    return parameters.stream()
+//      .filter(param -> param.getName().equals(name))
+//      .findFirst()
+//      .orElse(null);
+//  }
 
 
   // Additional UMLMethod-specific methods
-  public List<UMLComponent> getParameters() {
+  public List<UMLParameter> getParameters() {
     return parameters;
   }
 }
