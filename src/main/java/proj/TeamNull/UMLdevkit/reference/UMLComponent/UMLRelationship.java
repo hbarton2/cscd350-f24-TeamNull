@@ -62,19 +62,20 @@ public class UMLRelationship extends UMLComponent {
   }
 
   @Override
-  public void add(UMLComponent component) {
-    throw new UnsupportedOperationException("Cannot add components to a relationship.");
+  public void add(Object component) {
+    //Since we only needed to include them bc Abstract, I just made it an  empty method <-- Shane wuz here
   }
 
   @Override
-  public void remove(UMLComponent component) {
-    throw new UnsupportedOperationException("Cannot remove components from a relationship.");
+  public void remove(Object component) {
+
+    //Since we only needed to include them bc Abstract, I just made it an  empty method <-- Shane wuz here
   }
 
-  @Override
-  public UMLComponent getChild(String name) {
-    throw new UnsupportedOperationException("No child components in a relationship.");
-  }
+//  @Override   <-- Shane wuz here
+//  public UMLComponent getChild(String name) {
+//    throw new UnsupportedOperationException("No child components in a relationship.");
+//  }
 
   /**
    * Returns relationship as string

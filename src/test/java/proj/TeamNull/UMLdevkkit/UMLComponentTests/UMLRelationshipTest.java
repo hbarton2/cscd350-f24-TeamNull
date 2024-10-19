@@ -15,10 +15,10 @@ public class UMLRelationshipTest {
 
   private UMLRelationship umlRelationship;
 
-  // Helper method to create UMLRelationship object
+  // Helper method to create UMLRelationship object(More than likely needs rewriting due to refactor)
   private void relationshipCreationHelper() {
-    UMLClass sourceClass = new UMLClass("Person", null);
-    UMLClass destinationClass = new UMLClass("Address", null);
+    UMLClass sourceClass = new UMLClass("Person"); //<-- Shane wuz here
+    UMLClass destinationClass = new UMLClass("Address");//<-- Shane wuz here
     umlRelationship = new UMLRelationship("Person-Address Association", sourceClass, destinationClass, "Association");
   }
 
@@ -57,7 +57,7 @@ public class UMLRelationshipTest {
     relationshipCreationHelper();
 
     // Test that add(UMLComponent) is unsupported
-    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.add(new UMLClass("NewClass", null)));
+    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.add(new UMLClass("NewClass")));//<-- Shane wuz here
   }
 
   @Test (timeout = TIMEOUT)
@@ -65,14 +65,15 @@ public class UMLRelationshipTest {
     relationshipCreationHelper();
 
     // Test that remove(UMLComponent) is unsupported
-    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.remove(new UMLClass("NewClass", null)));
+    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.remove(new UMLClass("NewClass")));//<-- Shane wuz here
   }
 
-  @Test (timeout = TIMEOUT)
-  public void testGetChild() {
-    relationshipCreationHelper();
-
-    // Test that getChild is unsupported
-    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.getChild("child"));
-  }
+  //TODO rewrite test once getChild is implemented. <-- Shane wuz here
+//  @Test (timeout = TIMEOUT)
+//  public void testGetChild() {
+//    relationshipCreationHelper();
+//
+//    // Test that getChild is unsupported
+//    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.getChild("child"));
+//  }
 }

@@ -37,11 +37,12 @@ public class UMLFieldTest {
     assertThrows(UnsupportedOperationException.class, () -> umlField.remove(nameField));
   }
 
-  @Test (timeout = TIMEOUT)
-  public void testGetChild() {
-    fieldCreationHelper();
-
-    // Test that getChild operation throws an exception
-    assertThrows(UnsupportedOperationException.class, () -> umlField.getChild("child"));
-  }
+  //TODO: Rewrite test once getChild() is implemented in refactor. <-- Shane wuz here
+//  @Test (timeout = TIMEOUT)
+//  public void testGetChild() {
+//    fieldCreationHelper();
+//
+//    // Test that getChild operation throws an exception
+//    assertThrows(UnsupportedOperationException.class, () -> umlField.getChild("child"));
+//  }
 }
