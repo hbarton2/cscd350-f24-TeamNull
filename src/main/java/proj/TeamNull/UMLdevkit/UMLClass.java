@@ -2,6 +2,8 @@ package proj.TeamNull.UMLdevkit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * UMLClass represents a class that the user can create in the application, stores all methods, fields,
@@ -25,15 +27,35 @@ import java.util.List;
  */
 
 public class UMLClass {
+  Scanner sc = new Scanner(System.in);
   private String name;
 
   //these ArrayLists contain all the attributes to this class instance
   //TODO Change from <Object> to our new UML objects
-  private ArrayList<Object> methods;
+  private ArrayList<UMLMethod> methods;
   private ArrayList<Object> fields;
   private ArrayList<Object> relationships;
 
   public UMLClass(String name) {
     this.name = name;
+    this.methods = new ArrayList<>();
+    this.fields = new ArrayList<>();
+    this.relationships = new ArrayList<>();
+    createMethods();
   }
+
+  public void createMethods(){
+    String methodName = "";
+
+    while(true) {
+      System.out.println("Enter Method Name: (type 'done' to exit)");
+       methodName = sc.nextLine();
+       if(methodName.equals("done"))
+         return;
+
+      UMLMethod newMethod = new UMLMethod(methodName);
+      methods.add(newMethod);
+      System.out.println("Method created");
+      }
+    }
 }
