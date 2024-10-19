@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLClass;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
 
+import static proj.TeamNull.UMLdevkit.Menu.startMenu;
+
+
 public class EntryPoint extends Application {
 
   @Override
@@ -35,14 +38,11 @@ public class EntryPoint extends Application {
    */
   public static void main(String[] args) {
 
-    System.out.println("WAZZZZZZ UPPPP! Love you guys =) see you tomorrow");
-    //    Scanner scanner = new Scanner(System.in);
-    //
-    //    Menu.displayMainMenu();
-    //    Menu.processMainMenuInput(scanner.nextLine());
 
-    //    launch(); // <-- confused what this is doing! -kate, this is how to start JavaScenes -
-    // Jimmy
+    // start command-line menu
+    startMenu();
+
+//    launch();
 
 
   }

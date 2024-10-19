@@ -60,7 +60,7 @@ public class TerminalHandler {
 
   @FXML
   public void initialize() {
-    Menu.displayMainMenu();  // Display the initial main menu in the terminal
+    Menu.displayMenu();  // Display the initial main menu in the terminal
   }
 
   @FXML
@@ -74,7 +74,7 @@ public class TerminalHandler {
       printToTerminal("User: " + input);
 
       // Process the input in the menu (adjust according to which menu is currently active)
-      Menu.processMainMenuInput(input);  // Start by processing the main menu
+      Menu.processMenuInput(input);  // Start by processing the main menu
     }
   }
 
