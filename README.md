@@ -1,6 +1,6 @@
 # Universal Modeling Language Software Development Kit
 
-* v1.0.30
+* v1.1.35
 * How to read version # Version main branch.release branch.pull request changes'
 * Login Information: username: admin password: password it's "currently hard coded" (future Gson/SQL)
 * What's New
