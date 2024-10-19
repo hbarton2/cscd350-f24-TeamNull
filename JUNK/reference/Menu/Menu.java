@@ -154,3 +154,22 @@ public class Menu {
     }
   }
 }
+
+public static void displayCommands(){
+  String commands =
+
+    "\n------------------------------------------------------------------------------------------------"+
+      "\nAvailable commands are:" +
+      "\n......................."+
+      "\n\n Command                      Usage\n" +
+
+      "\n Create Class                 to create a new class"+
+      "\n List Class                   to display all class on the screen." +
+      "\n Rename Class                 to rename an existing class." +
+      "\n Delete Class                 to delete an existing class." +
+      "\n Help                         to display Help on commands." +
+      "\n Exit                         to close the application, or you can click on the type quit"+
+      "\n"+
+      "\n Type a command here: ";
+  printToTerminal(commands);
+}

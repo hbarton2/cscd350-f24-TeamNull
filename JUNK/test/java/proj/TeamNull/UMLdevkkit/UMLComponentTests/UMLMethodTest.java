@@ -1,14 +1,12 @@
 package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
-
-import org.junit.Test;
-import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLComponent;
-import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLMethod;
-import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLParameter;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLMethod;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLParameter;
 
 /**
  * Test class for UMLMethod
@@ -24,7 +22,7 @@ public class UMLMethodTest<module> {
     umlMethod = new UMLMethod("calculate", null);
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testAddParameter() {
     methodCreationHelper();
 
@@ -42,7 +40,7 @@ public class UMLMethodTest<module> {
     assertEquals("y", parameters.get(1).getName());
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testAddDuplicateParameter() {
     methodCreationHelper();
 
@@ -56,7 +54,7 @@ public class UMLMethodTest<module> {
     assertEquals("Invalid or duplicate parameter.", exception.getMessage());
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testRemoveParameter() {
     methodCreationHelper();
 

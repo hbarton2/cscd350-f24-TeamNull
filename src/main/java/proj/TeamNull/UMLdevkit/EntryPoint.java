@@ -5,16 +5,10 @@ package proj.TeamNull.UMLdevkit;
  */
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLClass;
-import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
-
-import static proj.TeamNull.UMLdevkit.Menu.startMenu;
-
 
 public class EntryPoint extends Application {
 
@@ -24,26 +18,14 @@ public class EntryPoint extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader(
       EntryPoint.class.getResource("LoginEntryPoint.fxml"));
 
-    Scene scene = new Scene(fxmlLoader.load(), 600, 400);//new Scene(fxmlLoader.load(), 320, 240);
-//    stage.setScene(new Scene(root, 600, 400));
-    //stage.initStyle(StageStyle.UNDECORATED); // this will remove the window to window borderless
-    stage.setResizable(false);  // This disables window resizing
+    Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+    stage.setResizable(false);
     stage.setTitle("Unified Modeling Language Software Development Kit - Login");
     stage.setScene(scene);
     stage.show();
   }
 
-  /**
-   * Start Menu Here!
-   */
   public static void main(String[] args) {
-
-
-    // start command-line menu
-    startMenu();
-
 //    launch();
-
-
   }
 }
