@@ -44,5 +44,6 @@ module proj.nullptr.devkituml {
   requires org.graalvm.collections;
 
   exports proj.TeamNull.UMLdevkit;
+  exports proj.TeamNull.UMLdevkit.utilities;
 
 }

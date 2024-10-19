@@ -1,7 +1,8 @@
-package proj.TeamNull.UMLdevkit;
+package proj.TeamNull.UMLdevkit.utilities;
 
 
 import java.util.ArrayList;
+import proj.TeamNull.UMLdevkit.UMLClass;
 
 /**
  * Storage class contains the array list of ALL the class objects the user has created using
