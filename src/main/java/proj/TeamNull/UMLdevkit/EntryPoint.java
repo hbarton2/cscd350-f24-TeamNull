@@ -10,6 +10,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLClass;
+import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
 
 import static proj.TeamNull.UMLdevkit.Menu.startMenu;
 
@@ -36,10 +38,12 @@ public class EntryPoint extends Application {
    */
   public static void main(String[] args) {
 
+
     // start command-line menu
     startMenu();
 
 //    launch();
+
 
   }
 }

@@ -30,7 +30,7 @@ public class UMLComponentManager {
       return;     // return if class already exists
     }
 
-    UMLClass newClass = new UMLClass(name, null);
+    UMLClass newClass = new UMLClass(name);//<-- Shane wuz here(Extra param decremented.)
     classes.add(newClass);
     System.out.println("Class " + name + " added");
   }
