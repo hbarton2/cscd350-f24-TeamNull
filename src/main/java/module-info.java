@@ -41,6 +41,7 @@ module proj.nullptr.devkituml {
   requires com.almasb.fxgl.all;      // If using the FXGL library
   requires com.google.gson;
   requires java.desktop;
+  requires org.graalvm.collections;
 
   exports proj.TeamNull.UMLdevkit;
 

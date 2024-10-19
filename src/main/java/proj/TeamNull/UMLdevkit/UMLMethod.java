@@ -35,13 +35,13 @@ public class UMLMethod {
             this.type = type;
         }
 
-    }
+  }
 
-    //TODO prompt for user input and create parameter object and add to parameters list
-    private void createParameter(){
-        UMLParameter param = new UMLParameter(name, "String");
-        parameters.add(param);
-        System.out.println("Added parameter " + param.name + " with type " + param.type);
+  //TODO prompt for user input and create parameter object and add to parameters list
+  private void createParameter() {
+    UMLParameter param = new UMLParameter(name, "String");
+    parameters.add(param);
+    System.out.println("Added parameter " + param.name + " with type " + param.type);
 
     }
 
