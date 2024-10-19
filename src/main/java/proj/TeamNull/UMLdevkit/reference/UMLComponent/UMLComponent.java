@@ -17,7 +17,7 @@ public abstract class UMLComponent {
    * @param name name of component
    */
   public UMLComponent(String name) {
-    if (name.isEmpty() || name == null){
+    if (!isValidName(name)){
       throw new IllegalArgumentException("Error, can not leave name as empty or null!");
     }
     this.name = name;
@@ -76,7 +76,7 @@ public abstract class UMLComponent {
    */
   public boolean isValidName(String name) {
     // You can add logic for name validation
-    if (name == null) {
+    if (name == null || name.isEmpty()) {
       return false;
     }
     if (name.length() > 50 || name.length() <= 1) {

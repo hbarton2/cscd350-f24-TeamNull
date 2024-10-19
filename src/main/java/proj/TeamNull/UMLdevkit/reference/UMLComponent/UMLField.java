@@ -21,7 +21,7 @@ public class UMLField extends UMLComponent {
    * **/
   public UMLField(String type, String name) {
     super(name);
-    if (type.isEmpty() || type == null){
+    if (!isValidName(type)){
       throw new IllegalArgumentException("'type' can not be empty or null!");
     }
     this.type = type;

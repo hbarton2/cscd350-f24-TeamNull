@@ -58,7 +58,7 @@ public class UMLClass extends UMLComponent {
     if (component instanceof UMLComponent && !(component instanceof UMLClass)){
       if (component instanceof UMLField){
         this.fields.add((UMLField) component);
-        System.out.println("Field: " + component + "has been successfully created!");
+        System.out.println("Field: " + component + " has been successfully created!");
       }else if(component instanceof UMLMethod){
         System.out.println("Added a method!!"); // <-- remove this when implementing add method(Shane wuz here)
       }else{
