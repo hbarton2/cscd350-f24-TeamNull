@@ -1,10 +1,11 @@
 package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.Test;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLClass;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLRelationship;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for UMLRelationship
@@ -19,10 +20,11 @@ public class UMLRelationshipTest {
   private void relationshipCreationHelper() {
     UMLClass sourceClass = new UMLClass("Person"); //<-- Shane wuz here
     UMLClass destinationClass = new UMLClass("Address");//<-- Shane wuz here
-    umlRelationship = new UMLRelationship("Person-Address Association", sourceClass, destinationClass, "Association");
+    umlRelationship = new UMLRelationship("Person-Address Association", sourceClass,
+      destinationClass, "Association");
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testConstructorAndGetters() {
     relationshipCreationHelper();
 
@@ -32,7 +34,7 @@ public class UMLRelationshipTest {
     assertEquals("Association", umlRelationship.getType());
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testSetType() {
     relationshipCreationHelper();
 
@@ -43,7 +45,7 @@ public class UMLRelationshipTest {
     assertEquals("Inheritance", umlRelationship.getType());
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testToString() {
     relationshipCreationHelper();
 
@@ -52,20 +54,22 @@ public class UMLRelationshipTest {
     assertEquals(expected, umlRelationship.toString());
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testUnsupportedAdd() {
     relationshipCreationHelper();
 
     // Test that add(UMLComponent) is unsupported
-    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.add(new UMLClass("NewClass")));//<-- Shane wuz here
+    assertThrows(UnsupportedOperationException.class,
+      () -> umlRelationship.add(new UMLClass("NewClass")));//<-- Shane wuz here
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testUnsupportedRemove() {
     relationshipCreationHelper();
 
     // Test that remove(UMLComponent) is unsupported
-    assertThrows(UnsupportedOperationException.class, () -> umlRelationship.remove(new UMLClass("NewClass")));//<-- Shane wuz here
+    assertThrows(UnsupportedOperationException.class,
+      () -> umlRelationship.remove(new UMLClass("NewClass")));//<-- Shane wuz here
   }
 
   //TODO rewrite test once getChild is implemented. <-- Shane wuz here

@@ -1,10 +1,10 @@
 package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.Test;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for UMLField
@@ -19,7 +19,7 @@ public class UMLFieldTest {
     umlField = new UMLField("size", "int");
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testAdd() {
     fieldCreationHelper();
     UMLField nameField = new UMLField("name", "String");
@@ -28,7 +28,7 @@ public class UMLFieldTest {
     assertThrows(UnsupportedOperationException.class, () -> umlField.add(nameField));
   }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testRemove() {
     fieldCreationHelper();
     UMLField nameField = new UMLField("name", "String");

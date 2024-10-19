@@ -1,14 +1,11 @@
 package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
-import org.junit.Test;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLParameter;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test Class for UMLParameter
  */
-public class UMLParameterTest{
+public class UMLParameterTest {
 
   private final int TIMEOUT = 1000;
   private UMLParameter umlParameter;

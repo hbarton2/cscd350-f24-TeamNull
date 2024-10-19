@@ -1,15 +1,14 @@
 package proj.TeamNull.UMLdevkkit.UMLComponentTests;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.Test;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLClass;
-import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLComponent;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
-import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLMethod;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLParameter;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLRelationship;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for UMLClass creation and manipulation
@@ -19,6 +18,7 @@ public class UMLClassTest {
   private final int TIMEOUT = 1000;
 
   private UMLClass umlClass;
+
   private void classCreationHelper() {
     umlClass = new UMLClass("Person"); //Altered due to refactor <--Shane wuz here
   }
@@ -35,7 +35,7 @@ public class UMLClassTest {
 //    assertEquals("name", retrievedField.getName(), "expected Field name is 'name");  // Verify the field name
 //  }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testAddDuplicateField() {
     classCreationHelper();
     UMLField nameField1 = new UMLField("name", "String");
@@ -45,10 +45,10 @@ public class UMLClassTest {
   }
 
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testAddInvalidComponent() {
     classCreationHelper();
-    UMLParameter invalidComponent = new UMLParameter("x","int");
+    UMLParameter invalidComponent = new UMLParameter("x", "int");
 
     // This should throw an exception since only fields and methods can be added
     assertThrows(IllegalArgumentException.class, () -> {
@@ -105,11 +105,12 @@ public class UMLClassTest {
 //    assertTrue(umlClass.getComponents().contains(relationship), "expected relationship is 'Association'");
 //  }
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testRemoveRelationship() {
     classCreationHelper();
     UMLClass addressClass = new UMLClass("Address");
-    UMLRelationship relationship = new UMLRelationship("Person-Address", umlClass, addressClass, "Association");
+    UMLRelationship relationship = new UMLRelationship("Person-Address", umlClass, addressClass,
+      "Association");
     umlClass.add(relationship);
     umlClass.remove(relationship);
     // Verify the relationship was removed
@@ -117,7 +118,7 @@ public class UMLClassTest {
   }
 
 
-  @Test (timeout = TIMEOUT)
+  @Test(timeout = TIMEOUT)
   public void testIsValidName() {
     UMLClass umlClass = new UMLClass("TestClass");
 
@@ -130,8 +131,8 @@ public class UMLClassTest {
     assertFalse(umlClass.isValidName(""));
     assertFalse(umlClass.isValidName("  "));
     assertFalse(umlClass.isValidName("a"));
-    assertFalse(umlClass.isValidName("weusedtolookupattheskyandwonderourplaceinthestarsnowwejustlookdownaandworryaboutourplaceinthedirt"));
+    assertFalse(umlClass.isValidName(
+      "weusedtolookupattheskyandwonderourplaceinthestarsnowwejustlookdownaandworryaboutourplaceinthedirt"));
   }
-
 
 }

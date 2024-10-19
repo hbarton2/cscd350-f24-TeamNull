@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Timeout;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLClass;
 import proj.TeamNull.UMLdevkit.reference.UMLComponent.UMLField;
 
-public class FreeToTestAnything {
+public class FreeTest {
+
   @Test
   @Timeout(1)
-  public void printLn(){
+  public void printLn() {
     /*
      * Sample code I've written to test out the add utility.
      * It literally just creates an object, throws it into the UMLClass.add() and then prints it out.

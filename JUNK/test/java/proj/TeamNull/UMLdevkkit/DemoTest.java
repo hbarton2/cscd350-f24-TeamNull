@@ -6,10 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.google.gson.Gson;
 import java.util.Vector;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import proj.TeamNull.UMLdevkit.reference.badcode.Person;
-
 
 public class DemoTest<module> {
 
@@ -77,7 +76,6 @@ public class DemoTest<module> {
   public void vector_test() {
     Vector<Object> vector = new Vector<>();
     Person person = new Person("John Doe", 30, "New York");
-
 
     System.out.println(vector);
   }
