@@ -5,14 +5,14 @@ package proj.TeamNull.UMLdevkit;
  */
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import static proj.TeamNull.UMLdevkit.reference.Menu.Menu.*;
+import static proj.TeamNull.UMLdevkit.Menu.startMenu;
+
 
 public class EntryPoint extends Application {
 
