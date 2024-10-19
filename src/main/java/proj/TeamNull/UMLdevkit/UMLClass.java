@@ -2,6 +2,8 @@ package proj.TeamNull.UMLdevkit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * UMLClass represents a class that the user can create in the application, stores all methods, fields,
@@ -25,15 +27,70 @@ import java.util.List;
  */
 
 public class UMLClass {
+  Scanner sc = new Scanner(System.in);
   private String name;
 
   //these ArrayLists contain all the attributes to this class instance
   //TODO Change from <Object> to our new UML objects
-  private ArrayList<Object> methods;
+  private ArrayList<UMLMethod> methods;
   private ArrayList<Object> fields;
   private ArrayList<Object> relationships;
 
   public UMLClass(String name) {
     this.name = name;
+    this.methods = new ArrayList<>();
+    this.fields = new ArrayList<>();
+    this.relationships = new ArrayList<>();
+    createMethods();
+  }
+
+  //does not take any parameters because it will prompt for user input itself
+  public void createMethods() {
+    String methodName;
+
+    while (true) {
+      System.out.println("Enter Method Name: (type 'done' to exit)");
+      methodName = sc.nextLine();
+      if (methodName.equalsIgnoreCase("done"))
+        break;
+      else {
+        UMLMethod newMethod = new UMLMethod(methodName);
+        methods.add(newMethod);
+        System.out.println("Method " + methodName + " created");
+      }
+    }
+  }
+
+  //does take a parameter name that must be provided
+  public void deleteMethod(String name) {
+    UMLMethod method = findMethod(name);
+    if (method != null) {
+      methods.remove(method);
+      System.out.println("Method " + name + " removed.");
+    } else {
+      System.out.println("Method " + name + " not found.");
+    }
+  }
+
+  //private method for searching for a method in this class
+  private UMLMethod findMethod(String name) {
+    for (UMLMethod method : methods) {
+      if (method.getName().equalsIgnoreCase(name)) {
+        return method;
+      }
+    }
+    return null;
+  }
+
+  //displays methods in this class
+  public void displayMethods() {
+    if (methods.isEmpty()) {
+      System.out.println("No methods available.");
+    } else {
+      System.out.println("Methods in " + name + ":");
+      for (UMLMethod method : methods) {
+        System.out.println("- " + method.getName());
+      }
+    }
   }
 }
