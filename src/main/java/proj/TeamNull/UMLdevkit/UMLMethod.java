@@ -73,6 +73,7 @@ public class UMLMethod {
   public String getName() {
     return this.name;
   }
+  public void changeName(String newName) {this.name = newName;}
 
   /**
    * Uses scanner to take in user input on its own, first asks for original parameter then finds it
