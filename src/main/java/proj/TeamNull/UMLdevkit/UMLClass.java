@@ -42,6 +42,9 @@ public class UMLClass {
     this.fields = new ArrayList<>();
     this.relationships = new ArrayList<>();
     createMethods();
+
+    System.out.println("Class: " + name);
+    displayAllMethods();
   }
 
   //does not take any parameters because it will prompt for user input itself
@@ -125,7 +128,7 @@ public class UMLClass {
   }
 
   //private method for searching for a method in this class
-  private UMLMethod findMethod(String name) {
+  public UMLMethod findMethod(String name) {
     for (UMLMethod method : methods) {
       if (method.getName().equalsIgnoreCase(name)) {
         return method;
@@ -135,7 +138,7 @@ public class UMLClass {
   }
 
   //displays methods in this class
-  public void displayMethods() {
+  public void displayAllMethods() {
     if (methods.isEmpty()) {
       System.out.println("No methods available.");
     } else {
