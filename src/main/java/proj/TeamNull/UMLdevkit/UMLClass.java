@@ -33,7 +33,7 @@ public class UMLClass {
   //these ArrayLists contain all the attributes to this class instance
   //TODO Change from <Object> to our new UML objects
   private ArrayList<UMLMethod> methods;
-  private ArrayList<Object> fields;
+  private ArrayList<UMLField> fields;
   private ArrayList<Object> relationships;
 
   public UMLClass(String name) {
@@ -41,6 +41,7 @@ public class UMLClass {
     this.methods = new ArrayList<>();
     this.fields = new ArrayList<>();
     this.relationships = new ArrayList<>();
+    createFields();
     createMethods();
   }
 
@@ -85,6 +86,28 @@ public class UMLClass {
   }
 
 
+  /**
+   * Generates as many fields as the user wants.
+   * Does not currently handle when user mistypes 'done'.
+   * TODO: Check for proper naming convention and add type to field.
+   * Does not take any parameters because it will prompt for user input itself.
+   * **/
+  public void createFields() {
+    String fieldName;
+
+    while (true) {
+      System.out.println("Enter Field Name: (type 'done' to exit)");
+      fieldName = sc.nextLine();
+      if (fieldName.equalsIgnoreCase("done"))
+        break;
+      else {
+        UMLField newField = new UMLField(fieldName);
+        fields.add(newField);
+        System.out.println("Field " + fieldName + " created");
+      }
+    }
+  }
+
   //does take a parameter name that must be provided
   public void deleteMethod(String name) {
     UMLMethod method = findMethod(name);
@@ -96,11 +119,39 @@ public class UMLClass {
     }
   }
 
+  /**
+   * Deletes existing field within this.fields
+   * @param name takes name of field to be deleted.
+   * **/
+  public void deleteField(String name) {
+    UMLField field = findField(name);
+    if (field != null) {
+      fields.remove(field);
+      System.out.println("Field " + name + " removed.");
+    } else {
+      System.out.println("Field " + name + " not found.");
+    }
+  }
+
   //private method for searching for a method in this class
   private UMLMethod findMethod(String name) {
     for (UMLMethod method : this.methods) {
       if (method.getName().equalsIgnoreCase(name)) {
         return method;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Finds, or doesn't find, a field within the class.
+   * If found, return the obj in the Array, else, return null.
+   * @param name takes name of field to be found.
+   * **/
+  private UMLField findField(String name) {
+    for (UMLField field : fields) {
+      if (field.getName().equalsIgnoreCase(name)) {
+        return field;
       }
     }
     return null;
@@ -116,5 +167,51 @@ public class UMLClass {
         System.out.println("- " + method.getName());
       }
     }
+  }
+
+  /**
+   * Displays all fields within a given class.
+   * Takes no params.
+   * **/
+  public void displayFields() {
+    if (fields.isEmpty()) {
+      System.out.println("No fields available.");
+    } else {
+      System.out.println("Fields in " + name + ":");
+      for (UMLField field : fields) {
+        System.out.println("- " + field.getName());
+      }
+    }
+  }
+
+  /**
+   * Accessor method for grabbing class 'name'.
+   * **/
+  public String getName() {
+    return this.name;
+  }
+
+  /**
+   * Mutator method for changing class 'name'.
+   * **/
+  public void setName(String name) {
+    this.name = name;
+  }
+
+/**
+ * Takes the name and new name from the user and renames the field.
+ * Uses 'findField()' to grab the memory reference and use the field class mutator to
+ * set it to the new name.
+ * @return String
+ * @param name Name of existing field
+ * @param newName Name to replace name of existing field.
+ * */
+  public String renameField(String name, String newName){
+    UMLField field = findField(name);
+    if (field != null) {
+      field.setName(newName);
+      return "Field: " + name + " found & renamed to --> " + newName + "\r\n";
+    }
+    return "Field: " + name + " not found.\nReturning to menu\r\n";
   }
 }
