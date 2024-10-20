@@ -108,6 +108,7 @@ public class UMLClass {
     }
   }
 
+
   //does take a parameter name that must be provided
   public void deleteMethod(String name) {
     UMLMethod method = findMethod(name);
