@@ -1,11 +1,47 @@
 # Technical Documentation
 
+# Known issues:
+
+* unable to see commands list
+* need to update this doc to relfect Jimmy's changes
+* need to update README <----
+
+# TODO: what from the rubric still needs to be implemented:
+
+## What is missing (these were likely moved to the JUNK/NOTUSED folder):
+
+Needs to be added to functions etc:
+* addClassRelationship
+* removeClassRelationship
+* add/remove field
+* add/remove method
+* rename field
+* rename method
+* add/remove parameter
+* change parameter
+* save/ load JSON functionality (Where are we even at with this??)
+* List classes
+* List class
+* List relationships
+* Help
+* 
+ 
+## what we have currently:
+
+* createClass (add Class)
+* removeClass ( delete class)
+* renameClass
+* exit
+
+
+---
+
 ## Section guidelines (for each class of project)
 * Description of class and how it works
 * Features:
   * methods, fields etc it contains plus brief description
 * Error Handling decriptions
-* 
+* Note: can also insert images where necessary
 
 ## Table of Contents
 1. [Entry Point](#Entry Point)
