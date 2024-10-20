@@ -1,5 +1,7 @@
 package proj.TeamNull.UMLdevkit;
 
+import proj.TeamNull.UMLdevkit.utilities.Storage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,7 +36,7 @@ public class UMLClass {
   //TODO Change from <Object> to our new UML objects
   private ArrayList<UMLMethod> methods;
   private ArrayList<UMLField> fields;
-  private ArrayList<Object> relationships;
+  private ArrayList<UMLClassRelationship> relationships;
 
   public UMLClass(String name) {
     this.name = name;
@@ -108,6 +110,7 @@ public class UMLClass {
     }
   }
 
+
   //does take a parameter name that must be provided
   public void deleteMethod(String name) {
     UMLMethod method = findMethod(name);
@@ -134,7 +137,7 @@ public class UMLClass {
   }
 
   //private method for searching for a method in this class
-  private UMLMethod findMethod(String name) {
+  public UMLMethod findMethod(String name) {
     for (UMLMethod method : this.methods) {
       if (method.getName().equalsIgnoreCase(name)) {
         return method;
@@ -214,4 +217,58 @@ public class UMLClass {
     }
     return "Field: " + name + " not found.\nReturning to menu\r\n";
   }
+
+  /**
+   * Adds a class relationship.
+   * Prompts user for existing source class and destination class, and type.
+   * The relationship name format: "Source-Destination Association"
+   *
+   * Checks if source and destination class both exist,
+   * creates a new relationship object,
+   * then adds to relationships list.
+   */
+  public void addClassRelationship(){
+    Storage.getInstance();
+
+    System.out.println("Enter the source class: ");
+    String source = sc.nextLine();
+    //TODO: use classSearch to verify source class exists
+    System.out.println("Enter the destination class: ");
+    String destination = sc.nextLine();
+    //TODO: use classSearch to verify destination class exists
+    System.out.println("Enter the relationship association type: ");
+    String type = sc.nextLine();
+    String relationshipName = source + "-" + destination + "-" + type;
+
+    UMLClassRelationship newRelationship = new UMLClassRelationship(relationshipName,source,destination,type);
+    relationships.add(newRelationship);
+    System.out.println("Relationship " + relationshipName + " created");
+  }
+
+  /**
+   * Removes class relationship from list.
+   * Prompts user for relationship name to be removed,
+   * then searches list for relationship.
+   * If found, removes relationship from list.
+   * Else prints "Relationship " + relationshipName + " not found."
+   */
+  public void removeClassRelationship(){
+    Storage.getInstance();
+
+    System.out.println("Enter the relationship name to remove (format: source-destination-type): ");
+    String relationshipName = sc.nextLine();
+
+    boolean found = false;
+    for (UMLClassRelationship relationship : relationships) {
+      if (relationship.getName().equals(relationshipName)) {
+        relationships.remove(relationship);
+        System.out.println("Relationship " + relationshipName + " removed");
+        found = true;
+      }
+    }
+    if (!found) {
+      System.out.println("Relationship " + relationshipName + " not found.");
+    }
+  }
+
 }
