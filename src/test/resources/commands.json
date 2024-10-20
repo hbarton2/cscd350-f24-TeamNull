@@ -1,0 +1,11 @@
+{
+  "mkc": {
+    "type": "CreateClassCommand"
+  },
+  "rmc": {
+    "type": "RemoveClassCommand"
+  },
+  "rn": {
+    "type": "RenameClassCommand"
+  }
+}

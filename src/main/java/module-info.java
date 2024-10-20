@@ -45,5 +45,6 @@ module proj.nullptr.devkituml {
 
   exports proj.TeamNull.UMLdevkit;
   exports proj.TeamNull.UMLdevkit.utilities;
+  exports proj.TeamNull.UMLdevkit.uml;
 
 }

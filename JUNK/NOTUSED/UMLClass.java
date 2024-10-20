@@ -1,18 +1,15 @@
-package proj.TeamNull.UMLdevkit;
-
-import proj.TeamNull.UMLdevkit.utilities.Storage;
+package proj.TeamNull.UMLdevkit.NOTUSED;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
+import proj.TeamNull.UMLdevkit.utilities.Storage;
 
 /**
- * UMLClass represents a class that the user can create in the application, stores all methods, fields,
- * and relations inside its private arraylists
+ * UMLClass represents a class that the user can create in the application, stores all methods,
+ * fields, and relations inside its private arraylists
  * <p>
- * UMLClass constructor only takes name parameter because all other additions to the array lists will be
- * handled by the add methods inside this class.
+ * UMLClass constructor only takes name parameter because all other additions to the array lists
+ * will be handled by the add methods inside this class.
  * <p>
  * TODO: create add methods for creating and adding to lists: addMethod, addField, addRelationship,
  *  these methods will be private and have no parameters they will be responsible for obtaining the
@@ -29,6 +26,7 @@ import java.util.Scanner;
  */
 
 public class UMLClass {
+
   Scanner sc = new Scanner(System.in);
   private String name;
 
@@ -53,9 +51,9 @@ public class UMLClass {
     while (true) {
       System.out.println("Enter Method Name: (type 'done' to exit)");
       methodName = sc.nextLine();
-      if (methodName.equalsIgnoreCase("done"))
+      if (methodName.equalsIgnoreCase("done")) {
         break;
-      else {
+      } else {
         if (isMethodNameExists(methodName)) {
           System.out.println("Method name already exists. Please enter a different name.");
         } else {
@@ -67,14 +65,15 @@ public class UMLClass {
       this.displayMethods();
     }
   }
+
   //Renames method in this class, first checks if method name is taken. Must provide new method name
-  public void renameMethod(String oldName, String newName){
-    UMLMethod method =  findMethod(oldName);
-    if(isMethodNameExists(newName))
+  public void renameMethod(String oldName, String newName) {
+    UMLMethod method = findMethod(oldName);
+    if (isMethodNameExists(newName)) {
       System.out.println("Method name already exists. Please enter a different name.");
-    else {
-        assert method != null;
-        method.changeName(newName);
+    } else {
+      assert method != null;
+      method.changeName(newName);
     }
   }
 
@@ -89,20 +88,20 @@ public class UMLClass {
 
 
   /**
-   * Generates as many fields as the user wants.
-   * Does not currently handle when user mistypes 'done'.
+   * Generates as many fields as the user wants. Does not currently handle when user mistypes
+   * 'done'.
    * TODO: Check for proper naming convention and add type to field.
    * Does not take any parameters because it will prompt for user input itself.
-   * **/
+   **/
   public void createFields() {
     String fieldName;
 
     while (true) {
       System.out.println("Enter Field Name: (type 'done' to exit)");
       fieldName = sc.nextLine();
-      if (fieldName.equalsIgnoreCase("done"))
+      if (fieldName.equalsIgnoreCase("done")) {
         break;
-      else {
+      } else {
         UMLField newField = new UMLField(fieldName);
         fields.add(newField);
         System.out.println("Field " + fieldName + " created");
@@ -124,8 +123,9 @@ public class UMLClass {
 
   /**
    * Deletes existing field within this.fields
+   *
    * @param name takes name of field to be deleted.
-   * **/
+   **/
   public void deleteField(String name) {
     UMLField field = findField(name);
     if (field != null) {
@@ -147,10 +147,11 @@ public class UMLClass {
   }
 
   /**
-   * Finds, or doesn't find, a field within the class.
-   * If found, return the obj in the Array, else, return null.
+   * Finds, or doesn't find, a field within the class. If found, return the obj in the Array, else,
+   * return null.
+   *
    * @param name takes name of field to be found.
-   * **/
+   **/
   private UMLField findField(String name) {
     for (UMLField field : fields) {
       if (field.getName().equalsIgnoreCase(name)) {
@@ -173,9 +174,8 @@ public class UMLClass {
   }
 
   /**
-   * Displays all fields within a given class.
-   * Takes no params.
-   * **/
+   * Displays all fields within a given class. Takes no params.
+   **/
   public void displayFields() {
     if (fields.isEmpty()) {
       System.out.println("No fields available.");
@@ -189,27 +189,27 @@ public class UMLClass {
 
   /**
    * Accessor method for grabbing class 'name'.
-   * **/
+   **/
   public String getName() {
     return this.name;
   }
 
   /**
    * Mutator method for changing class 'name'.
-   * **/
+   **/
   public void setName(String name) {
     this.name = name;
   }
 
-/**
- * Takes the name and new name from the user and renames the field.
- * Uses 'findField()' to grab the memory reference and use the field class mutator to
- * set it to the new name.
- * @return String
- * @param name Name of existing field
- * @param newName Name to replace name of existing field.
- * */
-  public String renameField(String name, String newName){
+  /**
+   * Takes the name and new name from the user and renames the field. Uses 'findField()' to grab the
+   * memory reference and use the field class mutator to set it to the new name.
+   *
+   * @param name    Name of existing field
+   * @param newName Name to replace name of existing field.
+   * @return String
+   */
+  public String renameField(String name, String newName) {
     UMLField field = findField(name);
     if (field != null) {
       field.setName(newName);
@@ -219,15 +219,13 @@ public class UMLClass {
   }
 
   /**
-   * Adds a class relationship.
-   * Prompts user for existing source class and destination class, and type.
-   * The relationship name format: "Source-Destination Association"
-   *
-   * Checks if source and destination class both exist,
-   * creates a new relationship object,
-   * then adds to relationships list.
+   * Adds a class relationship. Prompts user for existing source class and destination class, and
+   * type. The relationship name format: "Source-Destination Association"
+   * <p>
+   * Checks if source and destination class both exist, creates a new relationship object, then adds
+   * to relationships list.
    */
-  public void addClassRelationship(){
+  public void addClassRelationship() {
     Storage.getInstance();
 
     System.out.println("Enter the source class: ");
@@ -240,19 +238,18 @@ public class UMLClass {
     String type = sc.nextLine();
     String relationshipName = source + "-" + destination + "-" + type;
 
-    UMLClassRelationship newRelationship = new UMLClassRelationship(relationshipName,source,destination,type);
+    UMLClassRelationship newRelationship = new UMLClassRelationship(relationshipName, source,
+      destination, type);
     relationships.add(newRelationship);
     System.out.println("Relationship " + relationshipName + " created");
   }
 
   /**
-   * Removes class relationship from list.
-   * Prompts user for relationship name to be removed,
-   * then searches list for relationship.
-   * If found, removes relationship from list.
-   * Else prints "Relationship " + relationshipName + " not found."
+   * Removes class relationship from list. Prompts user for relationship name to be removed, then
+   * searches list for relationship. If found, removes relationship from list. Else prints
+   * "Relationship " + relationshipName + " not found."
    */
-  public void removeClassRelationship(){
+  public void removeClassRelationship() {
     Storage.getInstance();
 
     System.out.println("Enter the relationship name to remove (format: source-destination-type): ");
