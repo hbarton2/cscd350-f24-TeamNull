@@ -1,38 +1,39 @@
 package proj.TeamNull.UMLdevkit.utilities;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import org.graalvm.collections.EconomicMapUtil;
-
 /**
- * This class deal with all user input and then seek command class for help
+ * Deal with user Inputs all the user input get parsed here and ready for action
  */
+
 public class Parser {
-  private ArrayList<String> phrases;
-  private String commands;
 
-  public Parser() {}
+  private String userInput;  // Store raw input
+  private Commands commandRegistry;  // Reference to Commands class
 
-  public ArrayList<String> getPhrases() {
-    return phrases;
-  }
-  // read methods
-  public void setPhrases(String input) {
-    phrases.add(input); // change this later because ArrayList
+  // Constructor
+  public Parser(Commands commandRegistry) {
+    this.commandRegistry = new Commands();  // Initialize Commands from GSON
   }
 
-  /**
-   * read user input command for parsing
-   * takes input, and stores to phrases list
-   *
-   * TODO FIX ERROR
-   */
-  public void readInput() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Please enter the phrase you wish to add: ");
-    String newPhrase = scanner.nextLine();
-    setPhrases(newPhrase);
-    scanner.close();
+  // Method to set the user input
+  public void readInput(String input) {
+    this.userInput = input;
   }
 
+  // Step 1: Parse the input into a command and arguments
+  public void parseInput() {
+    // Split the input into command key and arguments
+    String[] tokens = userInput.split("\\s+");
+    String commandKey = tokens[0];  // First token is the command (e.g., 'mkc')
+    String[] args = new String[tokens.length - 1];
+    System.arraycopy(tokens, 1, args, 0, args.length);  // Extract arguments
+
+    // Step 2: Get the command from the Commands class
+    CommandAction command = commandRegistry.getCommand(commandKey);
+
+    if (command != null) {
+      command.execute(args);  // Execute the command with arguments
+    } else {
+      System.out.println("Unknown command: " + commandKey);
+    }
+  }
 }
