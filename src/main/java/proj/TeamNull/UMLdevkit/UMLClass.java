@@ -135,7 +135,7 @@ public class UMLClass {
   }
 
   //private method for searching for a method in this class
-  private UMLMethod findMethod(String name) {
+  public UMLMethod findMethod(String name) {
     for (UMLMethod method : this.methods) {
       if (method.getName().equalsIgnoreCase(name)) {
         return method;
