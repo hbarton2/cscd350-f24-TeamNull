@@ -1,8 +1,6 @@
 package proj.TeamNull.UMLdevkit;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -75,60 +73,8 @@ public class UMLClass {
     }
   }
 
-  //does not take any parameters because it will prompt for user input itself
-  public void createMethods() {
-    String methodName;
-
-    while (true) {
-      System.out.println("Enter Method Name: (type 'done' to exit)");
-      methodName = sc.nextLine();
-      if (methodName.equalsIgnoreCase("done"))
-        break;
-      else {
-        UMLMethod newMethod = new UMLMethod(methodName);
-        methods.add(newMethod);
-        System.out.println("Method " + methodName + " created");
-      }
-    }
-  }
-
-  //does take a parameter name that must be provided
-  public void deleteMethod(String name) {
-    UMLMethod method = findMethod(name);
-    if (method != null) {
-      methods.remove(method);
-      System.out.println("Method " + name + " removed.");
-    } else {
-      System.out.println("Method " + name + " not found.");
-    }
-  }
-
   //private method for searching for a method in this class
   private UMLMethod findMethod(String name) {
-    for (UMLMethod method : methods) {
-      if (method.getName().equalsIgnoreCase(name)) {
-        return method;
-      }
-    }
-    return null;
-  }
-
-  //displays methods in this class
-  public void displayMethods() {
-    if (methods.isEmpty()) {
-      System.out.println("No methods available.");
-    } else {
-      System.out.println("Methods in " + name + ":");
-      for (UMLMethod method : methods) {
-        System.out.println("- " + method.getName());
-      }
-    }
-  }
-
-  }
-
-  //private method for searching for a method in this class
-  public UMLMethod findMethod(String name) {
     for (UMLMethod method : methods) {
       if (method.getName().equalsIgnoreCase(name)) {
         return method;
