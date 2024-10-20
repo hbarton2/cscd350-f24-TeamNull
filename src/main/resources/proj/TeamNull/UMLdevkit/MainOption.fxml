@@ -15,7 +15,7 @@
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.TeamNull.UMLdevkit.UIhandler.MainOptionHandler">
   <children>
 
-    <!-- Menu Bar -->
+    <!-- Menu2 Bar -->
     <MenuBar style="-fx-background-color: #ADD8E6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <menus>
         <Menu text="File">
