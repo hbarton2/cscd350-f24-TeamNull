@@ -7,40 +7,44 @@ package proj.TeamNull.UMLdevkit.utilities;
 
 public class CommandFactory {
 
-  // Inner class to handle general command execution
-  public static class GeneralCommandAction implements CommandAction {
-
-    private String commandType;
-
-    public GeneralCommandAction(String commandType) {
-      this.commandType = commandType;
-    }
-
-    @Override
-    public void execute(String[] args) {
-      if (args.length == 2) {
-        String oldName = args[0];
-        String newName = args[1];
-
-        // Check if the class exists before renaming
-        if (Functions.classExists(oldName)) {
-          Functions.renameClass(oldName, newName);
-          System.out.println("Class " + oldName + " renamed to " + newName);
-        } else {
-          System.out.println("Error: Class " + oldName + " does not exist.");
-        }
-      } else {
-        System.out.println("Error: Provide both old and new class names.");
-      }
-    }
-  }
-
-  // Factory method to create command actions based on type
+  // Factory method to create command actions based on the command type
   public static CommandAction createCommand(String type) {
-    return switch (type) {
-      case "CreateClassCommand", "RemoveClassCommand", "RenameClassCommand" ->
-        new GeneralCommandAction(type);  // Return general command action
-      default -> throw new IllegalArgumentException("Unknown command type: " + type);
-    };
+    if (type == null || type.isEmpty()) {
+      System.out.println("Error: Command type cannot be null or empty.");
+      return null;
+    }
+
+    switch (type) {
+      case "createClass":
+        return args -> {
+          if (args.length == 1) {
+            Functions.createClass(args[0]);
+          } else {
+            System.out.println("Error: Incorrect number of arguments for creating a class.");
+          }
+        };
+
+      case "removeClass":
+        return args -> {
+          if (args.length == 1) {
+            Functions.removeClass(args[0]);
+          } else {
+            System.out.println("Error: Incorrect number of arguments for removing a class.");
+          }
+        };
+
+      case "renameClass":
+        return args -> {
+          if (args.length == 2) {
+            Functions.renameClass(args[0], args[1]);
+          } else {
+            System.out.println("Error: Provide both old and new class names.");
+          }
+        };
+
+      default:
+        System.out.println("Error: Unknown command type: " + type);
+        return null;  // Return null if the command type doesn't match anything known
+    }
   }
 }

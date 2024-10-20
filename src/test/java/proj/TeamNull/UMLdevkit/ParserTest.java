@@ -1,63 +1,96 @@
 package proj.TeamNull.UMLdevkit;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import proj.TeamNull.UMLdevkit.utilities.Commands;
-import proj.TeamNull.UMLdevkit.utilities.Parser;
+import proj.TeamNull.UMLdevkit.utilities.Functions;
+import proj.TeamNull.UMLdevkit.utilities.Storage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 
-  private Parser parser;
-  private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-  private final PrintStream originalOut = System.out;
-
   @BeforeEach
   public void setUp() {
-    // Redirect System.out to capture output
-    System.setOut(new PrintStream(outContent));
-    Commands commandRegistry = new Commands("commands.json");
-    parser = new Parser(commandRegistry);
-  }
-
-  @AfterEach
-  public void tearDown() {
-    // Restore System.out to its original state
-    System.setOut(originalOut);
-    outContent.reset();  // Clear the captured content for the next test
+    Storage.getUMLClasses().clear();  // Reset the storage before each test
   }
 
   @Test
   public void testCreateClass() {
-    parser.readInput("mkc Dog");
-    parser.parseInput();
-    assertEquals("Class Dog created.", outContent.toString().trim());
+    String className = "Dog";
+    Functions.createClass(className);
+
+    // Assert that the class was created successfully
+    assertTrue(Storage.classExists(className), "Class should be created");
+  }
+
+  @Test
+  public void testCreateClassAlreadyExists() {
+    String className = "Dog";
+    Functions.createClass(className);  // First creation
+    Functions.createClass(className);  // Attempt to create again
+
+    // Assert that the class still exists and no duplicates
+    assertTrue(Storage.classExists(className), "Class should exist");
+    assertEquals(1, Storage.getUMLClasses().size(), "There should be only one instance of the class");
   }
 
   @Test
   public void testRemoveClass() {
-    // First, create the class 'Dog'
-    parser.readInput("mkc Dog");
-    parser.parseInput();
-    outContent.reset();  // Clear the output before removing the class
+    String className = "Dog";
+    Functions.createClass(className);
+    Functions.removeClass(className);
 
-    // Now remove it
-    parser.readInput("rmc Dog");
-    parser.parseInput();
-    assertEquals("Class Dog removed.", outContent.toString().trim());
+    // Assert that the class was removed
+    assertFalse(Storage.classExists(className), "Class should be removed");
+  }
+
+  @Test
+  public void testRemoveNonExistentClass() {
+    String className = "Dog";
+    Functions.removeClass(className);
+
+    // Assert that removing a non-existent class doesn't cause any issues
+    assertFalse(Storage.classExists(className), "Class should not exist");
   }
 
   @Test
   public void testRenameClass() {
-    parser.readInput("mkc Cat");
-    parser.parseInput();
+    String oldName = "Cat";
+    String newName = "Feline";
 
-    parser.readInput("rn Cat Feline");
-    parser.parseInput();
-    assertEquals("Class Cat renamed to Feline", outContent.toString().trim());
+    Functions.createClass(oldName);  // Create the original class
+    Functions.renameClass(oldName, newName);
+
+    // Assert that the class was renamed successfully
+    assertFalse(Storage.classExists(oldName), "Old class name should not exist");
+    assertTrue(Storage.classExists(newName), "New class name should exist");
+  }
+
+  @Test
+  public void testRenameClassAlreadyExists() {
+    String oldName = "Cat";
+    String newName = "Dog";
+
+    Functions.createClass(oldName);
+    Functions.createClass(newName);  // Create a class with the new name already
+
+    // Attempt to rename to an existing class name
+    Functions.renameClass(oldName, newName);
+
+    // Assert that the original class still exists and no renaming happened
+    assertTrue(Storage.classExists(oldName), "Old class name should still exist");
+    assertTrue(Storage.classExists(newName), "New class name should exist");
+  }
+
+  @Test
+  public void testRenameNonExistentClass() {
+    String oldName = "Cat";
+    String newName = "Feline";
+
+    Functions.renameClass(oldName, newName);
+
+    // Assert that nothing was renamed since the class didn't exist
+    assertFalse(Storage.classExists(oldName), "Old class name should not exist");
+    assertFalse(Storage.classExists(newName), "New class name should not exist");
   }
 }

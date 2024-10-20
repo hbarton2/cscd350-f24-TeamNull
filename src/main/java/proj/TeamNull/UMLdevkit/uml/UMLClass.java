@@ -10,6 +10,7 @@ public class UMLClass {
   private List<String> methods;
   private List<String> relationships;
 
+  // Constructor with class name
   public UMLClass(String className) {
     this.className = className;
     this.attributes = new ArrayList<>();  // Initialize blank
@@ -26,6 +27,10 @@ public class UMLClass {
     return this.attributes;
   }
 
+  public void addAttribute(String attribute) {
+    this.attributes.add(attribute);
+  }
+
   // Getter and Setter for Methods
   public void setMethods(List<String> methods) {
     this.methods = methods;
@@ -33,6 +38,10 @@ public class UMLClass {
 
   public List<String> getMethods() {
     return this.methods;
+  }
+
+  public void addMethod(String method) {
+    this.methods.add(method);
   }
 
   // Getter and Setter for Relationships
@@ -44,8 +53,22 @@ public class UMLClass {
     return this.relationships;
   }
 
+  public void addRelationship(String relationship) {
+    this.relationships.add(relationship);
+  }
+
   // Get Class Name
   public String getClassName() {
     return className;
+  }
+
+  // Set Class Name
+  public void setClassName(String className) {
+    this.className = className;
+  }
+
+  // Method to rename the class
+  public void renameClass(String newName) {
+    this.className = newName;
   }
 }

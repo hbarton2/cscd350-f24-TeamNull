@@ -1,0 +1,13 @@
+{
+  "commands": {
+    "mkc": {
+      "type": "createClass"
+    },
+    "rm": {
+      "type": "removeClass"
+    },
+    "rn": {
+      "type": "renameClass"
+    }
+  }
+}
