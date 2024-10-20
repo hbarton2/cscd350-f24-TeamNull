@@ -47,25 +47,49 @@ public class UMLClass {
   //does not take any parameters because it will prompt for user input itself
   public void createMethods() {
     String methodName;
-
     while (true) {
       System.out.println("Enter Method Name: (type 'done' to exit)");
       methodName = sc.nextLine();
       if (methodName.equalsIgnoreCase("done"))
         break;
       else {
-        UMLMethod newMethod = new UMLMethod(methodName);
-        methods.add(newMethod);
-        System.out.println("Method " + methodName + " created");
+        if (isMethodNameExists(methodName)) {
+          System.out.println("Method name already exists. Please enter a different name.");
+        } else {
+          UMLMethod newMethod = new UMLMethod(methodName);
+          this.methods.add(newMethod);
+          System.out.println("Method " + methodName + " created");
+        }
       }
+      this.displayMethods();
     }
   }
+  //Renames method in this class, first checks if method name is taken. Must provide new method name
+  public void renameMethod(String oldName, String newName){
+    UMLMethod method =  findMethod(oldName);
+    if(isMethodNameExists(newName))
+      System.out.println("Method name already exists. Please enter a different name.");
+    else {
+        assert method != null;
+        method.changeName(newName);
+    }
+  }
+
+  private boolean isMethodNameExists(String methodName) {
+    for (UMLMethod method : this.methods) {
+      if (method.getName().equals(methodName)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   //does take a parameter name that must be provided
   public void deleteMethod(String name) {
     UMLMethod method = findMethod(name);
     if (method != null) {
-      methods.remove(method);
+      this.methods.remove(method);
       System.out.println("Method " + name + " removed.");
     } else {
       System.out.println("Method " + name + " not found.");
@@ -74,7 +98,7 @@ public class UMLClass {
 
   //private method for searching for a method in this class
   private UMLMethod findMethod(String name) {
-    for (UMLMethod method : methods) {
+    for (UMLMethod method : this.methods) {
       if (method.getName().equalsIgnoreCase(name)) {
         return method;
       }
@@ -84,11 +108,11 @@ public class UMLClass {
 
   //displays methods in this class
   public void displayMethods() {
-    if (methods.isEmpty()) {
+    if (this.methods.isEmpty()) {
       System.out.println("No methods available.");
     } else {
       System.out.println("Methods in " + name + ":");
-      for (UMLMethod method : methods) {
+      for (UMLMethod method : this.methods) {
         System.out.println("- " + method.getName());
       }
     }
