@@ -1,83 +1,52 @@
 # Technical Documentation
 
-# Known issues:
-
-* unable to see commands list
-* need to update this doc to relfect Jimmy's changes
-* need to update README <----
-
-# TODO: what from the rubric still needs to be implemented:
-
-## What is missing (these were likely moved to the JUNK/NOTUSED folder):
-
-Needs to be added to functions etc:
-* addClassRelationship
-* removeClassRelationship
-* add/remove field
-* add/remove method
-* rename field
-* rename method
-* add/remove parameter
-* change parameter
-* save/ load JSON functionality (Where are we even at with this??)
-* List classes
-* List class
-* List relationships
-* Help
-* 
- 
-## what we have currently:
-
-* createClass (add Class)
-* removeClass ( delete class)
-* renameClass
-* exit
-
 
 ---
-
-## Section guidelines (for each class of project)
-* Description of class and how it works
-* Features:
-  * methods, fields etc it contains plus brief description
-* Error Handling decriptions
-* Note: can also insert images where necessary
 
 ## Table of Contents
 1. [Entry Point](#Entry Point)
 2. [UMLClass](#UMLClass)
-3. [UMLClassRelationship](#UMLClassRelationship)
-4. [UMLField](#Field)
-5. [UMLMethod](#UMLMethod)
-6. [ActionHandler](#ActionHandler)
-7. [Commands](#Commands)
-8. [Display](#Display)
-9. [Functions](#Functions)
-10. [Parser](#Parser)
-11. [Storage](#Storage)
+3. [UMLClassRelationshipType](#UMLRelationshipType)
+4. [CommandAction](#CommandAction)
+5. [CommandFactory](#CommandFactory)
+6. [Commands](#Commands)
+7. [Display](#Display)
+8. [Functions](#Functions)
+9. [ParsingInputs](#ParsingInputs)
+10. [Storage](#Storage)
+11. [KnownBugs](#KnownBugs)
+
 
 
 
 
 ----
 ## Entry Point: 
-//TODO: UPDATE WITH WORKING ENTRYPOINT
+
 ### Overview:
+
 Point of entry for user into UML Editor application. 
+
 ### Features:
-* start() 
-  * Sets the stage for application. Creates a new scene for user.
-* main()
-  * launches program for user
+
+* Displays starting application
+* Runs application
+  
+### EntryPoint procedure:
+
+When running entrypoint, user will be greeted, and receive list of common commands and their usage.
+Will prompt user to type command to command line, and begin editing UML Diagram.
 
 ----
 
 ## UMLClass: 
 <h3> Overview: </h3>
 Handles all class objects created by the user
-Attributes: Name, List of Methods, Fields, Relationships
+Name, Attributes (Fields), List of Methods, Fields, Relationships
 
 <h3> Features: </h3>
+<p> Add Attributes: <br>
+    Adds an attribute to a class</p>
 <p> Create Methods: <br>
     creates a new method object and adds to list of methods in this class</p>
 <p> Remove Method: <br>
@@ -91,118 +60,69 @@ Attributes: Name, List of Methods, Fields, Relationships
 <p> isMethodExists: <br>
     returns boolean if method name is found in method list</p>
 <p> Find (Object): <br>
-    Methods that search the relevent list using the given name and returns the object if it exists </p>
+    Methods that search the relevant list using the given name and returns the object if it exists </p>
 <p> Display (Object): <br>
-    Display Methods, cycle through the relevent list and print to screen the information </p>
+    Display Methods, cycle through the relevant list and print to screen the information </p>
 
 ----
 
-## UMLClassRelationship:
+## UMLRelationshipType:
+
+### Overview: 
+
+Enum class that contains available relationship types:
+
+* ASSOCIATION
+* AGGREGATION
+* COMPOSITION
+* INHERITANCE
+
+---
+
+# Utilities:
+
+## CommandAction:
 
 ### Overview:
 
-UMLClassRelationship class represents the connection between two class objects.
-Will define relationships between a source class and a destination class, and define the type of relationship.
-
-### Features:
-
-* Fields:
-  * name: the name used to reference a relationship
-  * source: the source class in the class relationship
-  * destination: the destination class in the class relationship 
-  * type: the type of the class relationship
-* Class Relationship Constructor:
-
-  Contructs a class relationship by taking in and assigning the relationship 
-name, source class name, destination class name, and the type of relationship.
-
-* getName: 
-
-  Retrieves the name of the classRelationship object. 
-
-* setName:
-
-  Sets the name of the classRelationship object.
-
-* getSource:
-
-  Gets the source class of the relationship.
-
-* setSource:
-
-  Sets the source class of the relationship.
-
-* getDestination:
-
-  Gets the destination class of the relationship.
-
-* setDestination:
-
-  Sets the destination class of the relationship.
-
-* getType:
-
-  Gets the class relationship type.
-
-* setType:
-
-  Sets the class relationship type.
-
-* toString:
-
-  Overriden toString method. Creates a string for the class in the format: 
-> "Relationship: name [source -> destination] type"
-
-
-
-----
-## UMLField:
-### Overview:
-UMLField represents a field object within a class
-
-### Features:
-<p> Get/Set Name <br>
-    methods to retrieve the name field and change name field within UMLField object</p>
-<p> Get/Set Type <br>
-    methods to retrieve and update type field</p>
-
-----
-
-## UMLMethod:
-### Overview:
-UMLMethod represents a method within a class, has nested private class UMLParameter 
-Attributes: Name and List of Parameters
-### Features:
-<p> UMLParameter: <br>
-    Nested subclass that contains constructor for creating a parameter, has a name and a type</p>
-<p> Create Parameter: <br>
-    Method for creating a parameter object and adding it to the parameters list</p>
-<p> Remove Parameter: <br>
-    Method for checking if parameter exists in list and removing it if it does</p>
-<p> Change name: <br>
-    given a new name, updates the name of this method object with new name</p>>
-<p> Change Parameter: <br>
-    given the name of the parameter you want to change, enter a new name and type, updates that parameter</p>
-<p> Display Parameters: <br>
-    Function to display all parameters contained in this method object </p>
+Helper interface that pulls phrase from parser and attributes to a command.
+Helps avoid clutter in Main entry call.
 
 
 ---
-# Utilities:
 
-
-
-## ActionHandler:
+## CommandFactory:
 
 ### Overview:
 
-Parcer class feeds a phrase and ActionHandler that attributes to a command from Commands class.
+Factory class that uses a Factory method to create commands actions based on parsed phrases from Parser.
+
+### Features:
+
+createCommand Method: 
+
+Runs through cases to create a command based on command type. Options: createClass, removeClass, renameClass,
+addAttribute, removeAttribute, addMethod, removeMethod, addRelationship, removeRelationship, lsa, lsc, lsr,
+saveProgress, loadProgress, clearProgress. Default case prints: "Error: Unknown command type: type"
+
 
 ---
 ## Commands:
 
 ### Overview:
 Stores UML Editor commands as hash table.
+
+### Features:
+
+* loadCommand Method:
+pulls command from the Json file it is stored in, and stores it in the hash map for use
+
+* addHelpCommand
+Manually adds our help command into the hashmap
+* displayHelp
+Cycles through list of command definitions and prints them to the screen
+* getCommand
+getter method to return the command via the parameter commandKey
 
 ---
 
@@ -211,128 +131,213 @@ Stores UML Editor commands as hash table.
 ### Overview:
 Handles all display functionality.
 
+### Features:
+
+* Display: initializes command registry from GSON and creates parser instance.
+* Start: entry method to handle start of program. Displays list of available commands and their arguments. Displays help
+from the start. Creates a Scanner instance for user input handling. Formats user's terminal for clean presentation.
+Handles exit command for closing UML Editor application.
+
 ---
 
 ## Functions:
 
 ### Overview:
-Stores method calls.
+Stores method calls for use from the menu, checks input and checks if class exists before executing class specific method calls
+
+
+### Features:
+
+* createClass:
+Method call for creating a class, checks if class already exists if not then adds to the list
+
+* removeClass:
+checks if class exists if it does then removes from the class list
+
+* renameClass:
+takes parameters oldName and newName, checks if class exists if it does then calls objects internal renameClass method
+
+* addAttribute (field):
+takes parameter className and attribute, checks if class exists then calls addAttribute within the class
+
+* removeAttribute (field):
+  takes parameter className and attribute, checks if class exists then calls removeAttribute within the class
+
+* addMethod:
+takes className, methodName, and parameter. if Class does not exist or method name is taken then returns, otherwise adds method and optionally the parameter
+
+* removeMethod:
+takes className, methodName, and parameter. if Class does not exist or method name is taken then returns, otherwise removes method
+
+* addRelationship:
+Adds or updates a relationship in a class.
+
+* removeRelationship:
+Removes a relationship from a class
+
+* getRelationshipType:
+Retrieves the available relationship types: ASSOCIATION, AGGREGATION, COMPOSITION, INHERITANCE
+
+
+* listClasses:
+Contains case for list class commands, including: listAllClassDetails, listClassNamesOnly, listClassesWithRelationships
+
+* listAllClassDetails:
+List all class details including attributes (fields) and methods. If classes are empty, will print "No classes created."
+
+* listClassNamesOnly:
+List classes by name only. If classes are empty will display "No classes created."
+
+* listClassesWithRelationships:
+List all classes that have relationships. If classes are empty, will display "No classes created."
+
+* saveProgress:
+Saves progress to a JSON file.
+
+* loadProgress:
+Loads a progress state from a JSON file.
+
+* clearProgress:
+Clears user terminal of progress history.
+
+
 
 ---
 
-## Parser:
+
+
+
+## ParsingInputs:
 
 ### Overview:
 Parser class handles all user input then seeks command class.
 
+### Features:
+
+* Fields: 
+  * userInput: stores raw user input
+  * commandRegistry: reference to Commands class
+
+* readInput: Sets the user input. Receives a String and assigns to class userInput field.
+
+* parseInput: parses the input into a command and arguments. Grabs command from the command registry. If found, executes
+command, else prints: "Unknown command <command>"
+
+
 ---
+
+
+
+
+
 
 ## Storage:
+<h3> Storage</h3>
 
 ### Overview:
+<h3> Overview</h3>
 
-Storage class contains an array list of all the class objects of user's application state.
+<p> The Storage class is a utility that manages the storage of UML class objects created by the user.</p><br>
+<p> It allows for adding, removing, renaming, and checking the existence of UML classes using static methods. </p>
+<p> The storage mechanism is based on a HashMap where the key is the class name (a String) and the value is a UMLClass object.</p><br>
+
+<h3> Data Structure</h3>
+
+<p> The class uses a private static HashMap to store all UML class objects:</p>
+<p> private static HashMap<String, UMLClass> umlClasses = new HashMap<p>();</p>
+<p> • Key: The name of the UML class (String).</p>
+<p> • Value: The corresponding UMLClass object.</p>
+
+<h3> Key Features: </h3>
+
+<p> 1. Store UML Class objects: Stores and retrieves UML class objects using a HashMap.</p>
+<p> 2. Add and Remove Classes: Supports adding new classes and removing existing ones.</p>
+<p> 3. Check Class Existence: Provides a method to verify if a class exists in the storage. </p>
+<p> 4. Rename Classes: Allows renaming an existing class.</p><br>
 
 
+<h3> Methods: </h3>
+
+<p> 1. getUMLClasses </p>
+
+<p>public static HashMap<String, UMLClass> getUMLClasses()
+
+<p> • Description: Returns the entire umlClasses HashMap, which contains all the UML classes currently stored. </p>
+<p> • Return Type: HashMap<String, UMLClass> </p>
+<p> • Usage: To access the full collection of UML classes in storage.</p> <br>
+
+<h3> 2. addClass(String className) </h3>
+
+<p> public static void addClass(String className)</p>
+
+<p> • Description: Adds a new UML class to the storage if the class name doesn’t already exist.</p>
+<p> • Parameters:
+<p> • className (String): The name of the class to be added. </p>
+
+<p>• Behavior:</p>
+<p> • If the class name does not already exist, a new UMLClass object is created and added to the umlClasses map.</p>
+<p> • If the class name already exists, an error message is printed. </p>
+<p> • Usage: To create and add a new UML class. </p> <br>
 
 
+<h3> 3. removeClass(String className) </h3>
+
+<p> public static void removeClass(String className)</p>
+
+<p> • Description: Removes a UML class from the storage by its name.</p> <br>
+<p> • Parameters:
+<p> • className (String): The name of the class to be removed.</p> <br>
+
+<p> • Behavior:</p>
+<p> • Removes the class from the umlClasses map if it exists. </p>
+<p> • If the class does not exist, no action is taken.</p>
+<p> • Usage: To remove an existing UML class by its name.</p><br>
+
+<h3> 4. classExists(String className) </h3>
+
+<p> public static boolean classExists(String className)</p>
+
+<p> • Description: Checks if a UML class with the given name exists in storage. </p> <br>
+<p> • Parameters: </p>
+<p> • className (String): The name of the class to check. </p>
+<p> • Return Type: boolean — Returns true if the class exists, otherwise false. </p>
+<p> • Usage: To verify the existence of a class in storage. </p><br>
 
 
----
-## DeleteUMLClass Utility
+<h3> 5. renameClass(String oldName, String newName)</h3>
 
-<h3> Overview </h3>
+<p> public static void renameClass(String oldName, String newName)</p>
 
-The DeleteUMLClass class is a utility designed to delete a UML class by its name from a provided list. This class helps manage UML classes by allowing users to remove classes stored in an ArrayList. The method validates input parameters and provides appropriate feedback depending on the success or failure of the delete operation.
-
-<h3> Features </h3>
-
-• Deletes a UML class from a list based on the class name.
-• Checks if the list and the class name provided are valid (i.e., non-empty).
-• Provides clear messages for the following cases:
-• The class list is empty or invalid.
-• The class to delete is not found.
-• The class is successfully deleted.
-
-<h3> Usage </h3>
-
-<h3> Method: </h3>
-<h3> deleteClassByName </h3>
-
-<p>public static void deleteClassByName(ArrayList<p> storageList, String classNameToDelete)</p>
-
-<h3> • Parameters: </h3>
-
-• storageList: An ArrayList<Object> where each entry represents a class (as an ArrayList<Object> with class details).
-• classNameToDelete: A String representing the name of the class to delete.
-• Preconditions:
-• The list must not be null or empty.
-• The class name to delete must not be empty.
-
-<h3> • Description: </h3>
-
-<p>• This method searches through the provided list of classes to find the one matching the name provided. </p>
-<p>• If the class is found, it will be deleted from the list, and a confirmation message will be displayed.</p>
-<p>• If the class is not found, it will print a message informing the user that the class name was not found and may need to be corrected.</p>
-
+<p> • Description: Renames an existing UML class by replacing the old name with a new name.</p>
+<p> • Parameters:
+<p> • oldName (String): The current name of the class to be renamed.</p>
+<p> • newName (String): The new name to assign to the class.</p>
+<p> • Behavior: </p>
+<p> • If the class with oldName exists, it removes the old entry from the </p>
+umlClasses map and adds a new entry with newName and the same UMLClass object.</p>
+<p> • If the class with oldName does not exist, an error message is printed.</p>
+<p> • Usage: To rename an existing UML class in the storage.</p><br>
 
 <h3> Error Handling </h3>
 
-<p>• If the class list is null or empty, the method will print:</p>
-Storage array list is empty.
-<p>• If the class to be deleted is not found, the method will print: </p>
-<p> Class 'ClassName' not found. Please make sure the class exists & is spelled correctly.</p>
-• On successful deletion, the method will print:
-Class 'ClassName' deleted successfully.
+<p> • When adding a class, if the class already exists, an error message is printed: </p>
+<p> "Error: Class [className] already exists." </p>
+<p> • When renaming a class, if the old class name is not found, the following error message is printed: </p>
+<p> "Error: Class [oldName] does not exist." </p>
 
 ---
 
+## KnownBugs:
 
-<h3> ListAllUMLClasses Utility</h3>
+![img.png](img.png)
 
-<h3> Overview</h3>
-
-<p> The ListAllUMLClasses class is a simple utility designed to display the details of UML classes stored in a list.</p>
-<p>This class processes an array list containing class details (class name, fields, and methods) and </p> 
-<p>prints these details in a structured format. The utility helps users visualize UML class details quickly and </p>
-<p>efficiently.<br> </p>
-
-<h3> Features</h3>
-
-<p> • Display UML Class Details: Lists all the UML classes in the provided list, including their names, fields, and methods.</p>
-<p> • Handles Empty Input: Checks if the provided list is empty and informs the user when no classes are available.</p>
-<p> • Formatted Output: Outputs the class details in a neat and readable format for easy viewing. <br> </p>
-
-<h3> Usage</h3>
-
-<h3> Method:</h3>
-<p>displayClassDetails</p>
-
-<p> public void displayClassDetails(ArrayList<ArrayList<p>> allClasses)</p>
-
-<h3> Parameters:</h3>
-<p>• allClasses: An ArrayList where each element is another ArrayList representing a UML class.<br> </p>
-<p>Each UML class list contains:</p>
-<p>• List of Fields(String)</p>
-<p>• List of Methods (String)</p>
-
-• Description:
-• If the list of classes is empty, the method prints a message:
-The UML Class List is empty.
-• If the list contains classes, it loops through each class and prints:
-• The class name.
-• The fields (e.g., attributes or properties).
-• The methods (e.g., functions associated with the class).
-
-
-Error Handling
-
-• Empty List: If the list of UML classes is null or empty, the method will print:
-The UML Class List is empty.
+When I type a class name it saves it, I can add fields and methods to that class.
+I can rename it , for example rename the class from Computer to Desktop.
+Now, when I a parameter to Desktop, it shows that the parameter was added to both Computer and Desktop classes
 
 
 
-
+---
 
 
 
