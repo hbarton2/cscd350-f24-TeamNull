@@ -15,8 +15,16 @@
     "type": "addAttribute",
     "description": "Adds an attribute to a class. Usage: aa <class_name> <attribute>"
   },
+  "raa": {
+    "type": "removeAttribute",
+    "description": "Removes an attribute from a class. Usage: raa <class_name> <attribute>"
+  },
   "am": {
     "type": "addMethod",
     "description": "Adds a method to a class with optional overloading. Usage: am <class_name> <method_name> <parameter>"
+  },
+  "rmm": {
+    "type": "removeMethod",
+    "description": "Removes a method from a class. Usage: rmm <class_name> <method_name> <parameter>"
   }
 }

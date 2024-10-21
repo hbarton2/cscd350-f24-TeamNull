@@ -38,6 +38,17 @@ public class UMLClass {
     }
   }
 
+  // Remove an attribute
+  public void removeAttribute(String attribute) {
+    if (this.attributes.contains(attribute)) {
+      this.attributes.remove(attribute);
+      System.out.println("Attribute " + attribute + " removed from class " + className + ".");
+    } else {
+      System.out.println(
+        "Error: Attribute " + attribute + " does not exist in class " + className + ".");
+    }
+  }
+
   // Getter and Setter for Methods
   public void setMethods(List<MethodSignature> methods) {
     this.methods = methods;
@@ -67,6 +78,27 @@ public class UMLClass {
     System.out.println(
       "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
         + ".");
+  }
+
+  // Remove a method based on method name and parameter
+  public void removeMethod(String methodName, String parameter) {
+    MethodSignature methodToRemove = null;
+    for (MethodSignature method : methods) {
+      if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
+        methodToRemove = method;
+        break;
+      }
+    }
+
+    if (methodToRemove != null) {
+      methods.remove(methodToRemove);
+      System.out.println(
+        "Method '" + methodName + "' with parameter '" + parameter + "' removed from class "
+          + className + ".");
+    } else {
+      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter
+        + "' does not exist in class " + className + ".");
+    }
   }
 
   // Method to check if a method exists (with the same name and parameters)

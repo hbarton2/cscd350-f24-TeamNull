@@ -60,7 +60,22 @@ public class CommandFactory {
             System.out.println("Error: Provide class name and method.");
           }
         };
-
+      case "removeAttribute":
+        return args -> {
+          if (args.length == 2) {
+            Functions.removeAttribute(args[0], args[1]);
+          } else {
+            System.out.println("Error: Provide class name and attribute.");
+          }
+        };
+      case "removeMethod":
+        return args -> {
+          if (args.length == 3) {
+            Functions.removeMethod(args[0], args[1], args[2]);
+          } else {
+            System.out.println("Error: Provide class name, method, and parameter.");
+          }
+        };
       default:
         System.out.println("Error: Unknown command type: " + type);
         return null;  // Return null if the command type doesn't match anything known
