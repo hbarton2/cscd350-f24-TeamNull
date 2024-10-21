@@ -1,48 +1,7 @@
 # Technical Documentation
 
-# Known issues:
-
-* unable to see commands list
-* need to update this doc to relfect Jimmy's changes
-* need to update README <----
-
-# TODO: what from the rubric still needs to be implemented:
-
-## What is missing (these were likely moved to the JUNK/NOTUSED folder):
-
-Needs to be added to functions etc:
-* addClassRelationship
-* removeClassRelationship
-* rename field
-* remove field
-* rename method
-* save/ load JSON functionality (Where are we even at with this??)
-* List classes
-* List class
-* List relationships
-* 
- 
-## what we have currently:
-
-* createClass (add Class)
-* removeClass ( delete class)
-* renameClass
-* add field
-* add/remove method
-* add/remove parameter
-* change parameter
-* Help
-* exit
-
 
 ---
-
-## Section guidelines (for each class of project)
-* Description of class and how it works
-* Features:
-  * methods, fields etc it contains plus brief description
-* Error Handling description
-* Note: can also insert images where necessary
 
 ## Table of Contents
 1. [Entry Point](#Entry Point)
@@ -55,6 +14,7 @@ Needs to be added to functions etc:
 8. [Functions](#Functions)
 9. [ParsingInputs](#ParsingInputs)
 10. [Storage](#Storage)
+11. [KnownBugs](#KnownBugs)
 
 
 
@@ -142,7 +102,8 @@ Factory class that uses a Factory method to create commands actions based on par
 createCommand Method: 
 
 Runs through cases to create a command based on command type. Options: createClass, removeClass, renameClass,
-addAttribute, addMethod. Default case prints: "Error: Unknown command type: type"
+addAttribute, removeAttribute, addMethod, removeMethod, addRelationship, removeRelationship, lsa, lsc, lsr,
+saveProgress, loadProgress, clearProgress. Default case prints: "Error: Unknown command type: type"
 
 
 ---
@@ -196,11 +157,50 @@ checks if class exists if it does then removes from the class list
 * renameClass:
 takes parameters oldName and newName, checks if class exists if it does then calls objects internal renameClass method
 
-* addAttribute:
+* addAttribute (field):
 takes parameter className and attribute, checks if class exists then calls addAttribute within the class
+
+* removeAttribute (field):
+  takes parameter className and attribute, checks if class exists then calls removeAttribute within the class
 
 * addMethod:
 takes className, methodName, and parameter. if Class does not exist or method name is taken then returns, otherwise adds method and optionally the parameter
+
+* removeMethod:
+takes className, methodName, and parameter. if Class does not exist or method name is taken then returns, otherwise removes method
+
+* addRelationship:
+Adds or updates a relationship in a class.
+
+* removeRelationship:
+Removes a relationship from a class
+
+* getRelationshipType:
+Retrieves the available relationship types: ASSOCIATION, AGGREGATION, COMPOSITION, INHERITANCE
+
+
+* listClasses:
+Contains case for list class commands, including: listAllClassDetails, listClassNamesOnly, listClassesWithRelationships
+
+* listAllClassDetails:
+List all class details including attributes (fields) and methods. If classes are empty, will print "No classes created."
+
+* listClassNamesOnly:
+List classes by name only. If classes are empty will display "No classes created."
+
+* listClassesWithRelationships:
+List all classes that have relationships. If classes are empty, will display "No classes created."
+
+* saveProgress:
+Saves progress to a JSON file.
+
+* loadProgress:
+Loads a progress state from a JSON file.
+
+* clearProgress:
+Clears user terminal of progress history.
+
+
 
 ---
 
@@ -327,12 +327,17 @@ umlClasses map and adds a new entry with newName and the same UMLClass object.</
 
 ---
 
+## KnownBugs:
+
+![img.png](img.png)
+
+When I type a class name it saves it, I can add fields and methods to that class.
+I can rename it , for example rename the class from Computer to Desktop.
+Now, when I a parameter to Desktop, it shows that the parameter was added to both Computer and Desktop classes
 
 
 
-
-
-
+---
 
 
 
