@@ -1,13 +1,14 @@
 {
-  "commands": {
-    "mkc": {
-      "type": "createClass"
-    },
-    "rm": {
-      "type": "removeClass"
-    },
-    "rn": {
-      "type": "renameClass"
-    }
+  "mkc": {
+    "type": "createClass",
+    "description": "Creates a new class. Usage: mkc <class_name>"
+  },
+  "rm": {
+    "type": "removeClass",
+    "description": "Removes a class. Usage: rm <class_name>"
+  },
+  "rn": {
+    "type": "renameClass",
+    "description": "Renames a class. Usage: rn <old_class_name> <new_class_name>"
   }
 }

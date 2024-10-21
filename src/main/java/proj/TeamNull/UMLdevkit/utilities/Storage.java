@@ -22,7 +22,7 @@ public class Storage {
     if (!umlClasses.containsKey(className)) {
       UMLClass newClass = new UMLClass(className);  // Create a new UMLClass object
       umlClasses.put(className, newClass);  // Add it to the storage
-      System.out.println("Class " + className + " created.");
+//      System.out.println("Class " + className + " created.");
     } else {
       System.out.println("Error: Class " + className + " already exists.");
     }

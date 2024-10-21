@@ -47,4 +47,6 @@ module proj.nullptr.devkituml {
   exports proj.TeamNull.UMLdevkit.utilities;
   exports proj.TeamNull.UMLdevkit.uml;
 
+  opens proj.TeamNull.UMLdevkit.utilities to com.google.gson; // Open this package for reflection by Gson
+
 }
