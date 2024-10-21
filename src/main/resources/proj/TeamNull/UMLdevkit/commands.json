@@ -42,5 +42,17 @@
   "lsr": {
     "type": "lsr",
     "description": "Lists classes that have relationships. Usage: lsr"
+  },
+  "save": {
+    "type": "saveProgress",
+    "description": "Saves the current progress to a file. Usage: save <filename>"
+  },
+  "load": {
+    "type": "loadProgress",
+    "description": "Loads the saved progress from a file. Usage: load <filename>"
+  },
+  "clear": {
+    "type": "clearProgress",
+    "description": "Clears all the current progress. Usage: clear"
   }
 }
