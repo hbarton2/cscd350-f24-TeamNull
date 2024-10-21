@@ -78,6 +78,12 @@ Before running the project, ensure you have the following installed:
 
 ### Step-by-Step Instructions
 
+## Due to issue with Gson not being able to compile correctly please run the application "EntryPoint.java" in the IDE prefer IntelliJ IDEA
+
+```angular2html
+src/main/java/proj/TeamNull/UMLdevkit/EntryPoint.java
+```
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/hbarton2/cscd350-f24-TeamNull.git
