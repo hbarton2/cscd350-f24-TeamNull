@@ -54,5 +54,13 @@
   "clear": {
     "type": "clearProgress",
     "description": "Clears all the current progress. Usage: clear"
+  },
+  "ra": {
+    "type": "renameAttribute",
+    "description": "Renames an attribute in a class. Usage: ra <class_name> <old_attribute> <new_attribute>"
+  },
+  "rmn": {
+    "type": "renameMethod",
+    "description": "Renames a method in a class. Usage: rmn <class_name> <old_method_name> <new_method_name> <parameter>"
   }
 }

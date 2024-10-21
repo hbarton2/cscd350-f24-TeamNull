@@ -159,6 +159,24 @@ public class CommandFactory {
           }
         };
 
+      case "renameAttribute":
+        return args -> {
+          if (args.length == 3) {
+            Functions.renameAttribute(args[0], args[1], args[2]);
+          } else {
+            System.out.println("Error: Provide class name, old attribute name, and new attribute name.");
+          }
+        };
+
+      case "renameMethod":
+        return args -> {
+          if (args.length == 4) {
+            Functions.renameMethod(args[0], args[1], args[2], args[3]);
+          } else {
+            System.out.println("Error: Provide class name, old method name, new method name, and parameter.");
+          }
+        };
+
       default:
         System.out.println("Error: Unknown command type: " + type);
         return null;  // Return null if the command type doesn't match anything known

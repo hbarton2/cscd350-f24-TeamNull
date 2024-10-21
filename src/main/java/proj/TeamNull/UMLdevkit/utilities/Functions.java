@@ -78,9 +78,9 @@ public class Functions {
           + "' already exists in class " + className + ".");
       } else {
         umlClass.addMethod(methodName, parameter);
-        System.out.println(
-          "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
-            + ".");
+//        System.out.println(
+//          "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
+//            + ".");
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -265,5 +265,25 @@ public class Functions {
   public static void clearProgress() {
     Storage.clearUMLClasses();
     System.out.println("All progress has been cleared.");
+  }
+
+  // Method to rename an attribute
+  public static void renameAttribute(String className, String oldAttribute, String newAttribute) {
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);
+      umlClass.renameAttribute(oldAttribute, newAttribute);
+    } else {
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
+  }
+
+  // Method to rename a method
+  public static void renameMethod(String className, String oldMethodName, String newMethodName, String parameter) {
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);
+      umlClass.renameMethod(oldMethodName, newMethodName, parameter);
+    } else {
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
   }
 }
