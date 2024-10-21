@@ -128,4 +128,63 @@ public class Functions {
       default: return null;
     }
   }
+
+  public static void listClasses(String type) {
+    switch (type) {
+      case "lsa":
+        listAllClassDetails();  // List all classes with details
+        break;
+      case "lsc":
+        listClassNamesOnly();   // List class names only
+        break;
+      case "lsr":
+        listClassesWithRelationships();  // List classes with relationships
+        break;
+      default:
+        System.out.println("Error: Invalid list type.");
+    }
+  }
+
+  // List all class details including attributes and methods
+  private static void listAllClassDetails() {
+    if (Storage.getUMLClasses().isEmpty()) {
+      System.out.println("No classes created.");
+      return;
+    }
+    System.out.println("Classes with attributes and methods:");
+    for (UMLClass umlClass : Storage.getUMLClasses().values()) {
+      System.out.println("Class: " + umlClass.getClassName());
+      System.out.println("Attributes: " + umlClass.getAttributes());
+      umlClass.displayMethods();  // Show methods and overloads
+      System.out.println();
+    }
+  }
+
+  // List only class names
+  private static void listClassNamesOnly() {
+    if (Storage.getUMLClasses().isEmpty()) {
+      System.out.println("No classes created.");
+      return;
+    }
+    System.out.println("Classes:");
+    for (String className : Storage.getUMLClasses().keySet()) {
+      System.out.println("- " + className);
+    }
+  }
+
+  // List classes that have relationships
+  private static void listClassesWithRelationships() {
+    if (Storage.getUMLClasses().isEmpty()) {
+      System.out.println("No classes created.");
+      return;
+    }
+    System.out.println("Classes with relationships:");
+    for (UMLClass umlClass : Storage.getUMLClasses().values()) {
+      if (!umlClass.getRelationships().isEmpty()) {
+        System.out.println("Class: " + umlClass.getClassName());
+        System.out.println("Relationships: " + umlClass.getRelationships());
+        System.out.println();
+      }
+    }
+  }
 }

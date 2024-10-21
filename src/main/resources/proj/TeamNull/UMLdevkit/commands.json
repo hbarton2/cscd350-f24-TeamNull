@@ -19,6 +19,10 @@
     "type": "addMethod",
     "description": "Adds a method to a class with optional overloading. Usage: am <class_name> <method_name> <parameter>"
   },
+  "ar": {
+    "type": "addRelationship",
+    "description": "Adds or updates a relationship in a class. Usage: ar <class_name> <relationship_type(1-4)>"
+  },
   "raa": {
     "type": "removeAttribute",
     "description": "Removes an attribute from a class. Usage: raa <class_name> <attribute>"
@@ -27,12 +31,16 @@
     "type": "removeMethod",
     "description": "Removes a method from a class. Usage: rmm <class_name> <method_name> <parameter>"
   },
-  "ar": {
-    "type": "addRelationship",
-    "description": "Adds or updates a relationship in a class. Usage: ar <class_name> <relationship_type(1-4)>, where:\n 1: Association\n 2: Aggregation\n 3: Composition\n 4: Inheritance"
+  "lsa": {
+    "type": "lsa",
+    "description": "Lists all classes with their attributes and methods. Usage: lsa"
   },
-  "rmr": {
-    "type": "removeRelationship",
-    "description": "Removes a relationship from a class. Usage: rmr <class_name>"
+  "lsc": {
+    "type": "lsc",
+    "description": "Lists only the class names. Usage: lsc"
+  },
+  "lsr": {
+    "type": "lsr",
+    "description": "Lists classes that have relationships. Usage: lsr"
   }
 }
