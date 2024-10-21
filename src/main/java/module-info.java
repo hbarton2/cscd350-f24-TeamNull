@@ -37,11 +37,11 @@ module proj.nullptr.devkituml {
   requires net.synedra.validatorfx;  // For input validation
   requires org.kordamp.ikonli.javafx;  // For icons in JavaFX
   requires org.kordamp.bootstrapfx.core; // Bootstrap-style UI components
-  requires eu.hansolo.tilesfx;       // For dashboard-style tiles
-  requires com.almasb.fxgl.all;      // If using the FXGL library
+//  requires eu.hansolo.tilesfx;       // For dashboard-style tiles
+//  requires com.almasb.fxgl.all;      // If using the FXGL library
   requires com.google.gson;
   requires java.desktop;
-  requires org.graalvm.collections;
+//  requires org.graalvm.collections;
 
   exports proj.TeamNull.UMLdevkit;
   exports proj.TeamNull.UMLdevkit.utilities;
