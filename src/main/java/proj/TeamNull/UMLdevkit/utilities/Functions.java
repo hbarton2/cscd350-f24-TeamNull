@@ -46,13 +46,29 @@ public class Functions {
   }
 
   // Add method to a class
-  public static void addMethod(String className, String method) {
+//  public static void addMethod(String className, String method) {
+//    if (Storage.classExists(className)) {
+//      UMLClass umlClass = Storage.getUMLClasses().get(className);
+//      umlClass.addMethod(method);
+////      System.out.println("Method " + method + " added to class " + className + ".");
+//    } else {
+////      System.out.println("Error: Class " + className + " does not exist.");
+//    }
+//  }
+  // Add method to a class with method name and optional parameter
+  public static void addMethod(String className, String methodName, String parameter) {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);
-      umlClass.addMethod(method);
-//      System.out.println("Method " + method + " added to class " + className + ".");
+
+      // Check for duplicates
+      if (umlClass.methodExists(methodName, parameter)) {
+        System.out.println("Error: Method " + methodName + " with parameter '" + parameter + "' already exists in class " + className + ".");
+      } else {
+        umlClass.addMethod(methodName, parameter);
+//        System.out.println("Method " + methodName + " with parameter '" + parameter + "' added to class " + className + ".");
+      }
     } else {
-//      System.out.println("Error: Class " + className + " does not exist.");
+      System.out.println("Error: Class " + className + " does not exist.");
     }
   }
 }

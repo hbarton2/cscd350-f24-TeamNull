@@ -17,6 +17,6 @@
   },
   "am": {
     "type": "addMethod",
-    "description": "Adds a method to a class. Usage: am <class_name> <method>"
+    "description": "Adds a method to a class with optional overloading. Usage: am <class_name> <method_name> <parameter>"
   }
 }
