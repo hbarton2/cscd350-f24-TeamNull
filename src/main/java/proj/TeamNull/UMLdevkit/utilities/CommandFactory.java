@@ -103,6 +103,33 @@ public class CommandFactory {
           }
         };
 
+      case "lsa":
+        return args -> {
+          if (args.length == 0) {
+            Functions.listClasses("lsa");
+          } else {
+            System.out.println("Error: 'lsa' command does not take any arguments.");
+          }
+        };
+
+      case "lsc":
+        return args -> {
+          if (args.length == 0) {
+            Functions.listClasses("lsc");
+          } else {
+            System.out.println("Error: 'lsc' command does not take any arguments.");
+          }
+        };
+
+      case "lsr":
+        return args -> {
+          if (args.length == 0) {
+            Functions.listClasses("lsr");
+          } else {
+            System.out.println("Error: 'lsr' command does not take any arguments.");
+          }
+        };
+
       default:
         System.out.println("Error: Unknown command type: " + type);
         return null;  // Return null if the command type doesn't match anything known
