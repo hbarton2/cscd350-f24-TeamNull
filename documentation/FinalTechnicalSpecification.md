@@ -47,14 +47,15 @@ Needs to be added to functions etc:
 ## Table of Contents
 1. [Entry Point](#Entry Point)
 2. [UMLClass](#UMLClass)
-3. [UMLClassRelationshipType](#UMLRelationshipType)
-4. [CommandAction](#CommandAction)
-5. [CommandFactory](#CommandFactory)
-6. [Commands](#Commands)
-7. [Display](#Display)
-8. [Functions](#Functions)
-9. [ParsingInputs](#ParsingInputs)
-10. [Storage](#Storage)
+3. [UMLRelationship](#UMLRelationship)
+4. [UMLRelationshipType](#UMLRelationshipType)
+5. [CommandAction](#CommandAction)
+6. [CommandFactory](#CommandFactory)
+7. [Commands](#Commands)
+8. [Display](#Display)
+9. [Functions](#Functions)
+10. [ParsingInputs](#ParsingInputs)
+11. [Storage](#Storage)
 
 
 
@@ -105,6 +106,22 @@ Name, Attributes (Fields), List of Methods, Fields, Relationships
     Display Methods, cycle through the relevant list and print to screen the information </p>
 
 ----
+
+## UMLRelationship
+
+### Overview:
+
+UMLClassRelationship class represents the connection between two class objects.
+Will define relationships between a source class and a destination class, and define the type of relationship.
+
+### Features:
+
+* UMLRelationship constructor:
+  * creates a relationship object using type
+* getType/setType: getter and setter for relationship type
+* toString: returns string of name
+
+---
 
 ## UMLRelationshipType:
 
