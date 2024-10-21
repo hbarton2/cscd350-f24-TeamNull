@@ -1,10 +1,8 @@
 # Universal Modeling Language Software Development Kit
 
-* v1.1.53
+* v1.1.60
 * How to read version # Version main branch.release branch.pull request changes'
-* Login Information: username: admin password: password it's "currently hard coded" (future Gson/SQL)
 * What's New
-* 1. Application can be launched in GUI
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -13,33 +11,25 @@
 4. [Installation](#installation)
 5. [Running the Application](#running-the-application)
 6. [Usage](#usage)
-7. [Configuration](#configuration)
-8. [Testing](#testing)
-9. [Contributing](#contributing)
-10. [License](#license)
-11. [Contact](#contact)
+7. [Testing](#testing)
+8. [Contributing](#contributing)
+9. [License](#license)
+10. [Contact](#contact)
 
 ---
 
 ## Overview
 
-DevKitUML is a unified modeling language (UML) software development kit (SDK) designed to simplify the process of generating, managing, and interacting with UML diagrams for developers. This project leverages JavaFX for a rich graphical user interface and integrates a console-based interface for additional functionality.
+DevKitUML is a unified modeling language (UML) software development kit (SDK) designed to simplify the process of generating, managing, and interacting with UML diagrams for developers. This project integrates a console-based interface for UML Editor functionality.
 
 This SDK is intended to streamline the experience of creating class diagrams, modifying them, and saving/loading project data using JSON format for persistence.
 
-
-### Screenshots
-
-![screenshot](path/to/screenshot.png)  
-_A brief description of the screenshot._
 
 ---
 
 ## Features
 
-- **Graphical User Interface (GUI):** Built with JavaFX, users can interact with the software to create and manage UML diagrams.
 - **Command-Line Interface (CLI):** Provides a terminal-like environment where users can execute commands within the JavaFX terminal window.
-- **Customizable Menus:** The software includes a fully interactive menu system for managing settings, help sections, and other tools.
 - **JSON Integration:** Uses Gson for saving/loading the project data in JSON format.
 - **Multi-platform Support:** Designed to work on Windows, macOS, and Linux with cross-platform capabilities.
 
@@ -85,7 +75,6 @@ Before running the project, ensure you have the following installed:
 
 - **Java JDK 22** or later
 - **Maven 3.6** or later
-- **JavaFX** (already managed through Maven dependencies)
 
 ### Step-by-Step Instructions
 
@@ -128,21 +117,7 @@ mvn test
 ```
 ---
 
-## Configuration
-<!--
-Configuration files can be found under the /config directory. You can customize the following:
-- config.properties: Contains default application settings (e.g., UI themes, API keys, etc.).
-- logback.xml: Logging configuration for controlling log levels and outputs.
 
-
-### Example Configuration
-```bash
-theme=dark
-api_key=your-api-key
-default_airport_code=JFK
-```
----
--->
 
 ## Testing
 To run unit tests, execute the following command:
@@ -186,13 +161,13 @@ Please see LICENSE.md
 
 For any inquiries, feel free to reach out to:
 
-- TEAM NULL
+- TEAM NULL 
 - GitHub: https://github.com/hbarton2/cscd350-f24-TeamNull
 
 ---
 
 ## Acknowledgments
-- Special thanks to DEVELOPERS, DEVELOPERS, DEVELOPERS!!!
+- Special thanks to Jimmy, Kate, Colton, Muhammad, and Shane!! :)
 
 
 
