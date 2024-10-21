@@ -42,6 +42,22 @@ public class CommandFactory {
           }
         };
 
+      case "addAttribute":
+        return args -> {
+          if (args.length == 2) {
+            Functions.addAttribute(args[0], args[1]);
+          } else {
+            System.out.println("Error: Provide class name and attribute.");
+          }
+        };
+      case "addMethod":
+        return args -> {
+          if (args.length == 2) {
+            Functions.addMethod(args[0], args[1]);
+          } else {
+            System.out.println("Error: Provide class name and method.");
+          }
+        };
       default:
         System.out.println("Error: Unknown command type: " + type);
         return null;  // Return null if the command type doesn't match anything known
