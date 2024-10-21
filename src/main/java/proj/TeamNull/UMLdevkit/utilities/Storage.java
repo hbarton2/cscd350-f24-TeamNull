@@ -1,12 +1,5 @@
 package proj.TeamNull.UMLdevkit.utilities;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import proj.TeamNull.UMLdevkit.uml.UMLClass;
 
@@ -63,59 +56,5 @@ public class Storage {
   public static void clearUMLClasses() {
     umlClasses.clear();  // Clear the map of UML classes
     System.out.println("All UML classes have been cleared.");
-  }
-
-  // Method to save progress
-  public static void saveProgress(String filename) {
-    try {
-      // Specify the directory path
-      String directoryPath = "src/main/resources/proj/TeamNull/UMLdevkit/hdd";
-      File dir = new File(directoryPath);
-
-      // Create directory if it doesn't exist
-      if (!dir.exists()) {
-        dir.mkdirs();
-      }
-
-      // Save progress to a file inside the directory
-      Gson gson = new Gson();
-      String json = gson.toJson(Storage.getUMLClasses());
-
-      FileWriter writer = new FileWriter(directoryPath + "/" + filename);
-      writer.write(json);
-      writer.close();
-      System.out.println("Progress saved to " + directoryPath + "/" + filename + ".");
-    } catch (IOException e) {
-      System.out.println("Error: Could not save progress to " + filename + ".");
-    }
-  }
-
-  // Method to load progress
-  public static void loadProgress(String filename) {
-    try {
-      // Specify the directory path
-      String directoryPath = "src/main/resources/proj/TeamNull/UMLdevkit/hdd";
-      File file = new File(directoryPath + "/" + filename);
-
-      // Check if file exists before loading
-      if (!file.exists()) {
-        System.out.println("Error: File " + filename + " does not exist.");
-        return;
-      }
-
-      // Load progress from the file
-      Gson gson = new Gson();
-      FileReader reader = new FileReader(file);
-
-      Type type = new TypeToken<HashMap<String, UMLClass>>() {
-      }.getType();
-      HashMap<String, UMLClass> loadedClasses = gson.fromJson(reader, type);
-      Storage.setUMLClasses(loadedClasses);  // Update storage with loaded classes
-
-      reader.close();
-      System.out.println("Progress loaded from " + directoryPath + "/" + filename + ".");
-    } catch (IOException e) {
-      System.out.println("Error: Could not load progress from " + filename + ".");
-    }
   }
 }

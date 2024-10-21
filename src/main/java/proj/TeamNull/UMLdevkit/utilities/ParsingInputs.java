@@ -3,7 +3,7 @@ package proj.TeamNull.UMLdevkit.utilities;
 public class ParsingInputs {
 
   private String userInput;  // Store raw input
-  private Commands commandRegistry;  // Reference to Commands class
+  private final Commands commandRegistry;  // Reference to Commands class
 
   // Constructor
   public ParsingInputs(Commands commandRegistry) {

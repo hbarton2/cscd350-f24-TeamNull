@@ -8,8 +8,8 @@ import java.util.Scanner;
  */
 public class Display {
 
-  private Commands commandRegistry;
-  private ParsingInputs parser;
+  private final Commands commandRegistry;
+  private final ParsingInputs parser;
   private boolean running = true;
 
   public Display() {
@@ -39,11 +39,6 @@ public class Display {
 
       // Pass the input to the parser for processing
       parser.readInput(userInput);
-
-      // After processing, check if there was a valid command executed
-//      if (userInput.trim().isEmpty()) {
-//        System.out.println("Please enter a command.");
-//      }
     }
 
     input.close();  // Close the scanner when done
