@@ -1,8 +1,7 @@
 package proj.TeamNull.UMLdevkit.utilities;
 
 /**
- * Does this bring back 212 memories? If not, here’s something you can study upon:
- * <a href="https://refactoring.guru/design-patterns/factory-method">...</a>
+ * CommandFactory class to create and handle various command actions.
  */
 
 public class CommandFactory {
@@ -103,6 +102,7 @@ public class CommandFactory {
           }
         };
 
+      // List all classes with details
       case "lsa":
         return args -> {
           if (args.length == 0) {
@@ -112,6 +112,7 @@ public class CommandFactory {
           }
         };
 
+      // List only class names
       case "lsc":
         return args -> {
           if (args.length == 0) {
@@ -121,12 +122,40 @@ public class CommandFactory {
           }
         };
 
+      // List classes that have relationships
       case "lsr":
         return args -> {
           if (args.length == 0) {
             Functions.listClasses("lsr");
           } else {
             System.out.println("Error: 'lsr' command does not take any arguments.");
+          }
+        };
+
+      case "saveProgress":
+        return args -> {
+          if (args.length == 1) {
+            Functions.saveProgress(args[0]);  // Save progress with the given filename
+          } else {
+            System.out.println("Error: Provide a filename for saving progress.");
+          }
+        };
+
+      case "loadProgress":
+        return args -> {
+          if (args.length == 1) {
+            Functions.loadProgress(args[0]);  // Load progress from the given filename
+          } else {
+            System.out.println("Error: Provide a filename for loading progress.");
+          }
+        };
+
+      case "clearProgress":
+        return args -> {
+          if (args.length == 0) {
+            Functions.clearProgress();  // Clear all progress
+          } else {
+            System.out.println("Error: 'clear' command does not take any arguments.");
           }
         };
 
