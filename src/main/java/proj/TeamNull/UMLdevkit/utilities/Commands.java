@@ -9,13 +9,14 @@ import java.util.HashMap;
 
 public class Commands {
 
-  private HashMap<String, CommandAction> commands;  // Stores commands
-  private HashMap<String, CommandDefinition> commandDefinitions;  // Stores command definitions (types and descriptions)
-  private String commandsFilePath = "src/main/resources/proj/TeamNull/UMLdevkit/commands.json";  // Path to JSON file
-  private Gson gson;
+  private final HashMap<String, CommandAction> commands;  // Stores commands
+  private final HashMap<String, CommandDefinition> commandDefinitions;  // Stores command definitions (types and descriptions)
+  private final String commandsFilePath;// = "src/main/java/proj/TeamNull/UMLdevkit/utilities/commands.json";  // Path to JSON file
+  private final Gson gson;
 
   // Constructor
   public Commands() {
+    commandsFilePath = "src/main/java/proj/TeamNull/UMLdevkit/utilities/commands.json";
     this.commands = new HashMap<>();  // Initialize the commands HashMap
     this.commandDefinitions = new HashMap<>();  // Initialize the command definitions HashMap
     this.gson = new Gson();
@@ -43,7 +44,7 @@ public class Commands {
   }
 
   // Helper class to match the structure of each command in JSON
-  private class CommandDefinition {
+  private static class CommandDefinition {
 
     String type;
     String description;

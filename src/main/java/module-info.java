@@ -26,10 +26,7 @@
  */
 
 module proj.nullptr.devkituml {
-  requires javafx.graphics;
-  requires javafx.controls;
   requires javafx.fxml;
-  requires javafx.web;
 
   // Uncomment relevant dependencies if they are used in your FXML or code
   requires org.controlsfx.controls;  // For advanced UI controls
@@ -41,6 +38,7 @@ module proj.nullptr.devkituml {
 //  requires com.almasb.fxgl.all;      // If using the FXGL library
   requires com.google.gson;
   requires java.desktop;
+//  requires eu.hansolo.tilesfx;
 //  requires org.graalvm.collections;
 
   exports proj.TeamNull.UMLdevkit;

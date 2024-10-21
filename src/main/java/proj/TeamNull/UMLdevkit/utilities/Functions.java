@@ -78,9 +78,6 @@ public class Functions {
           + "' already exists in class " + className + ".");
       } else {
         umlClass.addMethod(methodName, parameter);
-//        System.out.println(
-//          "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
-//            + ".");
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -134,18 +131,13 @@ public class Functions {
 
   // Helper method to get relationship type by number
   private static UMLRelationshipType getRelationshipType(int number) {
-    switch (number) {
-      case 1:
-        return UMLRelationshipType.ASSOCIATION;
-      case 2:
-        return UMLRelationshipType.AGGREGATION;
-      case 3:
-        return UMLRelationshipType.COMPOSITION;
-      case 4:
-        return UMLRelationshipType.INHERITANCE;
-      default:
-        return null;
-    }
+    return switch (number) {
+      case 1 -> UMLRelationshipType.ASSOCIATION;
+      case 2 -> UMLRelationshipType.AGGREGATION;
+      case 3 -> UMLRelationshipType.COMPOSITION;
+      case 4 -> UMLRelationshipType.INHERITANCE;
+      default -> null;
+    };
   }
 
   public static void listClasses(String type) {
