@@ -10,5 +10,13 @@
   "rn": {
     "type": "renameClass",
     "description": "Renames a class. Usage: rn <old_class_name> <new_class_name>"
+  },
+  "aa": {
+    "type": "addAttribute",
+    "description": "Adds an attribute to a class. Usage: aa <class_name> <attribute>"
+  },
+  "am": {
+    "type": "addMethod",
+    "description": "Adds a method to a class. Usage: am <class_name> <method>"
   }
 }

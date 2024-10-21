@@ -27,8 +27,14 @@ public class UMLClass {
     return this.attributes;
   }
 
+  // Check for duplicates when adding an attribute
   public void addAttribute(String attribute) {
-    this.attributes.add(attribute);
+    if (!this.attributes.contains(attribute)) {
+      this.attributes.add(attribute);
+      System.out.println("Attribute " + attribute + " added to class " + className + ".");
+    } else {
+      System.out.println("Error: Attribute " + attribute + " already exists in class " + className + ".");
+    }
   }
 
   // Getter and Setter for Methods
@@ -40,8 +46,14 @@ public class UMLClass {
     return this.methods;
   }
 
+  // Check for duplicates when adding a method
   public void addMethod(String method) {
-    this.methods.add(method);
+    if (!this.methods.contains(method)) {
+      this.methods.add(method);
+      System.out.println("Method " + method + " added to class " + className + ".");
+    } else {
+      System.out.println("Error: Method " + method + " already exists in class " + className + ".");
+    }
   }
 
   // Getter and Setter for Relationships
