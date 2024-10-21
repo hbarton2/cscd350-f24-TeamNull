@@ -27,7 +27,8 @@ public class Commands {
   public void loadCommands() {
     System.out.println("Loading commands from: " + commandsFilePath);
     try (FileReader reader = new FileReader(commandsFilePath)) {
-      Type commandMapType = new TypeToken<HashMap<String, CommandDefinition>>() {}.getType();
+      Type commandMapType = new TypeToken<HashMap<String, CommandDefinition>>() {
+      }.getType();
       HashMap<String, CommandDefinition> rawCommands = gson.fromJson(reader, commandMapType);
 
       for (String key : rawCommands.keySet()) {
@@ -43,6 +44,7 @@ public class Commands {
 
   // Helper class to match the structure of each command in JSON
   private class CommandDefinition {
+
     String type;
     String description;
   }

@@ -1,5 +1,13 @@
 package proj.TeamNull.UMLdevkit.utilities;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.HashMap;
 import proj.TeamNull.UMLdevkit.uml.UMLClass;
 import proj.TeamNull.UMLdevkit.uml.UMLRelationshipType;
 
@@ -66,10 +74,13 @@ public class Functions {
 
       // Check for duplicates
       if (umlClass.methodExists(methodName, parameter)) {
-        System.out.println("Error: Method " + methodName + " with parameter '" + parameter + "' already exists in class " + className + ".");
+        System.out.println("Error: Method " + methodName + " with parameter '" + parameter
+          + "' already exists in class " + className + ".");
       } else {
         umlClass.addMethod(methodName, parameter);
-        System.out.println("Method " + methodName + " with parameter '" + parameter + "' added to class " + className + ".");
+        System.out.println(
+          "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
+            + ".");
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -84,9 +95,12 @@ public class Functions {
       // Check if method exists before attempting removal
       if (umlClass.methodExists(methodName, parameter)) {
         umlClass.removeMethod(methodName, parameter);
-        System.out.println("Method " + methodName + " with parameter '" + parameter + "' removed from class " + className + ".");
+        System.out.println(
+          "Method " + methodName + " with parameter '" + parameter + "' removed from class "
+            + className + ".");
       } else {
-        System.out.println("Error: Method " + methodName + " with parameter '" + parameter + "' does not exist in class " + className + ".");
+        System.out.println("Error: Method " + methodName + " with parameter '" + parameter
+          + "' does not exist in class " + className + ".");
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -121,11 +135,16 @@ public class Functions {
   // Helper method to get relationship type by number
   private static UMLRelationshipType getRelationshipType(int number) {
     switch (number) {
-      case 1: return UMLRelationshipType.ASSOCIATION;
-      case 2: return UMLRelationshipType.AGGREGATION;
-      case 3: return UMLRelationshipType.COMPOSITION;
-      case 4: return UMLRelationshipType.INHERITANCE;
-      default: return null;
+      case 1:
+        return UMLRelationshipType.ASSOCIATION;
+      case 2:
+        return UMLRelationshipType.AGGREGATION;
+      case 3:
+        return UMLRelationshipType.COMPOSITION;
+      case 4:
+        return UMLRelationshipType.INHERITANCE;
+      default:
+        return null;
     }
   }
 
@@ -186,5 +205,65 @@ public class Functions {
         System.out.println();
       }
     }
+  }
+
+  // Save current progress to a file
+  public static void saveProgress(String filename) {
+    try {
+      // Directory path to save the file
+      String directoryPath = "src/main/resources/proj/TeamNull/UMLdevkit/hdd";
+      File dir = new File(directoryPath);
+
+      // Create directory if it doesn't exist
+      if (!dir.exists()) {
+        dir.mkdirs();
+      }
+
+      // Convert the UMLClasses to JSON and save
+      Gson gson = new Gson();
+      String json = gson.toJson(Storage.getUMLClasses());
+
+      FileWriter writer = new FileWriter(directoryPath + "/" + filename);
+      writer.write(json);
+      writer.close();
+      System.out.println("Progress saved to " + directoryPath + "/" + filename + ".");
+    } catch (IOException e) {
+      System.out.println("Error: Could not save progress to " + filename + ".");
+    }
+  }
+
+  // Load progress from a file
+  public static void loadProgress(String filename) {
+    try {
+      // Directory path to load the file
+      String directoryPath = "src/main/resources/proj/TeamNull/UMLdevkit/hdd";
+      File file = new File(directoryPath + "/" + filename);
+
+      // Check if file exists
+      if (!file.exists()) {
+        System.out.println("Error: File " + filename + " does not exist.");
+        return;
+      }
+
+      // Read the JSON from the file and update UMLClasses
+      Gson gson = new Gson();
+      FileReader reader = new FileReader(file);
+
+      Type type = new TypeToken<HashMap<String, UMLClass>>() {
+      }.getType();
+      HashMap<String, UMLClass> loadedClasses = gson.fromJson(reader, type);
+      Storage.setUMLClasses(loadedClasses);
+
+      reader.close();
+      System.out.println("Progress loaded from " + directoryPath + "/" + filename + ".");
+    } catch (IOException e) {
+      System.out.println("Error: Could not load progress from " + filename + ".");
+    }
+  }
+
+  // Clear all progress (UML classes)
+  public static void clearProgress() {
+    Storage.clearUMLClasses();
+    System.out.println("All progress has been cleared.");
   }
 }

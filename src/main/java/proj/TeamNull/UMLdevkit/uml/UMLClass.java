@@ -28,7 +28,8 @@ public class UMLClass {
       this.attributes.add(attribute);
       System.out.println("Attribute " + attribute + " added to class " + className + ".");
     } else {
-      System.out.println("Error: Attribute " + attribute + " already exists in class " + className + ".");
+      System.out.println(
+        "Error: Attribute " + attribute + " already exists in class " + className + ".");
     }
   }
 
@@ -37,7 +38,8 @@ public class UMLClass {
       this.attributes.remove(attribute);
       System.out.println("Attribute " + attribute + " removed from class " + className + ".");
     } else {
-      System.out.println("Error: Attribute " + attribute + " does not exist in class " + className + ".");
+      System.out.println(
+        "Error: Attribute " + attribute + " does not exist in class " + className + ".");
     }
   }
 
@@ -49,11 +51,14 @@ public class UMLClass {
   public void addMethod(String methodName, String parameter) {
     MethodSignature newMethod = new MethodSignature(methodName, parameter);
     if (methodExists(methodName, parameter)) {
-      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter + "' already exists in class " + className + ".");
+      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter
+        + "' already exists in class " + className + ".");
       return;
     }
     methods.add(newMethod);
-    System.out.println("Method " + methodName + " with parameter '" + parameter + "' added to class " + className + ".");
+    System.out.println(
+      "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
+        + ".");
   }
 
   public void removeMethod(String methodName, String parameter) {
@@ -67,9 +72,12 @@ public class UMLClass {
 
     if (methodToRemove != null) {
       methods.remove(methodToRemove);
-      System.out.println("Method '" + methodName + "' with parameter '" + parameter + "' removed from class " + className + ".");
+      System.out.println(
+        "Method '" + methodName + "' with parameter '" + parameter + "' removed from class "
+          + className + ".");
     } else {
-      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter + "' does not exist in class " + className + ".");
+      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter
+        + "' does not exist in class " + className + ".");
     }
   }
 
