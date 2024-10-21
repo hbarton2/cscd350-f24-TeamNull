@@ -7,66 +7,111 @@ public class UMLClass {
 
   private String className;
   private List<String> attributes;
-  private List<String> methods;
-  private List<String> relationships;
+  private List<MethodSignature> methods;  // Store methods with parameters
+  private List<UMLRelationship> relationships;
 
   // Constructor with class name
   public UMLClass(String className) {
     this.className = className;
-    this.attributes = new ArrayList<>();  // Initialize blank
-    this.methods = new ArrayList<>();     // Initialize blank
-    this.relationships = new ArrayList<>();  // Initialize blank
+    this.attributes = new ArrayList<>();  // Initialize blank attributes list
+    this.methods = new ArrayList<>();     // Initialize blank methods list
+    this.relationships = new ArrayList<>();  // Initialize relationships list
   }
 
   // Getter and Setter for Attributes
-  public void setAttributes(List<String> attributes) {
-    this.attributes = attributes;
-  }
-
   public List<String> getAttributes() {
     return this.attributes;
   }
 
-  // Check for duplicates when adding an attribute
   public void addAttribute(String attribute) {
     if (!this.attributes.contains(attribute)) {
       this.attributes.add(attribute);
       System.out.println("Attribute " + attribute + " added to class " + className + ".");
     } else {
-      System.out.println("Error: Attribute " + attribute + " already exists in class " + className + ".");
+      System.out.println(
+        "Error: Attribute " + attribute + " already exists in class " + className + ".");
+    }
+  }
+
+  public void removeAttribute(String attribute) {
+    if (this.attributes.contains(attribute)) {
+      this.attributes.remove(attribute);
+      System.out.println("Attribute " + attribute + " removed from class " + className + ".");
+    } else {
+      System.out.println(
+        "Error: Attribute " + attribute + " does not exist in class " + className + ".");
     }
   }
 
   // Getter and Setter for Methods
-  public void setMethods(List<String> methods) {
-    this.methods = methods;
-  }
-
-  public List<String> getMethods() {
+  public List<MethodSignature> getMethods() {
     return this.methods;
   }
 
-  // Check for duplicates when adding a method
-  public void addMethod(String method) {
-    if (!this.methods.contains(method)) {
-      this.methods.add(method);
-      System.out.println("Method " + method + " added to class " + className + ".");
+  public void addMethod(String methodName, String parameter) {
+    MethodSignature newMethod = new MethodSignature(methodName, parameter);
+    if (methodExists(methodName, parameter)) {
+      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter
+        + "' already exists in class " + className + ".");
+      return;
+    }
+    methods.add(newMethod);
+    System.out.println(
+      "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
+        + ".");
+  }
+
+  public void removeMethod(String methodName, String parameter) {
+    MethodSignature methodToRemove = null;
+    for (MethodSignature method : methods) {
+      if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
+        methodToRemove = method;
+        break;
+      }
+    }
+
+    if (methodToRemove != null) {
+      methods.remove(methodToRemove);
+      System.out.println(
+        "Method '" + methodName + "' with parameter '" + parameter + "' removed from class "
+          + className + ".");
     } else {
-      System.out.println("Error: Method " + method + " already exists in class " + className + ".");
+      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter
+        + "' does not exist in class " + className + ".");
     }
   }
 
-  // Getter and Setter for Relationships
-  public void setRelationships(List<String> relationships) {
-    this.relationships = relationships;
+  // Method to check if a method with a specific name and parameter already exists
+  public boolean methodExists(String methodName, String parameter) {
+    for (MethodSignature method : methods) {
+      if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
+        return true;  // Method with the same name and parameter exists
+      }
+    }
+    return false;  // No duplicate found
   }
 
-  public List<String> getRelationships() {
+  // Getter and Setter for Relationships
+  public List<UMLRelationship> getRelationships() {
     return this.relationships;
   }
 
-  public void addRelationship(String relationship) {
-    this.relationships.add(relationship);
+  public void addOrUpdateRelationship(UMLRelationshipType type) {
+    if (this.relationships.isEmpty()) {
+      System.out.println("Adding relationship " + type + " to class " + className + ".");
+    } else {
+      System.out.println("Updating relationship in class " + className + " to " + type + ".");
+    }
+    this.relationships.add(new UMLRelationship(type));
+  }
+
+  public void removeRelationship() {
+    if (!this.relationships.isEmpty()) {
+      this.relationships.clear();
+      System.out.println("Removed all relationships from class " + className + ".");
+    } else {
+      System.out.println("Error: No relationship exists in class " + className + " to remove.");
+    }
   }
 
   // Get Class Name
@@ -74,13 +119,83 @@ public class UMLClass {
     return className;
   }
 
-  // Set Class Name
   public void setClassName(String className) {
     this.className = className;
   }
 
-  // Method to rename the class
   public void renameClass(String newName) {
     this.className = newName;
   }
+
+  // Internal class to represent a method signature with name and parameters
+  private static class MethodSignature {
+
+    String methodName;
+    String parameter;
+
+    public MethodSignature(String methodName, String parameter) {
+      this.methodName = methodName;
+      this.parameter = parameter != null ? parameter : ""; // Default to empty string if null
+    }
+
+    @Override
+    public String toString() {
+      return methodName + "(" + (parameter.isEmpty() ? "no parameters" : parameter) + ")";
+    }
+  }
+
+  // Debugging helper method to display all methods in the class
+  public void displayMethods() {
+    System.out.println("Methods in class " + className + ":");
+    for (MethodSignature method : methods) {
+      System.out.println("- " + method);
+    }
+  }
+
+  // Method to rename an attribute
+  public void renameAttribute(String oldAttribute, String newAttribute) {
+    if (attributes.contains(oldAttribute)) {
+      int index = attributes.indexOf(oldAttribute);
+      attributes.set(index, newAttribute);
+      System.out.println("Attribute renamed from " + oldAttribute + " to " + newAttribute + " in class " + className + ".");
+    } else {
+      System.out.println("Error: Attribute " + oldAttribute + " does not exist in class " + className + ".");
+    }
+  }
+
+  // Method to rename a method
+  public void renameMethod(String oldMethodName, String newMethodName, String parameter) {
+    MethodSignature oldMethod = findMethod(oldMethodName, parameter);
+    if (oldMethod != null) {
+      oldMethod.methodName = newMethodName;
+      System.out.println("Method renamed from " + oldMethodName + " to " + newMethodName + " in class " + className + ".");
+    } else {
+      System.out.println("Error: Method " + oldMethodName + " does not exist in class " + className + ".");
+    }
+  }
+
+  // Helper method to find a method by name and parameter
+  private MethodSignature findMethod(String methodName, String parameter) {
+    for (MethodSignature method : methods) {
+      if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
+        return method;
+      }
+    }
+    return null;
+  }
+//  private static class MethodSignature {
+//
+//    String methodName;
+//    String parameter;
+//
+//    public MethodSignature(String methodName, String parameter) {
+//      this.methodName = methodName;
+//      this.parameter = parameter != null ? parameter : ""; // Default to empty string if null
+//    }
+//
+//    @Override
+//    public String toString() {
+//      return methodName + "(" + (parameter.isEmpty() ? "no parameters" : parameter) + ")";
+//    }
+//  }
 }
