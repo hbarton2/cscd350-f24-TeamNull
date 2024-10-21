@@ -19,65 +19,70 @@ public class Commands {
     this.commands = new HashMap<>();  // Initialize the commands HashMap
     this.gson = new Gson();
     loadCommands();  // Load commands from JSON
+    addHelpCommand();  // Add help command
   }
 
-  // Method to load commands from the JSON file
-//  public void loadCommands() {
-//    System.out.println("Loading commands from: " + commandsFilePath);
-//    try (FileReader reader = new FileReader(commandsFilePath)) {
-//      Type commandMapType = new TypeToken<HashMap<String, HashMap<String, String>>>() {
-//      }.getType();
-//      HashMap<String, HashMap<String, String>> rawCommands = gson.fromJson(reader, commandMapType);
-//
-//      for (String commandKey : rawCommands.keySet()) {
-//        String commandType = rawCommands.get(commandKey).get("action");
-//        CommandAction commandAction = CommandFactory.createCommand(commandType);
-//
-//        // Ensure commandAction is not null before putting it in the map
-//        if (commandAction != null) {
-//          commands.put(commandKey, commandAction);
-//        } else {
-//          System.err.println("Error: No command found for " + commandKey);
-//        }
-//      }
-//    } catch (IOException e) {
-//      System.err.println("Error: Could not load commands from " + commandsFilePath);
-//    }
-//  }
-  // Method to load commands from the JSON file
   // Method to load commands from the JSON file
   public void loadCommands() {
     System.out.println("Loading commands from: " + commandsFilePath);
     try (FileReader reader = new FileReader(commandsFilePath)) {
-      // Define the type that matches the structure of the JSON
-      Type commandMapType = new TypeToken<HashMap<String, HashMap<String, HashMap<String, String>>>>(){}.getType();
-      HashMap<String, HashMap<String, HashMap<String, String>>> rawCommands = gson.fromJson(reader, commandMapType);
+      Type commandMapType = new TypeToken<HashMap<String, CommandDefinition>>() {}.getType();
+      HashMap<String, CommandDefinition> rawCommands = gson.fromJson(reader, commandMapType);
 
-      // Access the "commands" section of the JSON
-      HashMap<String, HashMap<String, String>> commandsData = rawCommands.get("commands");
-
-      for (String key : commandsData.keySet()) {
-        String type = commandsData.get(key).get("type");
-        if (type != null && !type.isEmpty()) {
-          CommandAction command = CommandFactory.createCommand(type);
-          commands.put(key, command);
-        } else {
-          System.out.println("Error: Command type is null or empty for key: " + key);
-        }
+      for (String key : rawCommands.keySet()) {
+        CommandDefinition commandDef = rawCommands.get(key);
+        CommandAction command = CommandFactory.createCommand(commandDef.type);
+        commands.put(key, command);
       }
     } catch (IOException e) {
       System.err.println("Error: Could not load commands from " + commandsFilePath);
-    } catch (JsonSyntaxException e) {
-      e.printStackTrace();
-      System.err.println("Error: JSON structure is invalid or doesn't match the expected format.");
     }
   }
 
+  // Helper class to match the structure of each command in JSON
+  private class CommandDefinition {
+    String type;
+    String description;
+  }
 
+  // Add help command manually
+  private void addHelpCommand() {
+    commands.put("help", args -> {
+      if (args.length == 0) {
+        displayHelp();
+      } else {
+        System.out.println("Error: 'help' command does not take arguments.");
+      }
+    });
+  }
+
+  // Display the list of commands and their descriptions
+  public void displayHelp() {
+    System.out.println("Available Commands:");
+    for (String command : commands.keySet()) {
+      System.out.println("- " + command + ": " + getCommandDescription(command));
+    }
+  }
+
+  private String getCommandDescription(String commandKey) {
+    // You could store descriptions in the CommandDefinition and pull them from there
+    switch (commandKey) {
+      case "mkc":
+        return "Creates a new class. Usage: mkc <class_name>";
+      case "rm":
+        return "Removes a class. Usage: rm <class_name>";
+      case "rn":
+        return "Renames a class. Usage: rn <old_class_name> <new_class_name>";
+      case "help":
+        return "Displays this help message.";
+      default:
+        return "Unknown command.";
+    }
+  }
 
   // Fetch a command by name
   public CommandAction getCommand(String commandKey) {
-    return commands.getOrDefault(commandKey,
-      args -> System.out.println("Unknown command: " + commandKey));
+    return commands.getOrDefault(commandKey, null);  // Return null if the command doesn't exist
   }
 }
+

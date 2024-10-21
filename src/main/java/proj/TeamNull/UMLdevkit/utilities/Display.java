@@ -20,6 +20,8 @@ public class Display {
   // Entry method to start the program
   public void start() {
     System.out.println("Welcome to the UML Editor!");
+    //TODO Display list of avaliable commands including exit include rn <classname> aka it's arguments
+    commandRegistry.displayHelp();  // Display help at the start
 
     // Create a single Scanner instance to reuse
     Scanner input = new Scanner(System.in);
@@ -39,9 +41,9 @@ public class Display {
       parser.readInput(userInput);
 
       // After processing, check if there was a valid command executed
-      if (userInput.trim().isEmpty()) {
-        System.out.println("Please enter a command.");
-      }
+//      if (userInput.trim().isEmpty()) {
+//        System.out.println("Please enter a command.");
+//      }
     }
 
     input.close();  // Close the scanner when done
