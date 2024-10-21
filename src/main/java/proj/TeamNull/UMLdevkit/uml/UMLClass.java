@@ -151,4 +151,51 @@ public class UMLClass {
       System.out.println("- " + method);
     }
   }
+
+  // Method to rename an attribute
+  public void renameAttribute(String oldAttribute, String newAttribute) {
+    if (attributes.contains(oldAttribute)) {
+      int index = attributes.indexOf(oldAttribute);
+      attributes.set(index, newAttribute);
+      System.out.println("Attribute renamed from " + oldAttribute + " to " + newAttribute + " in class " + className + ".");
+    } else {
+      System.out.println("Error: Attribute " + oldAttribute + " does not exist in class " + className + ".");
+    }
+  }
+
+  // Method to rename a method
+  public void renameMethod(String oldMethodName, String newMethodName, String parameter) {
+    MethodSignature oldMethod = findMethod(oldMethodName, parameter);
+    if (oldMethod != null) {
+      oldMethod.methodName = newMethodName;
+      System.out.println("Method renamed from " + oldMethodName + " to " + newMethodName + " in class " + className + ".");
+    } else {
+      System.out.println("Error: Method " + oldMethodName + " does not exist in class " + className + ".");
+    }
+  }
+
+  // Helper method to find a method by name and parameter
+  private MethodSignature findMethod(String methodName, String parameter) {
+    for (MethodSignature method : methods) {
+      if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
+        return method;
+      }
+    }
+    return null;
+  }
+//  private static class MethodSignature {
+//
+//    String methodName;
+//    String parameter;
+//
+//    public MethodSignature(String methodName, String parameter) {
+//      this.methodName = methodName;
+//      this.parameter = parameter != null ? parameter : ""; // Default to empty string if null
+//    }
+//
+//    @Override
+//    public String toString() {
+//      return methodName + "(" + (parameter.isEmpty() ? "no parameters" : parameter) + ")";
+//    }
+//  }
 }
