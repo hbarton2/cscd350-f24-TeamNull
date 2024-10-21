@@ -1,7 +1,19 @@
-# Old Classes that have been refactored out:
+# Old Classes and Documentation that have been refactored out:
 
 This document contains features that have been refactored or are no longer in use.
 
+---
+ 
+## UML Editor Design - Week 2
+
+![img_1.png](img_1.png)
+![img.png](img.png)
+
+## UML Editor Design - Week 2
+
+![img_2.png](img_2.png)
+
+---
 
 ## UMLClassRelationship:
 
