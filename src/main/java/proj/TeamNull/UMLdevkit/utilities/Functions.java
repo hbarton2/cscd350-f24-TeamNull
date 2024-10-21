@@ -1,6 +1,7 @@
 package proj.TeamNull.UMLdevkit.utilities;
 
 import proj.TeamNull.UMLdevkit.uml.UMLClass;
+import proj.TeamNull.UMLdevkit.uml.UMLRelationshipType;
 
 public class Functions {
 
@@ -89,6 +90,42 @@ public class Functions {
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
+    }
+  }
+
+  // Add or update a relationship in a class
+  public static void addRelationship(String className, int relationshipType) {
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
+      UMLRelationshipType type = getRelationshipType(relationshipType);
+      if (type != null) {
+        umlClass.addOrUpdateRelationship(type);
+      } else {
+        System.out.println("Error: Invalid relationship type.");
+      }
+    } else {
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
+  }
+
+  // Remove a relationship from a class
+  public static void removeRelationship(String className) {
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
+      umlClass.removeRelationship();
+    } else {
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
+  }
+
+  // Helper method to get relationship type by number
+  private static UMLRelationshipType getRelationshipType(int number) {
+    switch (number) {
+      case 1: return UMLRelationshipType.ASSOCIATION;
+      case 2: return UMLRelationshipType.AGGREGATION;
+      case 3: return UMLRelationshipType.COMPOSITION;
+      case 4: return UMLRelationshipType.INHERITANCE;
+      default: return null;
     }
   }
 }

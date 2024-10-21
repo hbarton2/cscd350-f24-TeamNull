@@ -8,79 +8,54 @@ public class UMLClass {
   private String className;
   private List<String> attributes;
   private List<MethodSignature> methods;  // Store methods with parameters
-  private List<String> relationships;
+  private List<UMLRelationship> relationships;
 
   // Constructor with class name
   public UMLClass(String className) {
     this.className = className;
     this.attributes = new ArrayList<>();  // Initialize blank attributes list
     this.methods = new ArrayList<>();     // Initialize blank methods list
-    this.relationships = new ArrayList<>();  // Initialize blank relationships list
+    this.relationships = new ArrayList<>();  // Initialize relationships list
   }
 
   // Getter and Setter for Attributes
-  public void setAttributes(List<String> attributes) {
-    this.attributes = attributes;
-  }
-
   public List<String> getAttributes() {
     return this.attributes;
   }
 
-  // Check for duplicates when adding an attribute
   public void addAttribute(String attribute) {
     if (!this.attributes.contains(attribute)) {
       this.attributes.add(attribute);
       System.out.println("Attribute " + attribute + " added to class " + className + ".");
     } else {
-      System.out.println(
-        "Error: Attribute " + attribute + " already exists in class " + className + ".");
+      System.out.println("Error: Attribute " + attribute + " already exists in class " + className + ".");
     }
   }
 
-  // Remove an attribute
   public void removeAttribute(String attribute) {
     if (this.attributes.contains(attribute)) {
       this.attributes.remove(attribute);
       System.out.println("Attribute " + attribute + " removed from class " + className + ".");
     } else {
-      System.out.println(
-        "Error: Attribute " + attribute + " does not exist in class " + className + ".");
+      System.out.println("Error: Attribute " + attribute + " does not exist in class " + className + ".");
     }
   }
 
   // Getter and Setter for Methods
-  public void setMethods(List<MethodSignature> methods) {
-    this.methods = methods;
-  }
-
   public List<MethodSignature> getMethods() {
     return this.methods;
   }
 
-  // Add method with duplicate check for overloads
   public void addMethod(String methodName, String parameter) {
     MethodSignature newMethod = new MethodSignature(methodName, parameter);
-
-    // Check for duplicates (same name and no parameters)
-    for (MethodSignature method : methods) {
-      if (method.methodName.equals(methodName) && method.parameter.equals("") && parameter.equals(
-        "")) {
-        System.out.println(
-          "Error: Method '" + methodName + "' with no parameters already exists in class "
-            + className + ".");
-        return;
-      }
+    if (methodExists(methodName, parameter)) {
+      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter + "' already exists in class " + className + ".");
+      return;
     }
-
-    // If no conflict, add the method
     methods.add(newMethod);
-    System.out.println(
-      "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
-        + ".");
+    System.out.println("Method " + methodName + " with parameter '" + parameter + "' added to class " + className + ".");
   }
 
-  // Remove a method based on method name and parameter
   public void removeMethod(String methodName, String parameter) {
     MethodSignature methodToRemove = null;
     for (MethodSignature method : methods) {
@@ -92,16 +67,13 @@ public class UMLClass {
 
     if (methodToRemove != null) {
       methods.remove(methodToRemove);
-      System.out.println(
-        "Method '" + methodName + "' with parameter '" + parameter + "' removed from class "
-          + className + ".");
+      System.out.println("Method '" + methodName + "' with parameter '" + parameter + "' removed from class " + className + ".");
     } else {
-      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter
-        + "' does not exist in class " + className + ".");
+      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter + "' does not exist in class " + className + ".");
     }
   }
 
-  // Method to check if a method exists (with the same name and parameters)
+  // Method to check if a method with a specific name and parameter already exists
   public boolean methodExists(String methodName, String parameter) {
     for (MethodSignature method : methods) {
       if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
@@ -112,16 +84,26 @@ public class UMLClass {
   }
 
   // Getter and Setter for Relationships
-  public void setRelationships(List<String> relationships) {
-    this.relationships = relationships;
-  }
-
-  public List<String> getRelationships() {
+  public List<UMLRelationship> getRelationships() {
     return this.relationships;
   }
 
-  public void addRelationship(String relationship) {
-    this.relationships.add(relationship);
+  public void addOrUpdateRelationship(UMLRelationshipType type) {
+    if (this.relationships.isEmpty()) {
+      System.out.println("Adding relationship " + type + " to class " + className + ".");
+    } else {
+      System.out.println("Updating relationship in class " + className + " to " + type + ".");
+    }
+    this.relationships.add(new UMLRelationship(type));
+  }
+
+  public void removeRelationship() {
+    if (!this.relationships.isEmpty()) {
+      this.relationships.clear();
+      System.out.println("Removed all relationships from class " + className + ".");
+    } else {
+      System.out.println("Error: No relationship exists in class " + className + " to remove.");
+    }
   }
 
   // Get Class Name
@@ -129,12 +111,10 @@ public class UMLClass {
     return className;
   }
 
-  // Set Class Name
   public void setClassName(String className) {
     this.className = className;
   }
 
-  // Method to rename the class
   public void renameClass(String newName) {
     this.className = newName;
   }
