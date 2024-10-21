@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
@@ -11,12 +12,10 @@ public class Commands {
 
   private final HashMap<String, CommandAction> commands;  // Stores commands
   private final HashMap<String, CommandDefinition> commandDefinitions;  // Stores command definitions (types and descriptions)
-  private final String commandsFilePath;// = "src/main/java/proj/TeamNull/UMLdevkit/utilities/commands.json";  // Path to JSON file
   private final Gson gson;
 
   // Constructor
   public Commands() {
-    commandsFilePath = "src/main/java/proj/TeamNull/UMLdevkit/utilities/commands.json";
     this.commands = new HashMap<>();  // Initialize the commands HashMap
     this.commandDefinitions = new HashMap<>();  // Initialize the command definitions HashMap
     this.gson = new Gson();
@@ -25,11 +24,30 @@ public class Commands {
   }
 
   // Method to load commands from the JSON file
+//  public void loadCommands() {
+//    String commandsFilePath = "src/main/resources/commands.json";
+//    System.out.println("Loading commands from: " + commandsFilePath);
+//    try (FileReader reader = new FileReader(commandsFilePath)) {
+//      Type commandMapType = new TypeToken<HashMap<String, CommandDefinition>>() {
+//      }.getType();
+//      HashMap<String, CommandDefinition> rawCommands = gson.fromJson(reader, commandMapType);
+//
+//      for (String key : rawCommands.keySet()) {
+//        CommandDefinition commandDef = rawCommands.get(key);
+//        CommandAction command = CommandFactory.createCommand(commandDef.type);
+//        commands.put(key, command);  // Store the action
+//        commandDefinitions.put(key, commandDef);  // Store the definition with description
+//      }
+//    } catch (IOException e) {
+//      System.err.println("Error: Could not load commands from " + commandsFilePath);
+//    }
+//  }
   public void loadCommands() {
+    String commandsFilePath = "/commands.json";  // Path relative to the resources directory in the JAR
     System.out.println("Loading commands from: " + commandsFilePath);
-    try (FileReader reader = new FileReader(commandsFilePath)) {
-      Type commandMapType = new TypeToken<HashMap<String, CommandDefinition>>() {
-      }.getType();
+
+    try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream(commandsFilePath))) {
+      Type commandMapType = new TypeToken<HashMap<String, CommandDefinition>>() {}.getType();
       HashMap<String, CommandDefinition> rawCommands = gson.fromJson(reader, commandMapType);
 
       for (String key : rawCommands.keySet()) {
@@ -42,7 +60,6 @@ public class Commands {
       System.err.println("Error: Could not load commands from " + commandsFilePath);
     }
   }
-
   // Helper class to match the structure of each command in JSON
   private static class CommandDefinition {
 
