@@ -1,7 +1,7 @@
 package proj.TeamNull.UMLdevkit.utilities;
 
 /**
- * does this bring back 212 memories if not here something you can study upon
+ * Does this bring back 212 memories? If not, here’s something you can study upon:
  * <a href="https://refactoring.guru/design-patterns/factory-method">...</a>
  */
 
@@ -50,6 +50,16 @@ public class CommandFactory {
             System.out.println("Error: Provide class name and attribute.");
           }
         };
+
+      case "removeAttribute":
+        return args -> {
+          if (args.length == 2) {
+            Functions.removeAttribute(args[0], args[1]);
+          } else {
+            System.out.println("Error: Provide class name and attribute.");
+          }
+        };
+
       case "addMethod":
         return args -> {
           if (args.length == 2) {  // Method without parameter
@@ -58,6 +68,38 @@ public class CommandFactory {
             Functions.addMethod(args[0], args[1], args[2]);
           } else {
             System.out.println("Error: Provide class name and method.");
+          }
+        };
+
+      case "removeMethod":
+        return args -> {
+          if (args.length == 3) {
+            Functions.removeMethod(args[0], args[1], args[2]);
+          } else {
+            System.out.println("Error: Provide class name, method, and parameter.");
+          }
+        };
+
+      case "addRelationship":
+        return args -> {
+          if (args.length == 2) {
+            try {
+              int relationshipType = Integer.parseInt(args[1]);
+              Functions.addRelationship(args[0], relationshipType);
+            } catch (NumberFormatException e) {
+              System.out.println("Error: Relationship type must be an integer (1-4).");
+            }
+          } else {
+            System.out.println("Error: Provide class name and relationship type.");
+          }
+        };
+
+      case "removeRelationship":
+        return args -> {
+          if (args.length == 1) {
+            Functions.removeRelationship(args[0]);
+          } else {
+            System.out.println("Error: Provide class name to remove the relationship.");
           }
         };
 
