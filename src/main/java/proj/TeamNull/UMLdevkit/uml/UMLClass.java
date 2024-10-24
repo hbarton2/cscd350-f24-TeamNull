@@ -6,9 +6,9 @@ import java.util.List;
 public class UMLClass {
 
   private String className;
-  private List<String> attributes;
-  private List<MethodSignature> methods;  // Store methods with parameters
-  private List<UMLRelationship> relationships;
+  private final List<String> attributes;
+  private final List<MethodSignature> methods;  // Store methods with parameters
+  private final List<UMLRelationship> relationships;
 
   // Constructor with class name
   public UMLClass(String className) {
@@ -157,9 +157,12 @@ public class UMLClass {
     if (attributes.contains(oldAttribute)) {
       int index = attributes.indexOf(oldAttribute);
       attributes.set(index, newAttribute);
-      System.out.println("Attribute renamed from " + oldAttribute + " to " + newAttribute + " in class " + className + ".");
+      System.out.println(
+        "Attribute renamed from " + oldAttribute + " to " + newAttribute + " in class " + className
+          + ".");
     } else {
-      System.out.println("Error: Attribute " + oldAttribute + " does not exist in class " + className + ".");
+      System.out.println(
+        "Error: Attribute " + oldAttribute + " does not exist in class " + className + ".");
     }
   }
 
@@ -168,9 +171,12 @@ public class UMLClass {
     MethodSignature oldMethod = findMethod(oldMethodName, parameter);
     if (oldMethod != null) {
       oldMethod.methodName = newMethodName;
-      System.out.println("Method renamed from " + oldMethodName + " to " + newMethodName + " in class " + className + ".");
+      System.out.println(
+        "Method renamed from " + oldMethodName + " to " + newMethodName + " in class " + className
+          + ".");
     } else {
-      System.out.println("Error: Method " + oldMethodName + " does not exist in class " + className + ".");
+      System.out.println(
+        "Error: Method " + oldMethodName + " does not exist in class " + className + ".");
     }
   }
 
@@ -183,19 +189,4 @@ public class UMLClass {
     }
     return null;
   }
-//  private static class MethodSignature {
-//
-//    String methodName;
-//    String parameter;
-//
-//    public MethodSignature(String methodName, String parameter) {
-//      this.methodName = methodName;
-//      this.parameter = parameter != null ? parameter : ""; // Default to empty string if null
-//    }
-//
-//    @Override
-//    public String toString() {
-//      return methodName + "(" + (parameter.isEmpty() ? "no parameters" : parameter) + ")";
-//    }
-//  }
 }

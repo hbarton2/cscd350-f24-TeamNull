@@ -39,21 +39,28 @@ This SDK is intended to streamline the experience of creating class diagrams, mo
 
 ### Prerequisites
 
-To build and run this project, you'll need:
+Ensure that the following software is installed on the target machine:
 
-- **JDK 22** (configured in Maven with JavaFX dependencies)
-- **Maven** for dependency management and building the project
+- **Java Runtime Environment (JRE)** or **Java Development Kit (JDK)** version 17 or higher.  
+  You can download it from the [Oracle Java Downloads page](https://www.oracle.com/java/technologies/javase-downloads.html) or from [AdoptOpenJDK](https://adoptopenjdk.net/).
+
+## Steps to Run the UML Editor
+
+### 1. Obtain the JAR File
+Download the package https://github.com/hbarton2/cscd350-f24-TeamNull.git
+
+Under root diretory folder <folder name>
+Make sure you have the `umleditor-1.jar` file, which contains the application.
+
+Run the Program
+Use the java -jar command to run the JAR file:
+
+java -jar umleditor-1.jar
 
 ### Dependencies
 
 The project uses the following dependencies, which are defined in the `pom.xml` file:
 
-- **JavaFX (v21.0.1)** for graphical interface (controls, graphics, fxml, media, web, swing).
-- **Gson (v2.8.9)** for handling JSON serialization/deserialization.
-- **JUnit (v5.10.2)** for unit testing.
-- **ControlsFX (v11.2.1)** for additional UI controls.
-- **TilesFX (v21.0.3)** for dashboard-like tiles.
-- **FXGL (v21.1)** for game development capabilities (future feature extensions).
 
 See the `pom.xml` file for full details on dependencies.
 
@@ -77,6 +84,12 @@ Before running the project, ensure you have the following installed:
 - **Maven 3.6** or later
 
 ### Step-by-Step Instructions
+
+## Due to issue with Gson not being able to compile correctly please run the application "EntryPoint.java" in the IDE prefer IntelliJ IDEA
+
+```angular2html
+src/main/java/proj/TeamNull/UMLdevkit/EntryPoint.java
+```
 
 1. Clone the repository:
    ```bash
