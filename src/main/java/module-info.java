@@ -22,11 +22,11 @@
 //}
 
 /**
- * v0.0.10+ requirements
+ * v1.1.60+ minimum requirements
  */
 
-module proj.nullptr.devkituml {
-  requires com.google.gson;
+//module sprint.utilities {
+//  requires com.google.gson;
 ////  requires javafx.fxml;
 //
 //  // Uncomment relevant dependencies if they are used in your FXML or code
@@ -49,4 +49,19 @@ module proj.nullptr.devkituml {
 //  opens proj.TeamNull.UMLdevkit.utilities to com.google.gson; // Open this package for reflection by Gson
 //
 //  opens proj.TeamNull.UMLdevkit.uml to com.google.gson;
+
+
+//}
+
+
+/**
+ * v1.1.64+ minimum requirements
+ */
+
+module sprint.utilities {
+  requires com.google.gson;
+  exports umleditor.sprint1.utilities;
+  opens umleditor.sprint1.utilities to com.google.gson;
+  // Add other opens/exports as needed
 }
+

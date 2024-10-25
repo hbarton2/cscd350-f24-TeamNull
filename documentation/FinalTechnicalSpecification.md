@@ -32,7 +32,7 @@ Point of entry for user into UML Editor application.
 * Displays starting application
 * Runs application
   
-### EntryPoint procedure:
+### umleditor.EntryPoint procedure:
 
 When running entrypoint, user will be greeted, and receive list of common commands and their usage.
 Will prompt user to type command to command line, and begin editing UML Diagram.
@@ -336,7 +336,10 @@ I can rename it , for example rename the class from Computer to Desktop.
 Now, when I a parameter to Desktop, it shows that the parameter was added to both Computer and Desktop classes
 
 
+add class relationship command:
 
+When adding relationship, this command should also take a source and destination class to define the relationship.
+Right now it only sets relationship name and type (as a string).
 ---
 
 

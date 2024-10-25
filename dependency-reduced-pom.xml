@@ -22,7 +22,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>proj.TeamNull.UMLdevkit.EntryPoint</mainClass>
+              <mainClass>umleditor.EntryPoint</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -39,7 +39,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>proj.TeamNull.UMLdevkit.EntryPoint</mainClass>
+                  <mainClass>umleditor.EntryPoint</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -54,7 +54,7 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>proj.TeamNull.UMLdevkit.EntryPoint</mainClass>
+              <mainClass>umleditor.EntryPoint</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

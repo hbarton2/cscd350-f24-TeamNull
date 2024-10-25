@@ -1,6 +1,6 @@
 # Universal Modeling Language Software Development Kit
 
-* v1.1.60
+* v1.1.64
 * How to read version # Version main branch.release branch.pull request changes'
 * What's New
 
@@ -15,7 +15,7 @@
 8. [Contributing](#contributing)
 9. [License](#license)
 10. [Contact](#contact)
-
+11. [Project Details](#Project-Details)
 ---
 
 ## Overview
@@ -85,10 +85,10 @@ Before running the project, ensure you have the following installed:
 
 ### Step-by-Step Instructions
 
-## Due to issue with Gson not being able to compile correctly please run the application "EntryPoint.java" in the IDE prefer IntelliJ IDEA
+## Due to issue with Gson not being able to compile correctly please run the application "umleditor.EntryPoint.java" in the IDE prefer IntelliJ IDEA
 
 ```angular2html
-src/main/java/proj/TeamNull/UMLdevkit/EntryPoint.java
+src/main/java/proj/TeamNull/UMLdevkit/umleditor.EntryPoint.java
 ```
 
 1. Clone the repository:
@@ -182,6 +182,10 @@ For any inquiries, feel free to reach out to:
 ## Acknowledgments
 - Special thanks to Jimmy, Kate, Colton, Muhammad, and Shane!! :)
 
+---
 
+## Project Details
+
+For known issues and project explaination please see: FinalTechnicalSpecification.md under project_root_folder/documentation/
 
 
