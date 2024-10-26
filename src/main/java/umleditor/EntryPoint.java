@@ -14,9 +14,10 @@ public class EntryPoint extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sprint2/CodeCain.fxml"));
-    Scene scene = new Scene(fxmlLoader.load(), 900, 600);
-    primaryStage.setResizable(false);  // Disable window resizing
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/sprint2/CodeCain.fxml"));
+    Scene scene = new Scene(loader.load(), 900, 600);
+
+    primaryStage.setResizable(true);
     primaryStage.setTitle("Code Cain Demo");
     primaryStage.setScene(scene);
     primaryStage.show();
@@ -33,6 +34,6 @@ public class EntryPoint extends Application {
     /*
     Sprint 2 Launch Codes
      */
-    launch();
+    launch(args);
   }
 }
