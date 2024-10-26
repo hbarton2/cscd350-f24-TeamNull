@@ -57,18 +57,17 @@
  */
 
 module umleditor {
-  requires com.google.gson;
   requires javafx.controls;
   requires javafx.fxml;
+  requires com.google.gson;
+
+  opens umleditor to javafx.fxml;
+  opens umleditor.sprint1.utilities to com.google.gson;
+  opens umleditor.sprint2.demo to javafx.fxml;
 
   exports umleditor;
   exports umleditor.sprint1.utilities;
   exports umleditor.sprint2.demo;
-
-  // Allow Gson to access the specified packages for reflection
-  opens umleditor.sprint1.utilities to com.google.gson;
-  opens umleditor.sprint2.demo to javafx.fxml;
-  opens umleditor.sprint1.uml to com.google.gson;  // This line is needed for Gson to access UMLClass fields
 }
 
 
