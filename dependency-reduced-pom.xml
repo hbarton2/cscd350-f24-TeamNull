@@ -4,7 +4,7 @@
   <groupId>com.null.umleditor</groupId>
   <artifactId>umleditor</artifactId>
   <name>uml_editor</name>
-  <version>1</version>
+  <version>2</version>
   <build>
     <plugins>
       <plugin>

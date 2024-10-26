@@ -203,7 +203,7 @@ public class Functions {
   public static void saveProgress(String filename) {
     try {
       // Directory path to save the file
-      String directoryPath = "src/main/resources/proj/TeamNull/UMLdevkit/hdd";
+      String directoryPath = "src/main/resources/sprint1/hdd";
       File dir = new File(directoryPath);
 
       // Create directory if it doesn't exist
@@ -228,7 +228,7 @@ public class Functions {
   public static void loadProgress(String filename) {
     try {
       // Directory path to load the file
-      String directoryPath = "src/main/resources/proj/TeamNull/UMLdevkit/hdd";
+      String directoryPath = "src/main/resources/sprint1/hdd";
       File file = new File(directoryPath + "/" + filename);
 
       // Check if file exists
@@ -270,7 +270,8 @@ public class Functions {
   }
 
   // Method to rename a method
-  public static void renameMethod(String className, String oldMethodName, String newMethodName, String parameter) {
+  public static void renameMethod(String className, String oldMethodName, String newMethodName,
+    String parameter) {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);
       umlClass.renameMethod(oldMethodName, newMethodName, parameter);
