@@ -60,6 +60,8 @@ module umleditor {
   requires javafx.controls;
   requires javafx.fxml;
   requires com.google.gson;
+  requires javafx.graphics;
+  requires java.desktop;
 
   opens umleditor to javafx.fxml;
   opens umleditor.sprint1.utilities to com.google.gson;
@@ -68,6 +70,9 @@ module umleditor {
   exports umleditor;
   exports umleditor.sprint1.utilities;
   exports umleditor.sprint2.demo;
+  exports umleditor.sprint2.view;
+  exports umleditor.sprint2.model;
+  exports umleditor.sprint2.controller;
 }
 
 
