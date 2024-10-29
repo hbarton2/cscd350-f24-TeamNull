@@ -1,9 +1,11 @@
 package umleditor.sprint2.demo;
+
 /**
  * This is only for Demoing J-Mocking
  */
 
 public class User {
+
   private String id;
   private String name;
 
@@ -13,6 +15,11 @@ public class User {
     this.name = name;
   }
 
-  public String getId() { return id; }
-  public String getName() { return name; }
+  public String getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
 }

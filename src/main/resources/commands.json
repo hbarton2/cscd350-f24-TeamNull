@@ -11,9 +11,9 @@
     "type": "renameClass",
     "description": "Renames a class. Usage: rn <old_class_name> <new_class_name>"
   },
-  "aa": {
+  "af": {
     "type": "addAttribute",
-    "description": "Adds an attribute to a class. Usage: aa <class_name> <attribute>"
+    "description": "Adds a Field to a class. Usage: aa <class_name> <field>"
   },
   "am": {
     "type": "addMethod",
@@ -23,9 +23,9 @@
     "type": "addRelationship",
     "description": "Adds or updates a relationship in a class. Usage: ar <class_name> <relationship_type(1-4)>"
   },
-  "raa": {
+  "raf": {
     "type": "removeAttribute",
-    "description": "Removes an attribute from a class. Usage: raa <class_name> <attribute>"
+    "description": "Removes an Field from a class. Usage: raa <class_name> <field>"
   },
   "rmm": {
     "type": "removeMethod",
@@ -33,7 +33,7 @@
   },
   "lsa": {
     "type": "lsa",
-    "description": "Lists all classes with their attributes and methods. Usage: lsa"
+    "description": "Lists all classes with their fields and methods. Usage: lsa"
   },
   "lsc": {
     "type": "lsc",
@@ -55,9 +55,9 @@
     "type": "clearProgress",
     "description": "Clears all the current progress. Usage: clear"
   },
-  "ra": {
+  "rf": {
     "type": "renameAttribute",
-    "description": "Renames an attribute in a class. Usage: ra <class_name> <old_attribute> <new_attribute>"
+    "description": "Renames a field in a class. Usage: ra <class_name> <old_field> <new_field>"
   },
   "rmn": {
     "type": "renameMethod",

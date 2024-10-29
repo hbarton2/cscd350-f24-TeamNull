@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Commands {
 
@@ -26,8 +27,10 @@ public class Commands {
     String commandsFilePath = "/commands.json";  // Path relative to the resources directory in the JAR
     System.out.println("Loading commands from: " + commandsFilePath);
 
-    try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream(commandsFilePath))) {
-      Type commandMapType = new TypeToken<HashMap<String, CommandDefinition>>() {}.getType();
+    try (InputStreamReader reader = new InputStreamReader(
+      Objects.requireNonNull(getClass().getResourceAsStream(commandsFilePath)))) {
+      Type commandMapType = new TypeToken<HashMap<String, CommandDefinition>>() {
+      }.getType();
       HashMap<String, CommandDefinition> rawCommands = gson.fromJson(reader, commandMapType);
 
       for (String key : rawCommands.keySet()) {
@@ -40,6 +43,7 @@ public class Commands {
       System.err.println("Error: Could not load commands from " + commandsFilePath);
     }
   }
+
   // Helper class to match the structure of each command in JSON
   private static class CommandDefinition {
 

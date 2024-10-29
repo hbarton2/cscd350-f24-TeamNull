@@ -6,6 +6,7 @@ package umleditor.sprint2.demo;
 
 // UserService.java
 public class UserService {
+
   private final UserRepository userRepository;
 
   public UserService(UserRepository userRepository) {
