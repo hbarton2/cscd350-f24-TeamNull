@@ -165,7 +165,7 @@ public class Functions {
     System.out.println("Classes with attributes and methods:");
     for (UMLClass umlClass : Storage.getUMLClasses().values()) {
       System.out.println("Class: " + umlClass.getClassName());
-      System.out.println("Attributes: " + umlClass.getAttributes());
+      System.out.println("Fields: " + umlClass.getAttributes());
       umlClass.displayMethods();  // Show methods and overloads
       System.out.println();
     }
