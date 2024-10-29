@@ -62,10 +62,12 @@ module umleditor {
   requires com.google.gson;
   requires javafx.graphics;
   requires java.desktop;
+  requires java.logging;
 
   opens umleditor to javafx.fxml;
   opens umleditor.sprint1.utilities to com.google.gson;
   opens umleditor.sprint2.demo to javafx.fxml;
+  opens umleditor.sprint2.controller to javafx.fxml;  // Ensure controllers are accessible for FXML
 
   exports umleditor;
   exports umleditor.sprint1.utilities;
@@ -74,5 +76,6 @@ module umleditor {
   exports umleditor.sprint2.model;
   exports umleditor.sprint2.controller;
 }
+
 
 
