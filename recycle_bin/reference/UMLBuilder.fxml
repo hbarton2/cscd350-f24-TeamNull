@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.SplitPane?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.collections.FXCollections?>
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
+  <children>
+    <!-- Menu Bar -->
+    <MenuBar VBox.vgrow="NEVER">
+      <!-- Menu omitted for brevity -->
+    </MenuBar>
+
+    <!-- Main SplitPane layout -->
+    <SplitPane dividerPositions="0.25" VBox.vgrow="ALWAYS">
+      <items>
+        <!-- Left control panel with form-style input -->
+        <VBox prefWidth="250.0" spacing="10" padding="10">
+          <Label text="Class Name" style="-fx-font-size: 14px;" />
+          <TextField fx:id="classNameField" promptText="Enter class name" />
+
+          <Label text="Fields" style="-fx-font-size: 14px;" />
+          <VBox fx:id="fieldsBox" spacing="5">
+            <HBox spacing="5">
+              <TextField promptText="Enter field" />
+              <Button text="+" onAction="#addField" />
+            </HBox>
+          </VBox>
+
+          <Label text="Methods" style="-fx-font-size: 14px;" />
+          <VBox fx:id="methodsBox" spacing="5">
+            <HBox spacing="5">
+              <TextField promptText="Enter method" />
+              <TextField promptText="Enter parameters" />
+              <Button text="+" onAction="#addMethod" />
+            </HBox>
+          </VBox>
+
+          <Label text="Relationships" style="-fx-font-size: 14px;" />
+          <VBox fx:id="relationshipsBox" spacing="5">
+            <HBox spacing="5">
+              <ChoiceBox fx:id="relationshipChoiceBox">
+                <items>
+                  <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Inheritance" />
+                    <String fx:value="Association" />
+                    <String fx:value="Aggregation" />
+                    <String fx:value="Composition" />
+                  </FXCollections>
+                </items>
+              </ChoiceBox>
+              <Button text="+" onAction="#addRelationship" />
+            </HBox>
+          </VBox>
+
+          <Button text="Create Node" onAction="#createNode" prefWidth="200.0" />
+        </VBox>
+
+        <!-- Right-side area for draggable nodes -->
+        <ScrollPane>
+          <content>
+            <AnchorPane fx:id="viewAnchorPane" prefHeight="545.0" prefWidth="643.0">
+              <!-- Draggable nodes will be added here dynamically -->
+            </AnchorPane>
+          </content>
+        </ScrollPane>
+      </items>
+    </SplitPane>
+
+    <!-- Status bar at the bottom -->
+    <HBox alignment="CENTER_LEFT" spacing="5.0" padding="10">
+      <Label text="Left status" HBox.hgrow="ALWAYS" />
+      <Pane HBox.hgrow="ALWAYS" />
+      <Label text="Right status" HBox.hgrow="NEVER" />
+    </HBox>
+  </children>
+</VBox>
