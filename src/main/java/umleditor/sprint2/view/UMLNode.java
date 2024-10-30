@@ -12,10 +12,10 @@ public class UMLNode extends Pane {
 
   public UMLNode(String className) {
     // Set dimensions and initial styling
-    this.setPrefSize(150, 100);
+    this.setPrefSize(250, 150);
     this.setStyle("-fx-border-color: black; -fx-background-color: lightgreen;");
 
-    Label classLabel = new Label(className);
+    Label classLabel = new Label(mockNode());
 
 //    Label classLabel = new Label(Display.class.getName());
     classLabel.setStyle("-fx-font-weight: bold;");
@@ -34,9 +34,15 @@ public class UMLNode extends Pane {
     });
   }
 
-//  private String UMLNodeBuilder(){
-//    UMLClass newClass = new UMLClass("Jimmy REALLY HATES JAVA");
-//
-//    return newClass.getClassName() + "\r\n" + "JAVA CHITTY FIELDS" + "\r\n" + "TONY HATES JAVA TOO" + "\r\n";
-//  }
+
+  private String mockNode(){
+    return """
+      Car\r
+      String Color\r
+      Engine model\r
+      void driveCar(String driver)\r
+      void openDoor()\r 
+      Composition\r
+      """;
+  }
 }
