@@ -19,7 +19,7 @@ public class AppStart extends Application {
     Scene scene = new Scene(loader.load(), 900, 600);
 
     primaryStage.setResizable(true);
-    primaryStage.setTitle("Code Cain Demo");
+    primaryStage.setTitle("UML Editor GUI edition");
     primaryStage.setScene(scene);
     primaryStage.show();
   }
