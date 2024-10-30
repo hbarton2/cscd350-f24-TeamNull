@@ -26,20 +26,20 @@ public class UMLClass {
   public void addAttribute(String attribute) {
     if (!this.attributes.contains(attribute)) {
       this.attributes.add(attribute);
-      System.out.println("Attribute " + attribute + " added to class " + className + ".");
+      System.out.println("Field " + attribute + " added to class " + className + ".");
     } else {
       System.out.println(
-        "Error: Attribute " + attribute + " already exists in class " + className + ".");
+        "Error: Field " + attribute + " already exists in class " + className + ".");
     }
   }
 
   public void removeAttribute(String attribute) {
     if (this.attributes.contains(attribute)) {
       this.attributes.remove(attribute);
-      System.out.println("Attribute " + attribute + " removed from class " + className + ".");
+      System.out.println("Field " + attribute + " removed from class " + className + ".");
     } else {
       System.out.println(
-        "Error: Attribute " + attribute + " does not exist in class " + className + ".");
+        "Error: Field " + attribute + " does not exist in class " + className + ".");
     }
   }
 
@@ -158,11 +158,11 @@ public class UMLClass {
       int index = attributes.indexOf(oldAttribute);
       attributes.set(index, newAttribute);
       System.out.println(
-        "Attribute renamed from " + oldAttribute + " to " + newAttribute + " in class " + className
+        "Field renamed from " + oldAttribute + " to " + newAttribute + " in class " + className
           + ".");
     } else {
       System.out.println(
-        "Error: Attribute " + oldAttribute + " does not exist in class " + className + ".");
+        "Error: Field " + oldAttribute + " does not exist in class " + className + ".");
     }
   }
 
