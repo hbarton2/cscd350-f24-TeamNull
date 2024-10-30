@@ -2,20 +2,20 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.SplitPane?>
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
   <children>
@@ -35,7 +35,7 @@
             <SeparatorMenuItem />
             <MenuItem mnemonicParsing="false" text="Preferences…" />
             <SeparatorMenuItem />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
@@ -66,11 +66,12 @@
         <!-- Left control panel -->
         <VBox prefWidth="250.0" spacing="10">
           <padding>
-            <Insets top="10" right="10" bottom="10" left="10"/>
+            <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-          <Label text="Class Forums and Text Fields" style="-fx-font-size: 18px; -fx-text-fill: gray;" />
+          <Label style="-fx-font-size: 18px; -fx-text-fill: gray;" text="Class Forums and Text Fields" />
           <ChoiceBox prefWidth="150.0" />
-          <Button text="Mock Add Class Node" onAction="#handleAddNode" prefWidth="200.0" />
+          <Button onAction="#handleAddNode" prefWidth="200.0" text="Mock Add Class Node" />
+               <ButtonBar prefHeight="40.0" prefWidth="200.0" />
         </VBox>
 
         <!-- Right panel for draggable UML nodes -->
@@ -78,7 +79,7 @@
           <content>
             <AnchorPane fx:id="viewAnchorPane" prefHeight="545.0" prefWidth="643.0">
               <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
+                <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
               <!-- Draggable nodes (UML Nodes) will be added here dynamically by the controller -->
             </AnchorPane>
@@ -90,9 +91,10 @@
     <!-- Status bar at the bottom -->
     <HBox alignment="CENTER_LEFT" spacing="5.0">
       <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
+        <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
-      <Label text="Left status" HBox.hgrow="ALWAYS" />
+      <Label text="Save" HBox.hgrow="ALWAYS" />
+         <ProgressBar prefWidth="200.0" progress="0.0" />
       <Pane HBox.hgrow="ALWAYS" />
       <Label text="Right status" HBox.hgrow="NEVER" />
     </HBox>

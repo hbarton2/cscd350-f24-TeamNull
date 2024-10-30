@@ -2,6 +2,8 @@ package umleditor.sprint2.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import umleditor.sprint1.uml.UMLClass;
+import umleditor.sprint2.model.Model;
 import umleditor.sprint2.view.UMLNode;
 import java.util.logging.Logger;
 
@@ -20,6 +22,18 @@ public class UMLBuilderController {
 
   @FXML
   public void handleAddNode() {
-    addUMLNode("NewClass"); // Sample class name
+    addUMLNode(UMLNodeBuilder()); // Sample class name
   }
+
+  private String UMLNodeBuilder(){
+    Model tempModel = new Model();
+
+    return tempModel.createClassNode("Jimmy REALLY HATES JAVA") + "\r\n" + "JAVA CHITTY FIELDS" + "\r\n" + "TONY HATES JAVA TOO" + "\r\n";
+  }
+
+  @FXML
+  public void exitProgram() {
+    System.exit(0);
+  }
+
 }
