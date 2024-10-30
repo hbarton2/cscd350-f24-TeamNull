@@ -20,7 +20,6 @@ public class Display {
   // Entry method to start the program
   public void start() {
     System.out.println("Welcome to the UML Editor!");
-    //TODO Display list of avaliable commands including exit include rn <classname> aka it's arguments
     commandRegistry.displayHelp();  // Display help at the start
 
     // Create a single Scanner instance to reuse
@@ -34,7 +33,6 @@ public class Display {
       if (userInput.equalsIgnoreCase("exit")) {
         System.out.println("Exiting the UML Editor. Goodbye!");
         running = false;
-        break;  // Exit the loop and terminate
       }
 
       // Pass the input to the parser for processing
