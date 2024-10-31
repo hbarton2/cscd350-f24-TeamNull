@@ -1,6 +1,6 @@
 # Universal Modeling Language Software Development Kit
 
-* v2.2.70
+* v2.2.73
 * How to read version # Version main branch.release branch.pull request changes'
 * What's New
 * - Haz GUI? YES!
