@@ -32,13 +32,12 @@ public class Display {
       // Handle exit command
       if (userInput.equalsIgnoreCase("exit")) {
         System.out.println("Exiting the UML Editor. Goodbye!");
+        input.close();
         running = false;
       }
 
       // Pass the input to the parser for processing
       parser.readInput(userInput);
     }
-
-    input.close();  // Close the scanner when done
   }
 }

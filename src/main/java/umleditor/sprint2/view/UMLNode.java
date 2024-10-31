@@ -2,11 +2,9 @@ package umleditor.sprint2.view;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import umleditor.sprint1.uml.UMLClass;
-import umleditor.sprint1.utilities.Display;
-import umleditor.sprint1.utilities.Functions;
 
 public class UMLNode extends Pane {
+
   private double offsetX;
   private double offsetY;
 
@@ -21,7 +19,6 @@ public class UMLNode extends Pane {
     classLabel.setStyle("-fx-font-weight: bold;");
     this.getChildren().add(classLabel);
 
-
     // Add event handlers for dragging
     this.setOnMousePressed(event -> {
       offsetX = event.getSceneX() - getLayoutX();
@@ -35,9 +32,9 @@ public class UMLNode extends Pane {
   }
 
 
-  private String mockNode(){
+  private String mockNode() {
     return """
-      Car\r
+      Bus\r
       String Color\r
       Engine model\r
       void driveCar(String driver)\r

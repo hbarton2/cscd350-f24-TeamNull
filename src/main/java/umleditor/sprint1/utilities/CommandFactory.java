@@ -148,6 +148,13 @@ public class CommandFactory {
             "Error: Provide class name, old method name, new method name, and parameter.");
         }
       };
+      case "exitProgram" -> args -> {
+        if (args.length == 0) {
+          Functions.exit();
+        } else {
+          System.out.println("Error: 'exit' command does not take any arguments.");
+        }
+      };
       default -> {
         System.out.println("Error: Unknown command type: " + type);
         yield null;

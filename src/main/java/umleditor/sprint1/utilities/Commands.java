@@ -68,7 +68,7 @@ public class Commands {
     for (String command : commandDefinitions.keySet()) {
       System.out.println("- " + command + ": " + commandDefinitions.get(command).description);
     }
-    System.out.println("- exit: exit the program at any time");
+//    System.out.println("- exit: exit the program at any time");
   }
 
   // Fetch a command by name

@@ -62,5 +62,9 @@
   "rmn": {
     "type": "renameMethod",
     "description": "Renames a method in a class. Usage: rmn <class_name> <old_method_name> <new_method_name> <parameter>"
+  },
+  "exit": {
+    "type": "exitProgram",
+    "description": "exit the program at any time"
   }
 }
