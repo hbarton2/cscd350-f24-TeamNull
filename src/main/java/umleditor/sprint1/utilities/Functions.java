@@ -279,4 +279,8 @@ public class Functions {
       System.out.println("Error: Class " + className + " does not exist.");
     }
   }
+
+  public static void exit() {
+    System.exit(0);
+  }
 }
