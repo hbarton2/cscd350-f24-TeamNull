@@ -1,6 +1,7 @@
 package umleditor.sprint2.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -9,31 +10,41 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import umleditor.sprint1.utilities.Functions;
 import umleditor.sprint2.view.UMLNode;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.Random;
+
 public class UMLBuilderController {
   @FXML private VBox fieldsBox, methodsBox, relationshipsBox;
   @FXML private AnchorPane viewAnchorPane;
   @FXML private TextField classNameField, methodName,fieldName, parameterName ;
+
  // @FXML private TextField methodName;
   //@FXML private TextField fieldName;
  // @FXML private TextField parameterName;
   @FXML private Button saveClassBNT;
   @FXML private TextArea textArea;
   private String straightLine = "\n__________________________________";
+    int classCounter = 0;
   @FXML
+   public void createClass(ActionEvent actionEvent) {
 
-
-  public void createClass(ActionEvent actionEvent) {
     if (classNameField.getText().isEmpty() || fieldName.getText().isEmpty() || parameterName.getText().isEmpty()) {
       textArea.setVisible(true);
       textArea.setText(straightLine + "\nNothing to display" + straightLine);
       return;
     }
+
     UMLNode node = new UMLNode("");
-    node.setClassName(classNameField.getText());
+    classCounter ++;
+    node.setClassName(classNameField.getText() + "\n Class #: " + classCounter );
     node.setFieldName(fieldName.getText());
     node.setMethodName(methodName.getText());
     node.setParameterName(parameterName.getText());
+
 
     // Set initial position for the node
     node.setLayoutX(100); // Adjust X position as needed
@@ -47,32 +58,42 @@ public class UMLBuilderController {
             straightLine + "\nField Name:\n" + fieldName.getText() +
             straightLine + "\nMethod Name:\n" + methodName.getText() +
             "\nParameters: ( " + parameterName.getText() + " )" +
-            straightLine + "\nRelationship:\n");
+            straightLine + "\nRelationship:\n" );
+
     // Optionally clear fields after saving
     classNameField.clear();
     fieldName.clear();
     methodName.clear();
     parameterName.clear();
   }
+
+
   public void deleteNode(ActionEvent actionEvent) {
-    textArea.clear();
-    textArea.setVisible(false);
+
+      textArea.clear();
+      textArea.setVisible(false);
 
     // need to set the content of the node to clear
   }
+
   public void saveClassAction(MouseEvent event) {
     // Implementation for save class action
   }
+
   @FXML
   public void addField() {
     HBox fieldBox = new HBox(5);
     TextField field = new TextField();
     field.setPromptText("Enter field");
+
+    field.setId(fieldName.getText());
+
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addField());
     fieldBox.getChildren().addAll(field, addButton);
     fieldsBox.getChildren().add(fieldBox);
   }
+
   @FXML
   public void addMethod() {
     HBox methodBox = new HBox(5);
@@ -85,6 +106,7 @@ public class UMLBuilderController {
     methodBox.getChildren().addAll(method, parameters, addButton);
     methodsBox.getChildren().add(methodBox);
   }
+
   @FXML
   public void addRelationship() {
     HBox relationshipBox = new HBox(5);
@@ -95,24 +117,39 @@ public class UMLBuilderController {
     relationshipBox.getChildren().addAll(relationshipChoiceBox, addButton);
     relationshipsBox.getChildren().add(relationshipBox);
   }
+
+  @FXML
+  public String getRelationship(){
+      return getRelationship();
+  }
+
   @FXML
   public void createNode() {
     String className = classNameField.getText();
     // Additional node creation logic, if necessary
   }
+
   public void exitProgram(ActionEvent actionEvent) {
     System.exit(0);
   }
+
   public void createMockNode(ActionEvent actionEvent) {
     UMLNode node = new UMLNode("");
     node.setLayoutX(100);
     node.setLayoutY(100);
     viewAnchorPane.getChildren().add(node);
   }
-  public void saveNode(ActionEvent actionEvent) {
-    // Save node logic here
-  }
+
+   public void saveNode(ActionEvent actionEvent) {
+       textArea.setVisible(true);
+      textArea.setText("This feature is in development mode.");
+   }
+
+
+
   public void loadNode(ActionEvent actionEvent) {
+      textArea.setVisible(true);
+      textArea.setText("This feature is in development mode.");
     // Load node logic here
   }
 }
