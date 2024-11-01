@@ -10,15 +10,18 @@ public class UMLNode extends Pane {
   private String methodName;
   private String fieldType; // not implemented yet
   private String parameterName;
-
+  private String relationship;
+  String straightLine = "\n----------------------------------\n";
 
   public UMLNode(String className) {
     this.className = className != null ? className : "Default Class Name";
     this.fieldName = "Default Field Name";
     this.methodName = "Default Method Name";
     this.parameterName = "Default Parameter Name";
+    this.relationship = "Default Relationship";
+
     // Set dimensions and initial styling
-    this.setPrefSize(250, 150);
+    this.setPrefSize(200, 300);
     this.setStyle("-fx-border-color: black; -fx-background-color: lightgreen;");
     // Create label and set text to display node information
     Label classLabel = new Label(mockNode());
@@ -64,10 +67,24 @@ public class UMLNode extends Pane {
 
  }
 
+ public void setRelationship(String relationship) {
+    this.relationship = relationship;
+    updateLabel();
+ }
+
+ public String getRelationship() {
+    return relationship;
+ }
+
   public String mockNode() {
-    return "\nClass Name: " + getClassName() + "\nField Name: " + getFieldName() +
-            "\nMethod Name: " + getMethodName() + "\nParameter Name: " + getParameterName();
+    return "Class Name: " + getClassName() + straightLine +
+            "Field Name: " + getFieldName() + straightLine +
+            "Method Name: " + getMethodName() + straightLine +
+            "Parameter: " + getParameterName() + straightLine +
+            "Relationship: " + getRelationship();
   }
+
+
   // Updates the label text with the latest mockNode output
   private void updateLabel() {
     if (!getChildren().isEmpty() && getChildren().get(0) instanceof Label) {
