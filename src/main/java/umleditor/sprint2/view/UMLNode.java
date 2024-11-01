@@ -2,6 +2,7 @@ package umleditor.sprint2.view;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import umleditor.sprint2.controller.UMLBuilderController;
 
 public class UMLNode extends Pane {
 
@@ -33,6 +34,8 @@ public class UMLNode extends Pane {
 
 
   private String mockNode() {
+
+
     return """
       Bus\r
       String Color\r
@@ -41,5 +44,9 @@ public class UMLNode extends Pane {
       void openDoor()\r 
       Composition\r
       """;
+
+  }
+  public String getClassName() {
+    return mockNode();
   }
 }
