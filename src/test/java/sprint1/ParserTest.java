@@ -2,6 +2,7 @@ package sprint1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import umleditor.sprint1.uml.UMLClass;
 import umleditor.sprint1.utilities.Functions;
 import umleditor.sprint1.utilities.Storage;
 
@@ -92,5 +93,19 @@ public class ParserTest {
     // Assert that nothing was renamed since the class didn't exist
     assertFalse(Storage.classExists(oldName), "Old class name should not exist");
     assertFalse(Storage.classExists(newName), "New class name should not exist");
+  }
+
+  @Test
+  public void testAddParameter(){
+    Functions.createClass("TestClass");
+    Functions.addMethod("TestClass", "TestMethod", "");
+    Functions.listClasses("lsa");
+
+    Functions.addParam("TestClass", "TestMethod", "null", "parameter1", "int");
+    Functions.listClasses("lsa");
+
+    Functions.addParam("TestClass", "TestMethod", "parameter1", "parameter2", "int");
+    Functions.listClasses("lsa");
+
   }
 }

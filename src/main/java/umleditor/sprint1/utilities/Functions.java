@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+
+import umleditor.sprint1.uml.MethodSignature;
 import umleditor.sprint1.uml.UMLClass;
 import umleditor.sprint1.uml.UMLRelationshipType;
 
@@ -98,6 +100,23 @@ public class Functions {
       } else {
         System.out.println("Error: Method " + methodName + " with parameter '" + parameter
           + "' does not exist in class " + className + ".");
+      }
+    } else {
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
+  }
+
+  public static void addParam(String className, String methodName, String paramName, String newParamName, String paramType){
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
+
+      if (umlClass.methodExists(methodName, paramName)) {
+        MethodSignature method = umlClass.findMethod(methodName, paramName);
+        method.addParam(newParamName, paramType);
+        System.out.println("Param " + newParamName + " added to method " + methodName + ".");
+      } else {
+        System.out.println("Error: Method " + methodName + " with parameter '" + paramName
+                + "' does not exist in class " + className + ".");
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");

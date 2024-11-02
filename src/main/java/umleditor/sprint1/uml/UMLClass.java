@@ -84,7 +84,7 @@ public class UMLClass {
   // Method to check if a method with a specific name and parameter already exists
   public boolean methodExists(String methodName, String parameter) {
     for (MethodSignature method : methods) {
-      if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
+      if (method.methodName.equals(methodName) && method.paramExists(parameter)){
         return true;  // Method with the same name and parameter exists
       }
     }
@@ -128,21 +128,21 @@ public class UMLClass {
   }
 
   // Internal class to represent a method signature with name and parameters
-  private static class MethodSignature {
-
-    String methodName;
-    String parameter;
-
-    public MethodSignature(String methodName, String parameter) {
-      this.methodName = methodName;
-      this.parameter = parameter != null ? parameter : ""; // Default to empty string if null
-    }
-
-    @Override
-    public String toString() {
-      return methodName + "(" + (parameter.isEmpty() ? "no parameters" : parameter) + ")";
-    }
-  }
+//  private static class MethodSignature {
+//
+//    String methodName;
+//    String parameter;
+//
+//    public MethodSignature(String methodName, String parameter) {
+//      this.methodName = methodName;
+//      this.parameter = parameter != null ? parameter : ""; // Default to empty string if null
+//    }
+//
+//    @Override
+//    public String toString() {
+//      return methodName + "(" + (parameter.isEmpty() ? "no parameters" : parameter) + ")";
+//    }
+//  }
 
   // Debugging helper method to display all methods in the class
   public void displayMethods() {
@@ -181,9 +181,9 @@ public class UMLClass {
   }
 
   // Helper method to find a method by name and parameter
-  private MethodSignature findMethod(String methodName, String parameter) {
+  public MethodSignature findMethod(String methodName, String parameter) {
     for (MethodSignature method : methods) {
-      if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
+      if (method.methodName.equals(methodName) && method.paramExists(parameter)) {
         return method;
       }
     }
