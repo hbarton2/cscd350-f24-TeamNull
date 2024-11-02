@@ -148,6 +148,14 @@ public class CommandFactory {
             "Error: Provide class name, old method name, new method name, and parameter.");
         }
       };
+      case "addParam" -> args -> {
+        if (args.length == 5) {
+          Functions.addParam(args[0], args[1], args[2], args[3], args[4]);
+        } else {
+          System.out.println(
+                  "Error: Provide class name, method name, parameter, new parameter name, and new parameter type.");
+        }
+      };
       case "exitProgram" -> args -> {
         if (args.length == 0) {
           Functions.exit();
