@@ -22,7 +22,7 @@ public class MethodSignature {
 
     String methodName;
     String parameter;   //This is only here to satisfy the legacy code, this will need to go eventually
-    List<UMLParameter> parameters;
+    public List<UMLParameter> parameters;
 
     public MethodSignature(String methodName, String paramName) {
         this.methodName = methodName;
@@ -51,8 +51,8 @@ public class MethodSignature {
      * UMLParameter, Parameter object has name and type
      */
     public static class UMLParameter{
-        String name;
-        String type;
+        public String name;
+        public String type;
 
         public UMLParameter(String name, String type){
             this.name = name;
