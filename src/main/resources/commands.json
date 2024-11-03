@@ -31,17 +31,17 @@
     "type": "removeMethod",
     "description": "Removes a method from a class. Usage: removeMethod <class_name> <method_name> "
   },
-  "lsa": {
+  "listAll": {
     "type": "lsa",
-    "description": "Lists all classes with their fields and methods. Usage: lsa"
+    "description": "Lists all classes with their fields and methods. Usage: listAll"
   },
-  "lsc": {
+  "listClassNames": {
     "type": "lsc",
-    "description": "Lists only the class names. Usage: lsc"
+    "description": "Lists only the class names. Usage: listClassNames"
   },
-  "lsr": {
+  "listClassRelationships": {
     "type": "lsr",
-    "description": "Lists classes that have relationships. Usage: lsr"
+    "description": "Lists classes that have relationships. Usage: listClassRelationships"
   },
   "save": {
     "type": "saveProgress",
