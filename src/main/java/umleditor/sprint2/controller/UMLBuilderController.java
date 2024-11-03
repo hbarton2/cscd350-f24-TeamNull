@@ -1,7 +1,8 @@
 package umleditor.sprint2.controller;
+
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -10,137 +11,181 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import umleditor.sprint1.utilities.Functions;
+import javafx.scene.text.TextFlow;
 import umleditor.sprint2.view.UMLNode;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.util.Random;
-
-
-/**
- *
- * Build controller handles Node creation for GUI
- *
- */
 
 public class UMLBuilderController {
-  @FXML private VBox fieldsBox, methodsBox, relationshipsBox;
-  @FXML private AnchorPane viewAnchorPane;
-  @FXML private TextField classNameField, methodName,fieldName, parameterName ;
-  @FXML private Button saveClassBNT;
-  @FXML private TextArea textArea;
-  @FXML private Button saveClass;
-  @FXML private String straightLine = "\n__________________________________";
-  @FXML int classCounter = 0;
 
-    @FXML
-    public void createClass(ActionEvent actionEvent) {
+  public TextFlow classShape;
+  public Button saveClass;
+  public TextField fieldType;
+  public TextField methodType;
+  public TextField parameterType;
+  public ChoiceBox relationshipChoiceBox;
+  public Button saveClassBNT;
 
-        if (classNameField.getText().isEmpty() || fieldName.getText().isEmpty() || parameterName.getText().isEmpty()) {
-            textArea.setVisible(true);
-            textArea.setText(straightLine + "\nNot enough user data is provided \n please fill out the fields" + straightLine);
-            return;
-        }
+  @FXML
+  private VBox fieldsBox, methodsBox, relationshipsBox;
 
-        UMLNode node = new UMLNode("");
+  @FXML
+  private AnchorPane viewAnchorPane;
 
-        classCounter ++; // counting number of classes created
+  @FXML
+  private TextField classNameField, methodName, fieldName, parameterName;
 
-        node.setClassName(classNameField.getText() + "\n Class #: " + classCounter );
-        node.setFieldName(fieldName.getText());
-        node.setMethodName(methodName.getText());
-        node.setParameterName(parameterName.getText());
-        node.setRelationship(relationshipChoiceBox.getSelectionModel().getSelectedItem());
+  @FXML
+  private TextArea textArea;
 
-        // Set initial position for the node
-        node.setLayoutX(100); // Adjust X position as needed
-        node.setLayoutY(100); // Adjust Y position as needed
+  private final List<String> relationshipTypes = List.of("None", "Generalization", "Realization",
+    "Dependency", "Association", "Aggregation", "Composition");
+  private final String straightLine = "\n__________________________________";
+  private int classCounter = 0;
 
-        // Add the node to the AnchorPane to display it
-        viewAnchorPane.getChildren().add(node);
-
-        // Display details in the TextArea
-        textArea.setVisible(true);
-        textArea.setText("Class Name:\n" + classNameField.getText() +
-                straightLine + "\nField Name:\n" + fieldName.getText() +
-                straightLine + "\nMethod Name:\n" + methodName.getText() +
-                "\nParameters: ( " + parameterName.getText() + " )" +
-                straightLine + "\nRelationship:\n" + relationshipChoiceBox.getSelectionModel().getSelectedItem() );
-
-        // Optionally clear fields after saving
-        classNameField.clear();
-        fieldName.clear();
-        methodName.clear();
-        parameterName.clear();
+  @FXML
+  public void initialize() {
+    // Initialize first relationship ChoiceBox with items
+    if (!relationshipsBox.getChildren().isEmpty()) {
+      HBox firstRelationshipBox = (HBox) relationshipsBox.getChildren().get(0);
+      ChoiceBox<String> relationshipChoiceBox = (ChoiceBox<String>) firstRelationshipBox.getChildren()
+        .get(0);
+      relationshipChoiceBox.getItems().addAll(relationshipTypes);
+      relationshipChoiceBox.setValue(relationshipTypes.get(0)); // Set default value
     }
-
-    public void deleteNode(ActionEvent actionEvent) {
-
-      textArea.clear();
-      textArea.setVisible(false);
-
-    // need to set the content of the node to clear
   }
 
+  @FXML
+  public void createClass(ActionEvent actionEvent) {
+    if (classNameField.getText().isEmpty()) {
+      showWarning("Class name is required.");
+      return;
+    }
+
+    UMLNode node = new UMLNode("");
+    classCounter++;
+    node.setClassName(classNameField.getText() + "\n Class #: " + classCounter);
+    node.setFieldName(fieldName.getText());
+    node.setMethodName(methodName.getText());
+    node.setParameterName(parameterName.getText());
+
+    node.setLayoutX(100);
+    node.setLayoutY(100);
+
+    viewAnchorPane.getChildren().add(node);
+
+    textArea.setVisible(true);
+    textArea.setText("Class Name:\n" + classNameField.getText() +
+      straightLine + "\nField Name:\n" + fieldName.getText() +
+      straightLine + "\nMethod Name:\n" + methodName.getText() +
+      "\nParameters: ( " + parameterName.getText() + " )");
+
+    resetFields();
+  }
+
+  private void showWarning(String message) {
+    textArea.setVisible(true);
+    textArea.setText(straightLine + "\n" + message + straightLine);
+  }
+
+  private void resetFields() {
+    classNameField.clear();
+    fieldName.clear();
+    methodName.clear();
+    parameterName.clear();
+
+    // Remove dynamically added elements only, keeping the initial setup intact
+    fieldsBox.getChildren().removeIf(node -> fieldsBox.getChildren().indexOf(node) > 0);
+    methodsBox.getChildren().removeIf(node -> methodsBox.getChildren().indexOf(node) > 0);
+    relationshipsBox.getChildren()
+      .removeIf(node -> relationshipsBox.getChildren().indexOf(node) > 0);
+  }
+
+  @FXML
+  public void deleteNode(ActionEvent actionEvent) {
+    textArea.clear();
+    textArea.setVisible(false);
+  }
+
+  @FXML
   public void saveClassAction(MouseEvent event) {
-    // Implementation for save class action
+    // Placeholder for save functionality
   }
 
   @FXML
   public void addField() {
     HBox fieldBox = new HBox(5);
-    TextField field = new TextField();
-    field.setPromptText("Enter field");
+    TextField fieldType = new TextField();
+    fieldType.setPromptText("Enter data type");
 
-    field.setId(fieldName.getText());
+    TextField fieldName = new TextField();
+    fieldName.setPromptText("Enter field name");
 
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addField());
-    fieldBox.getChildren().addAll(field, addButton);
+
+    Button removeButton = new Button("-");
+    removeButton.setOnAction(e -> fieldsBox.getChildren().remove(fieldBox));
+
+    fieldBox.getChildren().addAll(fieldType, fieldName, addButton, removeButton);
     fieldsBox.getChildren().add(fieldBox);
   }
 
   @FXML
   public void addMethod() {
     HBox methodBox = new HBox(5);
-    TextField method = new TextField();
-    method.setPromptText("Enter method");
-    TextField parameters = new TextField();
-    parameters.setPromptText("Enter parameters");
+
+    TextField returnType = new TextField();
+    returnType.setPromptText("Enter return type");
+
+    TextField methodName = new TextField();
+    methodName.setPromptText("Enter method name");
+
+    TextField parameterType = new TextField();
+    parameterType.setPromptText("Enter parameter type");
+
+    TextField parameterName = new TextField();
+    parameterName.setPromptText("Enter parameter name");
+
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addMethod());
-    methodBox.getChildren().addAll(method, parameters, addButton);
+
+    Button removeButton = new Button("-");
+    removeButton.setOnAction(e -> methodsBox.getChildren().remove(methodBox));
+
+    methodBox.getChildren()
+      .addAll(returnType, methodName, parameterType, parameterName, addButton, removeButton);
     methodsBox.getChildren().add(methodBox);
   }
 
   @FXML
-    HBox relationshipBox = new HBox(5);
-    ChoiceBox<String> relationshipChoiceBox = new ChoiceBox<>();
-  @FXML
   public void addRelationship() {
-    //HBox relationshipBox = new HBox(5);
-    //ChoiceBox<String> relationshipChoiceBox = new ChoiceBox<>();
-    relationshipChoiceBox.getItems().addAll("Inheritance", "Association", "Aggregation", "Composition");
+    HBox relationshipBox = new HBox(5);
+
+    ChoiceBox<String> relationshipChoice = new ChoiceBox<>();
+    relationshipChoice.getItems().addAll(relationshipTypes);
+    relationshipChoice.setValue(relationshipTypes.get(0)); // Set default value
+
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addRelationship());
-    relationshipBox.getChildren().addAll(relationshipChoiceBox, addButton);
+
+    Button removeButton = new Button("-");
+    removeButton.setOnAction(e -> relationshipsBox.getChildren().remove(relationshipBox));
+
+    relationshipBox.getChildren().addAll(relationshipChoice, addButton, removeButton);
     relationshipsBox.getChildren().add(relationshipBox);
-  }
-
-  @FXML
-  public String getRelationship(){
-      return getRelationship();
-  }
-
-  @FXML
-  public void createNode() {
-    String className = classNameField.getText();
-    // Additional node creation logic, if necessary
   }
 
   public void exitProgram(ActionEvent actionEvent) {
     System.exit(0);
+  }
+
+  public void saveNode(ActionEvent actionEvent) {
+    textArea.setVisible(true);
+    textArea.setText(straightLine + "\nSave:\n  feature is in development mode." + straightLine);
+  }
+
+  public void loadNode(ActionEvent actionEvent) {
+    textArea.setVisible(true);
+    textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
   }
 
   public void createMockNode(ActionEvent actionEvent) {
@@ -148,16 +193,5 @@ public class UMLBuilderController {
     node.setLayoutX(100);
     node.setLayoutY(100);
     viewAnchorPane.getChildren().add(node);
-  }
-
-   public void saveNode(ActionEvent actionEvent) {
-       textArea.setVisible(true);
-      textArea.setText(straightLine + "\nSave:\n  feature is in development mode." + straightLine);
-   }
-
-  public void loadNode(ActionEvent actionEvent) {
-      textArea.setVisible(true);
-      textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
-    // Load node logic here
   }
 }
