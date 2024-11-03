@@ -75,6 +75,11 @@
       <artifactId>glisten</artifactId>
       <version>0.1.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.xbean</groupId>
+      <artifactId>xbean-reflect</artifactId>
+      <version>3.7</version>
+    </dependency>
 
   </dependencies>
 

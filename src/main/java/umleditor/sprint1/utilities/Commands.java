@@ -7,17 +7,36 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.TreeMap;
 
+/**
+ * All the Commands are stored here
+ * Hashmap O(1) (no sort function but could be sorted by user before storage)
+ * TreeMap O(log n) but balanced and sorted RBT
+ */
 public class Commands {
 
-  private final HashMap<String, CommandAction> commands;  // Stores commands
-  private final HashMap<String, CommandDefinition> commandDefinitions;  // Stores command definitions (types and descriptions)
+//  private final HashMap<String, CommandAction> commands;  // Stores commands
+//  private final HashMap<String, CommandDefinition> commandDefinitions;  // Stores command definitions (types and descriptions)
+//  private final Gson gson;
+//
+//  // Constructor
+//  public Commands() {
+//    this.commands = new HashMap<>();  // Initialize the commands HashMap
+//    this.commandDefinitions = new HashMap<>();  // Initialize the command definitions HashMap
+//    this.gson = new Gson();
+//    loadCommands();  // Load commands from JSON
+//    addHelpCommand();  // Add help command
+//  }
+
+  private final TreeMap<String, CommandAction> commands;  // Stores commands in sorted order
+  private final TreeMap<String, CommandDefinition> commandDefinitions;  // Stores command definitions in sorted order
   private final Gson gson;
 
   // Constructor
   public Commands() {
-    this.commands = new HashMap<>();  // Initialize the commands HashMap
-    this.commandDefinitions = new HashMap<>();  // Initialize the command definitions HashMap
+    this.commands = new TreeMap<>();  // Initialize as TreeMap for sorted order
+    this.commandDefinitions = new TreeMap<>();  // Initialize as TreeMap for sorted order
     this.gson = new Gson();
     loadCommands();  // Load commands from JSON
     addHelpCommand();  // Add help command
