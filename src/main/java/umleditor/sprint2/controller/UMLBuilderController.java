@@ -13,46 +13,55 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 import umleditor.sprint2.view.UMLNode;
 
-
 /**
- * Build controller handles Node creation for GUI
+ * UMLBuilderController handles Node creation for GUI
  */
-
 public class UMLBuilderController {
 
   public TextFlow classShape;
+
   @FXML
   private VBox fieldsBox, methodsBox, relationshipsBox;
+
   @FXML
   private AnchorPane viewAnchorPane;
+
   @FXML
   private TextField classNameField, methodName, fieldName, parameterName;
+
   @FXML
   private Button saveClassBNT;
+
   @FXML
   private TextArea textArea;
+
   @FXML
-  private Button saveClass;
+  private ChoiceBox<String> relationshipChoiceBox;
+
+  private final String straightLine = "\n__________________________________";
+  private int classCounter = 0;
+
   @FXML
-  private String straightLine = "\n__________________________________";
-  @FXML
-  int classCounter = 0;
+  public void initialize() {
+    // Initialize choice box items for relationships
+    relationshipChoiceBox.getItems().addAll("Inheritance", "Association", "Aggregation", "Composition");
+
+    // Add initial field and method for UI consistency (optional)
+    addField();
+    addMethod();
+    addRelationship();
+  }
 
   @FXML
   public void createClass(ActionEvent actionEvent) {
-
-    if (classNameField.getText().isEmpty() || fieldName.getText().isEmpty()
-      || parameterName.getText().isEmpty()) {
-      textArea.setVisible(true);
-      textArea.setText(
-        straightLine + "\nNot enough user data is provided \n please fill out the fields"
-          + straightLine);
+    // Check if required fields are filled
+    if (classNameField.getText().isEmpty()) {
+      showWarning("Class name is required.");
       return;
     }
 
     UMLNode node = new UMLNode("");
-
-    classCounter++; // counting number of classes created
+    classCounter++; // Count number of classes created
 
     node.setClassName(classNameField.getText() + "\n Class #: " + classCounter);
     node.setFieldName(fieldName.getText());
@@ -73,75 +82,93 @@ public class UMLBuilderController {
       straightLine + "\nField Name:\n" + fieldName.getText() +
       straightLine + "\nMethod Name:\n" + methodName.getText() +
       "\nParameters: ( " + parameterName.getText() + " )" +
-      straightLine + "\nRelationship:\n" + relationshipChoiceBox.getSelectionModel()
-      .getSelectedItem());
+      straightLine + "\nRelationship:\n" + relationshipChoiceBox.getSelectionModel().getSelectedItem());
 
-    // Optionally clear fields after saving
+    // Clear fields after saving
+    clearFields();
+  }
+
+  private void showWarning(String message) {
+    textArea.setVisible(true);
+    textArea.setText(straightLine + "\n" + message + straightLine);
+  }
+
+  private void clearFields() {
     classNameField.clear();
     fieldName.clear();
     methodName.clear();
     parameterName.clear();
   }
 
+  @FXML
   public void deleteNode(ActionEvent actionEvent) {
-
     textArea.clear();
     textArea.setVisible(false);
-
-    // need to set the content of the node to clear
+    // Additional logic to delete a specific node, if needed
   }
 
+  @FXML
   public void saveClassAction(MouseEvent event) {
-    // Implementation for save class action
+    // Implementation for save class action, if necessary
   }
 
+  // Add a new field with a "-" button for deletion
   @FXML
   public void addField() {
     HBox fieldBox = new HBox(5);
     TextField field = new TextField();
     field.setPromptText("Enter field");
 
-    field.setId(fieldName.getText());
-
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addField());
-    fieldBox.getChildren().addAll(field, addButton);
+
+    Button removeButton = new Button("-");
+    removeButton.setOnAction(e -> fieldsBox.getChildren().remove(fieldBox));
+
+    fieldBox.getChildren().addAll(field, addButton, removeButton);
     fieldsBox.getChildren().add(fieldBox);
   }
 
+  // Add a new method with a "-" button for deletion
   @FXML
   public void addMethod() {
     HBox methodBox = new HBox(5);
     TextField method = new TextField();
     method.setPromptText("Enter method");
+
     TextField parameters = new TextField();
     parameters.setPromptText("Enter parameters");
+
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addMethod());
-    methodBox.getChildren().addAll(method, parameters, addButton);
+
+    Button removeButton = new Button("-");
+    removeButton.setOnAction(e -> methodsBox.getChildren().remove(methodBox));
+
+    methodBox.getChildren().addAll(method, parameters, addButton, removeButton);
     methodsBox.getChildren().add(methodBox);
   }
 
-  @FXML
-  HBox relationshipBox = new HBox(5);
-  @FXML
-  ChoiceBox<String> relationshipChoiceBox = new ChoiceBox<>();
-
+  // Add a new relationship with a "-" button for deletion
   @FXML
   public void addRelationship() {
-    //HBox relationshipBox = new HBox(5);
-    //ChoiceBox<String> relationshipChoiceBox = new ChoiceBox<>();
-    relationshipChoiceBox.getItems()
-      .addAll("Inheritance", "Association", "Aggregation", "Composition");
+    HBox relationshipBox = new HBox(5);
+    ChoiceBox<String> relationshipChoice = new ChoiceBox<>();
+    relationshipChoice.getItems().addAll("Inheritance", "Association", "Aggregation", "Composition");
+
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addRelationship());
-    relationshipBox.getChildren().addAll(relationshipChoiceBox, addButton);
+
+    Button removeButton = new Button("-");
+    removeButton.setOnAction(e -> relationshipsBox.getChildren().remove(relationshipBox));
+
+    relationshipBox.getChildren().addAll(relationshipChoice, addButton, removeButton);
     relationshipsBox.getChildren().add(relationshipBox);
   }
 
   @FXML
   public String getRelationship() {
-    return getRelationship();
+    return relationshipChoiceBox.getSelectionModel().getSelectedItem();
   }
 
   @FXML
