@@ -75,6 +75,7 @@ public class MethodSignature {
             if(param.name.equals(name)){
                 this.parameters.remove(param);
                 System.out.println("Param: " + name + " removed");
+                return;
             }
         }
         System.out.println("Param not found: " + name);
