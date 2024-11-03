@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+
+import umleditor.sprint1.uml.MethodSignature;
 import umleditor.sprint1.uml.UMLClass;
 import umleditor.sprint1.uml.UMLRelationshipType;
 
@@ -138,6 +140,42 @@ public class Functions {
       case 4 -> UMLRelationshipType.INHERITANCE;
       default -> null;
     };
+  }
+
+  public static void addParam(String className, String methodName, String paramName, String newParamName, String paramType){
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
+
+      if (umlClass.methodExists(methodName, paramName)) {
+        MethodSignature method = umlClass.findMethod(methodName, paramName);
+        method.addParam(newParamName, paramType);
+        System.out.println("Param " + newParamName + " added to method " + methodName + ".");
+      } else {
+        System.out.println("Error: Method " + methodName + " with parameter '" + paramName
+                + "' does not exist in class " + className + ".");
+      }
+    } else {
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
+  }
+
+  public static void removeParam(String className, String methodName, String paramName){
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);
+
+      if (umlClass.methodExists(methodName, paramName)) {
+        MethodSignature method = umlClass.findMethod(methodName, paramName);
+        method.removeParam(paramName);
+        System.out.println("Param " + paramName + " removed from method " + methodName + ".");
+      }
+      else{
+        System.out.println("Error: Method " + methodName + " with parameter '" + paramName
+        + "' does not exist in class " + className + ".");
+      }
+    }
+    else{
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
   }
 
   public static void listClasses(String type) {
@@ -278,5 +316,9 @@ public class Functions {
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
     }
+  }
+
+  public static void exit() {
+    System.exit(0);
   }
 }
