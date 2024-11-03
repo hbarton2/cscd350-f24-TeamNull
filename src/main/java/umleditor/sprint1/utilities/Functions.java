@@ -128,12 +128,16 @@ public class Functions {
   }
 
   // Helper method to get relationship type by number
+  // Helper method to get relationship type by number
   private static UMLRelationshipType getRelationshipType(int number) {
     return switch (number) {
       case 1 -> UMLRelationshipType.ASSOCIATION;
       case 2 -> UMLRelationshipType.AGGREGATION;
       case 3 -> UMLRelationshipType.COMPOSITION;
       case 4 -> UMLRelationshipType.INHERITANCE;
+      case 5 -> UMLRelationshipType.GENERALIZATION;
+      case 6 -> UMLRelationshipType.REALIZATION;
+      case 7 -> UMLRelationshipType.DEPENDENCY;
       default -> null;
     };
   }

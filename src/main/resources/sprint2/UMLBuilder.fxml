@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -15,7 +13,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -24,7 +21,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="667.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
+<VBox prefHeight="800.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
   <!-- Menu Bar -->
   <MenuBar prefHeight="23.0" prefWidth="1097.0" VBox.vgrow="NEVER">
     <Menu mnemonicParsing="false" text="File">
@@ -59,7 +56,7 @@
   </MenuBar>
 
   <!-- Main SplitPane layout -->
-  <SplitPane dividerPositions="0.35024752475247517" VBox.vgrow="ALWAYS">
+  <SplitPane dividerPositions="0.4551361386138613" VBox.vgrow="ALWAYS">
     <!-- Left control panel with form-style input -->
     <VBox prefWidth="250.0" spacing="10">
       <padding>
@@ -68,62 +65,61 @@
       <Label style="-fx-font-size: 14px;" text="Class Name" />
       <TextField fx:id="classNameField" promptText="Enter class name" />
 
+      <!-- Fields Section -->
       <Label style="-fx-font-size: 14px;" text="Fields" />
-      <VBox fx:id="fieldsBox" spacing="5">
-        <HBox spacing="5">
-          <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="295.0" promptText="Enter field" />
-          <Button onAction="#addField" text="+" />
-        </HBox>
-      </VBox>
+      <ScrollPane fitToWidth="true" prefHeight="108.0" prefWidth="464.0">
+        <VBox fx:id="fieldsBox" spacing="5">
+          <HBox spacing="5">
+            <TextField fx:id="fieldType" prefWidth="100.0" promptText="Enter data type" />
+            <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="168.0" promptText="Enter field name" />
+            <Button onAction="#addField" text="+" />
+          </HBox>
+        </VBox>
+      </ScrollPane>
 
+      <!-- Methods Section -->
       <Label prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
-      <VBox fx:id="methodsBox" spacing="5">
-        <HBox spacing="5">
-          <TextField fx:id="methodName" prefHeight="25.0" prefWidth="156.0" promptText="Enter method" />
-          <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="141.0" promptText="Enter parameters" />
-          <Button onAction="#addMethod" text="+" />
-        </HBox>
-      </VBox>
+      <ScrollPane fitToWidth="true" prefHeight="119.0" prefWidth="464.0">
+        <VBox fx:id="methodsBox" spacing="5">
+          <HBox spacing="5">
+            <TextField fx:id="methodType" prefHeight="25.0" prefWidth="77.0" promptText="Return type" />
+            <TextField fx:id="methodName" prefHeight="25.0" prefWidth="98.0" promptText="Method name" />
+            <TextField fx:id="parameterType" prefHeight="25.0" prefWidth="96.0" promptText="Parameter type" />
+            <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="115.0" promptText="Parameter name" />
+            <Button onAction="#addMethod" text="+" />
+          </HBox>
+        </VBox>
+      </ScrollPane>
 
+      <!-- Relationships Section -->
       <Label style="-fx-font-size: 14px;" text="Relationships" />
-      <VBox fx:id="relationshipsBox" spacing="5">
-        <HBox spacing="5">
-          <ChoiceBox fx:id="relationshipChoiceBox">
-            <items>
-              <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Inheritance" />
-                <String fx:value="Association" />
-                <String fx:value="Aggregation" />
-                <String fx:value="Composition" />
-              </FXCollections>
-            </items>
-          </ChoiceBox>
-          <Button onAction="#addRelationship" text="+" />
-        </HBox>
-      </VBox>
+      <ScrollPane fitToWidth="true" prefHeight="61.0" prefWidth="464.0">
+        <VBox fx:id="relationshipsBox" spacing="5">
+          <HBox spacing="5">
+            <ChoiceBox fx:id="relationshipChoiceBox" prefHeight="25.0" prefWidth="241.0" />
+            <Button onAction="#addRelationship" text="+" />
+          </HBox>
+        </VBox>
+      </ScrollPane>
 
+      <!-- Action Buttons -->
       <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
-      <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="35.0" prefWidth="273.0" text="Create Node (Not on final release)" />
+      <TextField prefHeight="25.0" prefWidth="255.0" promptText="Enter file name without extensions for saving, load, or delete operations" />
       <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="31.0" prefWidth="273.0" text="Save" />
       <Button mnemonicParsing="false" onAction="#loadNode" prefHeight="31.0" prefWidth="274.0" text="Load" />
       <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="31.0" prefWidth="275.0" text="Delete" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*vertical scroll bar will be near future*" wrappingWidth="269.31636238098145">
-            <font>
-               <Font size="16.0" />
-            </font></Text>
+      <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="35.0" prefWidth="273.0" text="Create Node (Not on final release)" />
     </VBox>
 
     <!-- Right-side area for draggable nodes -->
     <ScrollPane>
-      <AnchorPane fx:id="viewAnchorPane" prefHeight="577.0" prefWidth="691.0">
-        <Text layoutX="346.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon - clicking on class nodes will repopulate the left text fields. Also, each node that has relationships will be connected to its corresponding nodes." wrappingWidth="312.00000000000006">
-               <font>
-                  <Font size="15.0" />
-               </font></Text>
+      <AnchorPane fx:id="viewAnchorPane" prefHeight="735.0" prefWidth="691.0">
+        <Text layoutX="237.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon - clicking on class nodes will repopulate the left text fields. Also, each node that has relationships will be connected to its corresponding nodes." wrappingWidth="312.00000000000006">
+          <font>
+            <Font size="15.0" />
+          </font>
+        </Text>
         <TextFlow fx:id="classShape" layoutX="14.0" layoutY="14.0" prefHeight="219.0" prefWidth="200.0">
-          <effect>
-            <Glow />
-          </effect>
           <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" visible="false" />
         </TextFlow>
       </AnchorPane>
@@ -136,16 +132,17 @@
       <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
     <Label prefHeight="18.0" prefWidth="73.0" text="Save / Load" HBox.hgrow="ALWAYS">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
+      <font>
+        <Font size="14.0" />
+      </font>
+    </Label>
     <Pane HBox.hgrow="ALWAYS">
       <ProgressBar layoutY="1.0" prefWidth="200.0" progress="0.0" />
-       <Label layoutX="256.0" layoutY="1.0" prefHeight="18.0" prefWidth="592.0" text="Placeholder File Location of the save / load ">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
+      <Label layoutX="256.0" layoutY="1.0" prefHeight="18.0" prefWidth="592.0" text="Placeholder File Location of the save / load ">
+        <font>
+          <Font size="14.0" />
+        </font>
+      </Label>
     </Pane>
   </HBox>
 </VBox>

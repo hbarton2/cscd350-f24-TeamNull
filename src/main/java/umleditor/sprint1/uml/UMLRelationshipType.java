@@ -4,5 +4,8 @@ public enum UMLRelationshipType {
   ASSOCIATION,
   AGGREGATION,
   COMPOSITION,
-  INHERITANCE
+  INHERITANCE,
+  GENERALIZATION,     // Added for generalization
+  REALIZATION,        // Added for realization
+  DEPENDENCY          // Added for dependency
 }
