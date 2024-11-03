@@ -70,7 +70,7 @@ public class Functions {
   }
 
   // Add method to a class with method name
-  public static void addMethod(String className, String methodName) {
+  public static void addMethod(String className, String methodName, String methodType) {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
 
@@ -79,7 +79,7 @@ public class Functions {
         System.out.println("Error: Method " + methodName +
            " already exists in class " + className + ".");
       } else {
-        umlClass.addMethod(methodName);
+        umlClass.addMethod(methodName, methodType);
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");

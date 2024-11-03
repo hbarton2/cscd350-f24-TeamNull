@@ -16,7 +16,7 @@ class ParameterTests {
 
     @BeforeEach
     public void setUp() {
-        method = new MethodSignature("exampleMethod");
+        method = new MethodSignature("exampleMethod", "void");
     }
 
     @Test
@@ -41,7 +41,7 @@ class ParameterTests {
     @Test
     public void testAddParameterOutput(){
         Functions.createClass("TestClass");
-        Functions.addMethod("TestClass", "TestMethod");
+        Functions.addMethod("TestClass", "TestMethod", "void");
         Functions.listClasses("lsa");
 
         Functions.addParam("TestClass", "TestMethod", "parameter1", "int");

@@ -17,7 +17,7 @@
   },
   "addMethod": {
     "type": "addMethod",
-    "description": "Adds a method to a class with optional overloading. Usage: addMethod <class_name> <method_name>"
+    "description": "Adds a method to a class with optional overloading. Usage: addMethod <class_name> <method_name> <method_type>"
   },
   "addRelationship": {
     "type": "addRelationship",
