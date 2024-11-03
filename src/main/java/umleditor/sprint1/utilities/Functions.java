@@ -50,20 +50,20 @@ public class Functions {
   }
 
   // Add attribute to a class
-  public static void addAttribute(String className, String attribute) {
+  public static void addAttribute(String className, String attributeType, String attributeName) {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
-      umlClass.addAttribute(attribute);
+      umlClass.addAttribute(attributeName, attributeType);
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
     }
   }
 
   // Remove an attribute from a class
-  public static void removeAttribute(String className, String attribute) {
+  public static void removeAttribute(String className, String attributeName) {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
-      umlClass.removeAttribute(attribute);
+      umlClass.removeAttribute(attributeName);
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
     }
