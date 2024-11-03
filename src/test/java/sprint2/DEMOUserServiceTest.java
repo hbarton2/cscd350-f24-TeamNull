@@ -13,7 +13,7 @@ import umleditor.sprint2.demo.UserRepository;
 import umleditor.sprint2.demo.UserService;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+public class DEMOUserServiceTest {
 
   @Mock
   private UserRepository userRepository;  // Mocking the UserRepository
