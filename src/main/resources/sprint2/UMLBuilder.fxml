@@ -14,14 +14,17 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
   <children>
     <!-- Menu Bar -->
     <MenuBar VBox.vgrow="NEVER">
@@ -78,7 +81,7 @@
           <Label style="-fx-font-size: 14px;" text="Fields" />
           <VBox fx:id="fieldsBox" spacing="5">
             <HBox spacing="5">
-              <TextField promptText="Enter field" />
+              <TextField fx:id="fieldName" promptText="Enter field" />
               <Button onAction="#addField" text="+" />
             </HBox>
           </VBox>
@@ -86,8 +89,8 @@
           <Label prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
           <VBox fx:id="methodsBox" spacing="5">
             <HBox spacing="5">
-              <TextField promptText="Enter method" />
-              <TextField prefHeight="25.0" prefWidth="141.0" promptText="Enter parameters" />
+              <TextField fx:id="methodName" promptText="Enter method" />
+              <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="141.0" promptText="Enter parameters" />
               <Button onAction="#addMethod" text="+" />
             </HBox>
           </VBox>
@@ -109,9 +112,9 @@
             </HBox>
           </VBox>
 
-          <Button onAction="#createNode" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
+          <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
                <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="35.0" prefWidth="273.0" text="Create Node (Not on final release)" />
-               <Button mnemonicParsing="false" onAction="#saveNode" prefHeight="31.0" prefWidth="273.0" text="Save" />
+               <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="31.0" prefWidth="273.0" text="Save" />
                <Button mnemonicParsing="false" onAction="#loadNode" prefHeight="31.0" prefWidth="274.0" text="Load" />
                <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="31.0" prefWidth="275.0" text="Delete" />
                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*verticle scroll bar will be near future*" wrappingWidth="269.31636238098145" />
@@ -121,9 +124,18 @@
         <!-- Right-side area for draggable nodes -->
         <ScrollPane>
           <content>
-            <AnchorPane fx:id="viewAnchorPane" prefHeight="545.0" prefWidth="643.0">
+            <AnchorPane fx:id="viewAnchorPane" prefHeight="531.0" prefWidth="557.0">
                      <children>
                         <Text layoutX="312.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon - clicking on class nodes will repopulate the left text fields. Also, each node that has relationships will be connected to its corresponding nodes." wrappingWidth="172.00000000000006" />
+                        <TextFlow fx:id="classShape" layoutX="14.0" layoutY="14.0" prefHeight="219.0" prefWidth="200.0">
+                           <effect>
+                              <Glow />
+                           </effect>
+                           <children>
+                              <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                           </children>
+                        </TextFlow>
+                        <Label layoutX="484.0" layoutY="493.0" text="Current" />
                      </children></AnchorPane>
           </content>
         </ScrollPane>
