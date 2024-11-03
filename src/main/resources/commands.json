@@ -13,7 +13,7 @@
   },
   "addField": {
     "type": "addAttribute",
-    "description": "Adds a Field to a class. Usage: addField <class_name> <field>"
+    "description": "Adds a Field to a class. Usage: addField <class_name> <field_type> <field_name>"
   },
   "addMethod": {
     "type": "addMethod",
@@ -25,7 +25,7 @@
   },
   "removeField": {
     "type": "removeAttribute",
-    "description": "Removes an Field from a class. Usage: removeField <class_name> <field>"
+    "description": "Removes an Field from a class. Usage: removeField <class_name> <field_name>"
   },
   "removeMethod": {
     "type": "removeMethod",
@@ -57,7 +57,7 @@
   },
   "renameField": {
     "type": "renameAttribute",
-    "description": "Renames a field in a class. Usage: renameField <class_name> <old_field> <new_field>"
+    "description": "Renames a field in a class. Usage: renameField <class_name> <old_field_name> <new_field_name>"
   },
   "renameMethod": {
     "type": "renameMethod",

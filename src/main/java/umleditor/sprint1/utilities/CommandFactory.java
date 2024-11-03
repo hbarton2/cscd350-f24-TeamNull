@@ -36,17 +36,17 @@ public class CommandFactory {
         }
       };
       case "addAttribute" -> args -> {
-        if (args.length == 2) {
-          Functions.addAttribute(args[0], args[1]);
+        if (args.length == 3) {
+          Functions.addAttribute(args[0], args[1], args[2]);
         } else {
-          System.out.println("Error: Provide class name and field.");
+          System.out.println("Error: Provide class name, field type, and field name.");
         }
       };
       case "removeAttribute" -> args -> {
         if (args.length == 2) {
           Functions.removeAttribute(args[0], args[1]);
         } else {
-          System.out.println("Error: Provide class name and field.");
+          System.out.println("Error: Provide class name and field name.");
         }
       };
       case "addMethod" -> args -> {

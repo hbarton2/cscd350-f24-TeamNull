@@ -6,7 +6,7 @@ import java.util.List;
 public class UMLClass {
 
   private String className;
-  private final List<String> attributes;
+  private final List<UMLAttribute> attributes;
   private final List<MethodSignature> methods;  // Store methods with parameters
   private final List<UMLRelationship> relationships;
 
@@ -19,28 +19,47 @@ public class UMLClass {
   }
 
   // Getter and Setter for Attributes
-  public List<String> getAttributes() {
+  public List<UMLAttribute> getAttributes() {
     return this.attributes;
   }
 
-  public void addAttribute(String attribute) {
-    if (!this.attributes.contains(attribute)) {
-      this.attributes.add(attribute);
-      System.out.println("Field " + attribute + " added to class " + className + ".");
+  public void addAttribute(String attributeName, String attributeType) {
+    if (!attributeExists(attributeName)) {
+      this.attributes.add(new UMLAttribute(attributeName, attributeType));
+      System.out.println("Field " + attributeName + " added to class " + className + ".");
     } else {
       System.out.println(
-        "Error: Field " + attribute + " already exists in class " + className + ".");
+        "Error: Field " + attributeName + " already exists in class " + className + ".");
     }
   }
 
-  public void removeAttribute(String attribute) {
-    if (this.attributes.contains(attribute)) {
-      this.attributes.remove(attribute);
-      System.out.println("Field " + attribute + " removed from class " + className + ".");
+  public void removeAttribute(String attributeName) {
+    if (attributeExists(attributeName)) {
+      this.attributes.remove(findAttribute(attributeName));
+      System.out.println("Field " + attributeName + " removed from class " + className + ".");
     } else {
       System.out.println(
-        "Error: Field " + attribute + " does not exist in class " + className + ".");
+        "Error: Field " + attributeName + " does not exist in class " + className + ".");
     }
+  }
+
+  public boolean attributeExists(String attributeName) {
+    for (UMLAttribute attribute : attributes) {
+      if (attribute.getName().equals(attributeName)) {
+        return true;  // Method with the same name and parameter exists
+      }
+    }
+    return false;  // No duplicate found
+  }
+
+  // Helper method to find a method by name and parameter
+  public UMLAttribute findAttribute(String attributeName) {
+    for (UMLAttribute attribute : attributes) {
+      if (attribute.getName().equals(attributeName)) {
+        return attribute;
+      }
+    }
+    return null;
   }
 
   // Getter and Setter for Methods
@@ -150,17 +169,23 @@ public class UMLClass {
     }
   }
 
+  public void displayAttributes(){
+    System.out.println("Attributes in class " + className + ":");
+    for (UMLAttribute attribute : attributes) {
+      System.out.println("- " + attribute);
+    }
+  }
+
   // Method to rename an attribute
-  public void renameAttribute(String oldAttribute, String newAttribute) {
-    if (attributes.contains(oldAttribute)) {
-      int index = attributes.indexOf(oldAttribute);
-      attributes.set(index, newAttribute);
+  public void renameAttribute(String oldName, String newName) {
+    if (attributeExists(oldName)) {
+      findAttribute(oldName).setName(newName);
       System.out.println(
-        "Field renamed from " + oldAttribute + " to " + newAttribute + " in class " + className
+        "Field renamed from " + oldName + " to " + newName + " in class " + className
           + ".");
     } else {
       System.out.println(
-        "Error: Field " + oldAttribute + " does not exist in class " + className + ".");
+        "Error: Field " + oldName + " does not exist in class " + className + ".");
     }
   }
 
