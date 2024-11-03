@@ -1,15 +1,18 @@
 # Universal Modeling Language Software Development Kit
 
-* v2.2.73
+* v2.2.83
 * How to read version # Version main branch.release branch.pull request changes'
 * What's New
 * - Haz GUI? YES!
 
+---
+
 ## Table of Contents
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Getting Started User](#getting-started-User)
-4. [Running the Application User](#running-the-application-User)
+
+1. [Getting Started for User](#getting-started-for-User)
+2. [Running the Application for User](#running-the-application-for-User)
+3. [Overview](#overview)
+4. [Features](#features)
 5. [Installation for Developers](#installation-for-Developers)
 6. [Usage](#usage)
 7. [Testing](#testing)
@@ -18,26 +21,7 @@
 10. [Contact](#contact)
 11. [Project Details](#Project-Details)
 ---
-
-## Overview
-
-DevKitUML is a unified modeling language (UML) software development kit (SDK) designed to simplify the process of generating, managing, and interacting with UML diagrams for developers. This project integrates a console-based interface for UML Editor functionality.
-
-This SDK is intended to streamline the experience of creating class diagrams, modifying them, and saving/loading project data using JSON format for persistence.
-
-
----
-
-## Features
-
-- **Command-Line Interface (CLI):** Provides a terminal-like environment where users can execute commands within the JavaFX terminal window.
-- **Graphical User Interface (GUI):** Application has an elegant, easy-to-use graphical interface for an enhanced user experience.
-- **JSON Integration:** Uses Gson for saving/loading the project data in JSON format.
-- **Multi-platform Support:** Designed to work on Windows, macOS, and Linux with cross-platform capabilities.
-
----
-
-## Getting Started User
+## Getting Started for User
 
 ### Prerequisites
 
@@ -46,7 +30,9 @@ Ensure that the following software is installed on the target machine:
 - **Java Runtime Environment (JRE)** or **Java Development Kit (JDK)** version 17 or higher.  
   You can download it from the [Oracle Java Downloads page](https://www.oracle.com/java/technologies/javase-downloads.html) or from [AdoptOpenJDK](https://adoptopenjdk.net/).
 
-## Running the Application User
+---
+
+## Running the Application for User
 
 ### Steps to Run the UML Editor
 
@@ -60,11 +46,28 @@ Make sure you have the `umleditor.jar` file, which contains the application.
 Run the Program
 Use the java -jar command to run the JAR file:
 
-*Did you know: If this file is currently viewed in dedicated markdown viewer you can click the arrow icon next to the bash command and launch the application.* 
+*Did you know: If this file is currently viewed in dedicated markdown viewer you can click the arrow icon next to the bash command and launch the application.*
 
 ```bash
 java -jar umleditor.jar
 ```
+
+---
+
+## Overview
+
+DevKitUML is a unified modeling language (UML) software development kit (SDK) designed to simplify the process of generating, managing, and interacting with UML diagrams for developers. This project integrates a console-based interface for UML Editor functionality.
+
+This SDK is intended to streamline the experience of creating class diagrams, modifying them, and saving/loading project data using JSON format for persistence.
+
+---
+
+## Features
+
+- **Command-Line Interface (CLI):** Provides a terminal-like environment where users can execute commands within the JavaFX terminal window.
+- **Graphical User Interface (GUI):** Application has an elegant, easy-to-use graphical interface for an enhanced user experience.
+- **JSON Integration:** Uses Gson for saving/loading the project data in JSON format.
+- **Multi-platform Support:** Designed to work on Windows, macOS, and Linux with cross-platform capabilities.
 
 ---
 

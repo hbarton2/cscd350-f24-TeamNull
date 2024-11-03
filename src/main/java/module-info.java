@@ -81,6 +81,29 @@
  * v2.2.72 minimum requirements
  */
 
+//module umleditor {
+//  requires javafx.controls;
+//  requires javafx.fxml;
+//  requires javafx.graphics;
+//  requires java.desktop;
+//  requires com.google.gson;
+//
+//  opens umleditor to javafx.fxml;
+//  opens umleditor.sprint1.utilities to com.google.gson;
+//  opens umleditor.sprint2.demo to javafx.fxml;
+//  opens umleditor.sprint2.controller to javafx.fxml; // Added to allow access to controllers
+//
+//  exports umleditor;
+//  exports umleditor.sprint1.utilities;
+//  exports umleditor.sprint2.demo;
+//  exports umleditor.sprint2.view;
+//  exports umleditor.sprint2.model;
+//  exports umleditor.sprint2.controller;
+//}
+
+/**
+ * v2.2.83 minimum requirements
+ */
 module umleditor {
   requires javafx.controls;
   requires javafx.fxml;
@@ -91,13 +114,13 @@ module umleditor {
   opens umleditor to javafx.fxml;
   opens umleditor.sprint1.utilities to com.google.gson;
   opens umleditor.sprint2.demo to javafx.fxml;
-  opens umleditor.sprint2.controller to javafx.fxml; // Added to allow access to controllers
+  opens umleditor.sprint2.controller to javafx.fxml;
 
   exports umleditor;
+  exports umleditor.sprint1.uml; // Export if other modules or packages need access
   exports umleditor.sprint1.utilities;
   exports umleditor.sprint2.demo;
   exports umleditor.sprint2.view;
   exports umleditor.sprint2.model;
   exports umleditor.sprint2.controller;
 }
-
