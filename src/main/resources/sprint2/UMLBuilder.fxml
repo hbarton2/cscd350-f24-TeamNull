@@ -10,7 +10,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
@@ -21,6 +20,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
@@ -107,14 +107,19 @@
       <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="31.0" prefWidth="273.0" text="Save" />
       <Button mnemonicParsing="false" onAction="#loadNode" prefHeight="31.0" prefWidth="274.0" text="Load" />
       <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="31.0" prefWidth="275.0" text="Delete" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*vertical scroll bar will be near future*" wrappingWidth="269.31636238098145" />
-      <ScrollBar />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*vertical scroll bar will be near future*" wrappingWidth="269.31636238098145">
+            <font>
+               <Font size="16.0" />
+            </font></Text>
     </VBox>
 
     <!-- Right-side area for draggable nodes -->
     <ScrollPane>
       <AnchorPane fx:id="viewAnchorPane" prefHeight="577.0" prefWidth="691.0">
-        <Text layoutX="312.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon - clicking on class nodes will repopulate the left text fields. Also, each node that has relationships will be connected to its corresponding nodes." wrappingWidth="172.00000000000006" />
+        <Text layoutX="346.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon - clicking on class nodes will repopulate the left text fields. Also, each node that has relationships will be connected to its corresponding nodes." wrappingWidth="312.00000000000006">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
         <TextFlow fx:id="classShape" layoutX="14.0" layoutY="14.0" prefHeight="219.0" prefWidth="200.0">
           <effect>
             <Glow />
@@ -130,10 +135,17 @@
     <padding>
       <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
-    <Label prefHeight="18.0" prefWidth="73.0" text="Save / Load" HBox.hgrow="ALWAYS" />
+    <Label prefHeight="18.0" prefWidth="73.0" text="Save / Load" HBox.hgrow="ALWAYS">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
     <Pane HBox.hgrow="ALWAYS">
-      <ProgressBar layoutY="-1.0" prefWidth="200.0" progress="0.0" />
+      <ProgressBar layoutY="1.0" prefWidth="200.0" progress="0.0" />
+       <Label layoutX="256.0" layoutY="1.0" prefHeight="18.0" prefWidth="592.0" text="Placeholder File Location of the save / load ">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
     </Pane>
-    <Label prefHeight="18.0" prefWidth="592.0" text="Placeholder File Location of the save / load " HBox.hgrow="NEVER" />
   </HBox>
 </VBox>

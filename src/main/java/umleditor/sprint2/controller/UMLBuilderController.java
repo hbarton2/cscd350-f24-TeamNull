@@ -43,13 +43,10 @@ public class UMLBuilderController {
 
   @FXML
   public void initialize() {
-    // Initialize choice box items for relationships
-    relationshipChoiceBox.getItems().addAll("Inheritance", "Association", "Aggregation", "Composition");
-
-    // Add initial field and method for UI consistency (optional)
-    addField();
-    addMethod();
-    addRelationship();
+    // Initialize choice box items for relationships only once
+    if (relationshipChoiceBox.getItems().isEmpty()) {
+      relationshipChoiceBox.getItems().addAll("Inheritance", "Association", "Aggregation", "Composition");
+    }
   }
 
   @FXML
