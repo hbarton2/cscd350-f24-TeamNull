@@ -48,23 +48,22 @@ public class UMLClass {
     return this.methods;
   }
 
-  public void addMethod(String methodName, String parameter) {
-    MethodSignature newMethod = new MethodSignature(methodName, parameter);
-    if (methodExists(methodName, parameter)) {
-      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter
-        + "' already exists in class " + className + ".");
+  public void addMethod(String methodName) {
+    MethodSignature newMethod = new MethodSignature(methodName);
+    if (methodExists(methodName)) {
+      System.out.println("Error: Method '" + methodName + " already exists in class " + className + ".");
       return;
     }
     methods.add(newMethod);
     System.out.println(
-      "Method " + methodName + " with parameter '" + parameter + "' added to class " + className
+      "Method " + methodName + " added to class " + className
         + ".");
   }
 
-  public void removeMethod(String methodName, String parameter) {
+  public void removeMethod(String methodName) {
     MethodSignature methodToRemove = null;
     for (MethodSignature method : methods) {
-      if (method.methodName.equals(methodName) && method.parameter.equals(parameter)) {
+      if (method.methodName.equals(methodName)) {
         methodToRemove = method;
         break;
       }
@@ -73,18 +72,17 @@ public class UMLClass {
     if (methodToRemove != null) {
       methods.remove(methodToRemove);
       System.out.println(
-        "Method '" + methodName + "' with parameter '" + parameter + "' removed from class "
+        "Method '" + methodName + " removed from class "
           + className + ".");
     } else {
-      System.out.println("Error: Method '" + methodName + "' with parameter '" + parameter
-        + "' does not exist in class " + className + ".");
+      System.out.println("Error: Method '" + methodName + "' does not exist in class " + className + ".");
     }
   }
 
   // Method to check if a method with a specific name and parameter already exists
-  public boolean methodExists(String methodName, String parameter) {
+  public boolean methodExists(String methodName) {
     for (MethodSignature method : methods) {
-      if (method.methodName.equals(methodName) && method.paramExists(parameter)) {
+      if (method.methodName.equals(methodName)) {
         return true;  // Method with the same name and parameter exists
       }
     }
@@ -167,8 +165,8 @@ public class UMLClass {
   }
 
   // Method to rename a method
-  public void renameMethod(String oldMethodName, String newMethodName, String parameter) {
-    MethodSignature oldMethod = findMethod(oldMethodName, parameter);
+  public void renameMethod(String oldMethodName, String newMethodName) {
+    MethodSignature oldMethod = findMethod(oldMethodName);
     if (oldMethod != null) {
       oldMethod.methodName = newMethodName;
       System.out.println(
@@ -181,9 +179,9 @@ public class UMLClass {
   }
 
   // Helper method to find a method by name and parameter
-  public MethodSignature findMethod(String methodName, String parameter) {
+  public MethodSignature findMethod(String methodName) {
     for (MethodSignature method : methods) {
-      if (method.methodName.equals(methodName) && method.paramExists(parameter)) {
+      if (method.methodName.equals(methodName)) {
         return method;
       }
     }

@@ -17,7 +17,7 @@
   },
   "am": {
     "type": "addMethod",
-    "description": "Adds a method to a class with optional overloading. Usage: am <class_name> <method_name> <parameter>"
+    "description": "Adds a method to a class with optional overloading. Usage: am <class_name> <method_name>"
   },
   "ar": {
     "type": "addRelationship",
@@ -29,7 +29,7 @@
   },
   "rmm": {
     "type": "removeMethod",
-    "description": "Removes a method from a class. Usage: rmm <class_name> <method_name> <parameter>"
+    "description": "Removes a method from a class. Usage: rmm <class_name> <method_name> "
   },
   "lsa": {
     "type": "lsa",
@@ -61,15 +61,15 @@
   },
   "rmn": {
     "type": "renameMethod",
-    "description": "Renames a method in a class. Usage: rmn <class_name> <old_method_name> <new_method_name> <parameter>"
+    "description": "Renames a method in a class. Usage: rmn <class_name> <old_method_name> <new_method_name> "
   },
   "ap": {
     "type": "addParam",
-    "description": "Adds a parameter to a class. Usage: ap <class_name> <method_name> <parameter> <new_parameter_name> <new_parameter_type>"
+    "description": "Adds a parameter to a method. Usage: ap <class_name> <method_name> <parameter_name> <parameter_type>"
   },
   "rmp": {
     "type": "removeParam",
-    "description": "Removes a parameter from a method. Usage: rmp <class_name> <method_name> <parameter_to_remove>"
+    "description": "Removes a parameter from a method. Usage: rmp <class_name> <method_name> <parameter_name>"
   },
   "exit": {
     "type": "exitProgram",

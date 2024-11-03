@@ -51,18 +51,16 @@ public class CommandFactory {
       };
       case "addMethod" -> args -> {
         if (args.length == 2) {  // Method without parameter
-          Functions.addMethod(args[0], args[1], "");
-        } else if (args.length == 3) {  // Method with parameter
-          Functions.addMethod(args[0], args[1], args[2]);
+          Functions.addMethod(args[0], args[1]);
         } else {
           System.out.println("Error: Provide class name and method.");
         }
       };
       case "removeMethod" -> args -> {
-        if (args.length == 3) {
-          Functions.removeMethod(args[0], args[1], args[2]);
+        if (args.length == 2) {
+          Functions.removeMethod(args[0], args[1]);
         } else {
-          System.out.println("Error: Provide class name, method, and parameter.");
+          System.out.println("Error: Provide class name and method name.");
         }
       };
       case "addRelationship" -> args -> {
@@ -141,16 +139,16 @@ public class CommandFactory {
         }
       };
       case "renameMethod" -> args -> {
-        if (args.length == 4) {
-          Functions.renameMethod(args[0], args[1], args[2], args[3]);
+        if (args.length == 3) {
+          Functions.renameMethod(args[0], args[1], args[2]);
         } else {
           System.out.println(
-                  "Error: Provide class name, old method name, new method name, and parameter.");
+                  "Error: Provide class name, old method name, new method name.");
         }
       };
       case "addParam" -> args -> {
-        if (args.length == 5) {
-          Functions.addParam(args[0], args[1], args[2], args[3], args[4]);
+        if (args.length == 4) {
+          Functions.addParam(args[0], args[1], args[2], args[3]);
         } else {
           System.out.println(
                   "Error: Provide class name, method name, parameter, new parameter name, and new parameter type.");
