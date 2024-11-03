@@ -17,6 +17,13 @@ import com.google.gson.GsonBuilder;
 
 import java.util.Random;
 
+
+/**
+ *
+ * Build controller handles Node creation for GUI
+ *
+ */
+
 public class UMLBuilderController {
   @FXML private VBox fieldsBox, methodsBox, relationshipsBox;
   @FXML private AnchorPane viewAnchorPane;

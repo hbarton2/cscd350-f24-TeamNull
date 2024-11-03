@@ -31,23 +31,56 @@
 11. [KnownBugs](#KnownBugs)
 
 ---
-
-update the below items as they are developed
-
----
 ## Controller
 
-
+Directory for event handling. Listens for user to change state in the GUI, 
+and informs the model and view accordingly.
 
 
 ### UMLBuilderController
 
 
+<h3> Overview: </h3>
+BuildController handles Node class creation for GUI
+
+<h3> Features: </h3>
+<p> Create Class: <br>
+    Creates a class for user. Sets the name, field name, method name, parameters, and relationships</p>
+<p> Delete Node: <br>
+    Deletes a node class instance</p>
+<p> Save Class: <br>
+    Saves a class for user</p>
+<p> Add Field: <br>
+    Adds a field to an existent class node</p>
+<p> Add Method: <br>
+    Add a method to an existent class node</p>
+<p> Add Relationship: <br>
+    Add a relationship to classes</p>
+<p> Get Relationship: <br>
+    Returns the relationship</p>
+<p> Create Node: <br>
+    Creates a node </p>
+<p> Exit Program: <br>
+    Exits the program for user </p>
+<p> Create Mock Node: <br>
+    Creates a mock node for demonstration purposes</p>
+<p> Save Node: <br>
+    Saves a node state </p>
+<p> Load Node: <br>
+    Loads a node state </p>
 
 
 ---
 
 ## Model
+
+<h3> Overview: </h3>
+An adapter class. Talks to storage to retrieve and store data.
+
+<h3> Features: </h3>
+<p> Create Class Node: <br>
+    Adds new node class to storage.</p>
+
 
 
 ---
@@ -55,15 +88,37 @@ update the below items as they are developed
 
 ## View
 
+Directory for visualization. Requests data from Model and displays in user-friendly way for GUI.
+
 
 ### AppStart
 
+<h3> Overview: </h3>
+Handles launch for GUI.
 
+<h3> Features: </h3>
+<p> Start: <br>
+    Creates GUI state for user. Loads and sets scene.</p>
 
 ### UMLNode
 
+<h3> Overview: </h3>
+Handles display of class creation and manipulation for user.
 
-### View
+<h3> Features: </h3>
+<p> UML Node: <br>
+    Constructs a node. Sets size, style, and defaults names for class, field, method, parameter, relationship.</p>
+<p> Set/Get Class Name: <br>
+    Getter and setter for the class name.</p>
+<p> Set/Get Field Name: <br>
+    Getter and setter for field name.</p>
+<p> Set/Get Method Name: <br>
+    Getter and setter for method name.</p>
+<p> Get Relationship: <br>
+    Getter for relationship.</p>
+<p> Update Label: <br>
+    Updates label text with the latest output.</p>
+
 
 
 ----
