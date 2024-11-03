@@ -24,135 +24,116 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
-  <children>
-    <!-- Menu Bar -->
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem />
-            <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
+<VBox prefHeight="667.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
+  <!-- Menu Bar -->
+  <MenuBar prefHeight="23.0" prefWidth="1097.0" VBox.vgrow="NEVER">
+    <Menu mnemonicParsing="false" text="File">
+      <MenuItem mnemonicParsing="false" text="New" />
+      <MenuItem mnemonicParsing="false" text="Open…" />
+      <Menu mnemonicParsing="false" text="Open Recent" />
+      <SeparatorMenuItem />
+      <MenuItem mnemonicParsing="false" text="Close" />
+      <MenuItem mnemonicParsing="false" text="Save" />
+      <MenuItem mnemonicParsing="false" text="Save As…" />
+      <MenuItem mnemonicParsing="false" text="Revert" />
+      <SeparatorMenuItem />
+      <MenuItem mnemonicParsing="false" text="Preferences…" />
+      <SeparatorMenuItem />
+      <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Edit">
+      <MenuItem mnemonicParsing="false" text="Undo" />
+      <MenuItem mnemonicParsing="false" text="Redo" />
+      <SeparatorMenuItem />
+      <MenuItem mnemonicParsing="false" text="Cut" />
+      <MenuItem mnemonicParsing="false" text="Copy" />
+      <MenuItem mnemonicParsing="false" text="Paste" />
+      <MenuItem mnemonicParsing="false" text="Delete" />
+      <SeparatorMenuItem />
+      <MenuItem mnemonicParsing="false" text="Select All" />
+      <MenuItem mnemonicParsing="false" text="Unselect All" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+      <MenuItem mnemonicParsing="false" text="About" />
+    </Menu>
+  </MenuBar>
 
-    <!-- Main SplitPane layout -->
-    <SplitPane dividerPositions="0.33358098068350667" VBox.vgrow="ALWAYS">
-      <items>
-        <!-- Left control panel with form-style input -->
-        <VBox prefWidth="250.0" spacing="10">
-          <padding>
-            <Insets bottom="10" left="10" right="10" top="10" />
-          </padding>
-          <Label style="-fx-font-size: 14px;" text="Class Name" />
-          <TextField fx:id="classNameField" promptText="Enter class name" />
-
-          <Label style="-fx-font-size: 14px;" text="Fields" />
-          <VBox fx:id="fieldsBox" spacing="5">
-            <HBox spacing="5">
-              <TextField fx:id="fieldName" promptText="Enter field" />
-              <Button onAction="#addField" text="+" />
-            </HBox>
-          </VBox>
-
-          <Label prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
-          <VBox fx:id="methodsBox" spacing="5">
-            <HBox spacing="5">
-              <TextField fx:id="methodName" promptText="Enter method" />
-              <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="141.0" promptText="Enter parameters" />
-              <Button onAction="#addMethod" text="+" />
-            </HBox>
-          </VBox>
-
-          <Label style="-fx-font-size: 14px;" text="Relationships" />
-          <VBox fx:id="relationshipsBox" spacing="5">
-            <HBox spacing="5">
-              <ChoiceBox fx:id="relationshipChoiceBox">
-                <items>
-                  <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Inheritance" />
-                    <String fx:value="Association" />
-                    <String fx:value="Aggregation" />
-                    <String fx:value="Composition" />
-                  </FXCollections>
-                </items>
-              </ChoiceBox>
-              <Button onAction="#addRelationship" text="+" />
-            </HBox>
-          </VBox>
-
-          <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
-               <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="35.0" prefWidth="273.0" text="Create Node (Not on final release)" />
-               <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="31.0" prefWidth="273.0" text="Save" />
-               <Button mnemonicParsing="false" onAction="#loadNode" prefHeight="31.0" prefWidth="274.0" text="Load" />
-               <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="31.0" prefWidth="275.0" text="Delete" />
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*verticle scroll bar will be near future*" wrappingWidth="269.31636238098145" />
-               <ScrollBar />
-        </VBox>
-
-        <!-- Right-side area for draggable nodes -->
-        <ScrollPane>
-          <content>
-            <AnchorPane fx:id="viewAnchorPane" prefHeight="531.0" prefWidth="557.0">
-                     <children>
-                        <Text layoutX="312.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon - clicking on class nodes will repopulate the left text fields. Also, each node that has relationships will be connected to its corresponding nodes." wrappingWidth="172.00000000000006" />
-                        <TextFlow fx:id="classShape" layoutX="14.0" layoutY="14.0" prefHeight="219.0" prefWidth="200.0">
-                           <effect>
-                              <Glow />
-                           </effect>
-                           <children>
-                              <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" visible="false" />
-                           </children>
-                        </TextFlow>
-                        <Label layoutX="484.0" layoutY="493.0" text="Current" />
-                     </children></AnchorPane>
-          </content>
-        </ScrollPane>
-      </items>
-    </SplitPane>
-
-    <!-- Status bar at the bottom -->
-    <HBox alignment="CENTER_LEFT" spacing="5.0">
+  <!-- Main SplitPane layout -->
+  <SplitPane dividerPositions="0.35024752475247517" VBox.vgrow="ALWAYS">
+    <!-- Left control panel with form-style input -->
+    <VBox prefWidth="250.0" spacing="10">
       <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
-      <Label prefHeight="18.0" prefWidth="73.0" text="Save / Load" HBox.hgrow="ALWAYS" />
-      <Pane HBox.hgrow="ALWAYS">
-            <children>
-               <ProgressBar layoutY="-1.0" prefWidth="200.0" progress="0.0" />
-            </children></Pane>
-      <Label prefHeight="18.0" prefWidth="592.0" text="Placeholder File Location of the save / load " HBox.hgrow="NEVER" />
-    </HBox>
-  </children>
+      <Label style="-fx-font-size: 14px;" text="Class Name" />
+      <TextField fx:id="classNameField" promptText="Enter class name" />
+
+      <Label style="-fx-font-size: 14px;" text="Fields" />
+      <VBox fx:id="fieldsBox" spacing="5">
+        <HBox spacing="5">
+          <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="295.0" promptText="Enter field" />
+          <Button onAction="#addField" text="+" />
+        </HBox>
+      </VBox>
+
+      <Label prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
+      <VBox fx:id="methodsBox" spacing="5">
+        <HBox spacing="5">
+          <TextField fx:id="methodName" prefHeight="25.0" prefWidth="156.0" promptText="Enter method" />
+          <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="141.0" promptText="Enter parameters" />
+          <Button onAction="#addMethod" text="+" />
+        </HBox>
+      </VBox>
+
+      <Label style="-fx-font-size: 14px;" text="Relationships" />
+      <VBox fx:id="relationshipsBox" spacing="5">
+        <HBox spacing="5">
+          <ChoiceBox fx:id="relationshipChoiceBox">
+            <items>
+              <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Inheritance" />
+                <String fx:value="Association" />
+                <String fx:value="Aggregation" />
+                <String fx:value="Composition" />
+              </FXCollections>
+            </items>
+          </ChoiceBox>
+          <Button onAction="#addRelationship" text="+" />
+        </HBox>
+      </VBox>
+
+      <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
+      <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="35.0" prefWidth="273.0" text="Create Node (Not on final release)" />
+      <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="31.0" prefWidth="273.0" text="Save" />
+      <Button mnemonicParsing="false" onAction="#loadNode" prefHeight="31.0" prefWidth="274.0" text="Load" />
+      <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="31.0" prefWidth="275.0" text="Delete" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*vertical scroll bar will be near future*" wrappingWidth="269.31636238098145" />
+      <ScrollBar />
+    </VBox>
+
+    <!-- Right-side area for draggable nodes -->
+    <ScrollPane>
+      <AnchorPane fx:id="viewAnchorPane" prefHeight="577.0" prefWidth="691.0">
+        <Text layoutX="312.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon - clicking on class nodes will repopulate the left text fields. Also, each node that has relationships will be connected to its corresponding nodes." wrappingWidth="172.00000000000006" />
+        <TextFlow fx:id="classShape" layoutX="14.0" layoutY="14.0" prefHeight="219.0" prefWidth="200.0">
+          <effect>
+            <Glow />
+          </effect>
+          <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" visible="false" />
+        </TextFlow>
+      </AnchorPane>
+    </ScrollPane>
+  </SplitPane>
+
+  <!-- Status bar at the bottom -->
+  <HBox alignment="CENTER_LEFT" spacing="5.0">
+    <padding>
+      <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+    <Label prefHeight="18.0" prefWidth="73.0" text="Save / Load" HBox.hgrow="ALWAYS" />
+    <Pane HBox.hgrow="ALWAYS">
+      <ProgressBar layoutY="-1.0" prefWidth="200.0" progress="0.0" />
+    </Pane>
+    <Label prefHeight="18.0" prefWidth="592.0" text="Placeholder File Location of the save / load " HBox.hgrow="NEVER" />
+  </HBox>
 </VBox>

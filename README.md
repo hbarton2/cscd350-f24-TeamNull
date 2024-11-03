@@ -39,7 +39,7 @@ Ensure that the following software is installed on the target machine:
 ### 1. Obtain the Program File
 Download the package https://github.com/hbarton2/cscd350-f24-TeamNull.git
 
-## Steps to Open Terminal and Run `umleditor.jar`
+### Steps to Open Terminal and Run `umleditor.jar`
 
 2. **Locate `umleditor.jar`**:
     - Navigate to the directory where `umleditor.jar` is located using your file explorer.
