@@ -50,10 +50,10 @@ public class CommandFactory {
         }
       };
       case "addMethod" -> args -> {
-        if (args.length == 2) {  // Method without parameter
-          Functions.addMethod(args[0], args[1]);
+        if (args.length == 3) {
+          Functions.addMethod(args[0], args[1], args[2]);
         } else {
-          System.out.println("Error: Provide class name and method.");
+          System.out.println("Error: Provide class name, method name, and method type.");
         }
       };
       case "removeMethod" -> args -> {

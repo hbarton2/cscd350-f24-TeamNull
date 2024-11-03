@@ -21,17 +21,19 @@ import java.util.stream.Collectors;
 public class MethodSignature {
 
     String methodName;
+    String methodType;
     public List<UMLParameter> parameters;
 
-    public MethodSignature(String methodName) {
+    public MethodSignature(String methodName, String methodType) {
         this.methodName = methodName;
+        this.methodType = methodType;
         this.parameters = new ArrayList<UMLParameter>();
         this.parameters.add(new UMLParameter("", ""));
     }
 
     @Override
     public String toString() {
-        return methodName + "(" +
+        return methodType + " " + methodName + "(" +
                 (parameters == null || parameters.isEmpty() ?
                         "no parameters" :
                         parameters.stream()

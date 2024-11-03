@@ -48,8 +48,8 @@ public class UMLClass {
     return this.methods;
   }
 
-  public void addMethod(String methodName) {
-    MethodSignature newMethod = new MethodSignature(methodName);
+  public void addMethod(String methodName, String methodType) {
+    MethodSignature newMethod = new MethodSignature(methodName, methodType);
     if (methodExists(methodName)) {
       System.out.println("Error: Method '" + methodName + " already exists in class " + className + ".");
       return;
