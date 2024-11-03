@@ -1,35 +1,35 @@
 {
-  "mkc": {
+  "createClass": {
     "type": "createClass",
-    "description": "Creates a new class. Usage: mkc <class_name>"
+    "description": "Creates a new class. Usage: createClass <class_name>"
   },
-  "rm": {
+  "removeClass": {
     "type": "removeClass",
-    "description": "Removes a class. Usage: rm <class_name>"
+    "description": "Removes a class. Usage: removeClass <class_name>"
   },
-  "rn": {
+  "renameClass": {
     "type": "renameClass",
-    "description": "Renames a class. Usage: rn <old_class_name> <new_class_name>"
+    "description": "Renames a class. Usage: renameClass <old_class_name> <new_class_name>"
   },
-  "af": {
+  "addField": {
     "type": "addAttribute",
-    "description": "Adds a Field to a class. Usage: aa <class_name> <field>"
+    "description": "Adds a Field to a class. Usage: addField <class_name> <field>"
   },
-  "am": {
+  "addMethod": {
     "type": "addMethod",
-    "description": "Adds a method to a class with optional overloading. Usage: am <class_name> <method_name>"
+    "description": "Adds a method to a class with optional overloading. Usage: addMethod <class_name> <method_name>"
   },
-  "ar": {
+  "addRelationship": {
     "type": "addRelationship",
-    "description": "Adds or updates a relationship in a class. Usage: ar <class_name> <relationship_type(1-4)>"
+    "description": "Adds or updates a relationship in a class. Usage: addRelationship <class_name> <relationship_type(1-4)>"
   },
-  "raf": {
+  "removeField": {
     "type": "removeAttribute",
-    "description": "Removes an Field from a class. Usage: raa <class_name> <field>"
+    "description": "Removes an Field from a class. Usage: removeField <class_name> <field>"
   },
-  "rmm": {
+  "removeMethod": {
     "type": "removeMethod",
-    "description": "Removes a method from a class. Usage: rmm <class_name> <method_name> "
+    "description": "Removes a method from a class. Usage: removeMethod <class_name> <method_name> "
   },
   "lsa": {
     "type": "lsa",
@@ -55,21 +55,21 @@
     "type": "clearProgress",
     "description": "Clears all the current progress. Usage: clear"
   },
-  "rf": {
+  "renameField": {
     "type": "renameAttribute",
-    "description": "Renames a field in a class. Usage: ra <class_name> <old_field> <new_field>"
+    "description": "Renames a field in a class. Usage: renameField <class_name> <old_field> <new_field>"
   },
-  "rmn": {
+  "renameMethod": {
     "type": "renameMethod",
-    "description": "Renames a method in a class. Usage: rmn <class_name> <old_method_name> <new_method_name> "
+    "description": "Renames a method in a class. Usage: renameMethod <class_name> <old_method_name> <new_method_name> "
   },
-  "ap": {
+  "addParameter": {
     "type": "addParam",
-    "description": "Adds a parameter to a method. Usage: ap <class_name> <method_name> <parameter_name> <parameter_type>"
+    "description": "Adds a parameter to a method. Usage: addParameter <class_name> <method_name> <parameter_name> <parameter_type>"
   },
-  "rmp": {
+  "removeParameter": {
     "type": "removeParam",
-    "description": "Removes a parameter from a method. Usage: rmp <class_name> <method_name> <parameter_name>"
+    "description": "Removes a parameter from a method. Usage: removeParameter <class_name> <method_name> <parameter_name>"
   },
   "exit": {
     "type": "exitProgram",
