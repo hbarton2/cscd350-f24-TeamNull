@@ -1,6 +1,6 @@
 # Universal Modeling Language Software Development Kit
 
-* v2.2.84
+* v2.2.86
 * How to read version # Version main branch.release branch.pull request changes'
 * What's New
 * - Haz GUI? YES!
@@ -39,18 +39,32 @@ Ensure that the following software is installed on the target machine:
 ### 1. Obtain the Program File
 Download the package https://github.com/hbarton2/cscd350-f24-TeamNull.git
 
-### 2. Locate the JAR File
-Under root directory folder <folder name>
-Make sure you have the `umleditor.jar` file, which contains the application.
+## Steps to Open Terminal and Run `umleditor.jar`
 
-Run the Program
-Use the java -jar command to run the JAR file:
+2. **Locate `umleditor.jar`**:
+    - Navigate to the directory where `umleditor.jar` is located using your file explorer.
 
-*Did you know: If this file is currently viewed in dedicated markdown viewer you can click the arrow icon next to the bash command and launch the application.*
+3. **Open Terminal/Command Prompt**:
+    - **On Windows**:
+        - Right-click inside the folder (not on the file) and select `Open in Terminal` or `Open PowerShell window here`.
+    - **On macOS**:
+        - Open Terminal, then type `cd` followed by a space.
+        - Drag and drop the folder containing `umleditor.jar` into the Terminal window.
+        - Press `Enter` to navigate to the folder.
+    - **On Linux**:
+        - Open Terminal, then type `cd` followed by a space.
+        - Drag and drop the folder containing `umleditor.jar` into the Terminal window.
+        - Press `Enter` to navigate to the folder.
 
-```bash
-java -jar umleditor.jar
-```
+4. **Run the JAR File**:
+    - Type the following command in the terminal:
+      ```bash
+      java -jar umleditor.jar
+      ```
+    - Press `Enter` to execute the command.
+
+*Did you know: If this file is currently viewed in a dedicated markdown viewer, you can click the arrow icon next to the bash command and launch the application.*
+
 
 ---
 
