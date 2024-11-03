@@ -159,6 +159,25 @@ public class Functions {
     }
   }
 
+  public static void removeParam(String className, String methodName, String paramName){
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);
+
+      if (umlClass.methodExists(methodName, paramName)) {
+        MethodSignature method = umlClass.findMethod(methodName, paramName);
+        method.removeParam(paramName);
+        System.out.println("Param " + paramName + " removed from method " + methodName + ".");
+      }
+      else{
+        System.out.println("Error: Method " + methodName + " with parameter '" + paramName
+        + "' does not exist in class " + className + ".");
+      }
+    }
+    else{
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
+  }
+
   public static void listClasses(String type) {
     switch (type) {
       case "lsa":

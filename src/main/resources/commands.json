@@ -67,6 +67,10 @@
     "type": "addParam",
     "description": "Adds a parameter to a class. Usage: ap <class_name> <method_name> <parameter> <new_parameter_name> <new_parameter_type>"
   },
+  "rmp": {
+    "type": "removeParam",
+    "description": "Removes a parameter from a method. Usage: rmp <class_name> <method_name> <parameter_to_remove>"
+  },
   "exit": {
     "type": "exitProgram",
     "description": "exit the program at any time"

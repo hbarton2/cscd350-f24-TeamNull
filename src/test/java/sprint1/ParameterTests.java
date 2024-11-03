@@ -50,5 +50,15 @@ class ParameterTests {
         Functions.addParam("TestClass", "TestMethod", "parameter1", "parameter2", "int");
         Functions.listClasses("lsa");
 
+        Functions.removeParam("TestClass", "TestMethod", "parameter1");
+        Functions.listClasses("lsa");
+    }
+
+    @Test
+    public void parameterRemoved(){
+        method.addParam("Param1", "String");
+        method.removeParam("Param1");
+        boolean paramRemoved = method.paramExists("Param1");
+        Assertions.assertFalse(paramRemoved, "Parameter should be removed from the list");
     }
 }

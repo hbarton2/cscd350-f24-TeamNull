@@ -137,7 +137,7 @@ public class CommandFactory {
           Functions.renameAttribute(args[0], args[1], args[2]);
         } else {
           System.out.println(
-            "Error: Provide class name, old attribute name, and new attribute name.");
+                  "Error: Provide class name, old attribute name, and new attribute name.");
         }
       };
       case "renameMethod" -> args -> {
@@ -145,7 +145,7 @@ public class CommandFactory {
           Functions.renameMethod(args[0], args[1], args[2], args[3]);
         } else {
           System.out.println(
-            "Error: Provide class name, old method name, new method name, and parameter.");
+                  "Error: Provide class name, old method name, new method name, and parameter.");
         }
       };
       case "addParam" -> args -> {
@@ -156,6 +156,13 @@ public class CommandFactory {
                   "Error: Provide class name, method name, parameter, new parameter name, and new parameter type.");
         }
       };
+      case "removeParam" -> args -> {
+        if (args.length == 3) {
+          Functions.removeParam(args[0], args[1], args[2]);
+        } else{
+        System.out.println("Error: Provide class name, method, and parameter.");
+      }
+    };
       case "exitProgram" -> args -> {
         if (args.length == 0) {
           Functions.exit();
