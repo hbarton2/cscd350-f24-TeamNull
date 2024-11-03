@@ -39,14 +39,14 @@ public class CommandFactory {
         if (args.length == 2) {
           Functions.addAttribute(args[0], args[1]);
         } else {
-          System.out.println("Error: Provide class name and attribute.");
+          System.out.println("Error: Provide class name and field.");
         }
       };
       case "removeAttribute" -> args -> {
         if (args.length == 2) {
           Functions.removeAttribute(args[0], args[1]);
         } else {
-          System.out.println("Error: Provide class name and attribute.");
+          System.out.println("Error: Provide class name and field.");
         }
       };
       case "addMethod" -> args -> {
