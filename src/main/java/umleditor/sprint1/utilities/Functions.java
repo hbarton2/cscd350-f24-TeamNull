@@ -69,17 +69,17 @@ public class Functions {
     }
   }
 
-  // Add method to a class with method name and optional parameter (handling overloading)
-  public static void addMethod(String className, String methodName, String parameter) {
+  // Add method to a class with method name
+  public static void addMethod(String className, String methodName) {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
 
       // Check for duplicates
-      if (umlClass.methodExists(methodName, parameter)) {
-        System.out.println("Error: Method " + methodName + " with parameter '" + parameter
-          + "' already exists in class " + className + ".");
+      if (umlClass.methodExists(methodName)) {
+        System.out.println("Error: Method " + methodName +
+           " already exists in class " + className + ".");
       } else {
-        umlClass.addMethod(methodName, parameter);
+        umlClass.addMethod(methodName);
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -87,19 +87,15 @@ public class Functions {
   }
 
   // Remove a method from a class (including overloads)
-  public static void removeMethod(String className, String methodName, String parameter) {
+  public static void removeMethod(String className, String methodName) {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
 
       // Check if method exists before attempting removal
-      if (umlClass.methodExists(methodName, parameter)) {
-        umlClass.removeMethod(methodName, parameter);
-        System.out.println(
-          "Method " + methodName + " with parameter '" + parameter + "' removed from class "
-            + className + ".");
+      if (umlClass.methodExists(methodName)) {
+        umlClass.removeMethod(methodName);
       } else {
-        System.out.println("Error: Method " + methodName + " with parameter '" + parameter
-          + "' does not exist in class " + className + ".");
+        System.out.println("Error: Method " + methodName + " does not exist in class " + className + ".");
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -142,17 +138,16 @@ public class Functions {
     };
   }
 
-  public static void addParam(String className, String methodName, String paramName, String newParamName, String paramType){
+  public static void addParam(String className, String methodName, String newParamName, String paramType){
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
 
-      if (umlClass.methodExists(methodName, paramName)) {
-        MethodSignature method = umlClass.findMethod(methodName, paramName);
+      if (umlClass.methodExists(methodName)) {
+        MethodSignature method = umlClass.findMethod(methodName);
         method.addParam(newParamName, paramType);
         System.out.println("Param " + newParamName + " added to method " + methodName + ".");
       } else {
-        System.out.println("Error: Method " + methodName + " with parameter '" + paramName
-                + "' does not exist in class " + className + ".");
+        System.out.println("Error: Method " + methodName + " does not exist in class " + className + ".");
       }
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -163,8 +158,8 @@ public class Functions {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);
 
-      if (umlClass.methodExists(methodName, paramName)) {
-        MethodSignature method = umlClass.findMethod(methodName, paramName);
+      if (umlClass.methodExists(methodName)) {
+        MethodSignature method = umlClass.findMethod(methodName);
         method.removeParam(paramName);
         System.out.println("Param " + paramName + " removed from method " + methodName + ".");
       }
@@ -308,11 +303,10 @@ public class Functions {
   }
 
   // Method to rename a method
-  public static void renameMethod(String className, String oldMethodName, String newMethodName,
-    String parameter) {
+  public static void renameMethod(String className, String oldMethodName, String newMethodName) {
     if (Storage.classExists(className)) {
       UMLClass umlClass = Storage.getUMLClasses().get(className);
-      umlClass.renameMethod(oldMethodName, newMethodName, parameter);
+      umlClass.renameMethod(oldMethodName, newMethodName);
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
     }
