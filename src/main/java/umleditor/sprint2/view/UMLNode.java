@@ -4,21 +4,17 @@ import javafx.scene.layout.Pane;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
 public class UMLNode extends Pane {
 
   private double offsetX;
   private double offsetY;
-  private String className;
-  private String fieldName;
-  private String methodName;
-  private String fieldType; // not implemented yet
-  private String parameterName;
-  private String relationship;
-
-  String straightLine = "\n-------------------------------------\n";
-
-
+  private String className, fieldName, methodName, parameterName, relationship, fieldType;
+  // private String fieldName;
+  // private String methodName;
+  // private String fieldType; // not implemented yet
+  // private String parameterName;
+  // private String relationship;
+  private String straightLine = "\n-------------------------------------\n";
 
   public UMLNode(String className) {
 
@@ -30,12 +26,15 @@ public class UMLNode extends Pane {
 
     // Set dimensions and initial styling
       this.setPrefSize(200, 200);
-     // this.setStyle("-fx-border-color: blue; -fx-background-color: lighgreen;");
+     //this.setStyle("-fx-border-color: blue; -fx-background-color: lighgreen;");
     //this.setStyle("-fx-border-color: red; -fx-background-color: lightgreen;");
+
       this.setStyle("-fx-border-color: red; ");
 
     // Create label and set text to display node information
-    Label classLabel = new Label(mockNode());
+   // Label classLabel = new Label(mockNode());
+
+    Label classLabel = new Label(createNode());
     classLabel.setStyle("-fx-font-weight: bold;");
 
     this.getChildren().add(classLabel);
@@ -99,22 +98,32 @@ public class UMLNode extends Pane {
 
     // This method makes a node by adding
     // user entered text and formats them
-    //
-  public String mockNode() {
 
-    return "\n Class Name: " + getClassName() + straightLine +
-            " Field Name: " + getFieldName() + straightLine +
-            " Method Name: " + getMethodName() + straightLine +
-            " Parameter: " + getParameterName() + straightLine +
-            " Relationship: " + getRelationship() ;
-  }
+    // only for demo purposes.
+    public String mockNode() {
+
+        return "\nClass Name: " + getClassName() + straightLine +
+                " Field Name: " +  getFieldName() + straightLine +
+                " Method Name: " + getMethodName()  +
+                "\n Parameter: ( " + getParameterName() +" )"+ straightLine +
+                " Relationship: " + getRelationship() ;
+
+    }
+
+    public String createNode() {
+
+        return "\n Class Name: " + getClassName() + straightLine +
+                " Field Name: " +  getFieldName() + straightLine +
+                " Method Name: " + getMethodName()  +
+                "\n Parameter: ( " + getParameterName() +" )"+ straightLine +
+                " Relationship: " + getRelationship() ;
+    }
 
   // Updates the label text with the latest mockNode output
   private void updateLabel() {
     if (!getChildren().isEmpty() && getChildren().get(0) instanceof Label) {
       Label label = (Label) getChildren().get(0);
-      label.setText(mockNode());
+      label.setText(createNode());
     }
   }
-
 }

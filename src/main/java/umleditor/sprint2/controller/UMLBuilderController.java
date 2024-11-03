@@ -21,54 +21,54 @@ public class UMLBuilderController {
   @FXML private VBox fieldsBox, methodsBox, relationshipsBox;
   @FXML private AnchorPane viewAnchorPane;
   @FXML private TextField classNameField, methodName,fieldName, parameterName ;
-
- // @FXML private TextField methodName;
-  //@FXML private TextField fieldName;
- // @FXML private TextField parameterName;
   @FXML private Button saveClassBNT;
   @FXML private TextArea textArea;
-  private String straightLine = "\n__________________________________";
-    int classCounter = 0;
-  @FXML
-   public void createClass(ActionEvent actionEvent) {
+  @FXML private Button saveClass;
+  @FXML private String straightLine = "\n__________________________________";
+  @FXML int classCounter = 0;
 
-    if (classNameField.getText().isEmpty() || fieldName.getText().isEmpty() || parameterName.getText().isEmpty()) {
-      textArea.setVisible(true);
-      textArea.setText(straightLine + "\nNothing to display" + straightLine);
-      return;
+    @FXML
+    public void createClass(ActionEvent actionEvent) {
+
+        if (classNameField.getText().isEmpty() || fieldName.getText().isEmpty() || parameterName.getText().isEmpty()) {
+            textArea.setVisible(true);
+            textArea.setText(straightLine + "\nNot enough user data is provided \n please fill out the fields" + straightLine);
+            return;
+        }
+
+        UMLNode node = new UMLNode("");
+
+        classCounter ++; // counting number of classes created
+
+        node.setClassName(classNameField.getText() + "\n Class #: " + classCounter );
+        node.setFieldName(fieldName.getText());
+        node.setMethodName(methodName.getText());
+        node.setParameterName(parameterName.getText());
+        node.setRelationship(relationshipChoiceBox.getSelectionModel().getSelectedItem());
+
+        // Set initial position for the node
+        node.setLayoutX(100); // Adjust X position as needed
+        node.setLayoutY(100); // Adjust Y position as needed
+
+        // Add the node to the AnchorPane to display it
+        viewAnchorPane.getChildren().add(node);
+
+        // Display details in the TextArea
+        textArea.setVisible(true);
+        textArea.setText("Class Name:\n" + classNameField.getText() +
+                straightLine + "\nField Name:\n" + fieldName.getText() +
+                straightLine + "\nMethod Name:\n" + methodName.getText() +
+                "\nParameters: ( " + parameterName.getText() + " )" +
+                straightLine + "\nRelationship:\n" + relationshipChoiceBox.getSelectionModel().getSelectedItem() );
+
+        // Optionally clear fields after saving
+        classNameField.clear();
+        fieldName.clear();
+        methodName.clear();
+        parameterName.clear();
     }
 
-    UMLNode node = new UMLNode("");
-    classCounter ++;
-    node.setClassName(classNameField.getText() + "\n Class #: " + classCounter );
-    node.setFieldName(fieldName.getText());
-    node.setMethodName(methodName.getText());
-    node.setParameterName(parameterName.getText());
-
-
-    // Set initial position for the node
-    node.setLayoutX(100); // Adjust X position as needed
-    node.setLayoutY(100); // Adjust Y position as needed
-    // Add the node to the AnchorPane to display it
-    viewAnchorPane.getChildren().add(node);
-    // Display details in the TextArea
-
-    textArea.setVisible(true);
-    textArea.setText("Class Name:\n" + classNameField.getText() +
-            straightLine + "\nField Name:\n" + fieldName.getText() +
-            straightLine + "\nMethod Name:\n" + methodName.getText() +
-            "\nParameters: ( " + parameterName.getText() + " )" +
-            straightLine + "\nRelationship:\n" );
-
-    // Optionally clear fields after saving
-    classNameField.clear();
-    fieldName.clear();
-    methodName.clear();
-    parameterName.clear();
-  }
-
-
-  public void deleteNode(ActionEvent actionEvent) {
+    public void deleteNode(ActionEvent actionEvent) {
 
       textArea.clear();
       textArea.setVisible(false);
@@ -108,9 +108,12 @@ public class UMLBuilderController {
   }
 
   @FXML
-  public void addRelationship() {
     HBox relationshipBox = new HBox(5);
     ChoiceBox<String> relationshipChoiceBox = new ChoiceBox<>();
+  @FXML
+  public void addRelationship() {
+    //HBox relationshipBox = new HBox(5);
+    //ChoiceBox<String> relationshipChoiceBox = new ChoiceBox<>();
     relationshipChoiceBox.getItems().addAll("Inheritance", "Association", "Aggregation", "Composition");
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addRelationship());
@@ -142,14 +145,12 @@ public class UMLBuilderController {
 
    public void saveNode(ActionEvent actionEvent) {
        textArea.setVisible(true);
-      textArea.setText("This feature is in development mode.");
+      textArea.setText(straightLine + "\nSave:\n  feature is in development mode." + straightLine);
    }
-
-
 
   public void loadNode(ActionEvent actionEvent) {
       textArea.setVisible(true);
-      textArea.setText("This feature is in development mode.");
+      textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
     // Load node logic here
   }
 }
