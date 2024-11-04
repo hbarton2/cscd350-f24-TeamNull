@@ -71,6 +71,10 @@
     "type": "removeParam",
     "description": "Removes a parameter from a method. Usage: removeParameter <class_name> <method_name> <parameter_name>"
   },
+  "changeParameter": {
+    "type": "changeParam",
+    "description": "Change a parameter in a method. Usage: changeParameter <class_name> <method_name> <old_parameter_name> <new_parameter_name> <new_parameter_type>"
+  },
   "exit": {
     "type": "exitProgram",
     "description": "exit the program at any time"

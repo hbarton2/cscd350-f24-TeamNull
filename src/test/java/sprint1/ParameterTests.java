@@ -61,4 +61,12 @@ class ParameterTests {
         boolean paramRemoved = method.paramExists("Param1");
         Assertions.assertFalse(paramRemoved, "Parameter should be removed from the list");
     }
+
+    @Test
+    public void parameterRenamed(){
+        method.addParam("Param1", "String");
+        method.changeParam("Param1", "newParamName", "int");
+        boolean paramRenamed = method.paramExists("newParamName");
+        Assertions.assertTrue(paramRenamed, "Parameter should be renamed to the list");
+    }
 }

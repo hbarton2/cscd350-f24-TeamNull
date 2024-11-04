@@ -78,6 +78,20 @@ public class MethodSignature {
         System.out.println("Param not found: " + name);
     }
 
+    public void changeParam(String name, String newName, String newType){
+        if(paramExists(name)) {
+            for(UMLParameter param : this.parameters){
+                if(param.name.equals(name)){
+                    param.name = newName;
+                    param.type = newType;
+                }
+            }
+        }
+        else{
+            System.out.println("Param not found: " + name);
+        }
+    }
+
     //Searches based on name
     public boolean paramExists(String paramName){
         for(UMLParameter param : this.parameters){

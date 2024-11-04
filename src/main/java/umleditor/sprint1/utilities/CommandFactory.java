@@ -53,7 +53,7 @@ public class CommandFactory {
         if (args.length == 3) {
           Functions.addMethod(args[0], args[1], args[2]);
         } else {
-          System.out.println("Error: Provide class name, method name, and method type.");
+          System.out.println("Error: Provide class name, method type, and method name.");
         }
       };
       case "removeMethod" -> args -> {
@@ -151,16 +151,23 @@ public class CommandFactory {
           Functions.addParam(args[0], args[1], args[2], args[3]);
         } else {
           System.out.println(
-                  "Error: Provide class name, method name, parameter, new parameter name, and new parameter type.");
+                  "Error: Provide class name, method name, new parameter name, and new parameter type.");
         }
       };
       case "removeParam" -> args -> {
         if (args.length == 3) {
           Functions.removeParam(args[0], args[1], args[2]);
         } else{
-        System.out.println("Error: Provide class name, method, and parameter.");
-      }
-    };
+          System.out.println("Error: Provide class name, method, and parameter.");
+        }
+      };
+      case "changeParam" -> args -> {
+        if (args.length == 5) {
+          Functions.renameParam(args[0], args[1], args[2], args[3], args[4]);
+        } else{
+          System.out.println("Error: Provide class name, method name, old parameter name, new parameter name, and new parameter type.");
+        }
+      };
       case "exitProgram" -> args -> {
         if (args.length == 0) {
           Functions.exit();

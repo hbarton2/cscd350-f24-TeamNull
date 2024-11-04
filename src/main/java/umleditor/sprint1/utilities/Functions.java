@@ -177,6 +177,24 @@ public class Functions {
     }
   }
 
+  public static void renameParam(String className, String methodName, String oldParamName, String newParamName, String newParamType){
+    if (Storage.classExists(className)) {
+      UMLClass umlClass = Storage.getUMLClasses().get(className);
+
+      if (umlClass.methodExists(methodName)) {
+        MethodSignature method = umlClass.findMethod(methodName);
+        method.changeParam(oldParamName, newParamName, newParamType);
+        System.out.println("Param " + oldParamName + " renamed to " + newParamName + "(" + newParamType + ").");
+      }
+      else{
+        System.out.println("Error: Method " + methodName + " does not exist in class " + className + ".");
+      }
+    }
+    else{
+      System.out.println("Error: Class " + className + " does not exist.");
+    }
+  }
+
   public static void listClasses(String type) {
     switch (type) {
       case "lsa":
