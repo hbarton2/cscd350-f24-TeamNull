@@ -1,6 +1,4 @@
 # Technical Documentation
-
-
 ---
 
 ## Table of Contents
@@ -14,21 +12,23 @@
    1. [AppStart](#AppStart)
    2. [UMLNode](#UMLNode)
 
-
-
-
 # Sprint 1
 1. [Entry Point](#Entry Point)
-2. [UMLClass](#UMLClass)
-3. [UMLClassRelationshipType](#UMLRelationshipType)
-4. [CommandAction](#CommandAction)
-5. [CommandFactory](#CommandFactory)
-6. [Commands](#Commands)
-7. [Display](#Display)
-8. [Functions](#Functions)
-9. [ParsingInputs](#ParsingInputs)
-10. [Storage](#Storage)
-11. [KnownBugs](#KnownBugs)
+2. [UML](#UML)
+   1. [UMLClass](#UMLClass)
+   2. [UMLClassRelationshipType](#UMLRelationshipType)
+   3. [MethodSignature](#MethodSignature)
+   4. [UMLRelationship](#UMLRelationship)
+   5. [UMLAttribute](#UMlAttribute)
+3. [utilities](#utilities)
+   1. [CommandAction](#CommandAction)
+   2. [CommandFactory](#CommandFactory)
+   3. [Commands](#Commands)
+   4. [Display](#Display)
+   5. [Functions](#Functions)
+   6. [ParsingInputs](#ParsingInputs)
+   7. [Storage](#Storage)
+4. [KnownBugs](#KnownBugs)
 
 ---
 ## Controller
@@ -139,6 +139,7 @@ When running entrypoint, user will be greeted, and receive list of common comman
 Will prompt user to type command to command line, and begin editing UML Diagram.
 
 ----
+# UML:
 
 ## UMLClass: 
 <h3> Overview: </h3>
@@ -146,24 +147,41 @@ Handles all class objects created by the user
 Name, Attributes (Fields), List of Methods, Fields, Relationships
 
 <h3> Features: </h3>
-<p> Add Attributes: <br>
-    Adds an attribute to a class</p>
-<p> Create Methods: <br>
-    creates a new method object and adds to list of methods in this class</p>
-<p> Remove Method: <br>
-    finds method in class list and removes it by name</p>
-<p> Create Fields: <br>
-    uses name and type, to create a new UMLField object and add it to the list of fields</p>
-<p> Remove Fields: <br>
-    finds field by name and if it exists, removes from list of fields</p>
-<p> Rename Method: <br>
-    finds method in class method list, if it exists then asks user to enter new name. Renames method if name is not already taken</p>
-<p> isMethodExists: <br>
-    returns boolean if method name is found in method list</p>
-<p> Find (Object): <br>
-    Methods that search the relevant list using the given name and returns the object if it exists </p>
-<p> Display (Object): <br>
-    Display Methods, cycle through the relevant list and print to screen the information </p>
+
+* **Add Attributes:**
+    Adds an attribute to a class
+<p>
+
+* **Create Methods:** 
+    creates a new method object and adds to list of methods in this class
+<p>
+
+* **Remove Method:**
+    finds method in class list and removes it by name
+<p>
+
+* **Create Fields:**
+    uses name and type, to create a new UMLField object and add it to the list of fields
+<p>
+
+* **Remove Fields:**
+    finds field by name and if it exists, removes from list of fields
+<p>
+
+* **Rename Method:** 
+    finds method in class method list, if it exists then asks user to enter new name. Renames method if name is not already taken
+<p>
+
+* **isMethodExists:** 
+    returns boolean if method name is found in method list
+<p>
+
+* **Find (Object):** 
+    Methods that search the relevant list using the given name and returns the object if it exists
+<p>
+
+* **Display (Object):** 
+    Display Methods, cycle through the relevant list and print to screen the information
 
 ----
 
@@ -178,7 +196,106 @@ Enum class that contains available relationship types:
 * COMPOSITION
 * INHERITANCE
 
----
+----
+## MethodSignature:
+### Overview:
+class holds all parameter specific methods, represents
+a method object. contains:
+Strings methodname and methodType
+ArrayList of parameters
+
+### Features:
+
+* **MethodSignature Constructor:**
+takes method name and method type, creates new method with
+no parameters
+<p>
+
+* **addParam:**
+takes in parameter name and type, creates new UMLParameter object
+and adds to local parameter list
+<p>
+
+* **removeParam:**
+takes in parameter name, searches through local parameter list,
+if parameter with same name exists then, removes from list
+<p>
+
+* **paramExists:**
+Helper method, takes in parameter name and returns if that parameter
+exists in local parameter list or not.
+<p>
+
+* **toString:**
+returns string of method name and all parameters, if there are no
+parameters then says 'no parameters'
+
+### UMLParameter:
+#### Overview:
+Nested subclass of MethodSignature,
+contains fields name and type.
+
+#### Features:
+* **UMLParameter Constructor:**
+takes name and type, assigns new UMLParameter object
+* **toString:**
+returns string in format: "name (type)"
+----
+## UMLRelationship
+### Overview: 
+UMLRelationship handles relationship construction. Relationship must have a type.
+
+### Features: 
+* **UML Relationship:** 
+    Constructs a relationship object. Takes in a type.
+<p>
+
+* **Get Type:**
+    Gets relationship type
+<p>
+
+* **Set Type:**
+    Sets relationship type
+<p>
+
+* **To String:**
+    Returns name of relationship type as string
+
+
+----
+## UMLAttribute
+
+### Overview:
+UMLAttribute handles attribute (field) construction. Attribute must have a name and a type.
+
+### Features: 
+* **UML Attribute:**
+    Constructs an attribute (field) object
+<p> 
+
+* **Get Name:**
+    Gets attribute name
+<p>
+
+* **Get Type:**
+    Gets attribute type
+<p> 
+
+* **Set Type:**
+    Sets attribute type
+<p> 
+
+* **Set Name:**
+    Set attribute name
+<p> 
+
+* **To String:**
+    Returns attribute type and name as a String
+
+
+
+
+----
 
 # Utilities:
 
@@ -249,59 +366,80 @@ Stores method calls for use from the menu, checks input and checks if class exis
 
 ### Features:
 
-* createClass:
+* **createClass:**
 Method call for creating a class, checks if class already exists if not then adds to the list
+<p>
 
-* removeClass:
+* **removeClass:**
 checks if class exists if it does then removes from the class list
+<p>
 
-* renameClass:
+* **renameClass:**
 takes parameters oldName and newName, checks if class exists if it does then calls objects internal renameClass method
+<p>
 
-* addAttribute (field):
+* **addAttribute (field):**
 takes parameter className and attribute, checks if class exists then calls addAttribute within the class
+<p>
 
-* removeAttribute (field):
+* **removeAttribute (field):**
   takes parameter className and attribute, checks if class exists then calls removeAttribute within the class
+<p>
 
-* addMethod:
+* **addMethod:**
 takes className, methodName, and parameter. if Class does not exist or method name is taken then returns, otherwise adds method and optionally the parameter
+<p>
 
-* removeMethod:
+* **removeMethod:**
 takes className, methodName, and parameter. if Class does not exist or method name is taken then returns, otherwise removes method
+<p>
 
-* addRelationship:
+* **addRelationship:**
 Adds or updates a relationship in a class.
+<p>
 
-* removeRelationship:
+* **removeRelationship:**
 Removes a relationship from a class
+<p>
 
-* getRelationshipType:
+* **getRelationshipType:**
 Retrieves the available relationship types: ASSOCIATION, AGGREGATION, COMPOSITION, INHERITANCE
+<p>
 
-
-* listClasses:
+* **listClasses:**
 Contains case for list class commands, including: listAllClassDetails, listClassNamesOnly, listClassesWithRelationships
+<p>
 
-* listAllClassDetails:
+* **listAllClassDetails:**
 List all class details including attributes (fields) and methods. If classes are empty, will print "No classes created."
+<p>
 
-* listClassNamesOnly:
+* **listClassNamesOnly:**
 List classes by name only. If classes are empty will display "No classes created."
+<p>
 
-* listClassesWithRelationships:
+* **listClassesWithRelationships:**
 List all classes that have relationships. If classes are empty, will display "No classes created."
+<p>
 
-* saveProgress:
+* **saveProgress:**
 Saves progress to a JSON file.
+<p>
 
-* loadProgress:
+* **loadProgress:**
 Loads a progress state from a JSON file.
+<p>
 
-* clearProgress:
+* **clearProgress:**
 Clears user terminal of progress history.
+<p>
 
+* **addParam:**
+adds a parameter to an already existing method within a class
+<p>
 
+* **removeParam:**
+removes a parameter from an existing method within a class
 
 ---
 
@@ -333,10 +471,8 @@ command, else prints: "Unknown command <command>"
 
 
 ## Storage:
-<h3> Storage</h3>
 
 ### Overview:
-<h3> Overview</h3>
 
 <p> The Storage class is a utility that manages the storage of UML class objects created by the user.</p><br>
 <p> It allows for adding, removing, renaming, and checking the existence of UML classes using static methods. </p>
@@ -364,7 +500,7 @@ command, else prints: "Unknown command <command>"
 <p>public static HashMap<String, UMLClass> getUMLClasses()
 
 <p> • Description: Returns the entire umlClasses HashMap, which contains all the UML classes currently stored. </p>
-<p> • Return Type: HashMap<String, UMLClass> </p>
+<p> • Return Type: HashMap<String, UMLClass>
 <p> • Usage: To access the full collection of UML classes in storage.</p> <br>
 
 <h3> 2. addClass(String className) </h3>
@@ -415,7 +551,7 @@ command, else prints: "Unknown command <command>"
 <p> • newName (String): The new name to assign to the class.</p>
 <p> • Behavior: </p>
 <p> • If the class with oldName exists, it removes the old entry from the </p>
-umlClasses map and adds a new entry with newName and the same UMLClass object.</p>
+<p>umlClasses map and adds a new entry with newName and the same UMLClass object.</p>
 <p> • If the class with oldName does not exist, an error message is printed.</p>
 <p> • Usage: To rename an existing UML class in the storage.</p><br>
 
