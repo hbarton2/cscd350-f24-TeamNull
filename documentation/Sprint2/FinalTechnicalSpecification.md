@@ -27,48 +27,89 @@
    4. [Display](#Display)
    5. [Functions](#Functions)
    6. [ParsingInputs](#ParsingInputs)
-   7. [Storage](#Storage)
+   7. [SimpleAutoComplete](#SimpleAutoComplete)
+   8. [Storage](#Storage)
 4. [KnownBugs](#KnownBugs)
+5. [Broken Features](#Broken Features)
 
 ---
-## Controller
+# Controller
 
 Directory for event handling. Listens for user to change state in the GUI, 
 and informs the model and view accordingly.
 
 
-### UMLBuilderController
+## UMLBuilderController
 
 
-<h3> Overview: </h3>
+### Overview: 
 BuildController handles Node class creation for GUI
 
-<h3> Features: </h3>
-<p> Create Class: <br>
-    Creates a class for user. Sets the name, field name, method name, parameters, and relationships</p>
-<p> Delete Node: <br>
-    Deletes a node class instance</p>
-<p> Save Class: <br>
-    Saves a class for user</p>
-<p> Add Field: <br>
-    Adds a field to an existent class node</p>
-<p> Add Method: <br>
-    Add a method to an existent class node</p>
-<p> Add Relationship: <br>
-    Add a relationship to classes</p>
-<p> Get Relationship: <br>
-    Returns the relationship</p>
-<p> Create Node: <br>
-    Creates a node </p>
-<p> Exit Program: <br>
-    Exits the program for user </p>
-<p> Create Mock Node: <br>
-    Creates a mock node for demonstration purposes</p>
-<p> Save Node: <br>
-    Saves a node state </p>
-<p> Load Node: <br>
-    Loads a node state </p>
+### Features: 
 
+* **Create Class:** 
+    Creates a class for user. Sets the name, field name, method name, parameters, and relationships
+<p> 
+
+* **Delete Node:** 
+    Deletes a node class instance
+<p> 
+
+* **Save Class:**
+    Saves a class for user
+<p> 
+
+* **Add Field:**
+    Adds a field to an existent class node
+<p> 
+
+* **Add Method:** 
+    Add a method to an existent class node
+<p> 
+
+* **Add Relationship:** 
+    Add a relationship to classes
+<p> 
+
+* **Get Relationship:** 
+    Returns the relationship
+<p> 
+
+* **Create Node:** 
+    Creates a node
+<p> 
+
+* **Exit Program:** 
+Exits the program for user 
+<p> 
+
+* **Create Mock Node:** 
+    Creates a mock node for demonstration purposes
+<p> 
+
+* **Save Node:** 
+    Saves a node state 
+<p> 
+
+* **Load Node:** 
+    Loads a node state 
+<p>
+
+* **Get Class Counter:** 
+    Gets counters for class
+<p> 
+
+* **Set Class Counter:** 
+    Sets counters for class 
+<p>
+
+* **Populate Fields From Node:**
+    Populates fields for the Node 
+<p> 
+
+* **Update Text Area:**
+    Updates text in node 
+<p>
 
 ---
 
@@ -106,19 +147,46 @@ Handles launch for GUI.
 Handles display of class creation and manipulation for user.
 
 <h3> Features: </h3>
-<p> UML Node: <br>
-    Constructs a node. Sets size, style, and defaults names for class, field, method, parameter, relationship.</p>
-<p> Set/Get Class Name: <br>
-    Getter and setter for the class name.</p>
-<p> Set/Get Field Name: <br>
-    Getter and setter for field name.</p>
-<p> Set/Get Method Name: <br>
-    Getter and setter for method name.</p>
-<p> Get Relationship: <br>
-    Getter for relationship.</p>
-<p> Update Label: <br>
-    Updates label text with the latest output.</p>
 
+* **UML Node:**
+    Constructs a node. Sets size, style, and defaults names for class, field, method, parameter, relationship.
+<p>
+
+* **Set/Get Class Name:** 
+    Getter and setter for the class name.
+<p> 
+
+* **Set/Get Field Name:** 
+    Getter and setter for field name.
+<p>
+
+* **Set/Get Method Name:** 
+    Getter and setter for method name.
+<p> 
+
+* **Get Relationship:** 
+    Getter for relationship.
+<p>
+
+* **Update Label:** 
+    Updates label text with the latest output.
+<p>
+
+* **Set Position Automatically:**
+    Positions nodes in a clockwise pattern around the starting position.
+<p>
+
+* **Format Node Content:**
+  Formats the content to be displayed in the node
+<p>
+
+* **Adjust Node Size:**
+  Adjust node size based on content, ensuring it fits the text neatly
+<p>
+
+* **Show Error:**
+    Displays an error message in red
+<p>
 
 
 ----
@@ -467,8 +535,25 @@ command, else prints: "Unknown command <command>"
 
 
 
+## SimpleAutoComplete
+### Overview:
+SimpleAutocomplete provides basic autocomplete functionality.
+It matches user input against a predefined list of options.
+
+### Features:
+
+* **SimpleAutoComplete Constructor:**
+  Takes options command list
+<p>
+
+* **AutoComplete:**
+  Returns a list of suggestions that start with the given input
+<p> 
 
 
+
+
+---
 
 ## Storage:
 
@@ -580,10 +665,112 @@ Right now it only sets relationship name and type (as a string).
 ---
 
 
+<h3> 1- Label "Class Name", shows the class name.</h3>
+<p> Below Class Name label is the field for user to type class name.</p><br>
+
+<p> 2- Label Fields shows the field that should be added to the class.</p>
+<p> Below Field Name label is the field for user to type field data type.</p>
+<p> and it has the Field for the user to type the Field Name for the class.</p>
+<p> the plus " + " sign on the right hand side of the Field Name is the button to add more </p>
+<p> field type and field name. User can add as many as user wants.</p><br>
+
+<h3> 3- Methods label shows the fields for Method signature.</h3>
+<p> Return type field if for the return type of the method</p>
+<p> Method Name field is for the user to type method name</p>
+<p> Parameter type field is for the user to type Parameter type, string or int etc. </p>
+<p> Parameter fild is for user to type parameter field name </p>
+<p> the plus " + " sign button allows user to add more method signature. </p>
+<p> user can add as many method signature as needed.</p><br>
+
+<h3> 4- Relationships label shows the dropdown for the relationship types.</h3>
+<p> User cand can click on the dropdown menu and select the appropriate type of relationship for the current class.</p>
+<p> There are six relationship types user can select from.</p><br>
+
+<h3> 5- Create Class button, creates a node with all the information user has typed.</h3>
+
+----
+
+## Broken Features:
 
 
+### MovableLine
+
+```java
+public class MovableLine {
+
+    @FXML
+    Line line;
+   // Circle startPoint, endPoint;
+    @FXML
+    private Button add;
+
+   @FXML
+   private Circle endPoint;
+
+    //@FXML
+    //private TriangleMesh endPoint;
 
 
+    @FXML
+    private Circle startPoint;
+
+    public MovableLine(Pane root) {
+        createDraggableLine(root);
+    }
+
+    private void createDraggableLine(Pane root){
+        // Create the line
+        line = new Line(50, 50, 100, 100);
+        line.setStroke(Color.BLACK);
+        line.setStrokeWidth(2);
+
+
+        // Create the start and end points
+        startPoint = createDraggablePoint(line.getStartX(), line.getStartY());
+        endPoint = createDraggablePoint(line.getEndX(), line.getEndY());
+        //endPoint = createDraggablePoint().getId("");
+        // Add mouse event handlers for dragging
+        startPoint.setOnMouseDragged(e -> handlePointMouseDragged(e, line, true));
+        endPoint.setOnMouseDragged(e -> handlePointMouseDragged(e, line, false));
+
+        root.getChildren().addAll(line, startPoint, endPoint);
+    }
+
+    private void handlePointMouseDragged(MouseEvent event, Line line, Boolean startPoint) {
+        Circle point = (Circle) event.getSource();
+        double offsetX = event.getX();
+        double offsetY = event.getY();
+        point.setCenterX(offsetX);
+        point.setCenterY(offsetY);
+        point.setLayoutX(event.getSceneX() - offsetX);
+        point.setLayoutY(event.getSceneY() - offsetY);
+
+        if (startPoint) {
+            line.setStartX(offsetX);
+            line.setStartY(offsetY);
+        } else {
+            line.setEndX(offsetX);
+            line.setEndY(offsetY);
+        }
+    }
+
+    private Circle createDraggablePoint(double x, double y) {
+        Circle point = new Circle(x, y, 5, Color.RED);
+        point.setStroke(Color.BLACK);
+        point.setStrokeWidth(1);
+        point.setCenterX(x);
+        point.setCenterY(y);
+        return point;
+    }
+
+
+    public void removeLineFrom(Pane root){
+        root.getChildren().remove(line);
+        root.getChildren().remove(startPoint);
+        root.getChildren().remove(endPoint);
+    }```
+
+----
 
 
 
