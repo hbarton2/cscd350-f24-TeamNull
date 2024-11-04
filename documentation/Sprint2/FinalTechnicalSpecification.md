@@ -31,93 +31,130 @@
 4. [KnownBugs](#KnownBugs)
 
 ---
-## Controller
+# Controller
 
 Directory for event handling. Listens for user to change state in the GUI, 
 and informs the model and view accordingly.
 
 
-### UMLBuilderController
+## UMLBuilderController
 
-
-<h3> Overview: </h3>
+### Overview: 
 BuildController handles Node class creation for GUI
 
-<h3> Features: </h3>
-<p> Create Class: <br>
-    Creates a class for user. Sets the name, field name, method name, parameters, and relationships</p>
-<p> Delete Node: <br>
-    Deletes a node class instance</p>
-<p> Save Class: <br>
-    Saves a class for user</p>
-<p> Add Field: <br>
-    Adds a field to an existent class node</p>
-<p> Add Method: <br>
-    Add a method to an existent class node</p>
-<p> Add Relationship: <br>
-    Add a relationship to classes</p>
-<p> Get Relationship: <br>
-    Returns the relationship</p>
-<p> Create Node: <br>
-    Creates a node </p>
-<p> Exit Program: <br>
-    Exits the program for user </p>
-<p> Create Mock Node: <br>
-    Creates a mock node for demonstration purposes</p>
-<p> Save Node: <br>
-    Saves a node state </p>
-<p> Load Node: <br>
-    Loads a node state </p>
+### Features: 
+
+* **Create Class:**
+    Creates a class for user. Sets the name, field name, method name, parameters, and relationships
+<p>
+
+* **Delete Node:**
+    Deletes a node class instance
+<p> 
+
+* **Save Class:**
+    Saves a class for user
+<p> 
+
+* **Add Field:**
+    Adds a field to an existent class node
+<p> 
+
+* **Add Method:**
+    Add a method to an existent class node
+<p>
+
+* **Add Relationship:**
+    Add a relationship to classes
+<p> 
+
+* **Get Relationship:**
+    Returns the relationship
+<p> 
+
+* **Create Node:**
+    Creates a node
+<p> 
+
+* **Exit Program:**
+    Exits the program for user 
+<p>
+
+* **Create Mock Node:**
+    Creates a mock node for demonstration purposes
+<p> 
+
+* **Save Node:**
+    Saves a node state
+<p> 
+
+* **Load Node:**
+    Loads a node state 
+<p>
 
 
 ---
 
 ## Model
 
-<h3> Overview: </h3>
+### Overview: 
 An adapter class. Talks to storage to retrieve and store data.
 
-<h3> Features: </h3>
-<p> Create Class Node: <br>
-    Adds new node class to storage.</p>
+### Features: 
+* **Create Class Node:**
+    Adds new node class to storage.
+<p>
 
 
 
 ---
 
 
-## View
+# View
 
 Directory for visualization. Requests data from Model and displays in user-friendly way for GUI.
 
 
-### AppStart
+## AppStart
 
-<h3> Overview: </h3>
+### Overview: 
 Handles launch for GUI.
 
-<h3> Features: </h3>
-<p> Start: <br>
-    Creates GUI state for user. Loads and sets scene.</p>
+### Features: 
+* **Start:**
+    Creates GUI state for user. Loads and sets scene.
+<p>
 
-### UMLNode
+## UMLNode
 
-<h3> Overview: </h3>
+### Overview: 
 Handles display of class creation and manipulation for user.
 
-<h3> Features: </h3>
-<p> UML Node: <br>
-    Constructs a node. Sets size, style, and defaults names for class, field, method, parameter, relationship.</p>
-<p> Set/Get Class Name: <br>
-    Getter and setter for the class name.</p>
-<p> Set/Get Field Name: <br>
-    Getter and setter for field name.</p>
-<p> Set/Get Method Name: <br>
-    Getter and setter for method name.</p>
-<p> Get Relationship: <br>
-    Getter for relationship.</p>
-<p> Update Label: <br>
-    Updates label text with the latest output.</p>
+### Features: 
+*  **UML Node:**
+    Constructs a node. Sets size, style, and defaults names for class, field, method, parameter, relationship
+<p>
+
+* **Set/Get Class Name:**
+    Getter and setter for the class name
+<p>
+
+* **Set/Get Field Name:**
+    Getter and setter for field name
+<p> 
+
+* **Set/Get Method Name:**
+    Getter and setter for method name
+<p> 
+
+* **Get Relationship:**
+    Getter for relationship
+<p> 
+
+* **Update Label:**
+    Updates label text with the latest output.
+<p>
+
 
 
 
@@ -317,12 +354,11 @@ Factory class that uses a Factory method to create commands actions based on par
 
 ### Features:
 
-createCommand Method: 
-
+* **createCommand Method:**
 Runs through cases to create a command based on command type. Options: createClass, removeClass, renameClass,
 addAttribute, removeAttribute, addMethod, removeMethod, addRelationship, removeRelationship, lsa, lsc, lsr,
-saveProgress, loadProgress, clearProgress. Default case prints: "Error: Unknown command type: type"
-
+saveProgress, loadProgress, clearProgress, addParameter, removeParameter. Default case prints: "Error: Unknown command type: type"
+<p>
 
 ---
 ## Commands:
@@ -332,15 +368,21 @@ Stores UML Editor commands as hash table.
 
 ### Features:
 
-* loadCommand Method:
+* **loadCommand Method:**
 pulls command from the Json file it is stored in, and stores it in the hash map for use
+<p>
 
-* addHelpCommand
+* **addHelpCommand:**
 Manually adds our help command into the hashmap
-* displayHelp
+<p>
+
+* **displayHelp:**
 Cycles through list of command definitions and prints them to the screen
-* getCommand
+<p>
+
+* **getCommand:**
 getter method to return the command via the parameter commandKey
+<p>
 
 ---
 
@@ -351,10 +393,15 @@ Handles all display functionality.
 
 ### Features:
 
-* Display: initializes command registry from GSON and creates parser instance.
-* Start: entry method to handle start of program. Displays list of available commands and their arguments. Displays help
+* **Display:** 
+Initializes command registry from GSON and creates parser instance.
+<p>
+
+* **Start:**
+Entry method to handle start of program. Displays list of available commands and their arguments. Displays help
 from the start. Creates a Scanner instance for user input handling. Formats user's terminal for clean presentation.
 Handles exit command for closing UML Editor application.
+<p>
 
 ---
 
@@ -453,14 +500,19 @@ Parser class handles all user input then seeks command class.
 
 ### Features:
 
-* Fields: 
+* **Fields:**
   * userInput: stores raw user input
   * commandRegistry: reference to Commands class
+<p>
 
-* readInput: Sets the user input. Receives a String and assigns to class userInput field.
+* **readInput:** 
+Sets the user input. Receives a String and assigns to class userInput field.
+<p>
 
-* parseInput: parses the input into a command and arguments. Grabs command from the command registry. If found, executes
+* **parseInput:** 
+Parses the input into a command and arguments. Grabs command from the command registry. If found, executes
 command, else prints: "Unknown command <command>"
+<p></p>
 
 
 ---
@@ -474,28 +526,38 @@ command, else prints: "Unknown command <command>"
 
 ### Overview:
 
-<p> The Storage class is a utility that manages the storage of UML class objects created by the user.</p><br>
-<p> It allows for adding, removing, renaming, and checking the existence of UML classes using static methods. </p>
-<p> The storage mechanism is based on a HashMap where the key is the class name (a String) and the value is a UMLClass object.</p><br>
+The Storage class is a utility that manages the storage of UML class objects created by the user. 
+It allows for adding, removing, renaming, and checking the existence of UML classes using static methods. 
+The storage mechanism is based on a HashMap where the key is the class name (a String) and the value is a UMLClass object.
 
-<h3> Data Structure</h3>
+**Data Structure:**
 
-<p> The class uses a private static HashMap to store all UML class objects:</p>
-<p> private static HashMap<String, UMLClass> umlClasses = new HashMap<p>();</p>
-<p> • Key: The name of the UML class (String).</p>
-<p> • Value: The corresponding UMLClass object.</p>
+The class uses a private static HashMap to store all UML class objects:
+private static HashMap<String, UMLClass> umlClasses = new HashMap();
+* Key: The name of the UML class (String)
+* Value: The corresponding UMLClass object
 
-<h3> Key Features: </h3>
+### Features:
 
-<p> 1. Store UML Class objects: Stores and retrieves UML class objects using a HashMap.</p>
-<p> 2. Add and Remove Classes: Supports adding new classes and removing existing ones.</p>
-<p> 3. Check Class Existence: Provides a method to verify if a class exists in the storage. </p>
-<p> 4. Rename Classes: Allows renaming an existing class.</p><br>
+* **Store UML Class objects:**
+Stores and retrieves UML class objects using a HashMap
+<p>
+
+* **Add and Remove Classes:** 
+Supports adding new classes and removing existing ones.
+<p>
+
+* **Check Class Existence:**
+Provides a method to verify if a class exists in the storage.
+<p>
+
+* **Rename Classes:**
+Allows renaming an existing class.
+<p>
 
 
-<h3> Methods: </h3>
-
-<p> 1. getUMLClasses </p>
+### Methods:
+getUMLClasses </p>
 
 <p>public static HashMap<String, UMLClass> getUMLClasses()
 
