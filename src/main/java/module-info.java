@@ -102,7 +102,7 @@
 //}
 
 /**
- * v2.2.83 minimum requirements
+ * v2.2.83+ minimum requirements
  */
 module umleditor {
   requires javafx.controls;
@@ -115,6 +115,7 @@ module umleditor {
   opens umleditor.sprint1.utilities to com.google.gson;
   opens umleditor.sprint2.demo to javafx.fxml;
   opens umleditor.sprint2.controller to javafx.fxml;
+  opens umleditor.sprint1.uml to com.google.gson;
 
   exports umleditor;
   exports umleditor.sprint1.uml; // Export if other modules or packages need access
