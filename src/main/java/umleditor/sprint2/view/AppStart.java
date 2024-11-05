@@ -16,7 +16,7 @@ public class AppStart extends Application {
   public void start(Stage primaryStage) throws Exception {
 
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/sprint2/UMLBuilder.fxml"));
-    Scene scene = new Scene(loader.load(), 900, 600);
+    Scene scene = new Scene(loader.load());
     primaryStage.setResizable(true);
     primaryStage.setTitle("UML Editor GUI edition");
     primaryStage.setScene(scene);

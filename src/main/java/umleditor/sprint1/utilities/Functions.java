@@ -8,18 +8,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
-
 import umleditor.sprint1.uml.MethodSignature;
 import umleditor.sprint1.uml.UMLClass;
 import umleditor.sprint1.uml.UMLRelationshipType;
 
 public class Functions {
 
+  private static final String TEMP_FILENAME = "temp_save.json";
+  private static final String STORAGE_DIRECTORY = "src/main/resources/sprint1/hdd";
+
   // Method to create a new class
   public static void createClass(String className) {
     if (!Storage.classExists(className)) {
       Storage.addClass(className);
       System.out.println("Class " + className + " created.");
+      saveProgress(TEMP_FILENAME); // Auto-save to temporary storage
     } else {
       System.out.println("Error: Class " + className + " already exists.");
     }
@@ -30,6 +33,7 @@ public class Functions {
     if (Storage.classExists(className)) {
       Storage.removeClass(className);
       System.out.println("Class " + className + " removed.");
+      saveProgress(TEMP_FILENAME); // Auto-save to temporary storage
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
     }
@@ -41,6 +45,7 @@ public class Functions {
       if (!Storage.classExists(newName)) {
         Storage.renameClass(oldName, newName);
         System.out.println("Class " + oldName + " renamed to " + newName + ".");
+        saveProgress(TEMP_FILENAME); // Auto-save to temporary storage
       } else {
         System.out.println("Error: Class " + newName + " already exists.");
       }
@@ -49,185 +54,149 @@ public class Functions {
     }
   }
 
-  // Add attribute to a class
-  public static void addAttribute(String className, String attribute) {
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
-      umlClass.addAttribute(attribute);
-    } else {
-      System.out.println("Error: Class " + className + " does not exist.");
+  // Add or update an attribute in a class
+  public static void addAttribute(String className, String attributeType, String attributeName) {
+    UMLClass umlClass = getClassIfExists(className);
+    if (umlClass != null) {
+      umlClass.addAttribute(attributeName, attributeType);
+      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
   // Remove an attribute from a class
-  public static void removeAttribute(String className, String attribute) {
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
-      umlClass.removeAttribute(attribute);
-    } else {
-      System.out.println("Error: Class " + className + " does not exist.");
+  public static void removeAttribute(String className, String attributeName) {
+    UMLClass umlClass = getClassIfExists(className);
+    if (umlClass != null) {
+      umlClass.removeAttribute(attributeName);
+      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
-  // Add method to a class with method name and optional parameter (handling overloading)
-  public static void addMethod(String className, String methodName, String parameter) {
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
-
-      // Check for duplicates
-      if (umlClass.methodExists(methodName, parameter)) {
-        System.out.println("Error: Method " + methodName + " with parameter '" + parameter
-          + "' already exists in class " + className + ".");
-      } else {
-        umlClass.addMethod(methodName, parameter);
-      }
-    } else {
-      System.out.println("Error: Class " + className + " does not exist.");
+  // Rename an attribute in a class
+  public static void renameAttribute(String className, String oldAttribute, String newAttribute) {
+    UMLClass umlClass = getClassIfExists(className);
+    if (umlClass != null) {
+      umlClass.renameAttribute(oldAttribute, newAttribute);
+      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
-  // Remove a method from a class (including overloads)
-  public static void removeMethod(String className, String methodName, String parameter) {
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
-
-      // Check if method exists before attempting removal
-      if (umlClass.methodExists(methodName, parameter)) {
-        umlClass.removeMethod(methodName, parameter);
-        System.out.println(
-          "Method " + methodName + " with parameter '" + parameter + "' removed from class "
-            + className + ".");
+  // Add or update a method in a class
+  public static void addMethod(String className, String methodType, String methodName) {
+    UMLClass umlClass = getClassIfExists(className);
+    if (umlClass != null) {
+      if (!umlClass.methodExists(methodName)) {
+        umlClass.addMethod(methodName, methodType);
+        saveProgress(TEMP_FILENAME); // Auto-save
       } else {
-        System.out.println("Error: Method " + methodName + " with parameter '" + parameter
-          + "' does not exist in class " + className + ".");
+        System.out.println("Error: Method " + methodName + " already exists in class " + className + ".");
       }
+    }
+  }
+
+  // Remove a method from a class
+  public static void removeMethod(String className, String methodName) {
+    UMLClass umlClass = getClassIfExists(className);
+    if (umlClass != null && umlClass.methodExists(methodName)) {
+      umlClass.removeMethod(methodName);
+      saveProgress(TEMP_FILENAME); // Auto-save
     } else {
-      System.out.println("Error: Class " + className + " does not exist.");
+      System.out.println("Error: Method " + methodName + " does not exist in class " + className + ".");
+    }
+  }
+
+  // Rename a method in a class
+  public static void renameMethod(String className, String oldMethodName, String newMethodName) {
+    UMLClass umlClass = getClassIfExists(className);
+    if (umlClass != null) {
+      umlClass.renameMethod(oldMethodName, newMethodName);
+      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
   // Add or update a relationship in a class
   public static void addRelationship(String className, int relationshipType) {
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
-      UMLRelationshipType type = getRelationshipType(relationshipType);
-      if (type != null) {
-        umlClass.addOrUpdateRelationship(type);
-      } else {
-        System.out.println("Error: Invalid relationship type.");
-      }
-    } else {
-      System.out.println("Error: Class " + className + " does not exist.");
+    UMLClass umlClass = getClassIfExists(className);
+    UMLRelationshipType type = getRelationshipType(relationshipType);
+    if (umlClass != null && type != null) {
+      umlClass.addOrUpdateRelationship(type);
+      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
   // Remove a relationship from a class
   public static void removeRelationship(String className) {
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
+    UMLClass umlClass = getClassIfExists(className);
+    if (umlClass != null) {
       umlClass.removeRelationship();
-    } else {
-      System.out.println("Error: Class " + className + " does not exist.");
+      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
-  // Helper method to get relationship type by number
-  private static UMLRelationshipType getRelationshipType(int number) {
-    return switch (number) {
-      case 1 -> UMLRelationshipType.ASSOCIATION;
-      case 2 -> UMLRelationshipType.AGGREGATION;
-      case 3 -> UMLRelationshipType.COMPOSITION;
-      case 4 -> UMLRelationshipType.INHERITANCE;
-      default -> null;
-    };
-  }
-
-  public static void addParam(String className, String methodName, String paramName, String newParamName, String paramType){
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);  // Fetch class from storage
-
-      if (umlClass.methodExists(methodName, paramName)) {
-        MethodSignature method = umlClass.findMethod(methodName, paramName);
-        method.addParam(newParamName, paramType);
-        System.out.println("Param " + newParamName + " added to method " + methodName + ".");
-      } else {
-        System.out.println("Error: Method " + methodName + " with parameter '" + paramName
-                + "' does not exist in class " + className + ".");
-      }
-    } else {
-      System.out.println("Error: Class " + className + " does not exist.");
+  // Add a parameter to a method in a class
+  public static void addParam(String className, String methodName, String newParamName, String paramType) {
+    MethodSignature method = getMethodIfExists(className, methodName);
+    if (method != null) {
+      method.addParam(newParamName, paramType);
+      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
-  public static void removeParam(String className, String methodName, String paramName){
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);
-
-      if (umlClass.methodExists(methodName, paramName)) {
-        MethodSignature method = umlClass.findMethod(methodName, paramName);
-        method.removeParam(paramName);
-        System.out.println("Param " + paramName + " removed from method " + methodName + ".");
-      }
-      else{
-        System.out.println("Error: Method " + methodName + " with parameter '" + paramName
-        + "' does not exist in class " + className + ".");
-      }
-    }
-    else{
-      System.out.println("Error: Class " + className + " does not exist.");
+  // Remove a parameter from a method in a class
+  public static void removeParam(String className, String methodName, String paramName) {
+    MethodSignature method = getMethodIfExists(className, methodName);
+    if (method != null) {
+      method.removeParam(paramName);
+      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
+  // List all classes, only names or only relationships
   public static void listClasses(String type) {
     switch (type) {
       case "lsa":
-        listAllClassDetails();  // List all classes with details
+        listAllClassDetails();
         break;
       case "lsc":
-        listClassNamesOnly();   // List class names only
+        listClassNamesOnly();
         break;
       case "lsr":
-        listClassesWithRelationships();  // List classes with relationships
+        listClassesWithRelationships();
         break;
       default:
         System.out.println("Error: Invalid list type.");
     }
   }
 
-  // List all class details including attributes and methods
+  // Helper methods for listing details, names, and relationships
   private static void listAllClassDetails() {
     if (Storage.getUMLClasses().isEmpty()) {
       System.out.println("No classes created.");
       return;
     }
-    System.out.println("Classes with attributes and methods:");
     for (UMLClass umlClass : Storage.getUMLClasses().values()) {
       System.out.println("Class: " + umlClass.getClassName());
       System.out.println("Fields: " + umlClass.getAttributes());
-      umlClass.displayMethods();  // Show methods and overloads
+      umlClass.displayMethods();
       System.out.println();
     }
   }
 
-  // List only class names
   private static void listClassNamesOnly() {
     if (Storage.getUMLClasses().isEmpty()) {
       System.out.println("No classes created.");
       return;
     }
-    System.out.println("Classes:");
     for (String className : Storage.getUMLClasses().keySet()) {
       System.out.println("- " + className);
     }
   }
 
-  // List classes that have relationships
   private static void listClassesWithRelationships() {
     if (Storage.getUMLClasses().isEmpty()) {
       System.out.println("No classes created.");
       return;
     }
-    System.out.println("Classes with relationships:");
     for (UMLClass umlClass : Storage.getUMLClasses().values()) {
       if (!umlClass.getRelationships().isEmpty()) {
         System.out.println("Class: " + umlClass.getClassName());
@@ -237,85 +206,83 @@ public class Functions {
     }
   }
 
-  // Save current progress to a file
+  // Helper to find UMLClass if it exists
+  private static UMLClass getClassIfExists(String className) {
+    if (Storage.classExists(className)) {
+      return Storage.getUMLClasses().get(className);
+    } else {
+      System.out.println("Error: Class " + className + " does not exist.");
+      return null;
+    }
+  }
+
+  // Helper to find MethodSignature if it exists in a class
+  private static MethodSignature getMethodIfExists(String className, String methodName) {
+    UMLClass umlClass = getClassIfExists(className);
+    if (umlClass != null && umlClass.methodExists(methodName)) {
+      return umlClass.findMethod(methodName);
+    } else {
+      System.out.println("Error: Method " + methodName + " does not exist in class " + className + ".");
+      return null;
+    }
+  }
+
+  // Save progress to a file or temporary if no filename is provided
   public static void saveProgress(String filename) {
     try {
-      // Directory path to save the file
-      String directoryPath = "src/main/resources/sprint1/hdd";
-      File dir = new File(directoryPath);
-
-      // Create directory if it doesn't exist
+      File dir = new File(STORAGE_DIRECTORY);
       if (!dir.exists()) {
         dir.mkdirs();
       }
 
-      // Convert the UMLClasses to JSON and save
       Gson gson = new Gson();
       String json = gson.toJson(Storage.getUMLClasses());
 
-      FileWriter writer = new FileWriter(directoryPath + "/" + filename);
-      writer.write(json);
-      writer.close();
-      System.out.println("Progress saved to " + directoryPath + "/" + filename + ".");
+      try (FileWriter writer = new FileWriter(new File(STORAGE_DIRECTORY, filename))) {
+        writer.write(json);
+        System.out.println("Progress saved to " + STORAGE_DIRECTORY + "/" + filename + ".");
+      }
     } catch (IOException e) {
       System.out.println("Error: Could not save progress to " + filename + ".");
     }
   }
 
-  // Load progress from a file
+  // Load progress from a file or temporary if no filename is provided
   public static void loadProgress(String filename) {
-    try {
-      // Directory path to load the file
-      String directoryPath = "src/main/resources/sprint1/hdd";
-      File file = new File(directoryPath + "/" + filename);
+    File file = new File(STORAGE_DIRECTORY, filename);
+    if (!file.exists()) {
+      System.out.println("Error: File " + filename + " does not exist.");
+      return;
+    }
 
-      // Check if file exists
-      if (!file.exists()) {
-        System.out.println("Error: File " + filename + " does not exist.");
-        return;
-      }
-
-      // Read the JSON from the file and update UMLClasses
-      Gson gson = new Gson();
-      FileReader reader = new FileReader(file);
-
-      Type type = new TypeToken<HashMap<String, UMLClass>>() {
-      }.getType();
-      HashMap<String, UMLClass> loadedClasses = gson.fromJson(reader, type);
+    try (FileReader reader = new FileReader(file)) {
+      Type type = new TypeToken<HashMap<String, UMLClass>>() {}.getType();
+      HashMap<String, UMLClass> loadedClasses = new Gson().fromJson(reader, type);
       Storage.setUMLClasses(loadedClasses);
-
-      reader.close();
-      System.out.println("Progress loaded from " + directoryPath + "/" + filename + ".");
+      System.out.println("Progress loaded from " + STORAGE_DIRECTORY + "/" + filename + ".");
     } catch (IOException e) {
       System.out.println("Error: Could not load progress from " + filename + ".");
     }
   }
 
-  // Clear all progress (UML classes)
+  // Clear all classes from Storage
   public static void clearProgress() {
     Storage.clearUMLClasses();
     System.out.println("All progress has been cleared.");
   }
 
-  // Method to rename an attribute
-  public static void renameAttribute(String className, String oldAttribute, String newAttribute) {
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);
-      umlClass.renameAttribute(oldAttribute, newAttribute);
-    } else {
-      System.out.println("Error: Class " + className + " does not exist.");
-    }
-  }
-
-  // Method to rename a method
-  public static void renameMethod(String className, String oldMethodName, String newMethodName,
-    String parameter) {
-    if (Storage.classExists(className)) {
-      UMLClass umlClass = Storage.getUMLClasses().get(className);
-      umlClass.renameMethod(oldMethodName, newMethodName, parameter);
-    } else {
-      System.out.println("Error: Class " + className + " does not exist.");
-    }
+  // Helper method to map integer to UMLRelationshipType
+  private static UMLRelationshipType getRelationshipType(int number) {
+    return switch (number) {
+      case 1 -> UMLRelationshipType.ASSOCIATION;
+      case 2 -> UMLRelationshipType.AGGREGATION;
+      case 3 -> UMLRelationshipType.COMPOSITION;
+      case 4 -> UMLRelationshipType.INHERITANCE;
+      case 5 -> UMLRelationshipType.GENERALIZATION;
+      case 6 -> UMLRelationshipType.REALIZATION;
+      case 7 -> UMLRelationshipType.DEPENDENCY;
+      default -> null;
+    };
   }
 
   public static void exit() {
