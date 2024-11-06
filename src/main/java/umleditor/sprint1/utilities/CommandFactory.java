@@ -64,10 +64,10 @@ public class CommandFactory {
         }
       };
       case "addRelationship" -> args -> {
-        if (args.length == 2) {
+        if (args.length == 3) {
           try {
             int relationshipType = Integer.parseInt(args[1]);
-            Functions.addRelationship(args[0], relationshipType);
+            Functions.addRelationship(args[0], relationshipType, args[2]);
           } catch (NumberFormatException e) {
             System.out.println("Error: Relationship type must be an integer (1-4).");
           }

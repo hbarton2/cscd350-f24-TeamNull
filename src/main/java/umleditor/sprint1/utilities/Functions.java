@@ -115,13 +115,17 @@ public class Functions {
   }
 
   // Add or update a relationship in a class
-  public static void addRelationship(String className, int relationshipType) {
+  public static int addRelationship(String className, int relationshipType, String destClass) {
+    if (Storage.getUMLClasses().size() <= 1 || className.equals(destClass)){
+      return 1;
+    }
     UMLClass umlClass = getClassIfExists(className);
     UMLRelationshipType type = getRelationshipType(relationshipType);
     if (umlClass != null && type != null) {
       umlClass.addOrUpdateRelationship(type);
       saveProgress(TEMP_FILENAME); // Auto-save
     }
+    return 0;
   }
 
   // Remove a relationship from a class
