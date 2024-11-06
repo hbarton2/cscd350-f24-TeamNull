@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
+import umleditor.sprint1.utilities.Functions;
 import umleditor.sprint2.view.UMLNode;
 
 public class UMLBuilderController {
@@ -205,6 +206,17 @@ public class UMLBuilderController {
       ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(3)).getText();
     String relationship = relationshipsBox.getChildren().isEmpty() ? "None" :
       ((ChoiceBox<String>)((HBox) relationshipsBox.getChildren().get(0)).getChildren().get(0)).getValue();
+
+
+    //***************************************************************************************My Work Area
+    // take the text from class name field and set it as class name.
+    Functions.createClass(classNameField.getText());
+    Functions.addAttribute(classNameField.getText(),"String",fieldName);
+   // Functions.addRelationship(classNameField.getText(), classNameField.getText());
+    Functions.addMethod(classNameField.getText(),methodType,methodName);
+    Functions.saveProgress(classNameField.getText());
+
+    //********************************************************************* end of work area
 
     // Create the UML node with the collected data
     UMLNode node = new UMLNode(classNameField.getText());
