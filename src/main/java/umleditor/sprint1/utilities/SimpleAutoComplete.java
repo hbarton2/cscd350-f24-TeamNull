@@ -2,6 +2,11 @@ package umleditor.sprint1.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.impl.completer.StringsCompleter;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
 
 /**
  * SimpleAutocomplete provides basic autocomplete functionality.
