@@ -211,7 +211,7 @@ public class Functions {
   }
 
   // Helper to find UMLClass if it exists
-  private static UMLClass getClassIfExists(String className) {
+  public static UMLClass getClassIfExists(String className) {
     if (Storage.classExists(className)) {
       return Storage.getUMLClasses().get(className);
     } else {
