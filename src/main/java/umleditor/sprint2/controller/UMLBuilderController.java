@@ -1,6 +1,5 @@
 package umleditor.sprint2.controller;
 
-import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,15 +10,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextFlow;
 import umleditor.sprint1.utilities.Functions;
 import umleditor.sprint2.view.UMLNode;
 
+import java.util.List;
+
 public class UMLBuilderController {
 
-  public TextFlow classShape;
+
+
+ // public TextFlow classShape;
+  @FXML
   public Button saveClass;
-  public ChoiceBox<String> relationshipChoiceBox;
+
+   public ChoiceBox<String> relationshipChoiceBox;
 
   @FXML
   private VBox fieldsBox, methodsBox, relationshipsBox;
@@ -33,6 +37,11 @@ public class UMLBuilderController {
   @FXML
   private TextArea textArea;
 
+  @FXML
+  private ChoiceBox<String> fieldTypeChoice;
+  private final List<String> fieldDataTypeList = List.of("Select data type","Non","String","int","double","float","Object");
+
+
   private final List<String> relationshipTypes = List.of("None", "Generalization", "Realization",
     "Dependency", "Association", "Aggregation", "Composition");
   private final String straightLine = "\n__________________________________";
@@ -40,6 +49,8 @@ public class UMLBuilderController {
 
   @FXML
   public void initialize() {
+      fieldTypeChoice.getItems().addAll(fieldDataTypeList); // Field Data Type dropdown menu show list of options
+
     // Initialize first relationship ChoiceBox with items
     if (!relationshipsBox.getChildren().isEmpty()) {
       HBox firstRelationshipBox = (HBox) relationshipsBox.getChildren().get(0);
@@ -48,6 +59,7 @@ public class UMLBuilderController {
       relationshipChoiceBox.getItems().addAll(relationshipTypes);
       relationshipChoiceBox.setValue(relationshipTypes.get(0)); // Set default value
     }
+
   }
 
   private void showWarning(String message) {
@@ -103,18 +115,25 @@ public class UMLBuilderController {
   public void addField() {
     HBox fieldBox = new HBox(5);
     TextField fieldType = new TextField();
-    fieldType.setPromptText("Enter data type");
+  //  fieldType.setPromptText("Enter data type");
+
 
     TextField fieldName = new TextField();
     fieldName.setPromptText("Enter field name");
 
+    //drop down for method data type
+    ChoiceBox<String> fieldTypeChoice = new ChoiceBox<>();
+    fieldTypeChoice.getItems().addAll(fieldDataTypeList);
+
     Button addButton = new Button("+");
     addButton.setOnAction(e -> addField());  // Allows adding more fields
+
+     //ddButton.setOnAction(e -> fieldTypeChoice.getChildren().add(fieldTypeChoice));
 
     Button removeButton = new Button("-");
     removeButton.setOnAction(e -> fieldsBox.getChildren().remove(fieldBox));
 
-    fieldBox.getChildren().addAll(fieldType, fieldName, addButton, removeButton);
+    fieldBox.getChildren().addAll(fieldType, fieldName,fieldTypeChoice, addButton, removeButton);
     fieldsBox.getChildren().add(fieldBox);
   }
 
@@ -169,6 +188,7 @@ public class UMLBuilderController {
   public void saveNode(ActionEvent actionEvent) {
     textArea.setVisible(true);
     textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
+
     textArea.setText(straightLine + "\nSave:\n  feature is in development mode." + straightLine);
   }
 
@@ -212,16 +232,18 @@ public class UMLBuilderController {
     // take the text from class name field and set it as class name.
     Functions.createClass(classNameField.getText());
     Functions.addAttribute(classNameField.getText(),"String",fieldName);
-   // Functions.addRelationship(classNameField.getText(), classNameField.getText());
-    Functions.addMethod(classNameField.getText(),methodType,methodName);
+    //Functions.addRelationship(classNameField.getText(), relationshipChoiceBox.getItems().get(1));
+    Functions.addMethod(classNameField.getText(),fieldTypeChoice.getValue(),methodName);
     Functions.saveProgress(classNameField.getText());
 
     //********************************************************************* end of work area
 
     // Create the UML node with the collected data
+    // This is the green class box that appears on the screen
     UMLNode node = new UMLNode(classNameField.getText());
     node.setFieldName(fieldName);
-    node.setFieldType(fieldType);
+    node.setFieldType(fieldTypeChoice.getValue() ); //
+    // node.setFieldType(fieldType);
     node.setMethodName(methodName);
     node.setMethodType(methodType);
     node.setParameterName(parameterName);
@@ -232,11 +254,11 @@ public class UMLBuilderController {
     node.setOnMouseClicked(e -> populateFieldsFromNode(node)); // Add click listener for field population
     viewAnchorPane.getChildren().add(node);
 
-    updateTextArea(node);
+   // updateTextArea(node);
     resetFields(); // Clears only the necessary fields, preserving dynamic elements
   }
 
-
+/**
   private void updateTextArea(UMLNode node) {
     textArea.setVisible(true);
     textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color for details
@@ -247,7 +269,7 @@ public class UMLBuilderController {
         "\nParameters: (" + node.getParameterName() + ")" +
         straightLine + "\nRelationship:\n" + node.getRelationship()
     );
-  }
+  }*/
 
   private void populateFieldsFromNode(UMLNode node) {
     classNameField.setText(node.getClassName());

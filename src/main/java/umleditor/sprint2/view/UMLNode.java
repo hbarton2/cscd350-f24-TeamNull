@@ -1,20 +1,21 @@
 package umleditor.sprint2.view;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.geometry.Insets;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import umleditor.sprint1.utilities.Functions;
 
 public class UMLNode extends Pane {
 
   private String className, fieldName, fieldType, methodName, methodType, parameterName, parameterType, relationship;
   private double offsetX;
   private double offsetY;
-  private final String straightLine = "\n-------------------------------------\n";
-  private static final double DEFAULT_WIDTH = 250;  // Increased width by 50 pixels
+  private final String straightLine = "\n-----------------------------------------\n";
+  private static final double DEFAULT_WIDTH = 200;  // Increased width by 50 pixels
   private static final double DEFAULT_HEIGHT = 200;
   private static final double NODE_SPACING = 220;
   private static double baseX = 200;
@@ -44,7 +45,8 @@ public class UMLNode extends Pane {
 
     // Create background rectangle for node with rounded edges
     background = new Rectangle(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-    background.setFill(Color.LIGHTGREEN);
+   // background.setFill(Color.LIGHTGREEN);
+    background.setFill(Color.LIGHTBLUE);
     background.setStroke(Color.BLACK);
     background.setArcWidth(10);
     background.setArcHeight(10);
@@ -93,6 +95,9 @@ public class UMLNode extends Pane {
   }
 
   public void setClassName(String className) {
+
+    Functions.createClass(className);// sets class name in UMLClass
+
     this.className = className;
     updateLabel();
   }
@@ -107,6 +112,7 @@ public class UMLNode extends Pane {
   }
 
   public String getFieldName() {
+
     return fieldName;
   }
 
@@ -164,14 +170,29 @@ public class UMLNode extends Pane {
     return relationship;
   }
 
-  // Formats the content to be displayed in the node
+  // Formats the content to be displayed in the node, green class box
   private String formatNodeContent() {
-    return "Class Name: " + getClassName() + straightLine +
-      "Field: " + getFieldType() + " " + getFieldName() + straightLine +
-      "Method: " + getMethodType() + " " + getMethodName() +
-      "\nParameter: (" + getParameterType() + " " + getParameterName() + ")" + straightLine +
-      "Relationship: " + getRelationship();
+    return
+            "Class Name:  " +  getClassName() + straightLine +
+            "Field type:  " +  getFieldType() + " " +
+            "\nField name:  " +  getFieldName() + straightLine +
+            "\nMethod type:  " + getMethodType() + " " +
+            "\nMethod name:  " + getMethodName() +
+            "\nParameter: (" + getParameterType() + " " + getParameterName() + ")" + straightLine +
+            "Relationship:  " + getRelationship();
   }
+/**
+// Formats the content to be displayed in the node, green class box
+private String formatNodeContent() {
+  return
+            "                      " + getClassName() + straightLine +
+            " + " + getFieldName() +  " : " +   getFieldType()  + straightLine +
+            " + " + getMethodName() + " ( " + getParameterType() + " " + getParameterName() + " ) "+
+            " : "   +    getMethodType() +
+            straightLine +
+            "Relationship: " + getRelationship();
+}
+*/
 
   // Updates the label text with the formatted node content
   private void updateLabel() {
