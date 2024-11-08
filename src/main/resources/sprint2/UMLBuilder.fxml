@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="800.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
+<VBox prefHeight="800.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
   <!-- Menu Bar -->
   <MenuBar prefHeight="23.0" prefWidth="1097.0" VBox.vgrow="NEVER">
     <Menu mnemonicParsing="false" text="File">
@@ -72,6 +72,7 @@
           <HBox spacing="5">
             <TextField fx:id="fieldType" prefWidth="100.0" promptText="Enter data type" />
             <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="168.0" promptText="Enter field name" />
+                  <ChoiceBox fx:id="fieldTypeChoice" prefHeight="25.0" prefWidth="70.0" />
             <Button onAction="#addField" text="+" />
           </HBox>
         </VBox>
@@ -84,7 +85,7 @@
           <HBox spacing="5">
             <TextField fx:id="methodType" prefHeight="25.0" prefWidth="77.0" promptText="Return type" />
             <TextField fx:id="methodName" prefHeight="25.0" prefWidth="98.0" promptText="Method name" />
-            <TextField fx:id="parameterType" prefHeight="25.0" prefWidth="96.0" promptText="Parameter type" />
+            <TextField fx:id="parameterType" prefHeight="25.0" prefWidth="78.0" promptText="Parameter type" />
             <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="115.0" promptText="Parameter name" />
             <Button onAction="#addMethod" text="+" />
           </HBox>
