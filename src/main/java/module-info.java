@@ -110,8 +110,9 @@ module umleditor {
   requires javafx.graphics;
   requires java.desktop;
   requires com.google.gson;
+    requires org.jline;
 
-  opens umleditor to javafx.fxml;
+    opens umleditor to javafx.fxml;
   opens umleditor.sprint1.utilities to com.google.gson;
   opens umleditor.sprint2.demo to javafx.fxml;
   opens umleditor.sprint2.controller to javafx.fxml;
