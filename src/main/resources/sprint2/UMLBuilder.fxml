@@ -58,45 +58,50 @@
   <!-- Main SplitPane layout -->
   <SplitPane dividerPositions="0.4551361386138613" VBox.vgrow="ALWAYS">
     <!-- Left control panel with form-style input -->
-    <VBox prefWidth="250.0" spacing="10">
+    <VBox prefHeight="733.0" prefWidth="548.0" spacing="10">
       <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
-      <Label style="-fx-font-size: 14px;" text="Class Name" />
-      <TextField fx:id="classNameField" promptText="Enter class name" />
+      <Label fx:id="classNameLable" style="-fx-font-size: 14px;" text="Class Name" />
+      <TextField fx:id="classNameField" prefHeight="25.0" prefWidth="346.0" promptText="Enter class name" />
+         <Button fx:id="saveClassName" mnemonicParsing="false" onAction="#saveClassNameOnClick" text="Save" />
 
       <!-- Fields Section -->
-      <Label style="-fx-font-size: 14px;" text="Fields" />
-      <ScrollPane fitToWidth="true" prefHeight="108.0" prefWidth="464.0">
+      <Label fx:id="fieldsLabel" style="-fx-font-size: 14px;" text="Fields" />
+      <ScrollPane fx:id="fieldArea" fitToWidth="true" prefHeight="152.0" prefWidth="464.0">
         <VBox fx:id="fieldsBox" spacing="5">
           <HBox spacing="5">
             <TextField fx:id="fieldType" prefWidth="100.0" promptText="Enter data type" />
             <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="168.0" promptText="Enter field name" />
                   <ChoiceBox fx:id="fieldTypeChoice" prefHeight="25.0" prefWidth="70.0" />
             <Button onAction="#addField" text="+" />
+                  <Button fx:id="fieldSaveButton" mnemonicParsing="false" onAction="#saveFieldsOnClick" text="Save" />
           </HBox>
         </VBox>
       </ScrollPane>
 
       <!-- Methods Section -->
-      <Label prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
-      <ScrollPane fitToWidth="true" prefHeight="119.0" prefWidth="464.0">
+      <Label fx:id="methodLabel" prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
+      <ScrollPane fx:id="methodArea" fitToWidth="true" prefHeight="152.0" prefWidth="464.0">
         <VBox fx:id="methodsBox" spacing="5">
           <HBox spacing="5">
-            <TextField fx:id="methodType" prefHeight="25.0" prefWidth="77.0" promptText="Return type" />
-            <TextField fx:id="methodName" prefHeight="25.0" prefWidth="98.0" promptText="Method name" />
-            <TextField fx:id="parameterType" prefHeight="25.0" prefWidth="78.0" promptText="Parameter type" />
-            <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="115.0" promptText="Parameter name" />
+            <TextField fx:id="methodType" prefHeight="25.0" prefWidth="41.0" promptText="Return type" />
+            <TextField fx:id="methodName" prefHeight="25.0" prefWidth="49.0" promptText="Method name" />
+                  <ChoiceBox fx:id="methodDataTypeChoice" prefHeight="25.0" prefWidth="69.0" />
+            <TextField fx:id="parameterType" prefHeight="25.0" prefWidth="54.0" promptText="Parameter type" />
+            <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="74.0" promptText="Parameter name" />
+                  <ChoiceBox fx:id="pramRetunDataTypeChoice" prefHeight="25.0" prefWidth="61.0" />
             <Button onAction="#addMethod" text="+" />
+                  <Button fx:id="methodSaveButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="43.0" text="Save" />
           </HBox>
         </VBox>
       </ScrollPane>
 
       <!-- Relationships Section -->
-      <Label style="-fx-font-size: 14px;" text="Relationships" />
-      <ScrollPane fitToWidth="true" prefHeight="61.0" prefWidth="464.0">
+      <Label fx:id="relationshipLabel" style="-fx-font-size: 14px;" text="Relationships" />
+      <ScrollPane fx:id="area" fitToWidth="true" prefHeight="61.0" prefWidth="464.0">
         <VBox fx:id="relationshipsBox" spacing="5">
-          <HBox spacing="5">
+          <HBox fx:id="relationshipArea" spacing="5">
             <ChoiceBox fx:id="relationshipChoiceBox" prefHeight="25.0" prefWidth="241.0" />
             <Button onAction="#addRelationship" text="+" />
           </HBox>
@@ -113,8 +118,8 @@
     </VBox>
 
     <!-- Right-side area for draggable nodes -->
-    <ScrollPane>
-      <AnchorPane fx:id="viewAnchorPane" prefHeight="735.0" prefWidth="691.0">
+    <ScrollPane prefHeight="722.0" prefWidth="581.0">
+      <AnchorPane fx:id="viewAnchorPane" prefHeight="715.0" prefWidth="547.0">
         <Text layoutX="237.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon - clicking on class nodes will repopulate the left text fields. Also, each node that has relationships will be connected to its corresponding nodes." wrappingWidth="312.00000000000006">
           <font>
             <Font size="15.0" />
@@ -123,6 +128,7 @@
         <TextFlow fx:id="classShape" layoutX="14.0" layoutY="14.0" prefHeight="219.0" prefWidth="200.0">
           <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" visible="false" />
         </TextFlow>
+            <Label fx:id="bigLabelforClass" layoutX="37.0" layoutY="487.0" prefHeight="148.0" prefWidth="149.0" text="Label" />
       </AnchorPane>
     </ScrollPane>
   </SplitPane>
