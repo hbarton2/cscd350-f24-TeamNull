@@ -62,40 +62,48 @@
       <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
+         <Label text="Please select an action from drop down menu and press &quot;Go&quot; button" />
+         <ChoiceBox fx:id="userSelectionDropdown" prefHeight="25.0" prefWidth="363.0" />
+         <Button fx:id="goButton" mnemonicParsing="false" onAction="#executeUserSelection" text="Go" />
       <Label fx:id="classNameLable" style="-fx-font-size: 14px;" text="Class Name" />
       <TextField fx:id="classNameField" prefHeight="25.0" prefWidth="346.0" promptText="Enter class name" />
          <Button fx:id="saveClassName" mnemonicParsing="false" onAction="#saveClassNameOnClick" text="Save" />
 
       <!-- Fields Section -->
       <Label fx:id="fieldsLabel" style="-fx-font-size: 14px;" text="Fields" />
-      <ScrollPane fx:id="fieldArea" fitToWidth="true" prefHeight="152.0" prefWidth="464.0">
+   <TextField fx:id="classNameToSaveField" prefHeight="25.0" prefWidth="385.0" promptText="Enter class name" />
+   <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="121.0" promptText="Enter field name" />
+         <ChoiceBox fx:id="fieldTypeChoice" prefHeight="25.0" prefWidth="83.0" />
+         <Button fx:id="fieldSaveButton" mnemonicParsing="false" onAction="#saveFieldsOnClick" prefHeight="25.0" prefWidth="48.0" text="Save" />
+      <ScrollPane fx:id="fieldArea" fitToWidth="true" prefHeight="43.0" prefWidth="440.0">
         <VBox fx:id="fieldsBox" spacing="5">
-          <HBox spacing="5">
-            <TextField fx:id="classNameToSaveField" prefHeight="25.0" prefWidth="123.0" promptText="Enter class name" />
-            <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="117.0" promptText="Enter field name" />
-                  <ChoiceBox fx:id="fieldTypeChoice" prefHeight="25.0" prefWidth="70.0" />
-            <Button onAction="#addField" text="+" />
-                  <Button fx:id="fieldSaveButton" mnemonicParsing="false" onAction="#saveFieldsOnClick" prefHeight="25.0" prefWidth="48.0" text="Save" />
+          <HBox fx:id="fldArea" prefHeight="3.0" prefWidth="462.0" spacing="5">
+            <Button fx:id="field_Save_Button" onAction="#addField" text="+" />
           </HBox>
         </VBox>
       </ScrollPane>
 
       <!-- Methods Section -->
       <Label fx:id="methodLabel" prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
-      <ScrollPane fx:id="methodArea" fitToWidth="true" prefHeight="152.0" prefWidth="464.0">
+      <ScrollPane fx:id="methodArea" fitToWidth="true" prefHeight="103.0" prefWidth="464.0">
         <VBox fx:id="methodsBox" spacing="5">
           <HBox spacing="5">
-            <TextField fx:id="methodType" prefHeight="25.0" prefWidth="41.0" promptText="Return type" />
-            <TextField fx:id="methodName" prefHeight="25.0" prefWidth="49.0" promptText="Method name" />
-                  <ChoiceBox fx:id="methodDataTypeChoice" prefHeight="25.0" prefWidth="69.0" />
-            <TextField fx:id="parameterType" prefHeight="25.0" prefWidth="54.0" promptText="Parameter type" />
-            <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="74.0" promptText="Parameter name" />
-                  <ChoiceBox fx:id="pramRetunDataTypeChoice" prefHeight="25.0" prefWidth="61.0" />
+            <TextField fx:id="classNameToSaveMethod" prefHeight="25.0" prefWidth="114.0" promptText="Enter class name" />
+            <TextField fx:id="methodName" prefHeight="25.0" prefWidth="122.0" promptText="Method name" />
+                  <ChoiceBox fx:id="methodDataTypeChoice" prefHeight="25.0" prefWidth="83.0" />
+                  <Button fx:id="methodSaveButton" mnemonicParsing="false" onAction="#saveMethodANDPram" prefHeight="25.0" prefWidth="43.0" text="Save" />
             <Button onAction="#addMethod" text="+" />
-                  <Button fx:id="methodSaveButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="43.0" text="Save" />
           </HBox>
         </VBox>
       </ScrollPane>
+         <HBox fx:id="pramArea" prefHeight="100.0" prefWidth="200.0">
+            <children>
+         <TextField fx:id="parameterType" prefHeight="25.0" prefWidth="104.0" promptText="Parameter type" />
+         <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="134.0" promptText="Parameter name" />
+               <ChoiceBox fx:id="pramRetunDataTypeChoice" prefHeight="25.0" prefWidth="91.0" />
+               <Button mnemonicParsing="false" text="Save" />
+            </children>
+         </HBox>
 
       <!-- Relationships Section -->
       <Label fx:id="relationshipLabel" style="-fx-font-size: 14px;" text="Relationships" />
@@ -107,12 +115,12 @@
           </HBox>
         </VBox>
       </ScrollPane>
+      <TextField fx:id="fileName" prefHeight="25.0" prefWidth="255.0" promptText="Enter file name without extensions for saving, load, or delete operations" />
+      <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="31.0" prefWidth="273.0" text="Save" />
 
       <!-- Action Buttons -->
       <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
-      <TextField fx:id="fileName" prefHeight="25.0" prefWidth="255.0" promptText="Enter file name without extensions for saving, load, or delete operations" />
-      <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="31.0" prefWidth="273.0" text="Save" />
-      <Button mnemonicParsing="false" onAction="#loadNode" prefHeight="31.0" prefWidth="274.0" text="Load" />
+      <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadNode" prefHeight="31.0" prefWidth="274.0" text="Load" />
       <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="31.0" prefWidth="275.0" text="Delete" />
       <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="35.0" prefWidth="273.0" text="Create Node (Not on final release)" />
     </VBox>
@@ -128,7 +136,6 @@
         <TextFlow fx:id="classShape" layoutX="14.0" layoutY="14.0" prefHeight="219.0" prefWidth="200.0">
           <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" visible="false" />
         </TextFlow>
-            <Label fx:id="bigLabelforClass" layoutX="37.0" layoutY="487.0" prefHeight="148.0" prefWidth="149.0" text="Label" />
       </AnchorPane>
     </ScrollPane>
   </SplitPane>
