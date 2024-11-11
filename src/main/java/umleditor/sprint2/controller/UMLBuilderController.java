@@ -2,6 +2,7 @@ package umleditor.sprint2.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -16,13 +17,25 @@ import java.util.List;
 public class UMLBuilderController {
 
     @FXML
+    private HBox fldArea;
+    @FXML
+    private HBox pramArea;
+
+    @FXML
+    private Button field_Save_Button;
+
+    @FXML
+    private Button saveClassBNT;
+
+    @FXML
     private ScrollPane fieldArea; // field area is the whole area with field box, drop down menu, plus and minus buttons
 
     @FXML
     private Label relationshipLabel;
 
-    @FXML
-    private Label bigLabelforClass;
+    //@FXML
+   // private Label bigLabelforClass;
+
 
     @FXML
     private ScrollPane area;
@@ -41,20 +54,23 @@ public class UMLBuilderController {
     @FXML
     private Label classNameLable; // Label on top of the field that shows class name
 
+    // Dropdown menu on home page for user to select an action
+    @FXML
+    private ChoiceBox<String> userSelectionDropdown;
 
+    // List of option for user to chose on the home page
+    // This needs to be of an enum class, for now just listing them here.
+    private final List<String> userSelectionList = List.of(
+            "Create a Class","Rename a Class", "Delete a Class",
+            "Add Field (S)","Rename Field", "Delete Field",
+            "Add Method (S)","Rename Method", "Delete Method",
+            "Add Parameter","Rename Parameter", "Delete Parameter",
+            "Add Relationship","Save File","Help");
 
+    Node currentNode = new UMLNode("");
 
-
-
-
-
-
-
-
-
-
-
-
+    @FXML
+    private Button goButton;
 
 
     @FXML
@@ -67,21 +83,19 @@ public class UMLBuilderController {
     @FXML
     private TextField fileName;
 
+    @FXML
+    private Button loadButton ;
 
 
 
+    @FXML
+    private TextField classNameToSaveMethod;
+    @FXML
+    private TextField methodName;
+    @FXML
+    private TextField parameterName;
 
-
-
-
-
-
-
-
-
-
-
-
+    private final String filePath = " \\cscd350-f24-TeamNull\\src\\main\\resources\\sprint1\\hdd\\";
 
     @FXML
     private Label fieldsLabel;
@@ -129,9 +143,19 @@ public class UMLBuilderController {
 
 
 
-
     @FXML
     public void initialize() {
+
+        hideClassArea();// to hide the class label, class field and button to save class
+        hideFieldArea(); // to hide the field label, field name, drop down menu, and save button
+        hideRArea(); // to hide the relationship area
+        hideMethodArea(); // to hide method area
+        hideFileArea();//
+
+
+        // Add list of options to the dropdown menu on the home page.
+        userSelectionDropdown.getItems().addAll(userSelectionList);
+
         // methodDataTypeChoice.getItems().addAll(methodDataTypeChoiceList); // drop down menu for user to select method data type
         methodDataTypeChoice.getItems().addAll(dropDownChoices);
         // pramRetunDataTypeChoice.getItems().addAll(pramRetunDataTypeChoiceList); // drop down menu for user to select para meter data type
@@ -151,6 +175,45 @@ public class UMLBuilderController {
         }
 
     }
+
+
+    /**
+     * This method activates the functions on the home page based on user selection from the dropdown menu
+     * @param event, action listener.
+     * once user clicks the "Go" button after making selection, this method will execute.
+     */
+    @FXML
+    void executeUserSelection(ActionEvent event) {
+
+        infoBox("Option " + userSelectionDropdown.getValue() +  " selected.");
+
+        if (userSelectionDropdown.getValue().equalsIgnoreCase("Create a Class")){
+            showClassArea();
+        }
+
+
+        if(userSelectionDropdown.getValue().equalsIgnoreCase("Save File")){
+            showFileArea();
+            Functions.loadProgress(fieldName.getText());
+        }
+
+        if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Field (S)")){
+            showFieldArea();
+        }
+        if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Method (S)")){
+
+            showMethodArea();
+
+        }
+        if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Relationship")){
+            showRArea();
+        }
+       // if (userSelectionDropdown.getValue().equalsIgnoreCase("Save File")){
+
+        //}
+    }
+
+
 
     // Warning Box
     private void showWarning(String message) {
@@ -201,8 +264,10 @@ public class UMLBuilderController {
 
     @FXML
     public void deleteNode(ActionEvent actionEvent) {
-        textArea.clear();
-        textArea.setVisible(false);
+        Functions.clearProgress();
+        infoBox("All progress has been cleared.");
+       // textArea.clear();
+        // textArea.setVisible(false);
     }
 
     @FXML
@@ -210,7 +275,10 @@ public class UMLBuilderController {
         // Placeholder for save functionality
     }
 
-
+    /**
+     * Add or remove more Fields for user to add
+     * depending on the user selection of plus or minus button, this method or removes field
+     */
     // This method adds more Fields on the screen when user clicks the plus button
     @FXML
     public void addField() {
@@ -229,8 +297,6 @@ public class UMLBuilderController {
 
         Button fieldSaveButton = new Button("Save");
 
-
-
         Button addButton = new Button("+");
         addButton.setOnAction(e -> addField());  // Allows adding more fields
 
@@ -242,6 +308,7 @@ public class UMLBuilderController {
         fieldBox.getChildren().addAll(fieldType, fieldName,fieldTypeChoice, addButton, removeButton, fieldSaveButton);
         fieldsBox.getChildren().add(fieldBox);
     }
+
 
     @FXML
     public void addMethod() {
@@ -318,9 +385,11 @@ public class UMLBuilderController {
             fileName.requestFocus();
             return;
         }
+        //if(userSelectionDropdown.getValue().equalsIgnoreCase("Save File")){
 
+        //}
         Functions.saveProgress(fileName.getText());
-        infoBox("Saving file to \\cscd350-f24-TeamNull\\src\\main\\resources\\sprint1\\hdd " + fileName.getText() + ".txt");
+        infoBox("Saving file to " + filePath + fileName.getText() + ".txt");
 
         //textArea.setVisible(true);
         //textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
@@ -330,40 +399,159 @@ public class UMLBuilderController {
 
 
     public void loadNode(ActionEvent actionEvent) {
-        textArea.setVisible(true);
+
+       textArea.setVisible(true);
         textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
         textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void createMockNode(ActionEvent actionEvent) {
-        UMLNode node = new UMLNode("");
+
+        infoBox("Creating a new mock node");
+
+
+        UMLNode node = new UMLNode("Sweet Class");
         node.setPositionAutomatically();
+
+      //  viewAnchorPane.getChildren().add(Storage.getUMLClasses(),);
         viewAnchorPane.getChildren().add(node);
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @FXML
+    public void hideClassArea(){
+        classNameLable.setVisible(false);
+        classNameField.setVisible(false);
+        saveClassName.setVisible(false);
+
+
+
+    }
+
+    @FXML
+    public void  showClassArea(){
+        classNameLable.setVisible(true);
+        classNameField.setVisible(true);
+        saveClassName.setVisible(true);
+
+
+    }
     @FXML
     public void hideFieldArea(){
-        fieldArea.setVisible(false);
         fieldsLabel.setVisible(false);
-        //methodArea.setVisible(false);
-        //classNameLable.setVisible(false);
-        //classNameField.setVisible(false);
+        classNameToSaveField.setVisible(false);
+       fieldName.setVisible(false);
+       fieldTypeChoice.setVisible(false);
+       field_Save_Button.setVisible(false);
+       fieldSaveButton.setVisible(false);
+       // fldArea.setVisible(false);
+        fieldArea.setVisible(false);
 
+    }
 
+    @FXML
+    public void showFieldArea(){
+        fieldsLabel.setVisible(true);
+        classNameToSaveField.setVisible(true);
+        fieldName.setVisible(true);
+        fieldTypeChoice.setVisible(true);
+        field_Save_Button.setVisible(true);
+        fieldSaveButton.setVisible(true);
+      //  fldArea.setVisible(true);
+      //  fieldArea.setVisible(false);
     }
     @FXML
     public void hideMethodArea(){
-        methodArea.setVisible(false);
+
         methodLabel.setVisible(false);
+        methodArea.setVisible(false);
+        pramArea.setVisible(false);
+
     }
 
+    @FXML
+    public void showMethodArea(){
+        methodLabel.setVisible(true);
+        methodArea.setVisible(true);
+        pramArea.setVisible(true);
+        //ScrollPane scrollPane = new ScrollPane();
+        //scrollPane.setContent(methodArea,pramArea);
+    }
 
     @FXML
     public void hideRArea(){
         relationshipLabel.setVisible(false);
         area.setVisible(false);
     }
+
+    @FXML
+    public void showRArea(){
+        relationshipLabel.setVisible(true);
+        area.setVisible(true);
+    }
+
+
+    @FXML
+    public void hideFileArea(){
+        fileName.setVisible(false);
+        saveClassBNT.setVisible(false);
+
+    }
+
+    @FXML
+    public void showFileArea(){
+        fileName.setVisible(true);
+        saveClassBNT.setVisible(true);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -374,14 +562,40 @@ public class UMLBuilderController {
             return;
         }
 
-
-
         Functions.createClass(classNameField.getText());
 
-        infoBox("Class name  " + classNameField.getText() + "  Saved.");
-        bigLabelforClass.setText(classNameField.getText());
+        UMLNode node = new UMLNode(classNameField.getText());
+
+        node.setPositionAutomatically();
+
+        viewAnchorPane.getChildren().add(node);
+        node.setClassName(classNameField.getText());
+
+
+        infoBox("Class name  " + classNameField.getText() + "  Saved. \n File path is: "+ filePath);
+
+
+      ///  bigLabelforClass.setText("I am a label");
+
         classNameField.setText("");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
@@ -395,31 +609,61 @@ public class UMLBuilderController {
     @FXML
     void saveFieldsOnClick(ActionEvent event) {
 
-        if(classNameToSaveField.getText().isEmpty()){
+        if( classNameToSaveField.getText().isEmpty() || Functions.getClassIfExists(classNameToSaveField.getText()) == null) {
             showWarning("Class name is required !");
             classNameToSaveField.requestFocus();
             return;
         }
+
         Functions.addAttribute(classNameToSaveField.getText(),fieldTypeChoice.getValue(),fieldName.getText());
-        infoBox("Field name < " + fieldName.getText() + " > saved\n to < " + classNameToSaveField.getText() + " > class.");
+
+        // from here
+        UMLNode node = new UMLNode(classNameToSaveField.getText());
+
+        node.setPositionAutomatically();
+        viewAnchorPane.getChildren().add(node);
+
+        node.setFieldName(fieldName.getText());
+        node.setFieldType(fieldTypeChoice.getValue());
+        // here is the section for adding node and setting it on the screen
+
+        infoBox("Field name < " + fieldName.getText() + " > saved\n to < " + classNameToSaveField.getText() + " > class.\n file path is: " + filePath);
 
     }
 
 
+    @FXML
+    void saveMethodANDPram(ActionEvent event) {
+        if(classNameToSaveMethod.getText().isEmpty() || Functions.getClassIfExists(classNameToSaveField.getText()) == null) {
+            showWarning("Class name is required !");
+            classNameToSaveMethod.requestFocus();
+            return;
+        }
+
+        //Functions.addAttribute(classNameToSaveMethod.getText(), methodDataTypeChoice.getValue(),methodName.getText());
+        Functions.addAttribute(classNameToSaveMethod.getText(), "void",methodName.getText());
+        Functions.addParam(classNameToSaveMethod.getText(), methodName.getText(),parameterName.getText(),pramRetunDataTypeChoice.getValue());
 
 
 
+        // From here to
+        UMLNode node = new UMLNode(classNameToSaveMethod.getText());
+
+        node.setPositionAutomatically();
+        viewAnchorPane.getChildren().add(node);
+
+        node.setMethodName(methodName.getText());
+        node.setMethodType(methodDataTypeChoice.getValue());
+
+        node.setFieldName(parameterName.getText());
+        node.setParameterType(pramRetunDataTypeChoice.getValue());
+        // here is the section for adding node and setting it on the screen
 
 
+        infoBox("Method name and return type saved.");
 
 
-
-
-
-
-
-
-
+    }
 
 
 
@@ -432,9 +676,7 @@ public class UMLBuilderController {
 
 
         Functions.createClass(classNameField.getText());
-        hideFieldArea();
-        hideMethodArea();
-        hideRArea();
+
 
         System.out.println("Save class button clicked  ");
 /**
