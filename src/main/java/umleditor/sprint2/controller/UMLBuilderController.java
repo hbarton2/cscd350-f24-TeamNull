@@ -14,6 +14,7 @@ import umleditor.sprint2.view.UMLNode;
 import java.util.List;
 
 public class UMLBuilderController {
+
     @FXML
     private ScrollPane fieldArea; // field area is the whole area with field box, drop down menu, plus and minus buttons
 
@@ -39,6 +40,46 @@ public class UMLBuilderController {
 
     @FXML
     private Label classNameLable; // Label on top of the field that shows class name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @FXML
+    private TextField classNameToSaveField;
+
+    @FXML
+    private TextField fieldName;
+
+
+    @FXML
+    private TextField fileName;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -261,12 +302,32 @@ public class UMLBuilderController {
         System.exit(0);
     }
 
-    public void saveNode(ActionEvent actionEvent) {
-        textArea.setVisible(true);
-        textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
 
-        textArea.setText(straightLine + "\nSave:\n  feature is in development mode." + straightLine);
+    /**
+     * This method saves the progress in a file name provided by user
+     * Pre-condition, it checks for the file name, if not provided shows a message on the screen
+     * asking user to provide a file name.
+     * Once file name is provide, it saves the file under that name and displays a message to the user
+     * with the file location.
+     * @param actionEvent, click on the save button
+     */
+    public void saveNode(ActionEvent actionEvent) {
+
+        if(fileName.getText().isEmpty()) {
+            showWarning("Please enter a file name");
+            fileName.requestFocus();
+            return;
+        }
+
+        Functions.saveProgress(fileName.getText());
+        infoBox("Saving file to \\cscd350-f24-TeamNull\\src\\main\\resources\\sprint1\\hdd " + fileName.getText() + ".txt");
+
+        //textArea.setVisible(true);
+        //textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
+
+        //textArea.setText(straightLine + "\nSave:\n  feature is in development mode." + straightLine);
     }
+
 
     public void loadNode(ActionEvent actionEvent) {
         textArea.setVisible(true);
@@ -323,11 +384,42 @@ public class UMLBuilderController {
     }
 
 
+    /**
+     *  This method saves field in a spicific class.
+     *  it requires to have a class name
+     *  once class name, field name and field data type is provided
+     *  it saves them and confirm with message on the screen
+     * @param event, on the click of the save button
+     */
+
     @FXML
     void saveFieldsOnClick(ActionEvent event) {
 
+        if(classNameToSaveField.getText().isEmpty()){
+            showWarning("Class name is required !");
+            classNameToSaveField.requestFocus();
+            return;
+        }
+        Functions.addAttribute(classNameToSaveField.getText(),fieldTypeChoice.getValue(),fieldName.getText());
+        infoBox("Field name < " + fieldName.getText() + " > saved\n to < " + classNameToSaveField.getText() + " > class.");
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

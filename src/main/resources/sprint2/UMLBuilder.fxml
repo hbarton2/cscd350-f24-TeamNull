@@ -71,11 +71,11 @@
       <ScrollPane fx:id="fieldArea" fitToWidth="true" prefHeight="152.0" prefWidth="464.0">
         <VBox fx:id="fieldsBox" spacing="5">
           <HBox spacing="5">
-            <TextField fx:id="fieldType" prefWidth="100.0" promptText="Enter data type" />
-            <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="168.0" promptText="Enter field name" />
+            <TextField fx:id="classNameToSaveField" prefHeight="25.0" prefWidth="123.0" promptText="Enter class name" />
+            <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="117.0" promptText="Enter field name" />
                   <ChoiceBox fx:id="fieldTypeChoice" prefHeight="25.0" prefWidth="70.0" />
             <Button onAction="#addField" text="+" />
-                  <Button fx:id="fieldSaveButton" mnemonicParsing="false" onAction="#saveFieldsOnClick" text="Save" />
+                  <Button fx:id="fieldSaveButton" mnemonicParsing="false" onAction="#saveFieldsOnClick" prefHeight="25.0" prefWidth="48.0" text="Save" />
           </HBox>
         </VBox>
       </ScrollPane>
@@ -110,7 +110,7 @@
 
       <!-- Action Buttons -->
       <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
-      <TextField prefHeight="25.0" prefWidth="255.0" promptText="Enter file name without extensions for saving, load, or delete operations" />
+      <TextField fx:id="fileName" prefHeight="25.0" prefWidth="255.0" promptText="Enter file name without extensions for saving, load, or delete operations" />
       <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="31.0" prefWidth="273.0" text="Save" />
       <Button mnemonicParsing="false" onAction="#loadNode" prefHeight="31.0" prefWidth="274.0" text="Load" />
       <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="31.0" prefWidth="275.0" text="Delete" />
