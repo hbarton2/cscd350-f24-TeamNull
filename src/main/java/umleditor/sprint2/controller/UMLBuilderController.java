@@ -17,6 +17,14 @@ import java.util.List;
 public class UMLBuilderController {
 
     @FXML
+    private Button addRelationshipBTN;
+
+    @FXML
+    private TextField classNameToAddRelationship; // source class
+    @FXML
+    private TextField classNameToAddRelationshipdst; // destination class
+
+    @FXML
     private HBox fldArea;
     @FXML
     private HBox pramArea;
@@ -133,8 +141,8 @@ public class UMLBuilderController {
     // private final List<String> fieldDataTypeList = List.of("Select data type","Non","String","int","double","float","Object");
 
 
-    private final List<String> relationshipTypes = List.of("None", "Generalization", "Realization",
-            "Dependency", "Association", "Aggregation", "Composition");
+    private final List<String> relationshipTypes = List.of("None", "ASSOCIATION", "AGGREGATION",
+            "COMPOSITION", "INHERITANCE", "GENERALIZATION", "REALIZATION" ,"DEPENDENCY");
     private final String straightLine = "\n__________________________________";
     private int classCounter = 0;
 
@@ -186,6 +194,7 @@ public class UMLBuilderController {
         infoBox("Option: " + userSelectionDropdown.getValue() +  ", selected.");
 
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Create a Class")){
+            classNameField.requestFocus();
             showClassArea();
             sysMessage.setText("Option " + userSelectionDropdown.getValue() +  " selected.");
 
@@ -194,18 +203,21 @@ public class UMLBuilderController {
 
         if(userSelectionDropdown.getValue().equalsIgnoreCase("Save File")){
             showFileArea();
+            fileName.requestFocus();
             Functions.loadProgress(fieldName.getText());
         }
 
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Field (S)")){
+            classNameToSaveField.requestFocus();
             showFieldArea();
         }
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Method (S)")){
-
+            classNameToSaveMethod.requestFocus();
             showMethodArea();
 
         }
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Relationship")){
+
             showRArea();
         }
 
@@ -592,7 +604,57 @@ public class UMLBuilderController {
 
     }
 
+    /**
+     * This methods adds selected relationship type
+     * It requires source class, destination class and relationship type
+     * Once user select the type of relationship, both classes
+     * it converts the selection to a numerical representation of the type
+     * and saves it.
+     * @param event, click of save button on the GUI
+     */
 
+    @FXML
+    void addRelationshipOnClick(ActionEvent event) {
+        if(relationshipChoiceBox.getValue().isEmpty()){
+            showWarning("Relationship empty !");
+            relationshipChoiceBox.requestFocus();
+            return;
+        }
+
+        relationshipChoiceBox.requestFocus();
+
+        int relationshipType ;
+        switch (relationshipChoiceBox.getValue()){
+            case "ASSOCIATION":
+                relationshipType = 1;
+                break;
+            case "AGGREGATION":
+                relationshipType = 2;
+                break;
+            case "COMPOSITION":
+                relationshipType = 3;
+                break;
+            case "INHERITANCE":
+                relationshipType = 4;
+                break;
+            case "GENERALIZATION":
+                relationshipType = 5;
+                break;
+            case "REALIZATION":
+                relationshipType = 6;
+                break;
+            case "DEPENDENCY":
+                relationshipType = 7;
+                break;
+            default:
+                relationshipType = 0;
+                break;
+        }
+
+        Functions.addRelationship(classNameToAddRelationship.getText(), relationshipType,classNameToAddRelationshipdst.getText());
+
+        infoBox(relationshipChoiceBox.getValue() + " added.");
+    }// end of method
 
     @FXML
     public void createClass(ActionEvent actionEvent) {
@@ -601,9 +663,7 @@ public class UMLBuilderController {
             return;
         }
 
-
         Functions.createClass(classNameField.getText());
-
 
         System.out.println("Save class button clicked  ");
 /**
