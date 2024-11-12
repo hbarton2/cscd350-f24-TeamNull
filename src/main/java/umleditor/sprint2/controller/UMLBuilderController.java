@@ -33,9 +33,9 @@ public class UMLBuilderController {
     @FXML
     private Label relationshipLabel;
 
-    //@FXML
-   // private Label bigLabelforClass;
 
+    @FXML
+    private TextField sysMessage;
 
     @FXML
     private ScrollPane area;
@@ -103,11 +103,9 @@ public class UMLBuilderController {
 
     @FXML
     private ChoiceBox<String> methodDataTypeChoice;
-    // private final List<String> methodDataTypeChoiceList = List.of("Select data type","Non","String","int","double","float","Object");
 
     @FXML
     private ChoiceBox<String> pramRetunDataTypeChoice;
-    // private final List<String> pramRetunDataTypeChoiceList = List.of("Select data type","Non","String","int","double","float","Object");
 
     // public TextFlow classShape;
     @FXML
@@ -185,10 +183,12 @@ public class UMLBuilderController {
     @FXML
     void executeUserSelection(ActionEvent event) {
 
-        infoBox("Option " + userSelectionDropdown.getValue() +  " selected.");
+        infoBox("Option: " + userSelectionDropdown.getValue() +  ", selected.");
 
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Create a Class")){
             showClassArea();
+            sysMessage.setText("Option " + userSelectionDropdown.getValue() +  " selected.");
+
         }
 
 
@@ -208,26 +208,30 @@ public class UMLBuilderController {
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Relationship")){
             showRArea();
         }
-       // if (userSelectionDropdown.getValue().equalsIgnoreCase("Save File")){
 
-        //}
     }
 
 
 
     // Warning Box
     private void showWarning(String message) {
-        textArea.setVisible(true);
-        textArea.setStyle("-fx-text-fill: red; -fx-font-weight: bold;"); // Red font for error box
-        textArea.setText(straightLine + "\n" + message + straightLine);
-    }
 
+        sysMessage.setText(message);
+        sysMessage.setEditable(false);
+        sysMessage.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+
+    }
 
     // Information box
     private void infoBox(String message) {
-        textArea.setVisible(true);
-        textArea.setStyle("-fx-text-fill: green; -fx-font-weight: bold;"); // Red font for error box
-        textArea.setText(straightLine + "\n" + message + straightLine);
+
+
+        sysMessage.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+        sysMessage.setText(message);
+
+       //textArea.setVisible(true);
+        //textArea.setStyle("-fx-text-fill: green; -fx-font-weight: bold;"); // Red font for error box
+        //textArea.setText(straightLine + "\n" + message + straightLine);
     }
 
     private void resetFields() {
@@ -265,6 +269,7 @@ public class UMLBuilderController {
     @FXML
     public void deleteNode(ActionEvent actionEvent) {
         Functions.clearProgress();
+        node.setVisible(false);
         infoBox("All progress has been cleared.");
        // textArea.clear();
         // textArea.setVisible(false);
@@ -380,21 +385,17 @@ public class UMLBuilderController {
      */
     public void saveNode(ActionEvent actionEvent) {
 
+
         if(fileName.getText().isEmpty()) {
             showWarning("Please enter a file name");
             fileName.requestFocus();
             return;
         }
-        //if(userSelectionDropdown.getValue().equalsIgnoreCase("Save File")){
 
-        //}
         Functions.saveProgress(fileName.getText());
-        infoBox("Saving file to " + filePath + fileName.getText() + ".txt");
+        infoBox("Saving file to " + filePath + fileName.getText() + ".json");
 
-        //textArea.setVisible(true);
-        //textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
 
-        //textArea.setText(straightLine + "\nSave:\n  feature is in development mode." + straightLine);
     }
 
 
@@ -406,19 +407,6 @@ public class UMLBuilderController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void createMockNode(ActionEvent actionEvent) {
 
         infoBox("Creating a new mock node");
@@ -427,25 +415,8 @@ public class UMLBuilderController {
         UMLNode node = new UMLNode("Sweet Class");
         node.setPositionAutomatically();
 
-      //  viewAnchorPane.getChildren().add(Storage.getUMLClasses(),);
         viewAnchorPane.getChildren().add(node);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -454,8 +425,6 @@ public class UMLBuilderController {
         classNameLable.setVisible(false);
         classNameField.setVisible(false);
         saveClassName.setVisible(false);
-
-
 
     }
 
@@ -475,8 +444,7 @@ public class UMLBuilderController {
        fieldTypeChoice.setVisible(false);
        field_Save_Button.setVisible(false);
        fieldSaveButton.setVisible(false);
-       // fldArea.setVisible(false);
-        fieldArea.setVisible(false);
+       fieldArea.setVisible(false);
 
     }
 
@@ -488,8 +456,7 @@ public class UMLBuilderController {
         fieldTypeChoice.setVisible(true);
         field_Save_Button.setVisible(true);
         fieldSaveButton.setVisible(true);
-      //  fldArea.setVisible(true);
-      //  fieldArea.setVisible(false);
+
     }
     @FXML
     public void hideMethodArea(){
@@ -505,8 +472,7 @@ public class UMLBuilderController {
         methodLabel.setVisible(true);
         methodArea.setVisible(true);
         pramArea.setVisible(true);
-        //ScrollPane scrollPane = new ScrollPane();
-        //scrollPane.setContent(methodArea,pramArea);
+
     }
 
     @FXML
@@ -536,70 +502,36 @@ public class UMLBuilderController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    UMLNode node ;
 
     @FXML
     void saveClassNameOnClick(ActionEvent event) {
-        if (classNameField.getText().isEmpty()) {
-            showWarning("Class name is required !");
+
+        if (classNameField.getText().isEmpty()){
+            showWarning("Class empty or duplicate !");
             return;
         }
+          //  classCounter ++;
+            Functions.createClass(classNameField.getText());
 
-        Functions.createClass(classNameField.getText());
+            node = new UMLNode(classNameField.getText());
+            classNameField.setText("");
 
-        UMLNode node = new UMLNode(classNameField.getText());
+            //node.setPositionAutomatically();
+            node.setPrefHeight(50);
 
-        node.setPositionAutomatically();
+            viewAnchorPane.getChildren().add(node);
+           // node.setClassName(classNameField.getText());
 
-        viewAnchorPane.getChildren().add(node);
-        node.setClassName(classNameField.getText());
+            infoBox("Class name  " + classNameField.getText() + "  Saved. \n File path is: " + filePath);
+            classNameField.clear();
 
-
-        infoBox("Class name  " + classNameField.getText() + "  Saved. \n File path is: "+ filePath);
-
-
-      ///  bigLabelforClass.setText("I am a label");
-
-        classNameField.setText("");
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
 
     /**
-     *  This method saves field in a spicific class.
+     *  This method saves field in a specific class.
      *  it requires to have a class name
      *  once class name, field name and field data type is provided
      *  it saves them and confirm with message on the screen
@@ -615,17 +547,15 @@ public class UMLBuilderController {
             return;
         }
 
+        node.setClassName(classNameToSaveField.getText());
+        node.setFieldName(fieldName.getText());
+        node.setFieldType(fieldTypeChoice.getValue());
+
         Functions.addAttribute(classNameToSaveField.getText(),fieldTypeChoice.getValue(),fieldName.getText());
 
-        // from here
-        UMLNode node = new UMLNode(classNameToSaveField.getText());
 
         node.setPositionAutomatically();
         viewAnchorPane.getChildren().add(node);
-
-        node.setFieldName(fieldName.getText());
-        node.setFieldType(fieldTypeChoice.getValue());
-        // here is the section for adding node and setting it on the screen
 
         infoBox("Field name < " + fieldName.getText() + " > saved\n to < " + classNameToSaveField.getText() + " > class.\n file path is: " + filePath);
 
@@ -640,23 +570,20 @@ public class UMLBuilderController {
             return;
         }
 
+      //  viewAnchorPane.getChildren().add(node);
+        node.setClassName(classNameToSaveMethod.getText());
+        node.setMethodName(methodName.getText());
+        node.setMethodType(methodDataTypeChoice.getValue());
+
+        node.setParameterName(parameterName.getText());
+        node.setParameterType(pramRetunDataTypeChoice.getValue());
+
         //Functions.addAttribute(classNameToSaveMethod.getText(), methodDataTypeChoice.getValue(),methodName.getText());
         Functions.addAttribute(classNameToSaveMethod.getText(), "void",methodName.getText());
         Functions.addParam(classNameToSaveMethod.getText(), methodName.getText(),parameterName.getText(),pramRetunDataTypeChoice.getValue());
 
-
-
-        // From here to
-        UMLNode node = new UMLNode(classNameToSaveMethod.getText());
-
         node.setPositionAutomatically();
         viewAnchorPane.getChildren().add(node);
-
-        node.setMethodName(methodName.getText());
-        node.setMethodType(methodDataTypeChoice.getValue());
-
-        node.setFieldName(parameterName.getText());
-        node.setParameterType(pramRetunDataTypeChoice.getValue());
         // here is the section for adding node and setting it on the screen
 
 
@@ -705,27 +632,7 @@ public class UMLBuilderController {
  Functions.addMethod(classNameField.getText(),fieldTypeChoice.getValue(),methodName);
  Functions.saveProgress(classNameField.getText());
  */
-        //********************************************************************* end of work area
-/*
-    // Create the UML node with the collected data
-    // This is the green class box that appears on the screen
-    UMLNode node = new UMLNode(classNameField.getText());
-    node.setFieldName(fieldName);
-    node.setFieldType(fieldTypeChoice.getValue() ); //
-    // node.setFieldType(fieldType);
-    node.setMethodName(methodName);
-    node.setMethodType(methodType);
-    node.setParameterName(parameterName);
-    node.setParameterType(parameterType);
-    node.setRelationship(relationship);
 
-    node.setPositionAutomatically();
-    node.setOnMouseClicked(e -> populateFieldsFromNode(node)); // Add click listener for field population
-    viewAnchorPane.getChildren().add(node);
-
-   // updateTextArea(node);
-    resetFields(); // Clears only the necessary fields, preserving dynamic elements
-    */
 
     }
 
