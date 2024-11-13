@@ -156,7 +156,7 @@ public class UMLBuilderController {
         hideFieldArea(); // to hide the field label, field name, drop down menu, and save button
         hideRArea(); // to hide the relationship area
         hideMethodArea(); // to hide method area
-        hideFileArea();//
+        //hideFileArea();//
 
 
         // Add list of options to the dropdown menu on the home page.
@@ -319,8 +319,7 @@ public class UMLBuilderController {
         Functions.clearProgress();
         node.setVisible(false);
         infoBox("All progress has been cleared.");
-       // textArea.clear();
-        // textArea.setVisible(false);
+
     }
 
     @FXML
