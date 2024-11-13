@@ -289,6 +289,22 @@ public class Functions {
     };
   }
 
+  /**
+   * TODO: implement with memento design pattern
+   * Use a stack to revert the last action performed by the user
+   */
+  public static void undo(){
+    System.out.println("last action reverted");
+  }
+
+  /**
+   * TODO: implement with memento design pattern
+   * Use a stack to restore the most recently undone action
+   */
+  public static void redo(){
+    System.out.println("last action restored");
+  }
+
   public static void exit() {
     System.exit(0);
   }

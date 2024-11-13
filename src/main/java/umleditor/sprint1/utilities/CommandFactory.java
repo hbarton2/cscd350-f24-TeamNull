@@ -168,6 +168,20 @@ public class CommandFactory {
           System.out.println("Error: 'exit' command does not take any arguments.");
         }
       };
+      case "undo" -> args -> {
+        if (args.length == 0) {
+          Functions.undo();
+        } else {
+          System.out.println("Error: 'undo' command does not take any arguments.");
+        }
+      };
+      case "redo" -> args -> {
+        if (args.length == 0) {
+          Functions.redo();
+        } else {
+          System.out.println("Error: 'redo' command does not take any arguments.");
+        }
+      };
       default -> {
         System.out.println("Error: Unknown command type: " + type);
         yield null;
