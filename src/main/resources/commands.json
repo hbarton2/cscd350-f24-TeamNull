@@ -61,7 +61,7 @@
   },
   "renameMethod": {
     "type": "renameMethod",
-    "description": "Renames a method in a class. Usage: renameMethod <class_name> <old_method_name> <new_method_name> "
+    "description": "Renames a method in a class. Usage: renameMethod <class_name> <old_method_name> <new_method_name>"
   },
   "addParameter": {
     "type": "addParam",
@@ -73,6 +73,14 @@
   },
   "exit": {
     "type": "exitProgram",
-    "description": "exit the program at any time"
+    "description": "Exit the program at any time"
+  },
+  "undo": {
+    "type": "undo",
+    "description": "Reverts the last action performed by the user"
+  },
+  "redo": {
+    "type": "redo",
+    "description": "Restores the most recently undone action"
   }
 }

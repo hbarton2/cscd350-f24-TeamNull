@@ -131,7 +131,7 @@ src/main/java/umleditor/EntryPoint.java
 
 3. Run the project:
    ```bash
-   java -jar umleditor-2.0-shaded.jar
+   java -jar umleditor-2.0-shaded-Demo.jar
    ``` 
 ---
 
