@@ -141,7 +141,7 @@ public class UMLBuilderController {
     // private final List<String> fieldDataTypeList = List.of("Select data type","Non","String","int","double","float","Object");
 
 
-    private final List<String> relationshipTypes = List.of("None", "ASSOCIATION", "AGGREGATION",
+    private final List<String> relationshipTypes = List.of("Select Type", "ASSOCIATION", "AGGREGATION",
             "COMPOSITION", "INHERITANCE", "GENERALIZATION", "REALIZATION" ,"DEPENDENCY");
     private final String straightLine = "\n__________________________________";
     private int classCounter = 0;
@@ -193,9 +193,42 @@ public class UMLBuilderController {
 
         infoBox("Option: " + userSelectionDropdown.getValue() +  ", selected.");
 
+        switch (userSelectionDropdown.getValue()){
+
+            case "Create a Class":
+                showClassArea();
+                classNameField.requestFocus();
+                sysMessage.setText("Option " + userSelectionDropdown.getValue() +  " selected.");
+                break;
+
+            case "Add Field (S)":
+                showFieldArea();
+                classNameToSaveField.requestFocus();
+                break;
+
+            case "Add Method (S)":
+                showMethodArea();
+                classNameToSaveMethod.requestFocus();
+                break;
+            case "Add Relationship":
+                showRArea();
+                relationshipChoiceBox.requestFocus();
+                break;
+            case "Save File":
+                showFileArea();
+                fileName.requestFocus();
+                Functions.loadProgress(fieldName.getText());
+
+            default:
+                infoBox(relationshipChoiceBox.getValue() + " is in development");
+
+
+        }
+        /**
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Create a Class")){
-            classNameField.requestFocus();
+
             showClassArea();
+            classNameField.requestFocus();
             sysMessage.setText("Option " + userSelectionDropdown.getValue() +  " selected.");
 
         }
@@ -208,19 +241,22 @@ public class UMLBuilderController {
         }
 
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Field (S)")){
-            classNameToSaveField.requestFocus();
+
             showFieldArea();
+            classNameToSaveField.requestFocus();
         }
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Method (S)")){
-            classNameToSaveMethod.requestFocus();
+
             showMethodArea();
+            classNameToSaveMethod.requestFocus();
 
         }
         if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Relationship")){
 
             showRArea();
+            relationshipChoiceBox.requestFocus();
         }
-
+            */
     }
 
 
@@ -591,16 +627,14 @@ public class UMLBuilderController {
         node.setParameterType(pramRetunDataTypeChoice.getValue());
 
         //Functions.addAttribute(classNameToSaveMethod.getText(), methodDataTypeChoice.getValue(),methodName.getText());
-        Functions.addAttribute(classNameToSaveMethod.getText(), "void",methodName.getText());
+        Functions.addAttribute(classNameToSaveMethod.getText(), "methodDataTypeChoice.getValue()",methodName.getText());
         Functions.addParam(classNameToSaveMethod.getText(), methodName.getText(),parameterName.getText(),pramRetunDataTypeChoice.getValue());
 
         node.setPositionAutomatically();
         viewAnchorPane.getChildren().add(node);
         // here is the section for adding node and setting it on the screen
 
-
         infoBox("Method name and return type saved.");
-
 
     }
 
@@ -652,10 +686,22 @@ public class UMLBuilderController {
         }
 
         Functions.addRelationship(classNameToAddRelationship.getText(), relationshipType,classNameToAddRelationshipdst.getText());
+        node.setClassName(classNameToAddRelationship.getText());
+        node.setRelationship(relationshipChoiceBox.getValue());
 
         infoBox(relationshipChoiceBox.getValue() + " added.");
     }// end of method
 
+
+    /**
+     * This method creates a class
+     * once user types class name in the class name field box
+     * and press save button, this method will save that name in Storage
+     * class via Functions
+     * Pre-condition. It checks the name field box first
+     * if it is empty it displays a warning message
+     * @param actionEvent, press of save button
+     */
     @FXML
     public void createClass(ActionEvent actionEvent) {
         if (classNameField.getText().isEmpty()) {

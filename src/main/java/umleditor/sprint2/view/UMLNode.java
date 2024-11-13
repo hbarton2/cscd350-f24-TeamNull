@@ -28,13 +28,13 @@ public class UMLNode extends Pane {
   // Constructor
   public UMLNode(String className) {
     this.className = className != null ? className : "Default Class Name";
-    this.fieldName = "Default Field Name";
-    this.fieldType = "Default Field Type";
-    this.methodName = "Default Method Name";
-    this.methodType = "Default Method Type";
-    this.parameterName = "Default Parameter Name";
-    this.parameterType = "Default Parameter Type";
-    this.relationship = "Default Relationship";
+    this.fieldName = "";
+    this.fieldType = "";
+    this.methodName = "";
+    this.methodType = "";
+    this.parameterName = "";
+    this.parameterType = "";
+    this.relationship = "";
 
     // Create and style label for node content
     classLabel = new Label(formatNodeContent());
