@@ -113,16 +113,22 @@ module umleditor {
     requires org.jline;
 
     opens umleditor to javafx.fxml;
-  opens umleditor.sprint1.utilities to com.google.gson;
-  opens umleditor.sprint2.demo to javafx.fxml;
-  opens umleditor.sprint2.controller to javafx.fxml;
-  opens umleditor.sprint1.uml to com.google.gson;
+  opens umleditor.controller.utilities to com.google.gson;
+  opens umleditor.demo to javafx.fxml;
+  opens umleditor.controller to javafx.fxml;
+  opens umleditor.model.uml to com.google.gson;
 
   exports umleditor;
-  exports umleditor.sprint1.uml; // Export if other modules or packages need access
-  exports umleditor.sprint1.utilities;
-  exports umleditor.sprint2.demo;
-  exports umleditor.sprint2.view;
-  exports umleditor.sprint2.model;
-  exports umleditor.sprint2.controller;
+  exports umleditor.model.uml; // Export if other modules or packages need access
+  exports umleditor.controller.utilities;
+  exports umleditor.demo;
+  exports umleditor.view;
+  exports umleditor.model;
+  exports umleditor.controller;
+  exports umleditor.model.utilities;
+  opens umleditor.model.utilities to com.google.gson;
+  exports umleditor.view.gui;
+  exports umleditor.view.cli;
+  opens umleditor.view.cli to com.google.gson;
+
 }

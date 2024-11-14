@@ -3,16 +3,16 @@ package sprint1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import umleditor.sprint1.uml.UMLClass;
-import umleditor.sprint1.utilities.Functions;
-import umleditor.sprint1.utilities.Storage;
+import umleditor.model.uml.UMLClass;
+import umleditor.controller.utilities.Functions;
+import umleditor.model.utilities.Storage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static umleditor.sprint1.utilities.Functions.getClassIfExists;
+import static umleditor.controller.utilities.Functions.getClassIfExists;
 
 
 /**

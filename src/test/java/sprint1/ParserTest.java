@@ -2,8 +2,8 @@ package sprint1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import umleditor.sprint1.utilities.Functions;
-import umleditor.sprint1.utilities.Storage;
+import umleditor.controller.utilities.Functions;
+import umleditor.model.utilities.Storage;
 
 import static org.junit.jupiter.api.Assertions.*;
 

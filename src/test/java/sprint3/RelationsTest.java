@@ -1,12 +1,10 @@
 package sprint3;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import umleditor.sprint1.uml.UMLClass;
-import umleditor.sprint1.uml.UMLRelationship;
-import umleditor.sprint1.uml.UMLRelationshipType;
-import umleditor.sprint1.utilities.Functions;
+import umleditor.model.uml.UMLClass;
+import umleditor.model.uml.UMLRelationshipType;
+import umleditor.controller.utilities.Functions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
