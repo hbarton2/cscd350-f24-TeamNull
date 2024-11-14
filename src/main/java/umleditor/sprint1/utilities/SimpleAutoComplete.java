@@ -1,50 +1,58 @@
 package umleditor.sprint1.utilities;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.jline.reader.Candidate;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.ParsedLine;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
+import java.util.List;
+
 /**
- * SimpleAutocomplete provides basic autocomplete functionality.
- * It matches user input against a predefined list of options.
+ * Class that handles all the tab auto complete. constructor and readInput will get called in display class,
+ * constructor must be passed in a String list of all command names
  * <p>
- * TODO: Implement into final code (not working)
- *
+ * Right now auto-complete does not work in 'dumb' terminals such as windows cmd. It does work in linux
+ * TODO: When the user launches CLI mode, create a new "Smart" terminal for tab autocomplete
  */
 public class SimpleAutoComplete {
-    // List of options to be used for autocomplete
-    private List<String> options;
+    private final List<String> options;
+    private final LineReader reader;
 
-    /**
-     * Constructor that initializes the autocomplete options.
-     *
-     * @param options A list of strings to be used for autocomplete suggestions.
-     */
     public SimpleAutoComplete(List<String> options) {
-        this.options = options;
+        this.options = options; //list of all commands
+        this.reader = createLineReader();
     }
 
     /**
-     * Returns a list of suggestions that start with the given input.
-     *
-     * @param input The input string that the user has typed.
-     * @return A list of strings that match the input.
+     * Line Reader does the bulk of the work, builds a new linereader, using terminal reference and specified completer
+     * we use a string completer because the command names are a list of strings.
+     * Line Reader will handle all the suggestions, and auto-completion
+     * @returns reader object to be used in readInput method
      */
-    public List<String> autocomplete(String input) {
-        List<String> suggestions = new ArrayList<>(); // List to store matching suggestions
+    private LineReader createLineReader() {
+        try {
+            Terminal terminal = TerminalBuilder.builder().system(true).build();
+            LineReader lineReader = LineReaderBuilder.builder()
+                    .terminal(terminal)
+                    .completer(new StringsCompleter(options))   //Pass the new completer object the options
+                    .build();
 
-        // Iterate over each option to find matches
-        for (String option : options) {
-            // Check if the option starts with the user input
-            if (option.startsWith(input)) {
-                suggestions.add(option); // Add matching option to the suggestions list
-            }
+            // Set the key map to enable autocompletion with the TAB key
+            lineReader.setKeyMap(LineReader.EMACS);
+            return lineReader;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
+    }
 
-        return suggestions; // Return the list of suggestions
+    //reads the current line the user is typing on, uses Jline's lineReader API to constantly scan for suggestions
+    public String readInputWithAutocomplete() {
+        return reader.readLine(">> ");
     }
 }
+

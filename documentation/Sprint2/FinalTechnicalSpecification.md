@@ -409,7 +409,10 @@ Manually adds our help command into the hashmap
 Cycles through list of command definitions and prints them to the screen
 * getCommand
 getter method to return the command via the parameter commandKey
+<p>
 
+* **getAllCommands:**
+returns a arrayList of strings for all command names on file
 ---
 
 ## Display:
@@ -419,10 +422,14 @@ Handles all display functionality.
 
 ### Features:
 
-* Display: initializes command registry from GSON and creates parser instance.
-* Start: entry method to handle start of program. Displays list of available commands and their arguments. Displays help
-from the start. Creates a Scanner instance for user input handling. Formats user's terminal for clean presentation.
+* **Display:** initializes command registry from GSON and creates parser instance.
+<p>
+
+* **Start:** entry method to handle start of program. Displays list of available commands and their arguments. Displays help
+from the start. Calls readInput from autocomplete to read user input. Formats user's terminal for clean presentation.
 Handles exit command for closing UML Editor application.
+<p>
+
 
 ---
 
@@ -537,21 +544,25 @@ command, else prints: "Unknown command <command>"
 
 ## SimpleAutoComplete
 ### Overview:
-SimpleAutocomplete provides basic autocomplete functionality.
-It matches user input against a predefined list of options.
+SimpleAutocomplete uses Jline3 library to provide tab auto-complete to the CLI
+
+**NOTE:** Tab auto complete only works in linux terminal
 
 ### Features:
 
 * **SimpleAutoComplete Constructor:**
-  Takes options command list
+  Takes options command list, and creates a new LineReader object
 <p>
 
-* **AutoComplete:**
-  Returns a list of suggestions that start with the given input
-<p> 
+* **createLineReader:**
+Line Reader does the bulk of the work, builds a new linereader, using terminal reference and specified completer
+uses a string completer because the command names are a list of strings.
+Line Reader will handle all the suggestions, and auto-completion
+returns reader object to be used in readInput method
+<p>
 
-
-
+* **readInputWithAutocomplete:**
+uses the reader object to read the line that the user is typing
 
 ---
 
