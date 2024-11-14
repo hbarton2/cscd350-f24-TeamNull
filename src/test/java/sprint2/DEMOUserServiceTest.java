@@ -8,9 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import umleditor.sprint2.demo.User;
-import umleditor.sprint2.demo.UserRepository;
-import umleditor.sprint2.demo.UserService;
+import umleditor.demo.User;
+import umleditor.demo.UserRepository;
+import umleditor.demo.UserService;
 
 @ExtendWith(MockitoExtension.class)
 public class DEMOUserServiceTest {

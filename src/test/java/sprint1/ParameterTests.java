@@ -3,10 +3,8 @@ package sprint1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import umleditor.sprint1.uml.MethodSignature;
-import umleditor.sprint1.utilities.Functions;
-
-import java.util.List;
+import umleditor.model.uml.MethodSignature;
+import umleditor.controller.utilities.Functions;
 
 import static org.junit.Assert.assertTrue;
 

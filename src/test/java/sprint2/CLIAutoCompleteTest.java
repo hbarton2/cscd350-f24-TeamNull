@@ -1,12 +1,5 @@
 package sprint2;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import umleditor.sprint1.utilities.SimpleAutoComplete;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

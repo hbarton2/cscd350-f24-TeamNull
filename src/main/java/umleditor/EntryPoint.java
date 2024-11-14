@@ -5,8 +5,8 @@ package umleditor;
  */
 
 import java.util.Scanner;
-import umleditor.sprint1.utilities.Display;
-import umleditor.sprint2.view.AppStart;
+import umleditor.view.cli.Display;
+import umleditor.view.AppStart;
 
 public class EntryPoint {
 

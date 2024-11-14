@@ -2,9 +2,8 @@ package sprint1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import umleditor.sprint1.uml.UMLAttribute;
-import umleditor.sprint1.uml.UMLClass;
-import umleditor.sprint1.utilities.Functions;
+import umleditor.model.uml.UMLClass;
+import umleditor.controller.utilities.Functions;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.ByteArrayOutputStream;
