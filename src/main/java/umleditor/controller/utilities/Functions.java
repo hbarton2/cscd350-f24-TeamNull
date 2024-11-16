@@ -23,7 +23,6 @@ public class Functions {
     if (!Storage.classExists(className)) {
       Storage.addClass(className);
       System.out.println("Class " + className + " created.");
-      saveProgress(TEMP_FILENAME); // Auto-save to temporary storage
     } else {
       System.out.println("Error: Class " + className + " already exists.");
     }
@@ -34,7 +33,6 @@ public class Functions {
     if (Storage.classExists(className)) {
       Storage.removeClass(className);
       System.out.println("Class " + className + " removed.");
-      saveProgress(TEMP_FILENAME); // Auto-save to temporary storage
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
     }
@@ -46,7 +44,6 @@ public class Functions {
       if (!Storage.classExists(newName)) {
         Storage.renameClass(oldName, newName);
         System.out.println("Class " + oldName + " renamed to " + newName + ".");
-        saveProgress(TEMP_FILENAME); // Auto-save to temporary storage
       } else {
         System.out.println("Error: Class " + newName + " already exists.");
       }
@@ -60,7 +57,6 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.addAttribute(attributeName, attributeType);
-      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
@@ -69,7 +65,6 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.removeAttribute(attributeName);
-      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
@@ -78,7 +73,6 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.renameAttribute(oldAttribute, newAttribute);
-      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
@@ -88,7 +82,6 @@ public class Functions {
     if (umlClass != null) {
       if (!umlClass.methodExists(methodName)) {
         umlClass.addMethod(methodName, methodType);
-        saveProgress(TEMP_FILENAME); // Auto-save
       } else {
         System.out.println("Error: Method " + methodName + " already exists in class " + className + ".");
       }
@@ -100,7 +93,6 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null && umlClass.methodExists(methodName)) {
       umlClass.removeMethod(methodName);
-      saveProgress(TEMP_FILENAME); // Auto-save
     } else {
       System.out.println("Error: Method " + methodName + " does not exist in class " + className + ".");
     }
@@ -111,7 +103,6 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.renameMethod(oldMethodName, newMethodName);
-      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
@@ -124,7 +115,6 @@ public class Functions {
     UMLRelationshipType type = getRelationshipType(relationshipType);
     if (umlClass != null && type != null) {
       umlClass.addOrUpdateRelationship(type);
-      saveProgress(TEMP_FILENAME); // Auto-save
     }
     return 0;
   }
@@ -134,7 +124,6 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.removeRelationship();
-      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
@@ -143,7 +132,6 @@ public class Functions {
     MethodSignature method = getMethodIfExists(className, methodName);
     if (method != null) {
       method.addParam(newParamName, paramType);
-      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
@@ -152,7 +140,6 @@ public class Functions {
     MethodSignature method = getMethodIfExists(className, methodName);
     if (method != null) {
       method.removeParam(paramName);
-      saveProgress(TEMP_FILENAME); // Auto-save
     }
   }
 
