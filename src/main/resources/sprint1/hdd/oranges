@@ -1,0 +1,1 @@
+{"Apple":{"className":"Apple","attributes":[{"name":"calcPrice","type":"long"}],"methods":[],"relationships":[{"type":"AGGREGATION"}]},"Oranges":{"className":"Oranges","attributes":[{"name":"name","type":"String"}],"methods":[],"relationships":[{"type":"AGGREGATION"}]}}

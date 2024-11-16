@@ -1,1 +1,1 @@
-{"IAmAMock":{"className":"IAmAMock","attributes":[],"methods":[],"relationships":[]},"Cat":{"className":"Cat","attributes":[],"methods":[],"relationships":[]},"NewMock":{"className":"NewMock","attributes":[],"methods":[],"relationships":[{"type":"ASSOCIATION"},{"type":"ASSOCIATION"}]},"AnotherMock":{"className":"AnotherMock","attributes":[],"methods":[],"relationships":[]},"Dog":{"className":"Dog","attributes":[],"methods":[],"relationships":[]}}
+{"Apple":{"className":"Apple","attributes":[{"name":"String","type":"name"}],"methods":[],"relationships":[]}}
