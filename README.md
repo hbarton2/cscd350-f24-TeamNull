@@ -39,27 +39,27 @@ Ensure that the following software is installed on the target machine:
 ### 1. Obtain the Program File
 Download the package https://github.com/hbarton2/cscd350-f24-TeamNull.git
 
-### Steps to Open Terminal and Run `umleditor.jar`
-
-2. **Locate `umleditor.jar`**:
-    - Navigate to the directory where `umleditor.jar` is located using your file explorer.
+### Steps to Open Terminal and Run `umleditor-2.0-shaded.jar`
+#### NOTE: CLI must be ran in Linux terminal for access to all features.
+2. **Locate `umleditor-2.0-shaded.jar`**:
+    - Navigate to the directory where `umleditor-2.0-shaded.jar` is located using your file explorer.
 
 3. **Open Terminal/Command Prompt**:
     - **On Windows**:
         - Right-click inside the folder (not on the file) and select `Open in Terminal` or `Open PowerShell window here`.
     - **On macOS**:
         - Open Terminal, then type `cd` followed by a space.
-        - Drag and drop the folder containing `umleditor.jar` into the Terminal window.
+        - Drag and drop the folder containing `umleditor-2.0-shaded.jar` into the Terminal window.
         - Press `Enter` to navigate to the folder.
     - **On Linux**:
         - Open Terminal, then type `cd` followed by a space.
-        - Drag and drop the folder containing `umleditor.jar` into the Terminal window.
+        - Drag and drop the folder containing `umleditor-2.0-shaded.jar` into the Terminal window.
         - Press `Enter` to navigate to the folder.
 
 4. **Run the JAR File**:
     - Type the following command in the terminal:
       ```bash
-      java -jar umleditor.jar
+      java -jar umleditor-2.0-shaded.jar
       ```
     - Press `Enter` to execute the command.
 
@@ -131,7 +131,7 @@ src/main/java/umleditor/EntryPoint.java
 
 3. Run the project:
    ```bash
-   java -jar umleditor-2.0-shaded-Demo.jar
+   java -jar umleditor-2.0-shaded.jar
    ``` 
 ---
 
