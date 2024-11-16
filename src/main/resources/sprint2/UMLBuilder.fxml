@@ -10,13 +10,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.UMLBuilderController">
   <!-- Menu Bar -->
@@ -74,7 +71,7 @@
          <Button fx:id="fieldSaveButton" mnemonicParsing="false" onAction="#saveFieldsOnClick" prefHeight="25.0" prefWidth="48.0" text="Enter" />
       <ScrollPane fx:id="fieldArea" fitToWidth="true" prefHeight="43.0" prefWidth="440.0">
         <VBox fx:id="fieldsBox" spacing="5">
-          <HBox fx:id="fldArea" prefHeight="3.0" prefWidth="462.0" spacing="5">
+          <HBox fx:id="fldArea" prefHeight="25.0" prefWidth="328.0" spacing="5">
             <Button fx:id="field_Save_Button" onAction="#addField" text="+" />
           </HBox>
         </VBox>
@@ -82,32 +79,26 @@
 
       <!-- Methods Section -->
       <Label fx:id="methodLabel" prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
-      <ScrollPane fx:id="methodArea" fitToWidth="true" prefHeight="103.0" prefWidth="464.0">
+      <ScrollPane fx:id="methodArea" fitToWidth="true" prefHeight="28.0" prefWidth="553.0">
         <VBox fx:id="methodsBox" spacing="5">
           <HBox spacing="5">
-            <TextField fx:id="classNameToSaveMethod" prefHeight="25.0" prefWidth="114.0" promptText="Enter class name" />
-            <TextField fx:id="methodName" prefHeight="25.0" prefWidth="122.0" promptText="Method name" />
+            <TextField fx:id="classNameToSaveMethod" prefHeight="25.0" prefWidth="111.0" promptText="Enter class name" />
+            <TextField fx:id="methodName" prefHeight="25.0" prefWidth="96.0" promptText="Method name" />
                   <ChoiceBox fx:id="methodDataTypeChoice" prefHeight="25.0" prefWidth="83.0" />
-                  <Button fx:id="methodSaveButton" mnemonicParsing="false" onAction="#saveMethodANDPram" prefHeight="25.0" prefWidth="67.0" text="Enter" />
-            <Button onAction="#addMethod" text="+" />
+            <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="98.0" promptText="Parameter name" />
+                  <ChoiceBox fx:id="pramRetunDataTypeChoice" prefHeight="25.0" prefWidth="74.0" />
+                  <Button fx:id="methodSaveButton" mnemonicParsing="false" onAction="#saveMethodANDPram" prefHeight="25.0" prefWidth="50.0" text="Enter" />
           </HBox>
         </VBox>
       </ScrollPane>
-         <HBox fx:id="pramArea" prefHeight="100.0" prefWidth="200.0">
-            <children>
-         <TextField fx:id="parameterType" prefHeight="25.0" prefWidth="104.0" promptText="Parameter type" />
-         <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="134.0" promptText="Parameter name" />
-               <ChoiceBox fx:id="pramRetunDataTypeChoice" prefHeight="25.0" prefWidth="89.0" />
-               <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Enter" />
-            </children>
-         </HBox>
+         <HBox fx:id="pramArea" prefHeight="100.0" prefWidth="200.0" />
 
       <!-- Relationships Section -->
       <Label fx:id="relationshipLabel" style="-fx-font-size: 14px;" text="Relationships" />
       <ScrollPane fx:id="area" fitToWidth="true" prefHeight="61.0" prefWidth="464.0">
         <VBox fx:id="relationshipsBox" spacing="5">
           <HBox fx:id="relationshipArea" prefHeight="20.0" prefWidth="551.0" spacing="5">
-            <ChoiceBox fx:id="relationshipChoiceBox" prefHeight="25.0" prefWidth="148.0" />
+            <ChoiceBox fx:id="relationshipChoiceBox" prefHeight="26.0" prefWidth="109.0" />
                   <TextField fx:id="classNameToAddRelationship" prefHeight="25.0" prefWidth="107.0" promptText="src Class Name" />
                   <TextField fx:id="classNameToAddRelationshipdst" prefHeight="25.0" prefWidth="108.0" promptText="dst Class Name" />
                   <Button fx:id="addRelationshipBTN" mnemonicParsing="false" onAction="#addRelationshipOnClick" text="Enter" />
@@ -118,25 +109,16 @@
 
       <!-- Action Buttons -->
       <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
-      <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="25.0" prefWidth="272.0" text="Delete" />
       <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="25.0" prefWidth="272.0" text="Save to file" />
-      <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadNode" prefHeight="25.0" prefWidth="271.0" text="Load" />
-      <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="35.0" prefWidth="273.0" text="Create Node (Not on final release)" />
+         <TextField fx:id="lowerMsgBox" prefHeight="2.0" prefWidth="553.0" promptText="System messages:" />
+      <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadNode" prefHeight="25.0" prefWidth="57.0" text="Load" />
+      <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="25.0" prefWidth="60.0" text="Create Node (Not on final release)" />
+      <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="25.0" prefWidth="57.0" text="Delete" />
     </VBox>
 
     <!-- Right-side area for draggable nodes -->
     <ScrollPane prefHeight="722.0" prefWidth="581.0">
-      <AnchorPane fx:id="viewAnchorPane" prefHeight="621.0" prefWidth="422.0">
-        <TextFlow fx:id="classShape" layoutX="122.0" layoutY="283.0" prefHeight="137.0" prefWidth="200.0">
-          <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" visible="false" />
-        </TextFlow>
-            <TextField fx:id="sysMessage" layoutX="147.0" layoutY="2.0" prefHeight="25.0" prefWidth="529.0" />
-         <Label layoutX="14.0" layoutY="-4.0" prefHeight="36.0" prefWidth="128.0" text="System Messages:">
-           <font>
-             <Font size="14.0" />
-           </font>
-         </Label>
-      </AnchorPane>
+      <AnchorPane fx:id="viewAnchorPane" prefHeight="847.0" prefWidth="681.0" />
     </ScrollPane>
   </SplitPane>
 
