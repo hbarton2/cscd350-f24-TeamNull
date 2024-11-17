@@ -30,9 +30,10 @@ public class AlterRelationTest {
         this.mockSource = "IAmSource";
         this.mockDestination = "IAmDestination";
         this.mockRelationship = new UMLRelationship(mockSource, UMLRelationshipType.GENERALIZATION, mockDestination);
-        this.storage.addClass(mockSource);
-        this.storage.addClass(mockDestination);
-        this.storage.addClass(mockAnotherClass);
+        this.storage.createClass(mockSource);
+        this.storage.addClass(mockSource, storage.createClass(mockSource));
+        this.storage.addClass(mockDestination, storage.createClass(mockDestination));
+        this.storage.addClass(mockAnotherClass, storage.createClass(mockAnotherClass));
         this.storage.addRelation(mockRelationship);
     }
 

@@ -18,7 +18,7 @@ public class Model {
    * relationships list
    */
   public String createClassNode(String nodeClass){ //currently only holds 'class name'
-    storage.createClass(nodeClass);
+    storage.addClass(nodeClass, storage.createClass(nodeClass));
     return nodeClass;
   }
 
