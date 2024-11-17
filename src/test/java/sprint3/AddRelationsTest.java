@@ -1,10 +1,8 @@
 package sprint3;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import umleditor.sprint1.uml.UMLClass;
-import umleditor.sprint1.uml.UMLRelationship;
 import umleditor.sprint1.uml.UMLRelationshipType;
 import umleditor.sprint1.utilities.Functions;
 
@@ -17,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Also checks for deletion of tests.
  *
  * */
-public class RelationsTest {
+public class AddRelationsTest {
 
     //The mock class we are testing
     private UMLClass mock;
@@ -132,7 +130,7 @@ public class RelationsTest {
     @Test
     public void noAddWithOneClass(){
         Functions.createClass("IAmAMock");
-        assertEquals(Functions.addRelationship("IAmMock", 1, "DestClass"), 0, "Unexpected return value"); //set to zero to induce fail state
+        assertNotEquals(Functions.addRelationship("IAmMock", 1, "DestClass"), 0, "Unexpected return value"); //set to zero to induce fail state
 
     }
 

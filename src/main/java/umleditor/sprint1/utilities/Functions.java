@@ -7,9 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import umleditor.sprint1.uml.MethodSignature;
 import umleditor.sprint1.uml.UMLClass;
+import umleditor.sprint1.uml.UMLRelationship;
 import umleditor.sprint1.uml.UMLRelationshipType;
 
 public class Functions {
@@ -117,15 +119,17 @@ public class Functions {
   // Add or update a relationship in a class
   public static int addRelationship(String className, int relationshipType, String destClass) {
     if (Storage.getUMLClasses().size() <= 1 || className.equals(destClass)){
+      System.out.println("Can not create relation to single class or 'self', please try again.");
       return 1;
     }
     UMLClass umlClass = getClassIfExists(className);
     UMLRelationshipType type = getRelationshipType(relationshipType);
     if (umlClass != null && type != null) {
-      umlClass.addOrUpdateRelationship(type);
+      Storage.addRelation(new UMLRelationship(className, type, destClass));
       saveProgress(TEMP_FILENAME); // Auto-save
+      return 0;
     }
-    return 0;
+    return 1;
   }
 
   // Remove a relationship from a class
@@ -233,39 +237,97 @@ public class Functions {
 
   // Save progress to a file or temporary if no filename is provided
   public static void saveProgress(String filename) {
+    String printOutName;
+    String fileNameForClass = "";
+    String fileNameForRelations = "";
+    if (filename.contains(".json")){
+      fileNameForRelations = filename.substring(0, filename.indexOf('.'));
+      printOutName = filename;
+    }else {
+      fileNameForClass = filename + ".json";
+      printOutName = fileNameForClass;
+    }
+
     try {
       File dir = new File(STORAGE_DIRECTORY);
       if (!dir.exists()) {
         dir.mkdirs();
       }
 
-      Gson gson = new Gson();
-      String json = gson.toJson(Storage.getUMLClasses());
 
-      try (FileWriter writer = new FileWriter(new File(STORAGE_DIRECTORY, filename))) {
-        writer.write(json);
-        System.out.println("Progress saved to " + STORAGE_DIRECTORY + "/" + filename + ".");
+      Gson gson = new Gson();
+
+      String json1 = gson.toJson(Storage.getUMLClasses());
+      String json2 = gson.toJson(Storage.getRelationships());
+
+      FileWriter writer1;
+      if (fileNameForClass.isEmpty()){
+        writer1 = new FileWriter(new File(STORAGE_DIRECTORY, filename));
+      }else {
+        writer1 = new FileWriter(new File(STORAGE_DIRECTORY, fileNameForClass));
+
       }
+
+      FileWriter writer2;
+      if (fileNameForRelations.isEmpty()){
+        writer2 = new FileWriter(new File(STORAGE_DIRECTORY, filename + "-Rltn.json"));
+      }else{
+        writer2 = new FileWriter(new File(STORAGE_DIRECTORY, fileNameForRelations + "-Rltn.json"));
+      }
+
+      writer1.write(json1);
+      writer2.write(json2);
+      System.out.println("Progress saved to " + STORAGE_DIRECTORY + "/" + printOutName + ".");
+
+      writer1.close();
+      writer2.close();
     } catch (IOException e) {
-      System.out.println("Error: Could not save progress to " + filename + ".");
+      System.out.println("Error: Could not save progress to " + printOutName + ".");
     }
   }
 
   // Load progress from a file or temporary if no filename is provided
   public static void loadProgress(String filename) {
-    File file = new File(STORAGE_DIRECTORY, filename);
-    if (!file.exists()) {
-      System.out.println("Error: File " + filename + " does not exist.");
+    String printOutName;
+    String classFile;
+    String relationFile;
+    File file1;
+    File file2;
+
+    if (filename.contains(".json")){
+      relationFile = filename.substring(0, filename.indexOf('.'));
+      printOutName = filename;
+      file1 = new File(STORAGE_DIRECTORY, filename);
+      file2 = new File(STORAGE_DIRECTORY, relationFile + "-Rltn.json");
+    }else {
+      classFile = filename + ".json";
+      printOutName = classFile;
+      file1 = new File(STORAGE_DIRECTORY, classFile);
+      file2 = new File(STORAGE_DIRECTORY, filename + "-Rltn.json");
+    }
+
+    if (!file1.exists()) {
+      System.out.println("Error: File " + printOutName + " does not exist.");
       return;
     }
 
-    try (FileReader reader = new FileReader(file)) {
-      Type type = new TypeToken<HashMap<String, UMLClass>>() {}.getType();
-      HashMap<String, UMLClass> loadedClasses = new Gson().fromJson(reader, type);
-      Storage.setUMLClasses(loadedClasses);
-      System.out.println("Progress loaded from " + STORAGE_DIRECTORY + "/" + filename + ".");
+    try{
+      FileReader reader1 = new FileReader(file1);
+      FileReader reader2 = new FileReader(file2);
+      Type type1 = new TypeToken<HashMap<String, UMLClass>>() {}.getType();
+      HashMap<String, UMLClass> classes = new Gson().fromJson(reader1, type1);
+      Type type2 = new TypeToken<ArrayList<UMLRelationship>>() {}.getType();
+      ArrayList<UMLRelationship> relations = new Gson().fromJson(reader2, type2);
+
+      //System.out.println("Type in 'loadedData[0]': " + relations.getClass());
+      Storage.setRelationships(relations);
+
+      //System.out.println("Type in 'loadedData[1]': " + classes.getClass());
+      Storage.setUMLClasses(classes);
+
+      System.out.println("Progress loaded from " + STORAGE_DIRECTORY + "/" + printOutName + ".");
     } catch (IOException e) {
-      System.out.println("Error: Could not load progress from " + filename + ".");
+      System.out.println("Error: Could not load progress from " + printOutName + ".");
     }
   }
 
