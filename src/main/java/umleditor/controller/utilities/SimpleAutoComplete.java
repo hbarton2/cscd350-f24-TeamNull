@@ -54,5 +54,10 @@ public class SimpleAutoComplete {
     public String readInputWithAutocomplete() {
         return reader.readLine(">> ");
     }
+
+    public boolean readerExists(){
+        return reader != null;
+    }
 }
+
 
