@@ -1,5 +1,7 @@
 package umleditor.model.uml;
 
+import umleditor.model.utilities.Storage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -238,10 +240,15 @@ public class UMLClass {
   }
 
   public void restoreFromMemento(Memento memento) {
-    this.className = memento.getClassName();
-    this.attributes = new ArrayList<>(memento.getAttributes());
-    this.methods = new ArrayList<>(memento.getMethods());
-    this.relationships = new ArrayList<>(memento.getRelationships());
+    Storage storage = Storage.getInstance();
+    if(storage.classExists(memento.className)) {
+      this.className = memento.getClassName();
+      this.attributes = new ArrayList<>(memento.getAttributes());
+      this.methods = new ArrayList<>(memento.getMethods());
+      this.relationships = new ArrayList<>(memento.getRelationships());
+    }
+    else
+      System.out.println("Restore from memento failed. Still in development");
   }
 
   // Nested Memento class

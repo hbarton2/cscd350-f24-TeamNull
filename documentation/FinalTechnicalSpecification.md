@@ -15,6 +15,7 @@ Technical Documentation
       4. [Functions](#Functions)
       5. [ParsingInputs](#ParsingInputs)
       6. [SimpleAutoComplete](#SimpleAutoComplete)
+      7. [MementoStorage](#MementoStorage)
 3. [Model](#Model)
    1. [Model](#Model)
    2. [UML](#UML)
@@ -267,7 +268,17 @@ Stores method calls for use from the menu, checks input and checks if class exis
 
 * **removeParam:**
   removes a parameter from an existing method within a class
+<p>
 
+* **undo:**
+uses the memento storage class, and replaces the current class information with the
+information stored in the memento object. Undos the last action and restores the class
+into its previous state.
+<p>
+
+* **redo:**
+uses the same logic as undo, to redo the last undo action and restore the class
+to its state before the undo was called.
 ---
 
 
@@ -412,7 +423,9 @@ UMLAttribute handles attribute (field) construction. Attribute must have a name 
 ## UMLClass:
 <h3> Overview: </h3>
 Handles all class objects created by the user
-Name, Attributes (Fields), List of Methods, Fields, Relationships
+Name, Attributes (Fields), List of Methods, Fields, Relationships.
+Contains Memento nested class that creates a memento 'clone' of the class
+used undo/redo actions.
 
 <h3> Features: </h3>
 
@@ -450,6 +463,19 @@ Name, Attributes (Fields), List of Methods, Fields, Relationships
 
 * **Display (Object):**
   Display Methods, cycle through the relevant list and print to screen the information
+<p>
+
+* **restoreFromMemento**
+takes in memento object as parameter, sets all of the fields of this class equal to
+the fields of the memento object.
+<p>
+
+* **saveToMemento:**
+Saves all fields of this class into memento object
+<p>
+
+### Memento:
+has constructor and getter methods to create a memento clone of this class
 
 ----
 
