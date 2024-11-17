@@ -48,7 +48,7 @@ public class AlterRelationTest {
      * */
     @Test
     public void testAlterBySource(){
-//        int result = Storage.alterBySource(mockRelationship, args);
+       int result = Storage.alterBySource(mockRelationship, args);
 //        assertEquals(0, result); // ensures operations was successful
 //        assertTrue(Storage.getRelationships().get(0).getSource().equals(mockSource)); // asserts we didn't accidentally change the source class attribute.
 //        assertTrue(Storage.getRelationships().get(0).getType().equals(args[0]) && Storage.getRelationships().get(0).getDestination().equals(args[1])
@@ -76,7 +76,7 @@ public class AlterRelationTest {
      * */
     @Test
     public void testAlterByDestination(){
-//        int result = Storage.alterByDestination(mockRelationship, args);
+        int result = Storage.alterByDestination(mockRelationship, args);
 //        assertEquals(0, result); // ensures operations was successful
 //        assertTrue(Storage.getRelationships().get(0).getSource().equals(mockDestination)); // asserts we didn't accidentally change the source class attribute.
 //        assertTrue(Storage.getRelationships().get(0).getType().equals(args[0]) && Storage.getRelationships().get(0).getSource().equals(args[1])
