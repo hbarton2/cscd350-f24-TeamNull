@@ -19,6 +19,8 @@ public class Functions {
 
   private static final String TEMP_FILENAME = "temp_save.json";
   private static final String STORAGE_DIRECTORY = "src/main/resources/sprint1/hdd";
+  private static final Storage store = Storage.getInstance();
+  private static final MementoStorage memStore = MementoStorage.getInstance();
 
   // Singleton instance of Storage
   private static final Storage storage = Storage.getInstance();
@@ -26,7 +28,9 @@ public class Functions {
   // Method to create a new class
   public static void createClass(String className) {
     if (!storage.classExists(className)) {
-      storage.addClass(className);
+      UMLClass newClass = storage.createClass(className);
+      storage.addClass(className, newClass);
+      memStore.saveState(newClass.saveToMemento(storage.classExists(className)));
       System.out.println("Class " + className + " created.");
     } else {
       System.out.println("Error: Class " + className + " already exists.");
@@ -36,7 +40,11 @@ public class Functions {
   // Method to remove a class
   public static void removeClass(String className) {
     if (storage.classExists(className)) {
+
+      // Get the class to be removed
+      UMLClass classToRemove = storage.getClassObject(className);
       storage.removeClass(className);
+      memStore.saveState(classToRemove.saveToMemento(storage.classExists(className)));
       System.out.println("Class " + className + " removed.");
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -46,8 +54,10 @@ public class Functions {
   // Method to rename a class
   public static void renameClass(String oldName, String newName) {
     if (storage.classExists(oldName)) {
+      UMLClass umlClass = storage.getClassObject(oldName);
       if (!storage.classExists(newName)) {
         storage.renameClass(oldName, newName);
+        memStore.saveState(umlClass.saveToMemento(storage.classExists(newName)));
         System.out.println("Class " + oldName + " renamed to " + newName + ".");
       } else {
         System.out.println("Error: Class " + newName + " already exists.");
@@ -62,6 +72,7 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.addAttribute(attributeName, attributeType);
+      memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
     }
   }
 
@@ -70,6 +81,7 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.removeAttribute(attributeName);
+      memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
     }
   }
 
@@ -78,6 +90,7 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.renameAttribute(oldAttribute, newAttribute);
+      memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
     }
   }
 
@@ -87,6 +100,7 @@ public class Functions {
     if (umlClass != null) {
       if (!umlClass.methodExists(methodName)) {
         umlClass.addMethod(methodName, methodType);
+        memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
       } else {
         System.out.println("Error: Method " + methodName + " already exists in class " + className + ".");
       }
@@ -98,6 +112,7 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null && umlClass.methodExists(methodName)) {
       umlClass.removeMethod(methodName);
+      memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
     } else {
       System.out.println("Error: Method " + methodName + " does not exist in class " + className + ".");
     }
@@ -108,6 +123,7 @@ public class Functions {
     UMLClass umlClass = getClassIfExists(className);
     if (umlClass != null) {
       umlClass.renameMethod(oldMethodName, newMethodName);
+      memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
     }
   }
 
@@ -137,17 +153,25 @@ public class Functions {
 
   // Add a parameter to a method in a class
   public static void addParam(String className, String methodName, String newParamName, String paramType) {
-    MethodSignature method = getMethodIfExists(className, methodName);
-    if (method != null) {
-      method.addParam(newParamName, paramType);
+    if(storage.classExists(className)) {
+      UMLClass umlClass = storage.getClassObject(className);
+      MethodSignature method = getMethodIfExists(className, methodName);
+      if (method != null) {
+        method.addParam(newParamName, paramType);
+        memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
+      }
     }
   }
 
   // Remove a parameter from a method in a class
   public static void removeParam(String className, String methodName, String paramName) {
-    MethodSignature method = getMethodIfExists(className, methodName);
-    if (method != null) {
-      method.removeParam(paramName);
+      if(storage.classExists(className)) {
+        UMLClass umlClass = storage.getClassObject(className);
+      MethodSignature method = getMethodIfExists(className, methodName);
+      if (method != null) {
+        method.removeParam(paramName);
+        memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
+      }
     }
   }
 
@@ -345,19 +369,43 @@ public class Functions {
   }
 
   /**
-   * TODO: implement with memento design pattern
-   * Use a stack to revert the last action performed by the user
+   * Reverts the last action performed by the user using the undo stack.
+   * Retrieves the last memento, restores the state, and moves it to the redo stack.
    */
-  public static void undo(){
-    System.out.println("last action reverted");
+  public static void undo() {
+    if (memStore.canUndo()) {
+      // Perform the undo operation
+      UMLClass.Memento previousState = memStore.undo();
+      if (previousState != null) {
+        UMLClass affectedClass = storage.getClassObject(previousState.getClassName());
+        affectedClass.restoreFromMemento(previousState);
+        System.out.println("Last action reverted: Class " + previousState.getClassName() + " restored.");
+      } else {
+        System.out.println("Undo failed: No state to revert.");
+      }
+    } else {
+      System.out.println("No actions to undo.");
+    }
   }
 
   /**
-   * TODO: implement with memento design pattern
-   * Use a stack to restore the most recently undone action
+   * Restores the most recently undone action using the redo stack.
+   * Retrieves the last memento from the redo stack, restores the state, and moves it to the undo stack.
    */
-  public static void redo(){
-    System.out.println("last action restored");
+  public static void redo() {
+    if (memStore.canRedo()) {
+      // Perform the redo operation
+      UMLClass.Memento redoneState = memStore.redo();
+      if (redoneState != null) {
+        UMLClass affectedClass = storage.getClassObject(redoneState.getClassName());
+        affectedClass.restoreFromMemento(redoneState);
+        System.out.println("Last undone action restored: Class " + redoneState.getClassName() + " redone.");
+      } else {
+        System.out.println("Redo failed: No state to restore.");
+      }
+    } else {
+      System.out.println("No actions to redo.");
+    }
   }
 
   public static void exit() {

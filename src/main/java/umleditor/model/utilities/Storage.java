@@ -77,14 +77,21 @@ public class Storage {
   }
 
   // Method to add a new class to storage
-  public void addClass(String className) {
+  public UMLClass createClass(String className) {
     if (!umlClasses.containsKey(className)) {
       UMLClass newClass = new UMLClass(className);  // Create a new UMLClass object
-      umlClasses.put(className, newClass);  // Add it to the storage
+      return newClass;
+
     } else {
       System.out.println("Error: Class " + className + " already exists.");
+      return null;
     }
   }
+
+  public void addClass(String className, UMLClass classObject) {
+    umlClasses.put(className, classObject);  // Add it to the storage
+  }
+
 
   // Method to remove a class from storage
   public void removeClass(String className) {
@@ -236,7 +243,7 @@ public class Storage {
   }
 
   // Method to get a UMLClass by its name
-  public UMLClass getClass(String className) {
+  public UMLClass getClassObject(String className) {
     return umlClasses.get(className);
   }
 }
