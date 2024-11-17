@@ -18,10 +18,13 @@ public class Functions {
   private static final String TEMP_FILENAME = "temp_save.json";
   private static final String STORAGE_DIRECTORY = "src/main/resources/sprint1/hdd";
 
+  // Singleton instance of Storage
+  private static final Storage storage = Storage.getInstance();
+
   // Method to create a new class
   public static void createClass(String className) {
-    if (!Storage.classExists(className)) {
-      Storage.addClass(className);
+    if (!storage.classExists(className)) {
+      storage.addClass(className);
       System.out.println("Class " + className + " created.");
     } else {
       System.out.println("Error: Class " + className + " already exists.");
@@ -30,8 +33,8 @@ public class Functions {
 
   // Method to remove a class
   public static void removeClass(String className) {
-    if (Storage.classExists(className)) {
-      Storage.removeClass(className);
+    if (storage.classExists(className)) {
+      storage.removeClass(className);
       System.out.println("Class " + className + " removed.");
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
@@ -40,9 +43,9 @@ public class Functions {
 
   // Method to rename a class
   public static void renameClass(String oldName, String newName) {
-    if (Storage.classExists(oldName)) {
-      if (!Storage.classExists(newName)) {
-        Storage.renameClass(oldName, newName);
+    if (storage.classExists(oldName)) {
+      if (!storage.classExists(newName)) {
+        storage.renameClass(oldName, newName);
         System.out.println("Class " + oldName + " renamed to " + newName + ".");
       } else {
         System.out.println("Error: Class " + newName + " already exists.");
@@ -108,7 +111,7 @@ public class Functions {
 
   // Add or update a relationship in a class
   public static int addRelationship(String className, int relationshipType, String destClass) {
-    if (Storage.getUMLClasses().size() <= 1 || className.equals(destClass)){
+    if (storage.getUMLClasses().size() <= 1 || className.equals(destClass)){
       return 1;
     }
     UMLClass umlClass = getClassIfExists(className);
@@ -162,11 +165,11 @@ public class Functions {
 
   // Helper methods for listing details, names, and relationships
   private static void listAllClassDetails() {
-    if (Storage.getUMLClasses().isEmpty()) {
+    if (storage.getUMLClasses().isEmpty()) {
       System.out.println("No classes created.");
       return;
     }
-    for (UMLClass umlClass : Storage.getUMLClasses().values()) {
+    for (UMLClass umlClass : storage.getUMLClasses().values()) {
       System.out.println("Class: " + umlClass.getClassName());
       System.out.println("Fields: " + umlClass.getAttributes());
       umlClass.displayMethods();
@@ -175,21 +178,21 @@ public class Functions {
   }
 
   private static void listClassNamesOnly() {
-    if (Storage.getUMLClasses().isEmpty()) {
+    if (storage.getUMLClasses().isEmpty()) {
       System.out.println("No classes created.");
       return;
     }
-    for (String className : Storage.getUMLClasses().keySet()) {
+    for (String className : storage.getUMLClasses().keySet()) {
       System.out.println("- " + className);
     }
   }
 
   private static void listClassesWithRelationships() {
-    if (Storage.getUMLClasses().isEmpty()) {
+    if (storage.getUMLClasses().isEmpty()) {
       System.out.println("No classes created.");
       return;
     }
-    for (UMLClass umlClass : Storage.getUMLClasses().values()) {
+    for (UMLClass umlClass : storage.getUMLClasses().values()) {
       if (!umlClass.getRelationships().isEmpty()) {
         System.out.println("Class: " + umlClass.getClassName());
         System.out.println("Relationships: " + umlClass.getRelationships());
@@ -200,8 +203,8 @@ public class Functions {
 
   // Helper to find UMLClass if it exists
   public static UMLClass getClassIfExists(String className) {
-    if (Storage.classExists(className)) {
-      return Storage.getUMLClasses().get(className);
+    if (storage.classExists(className)) {
+      return storage.getUMLClasses().get(className);
     } else {
       System.out.println("Error: Class " + className + " does not exist.");
       return null;
@@ -228,7 +231,7 @@ public class Functions {
       }
 
       Gson gson = new Gson();
-      String json = gson.toJson(Storage.getUMLClasses());
+      String json = gson.toJson(storage.getUMLClasses());
 
       try (FileWriter writer = new FileWriter(new File(STORAGE_DIRECTORY, filename))) {
         writer.write(json);
@@ -250,7 +253,7 @@ public class Functions {
     try (FileReader reader = new FileReader(file)) {
       Type type = new TypeToken<HashMap<String, UMLClass>>() {}.getType();
       HashMap<String, UMLClass> loadedClasses = new Gson().fromJson(reader, type);
-      Storage.setUMLClasses(loadedClasses);
+      storage.setUMLClasses(loadedClasses);
       System.out.println("Progress loaded from " + STORAGE_DIRECTORY + "/" + filename + ".");
     } catch (IOException e) {
       System.out.println("Error: Could not load progress from " + filename + ".");
@@ -259,7 +262,7 @@ public class Functions {
 
   // Clear all classes from Storage
   public static void clearProgress() {
-    Storage.clearUMLClasses();
+    storage.clearUMLClasses();
     System.out.println("All progress has been cleared.");
   }
 

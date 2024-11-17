@@ -7,6 +7,7 @@
 2. [Builder](#Builder)
 3. [MVC](#MVC)
 4. [Builder (Jline)](#Builder (Jline))
+5. [Singleton](#Singleton)
 
 ----
 # Command Factory:
@@ -45,3 +46,19 @@ each only performing their required tasks.
 Create LineReader method in class, uses builder pattern to build a new line reader
 object.
 ----
+
+# Singleton
+
+### Location: Storage
+<p>
+
+**Description:**
+Singleton Storage class create a single instance of storage. Ensures that UMLEditor only has one
+instance of Storage, and creates global access to the instance. 
+
+**Singleton Aspects**: 
+  * private static field for storing singleton instance
+  * public static creation method getInstance()
+  * private Storage constructor
+
+---

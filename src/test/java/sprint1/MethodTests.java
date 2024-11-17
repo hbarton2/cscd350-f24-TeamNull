@@ -23,7 +23,8 @@ public class MethodTests {
 
     private UMLClass TestClass;
     private ByteArrayOutputStream outputStream;
-
+    // Singleton Storage instance
+    private static final Storage storage = Storage.getInstance();
 
     @BeforeEach
     public void setUp() {
@@ -102,7 +103,7 @@ public class MethodTests {
         Functions.addMethod("TestClass", "void", "testMethod");
         Functions.removeClass("TestClass");
 
-        Assertions.assertFalse(Storage.classExists("TestClass"));
+        Assertions.assertFalse(storage.classExists("TestClass"));
 
         Functions.createClass("TestClass");
         TestClass = getClassIfExists("TestClass");

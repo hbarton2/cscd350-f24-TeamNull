@@ -500,10 +500,19 @@ Enum class that contains available relationship types:
 <p> It allows for adding, removing, renaming, and checking the existence of UML classes using static methods. </p>
 <p> The storage mechanism is based on a HashMap where the key is the class name (a String) and the value is a UMLClass object.</p><br>
 
+<h3> Design Pattern: Singleton</h3>
+
+<p> Singleton Storage class create a single instance of storage. Ensures that UMLEditor only has one
+instance of Storage, and creates global access to the instance.</p>
+<p> Singleton Aspects</p>
+<p> • private static field for storing singleton instance.</p>
+<p> • public static creation method getInstance().</p>
+<p> • private Storage constructor.</p>
+
 <h3> Data Structure</h3>
 
 <p> The class uses a private static HashMap to store all UML class objects:</p>
-<p> private static HashMap<String, UMLClass> umlClasses = new HashMap<p>();</p>
+<p> private static HashMap(String, UMLClass) umlClasses = new HashMap();</p>
 <p> • Key: The name of the UML class (String).</p>
 <p> • Value: The corresponding UMLClass object.</p>
 
@@ -515,19 +524,32 @@ Enum class that contains available relationship types:
 <p> 4. Rename Classes: Allows renaming an existing class.</p><br>
 
 
+<h3> Private Constructor: </h3>
+private Storage() {umlClasses = new HashMap<>();}
+
 <h3> Methods: </h3>
 
-<p> 1. getUMLClasses </p>
+<p> 1. getInstance() </p>
 
-<p>public static HashMap<String, UMLClass> getUMLClasses()
+<p>public static Storage getInstance()
+
+<p> • Description: Public static creation method for getting singleton instance. 
+Uses double-checked locking approach to prevent thread issues. </p>
+<p> • Return Type: Storage instance
+<p> • Usage: To access singleton instance of Storage.</p> <br>
+
+
+<p> 2. getUMLClasses </p>
+
+<p>public HashMap(String, UMLClass) getUMLClasses()
 
 <p> • Description: Returns the entire umlClasses HashMap, which contains all the UML classes currently stored. </p>
-<p> • Return Type: HashMap<String, UMLClass>
+<p> • Return Type: HashMap(String, UMLClass)
 <p> • Usage: To access the full collection of UML classes in storage.</p> <br>
 
-<h3> 2. addClass(String className) </h3>
+<h3> 3. addClass(String className) </h3>
 
-<p> public static void addClass(String className)</p>
+<p> public void addClass(String className)</p>
 
 <p> • Description: Adds a new UML class to the storage if the class name doesn’t already exist.</p>
 <p> • Parameters:
@@ -539,9 +561,9 @@ Enum class that contains available relationship types:
 <p> • Usage: To create and add a new UML class. </p> <br>
 
 
-<h3> 3. removeClass(String className) </h3>
+<h3> 4. removeClass(String className) </h3>
 
-<p> public static void removeClass(String className)</p>
+<p> public void removeClass(String className)</p>
 
 <p> • Description: Removes a UML class from the storage by its name.</p> <br>
 <p> • Parameters:
@@ -552,9 +574,9 @@ Enum class that contains available relationship types:
 <p> • If the class does not exist, no action is taken.</p>
 <p> • Usage: To remove an existing UML class by its name.</p><br>
 
-<h3> 4. classExists(String className) </h3>
+<h3> 5. classExists(String className) </h3>
 
-<p> public static boolean classExists(String className)</p>
+<p> public boolean classExists(String className)</p>
 
 <p> • Description: Checks if a UML class with the given name exists in storage. </p> <br>
 <p> • Parameters: </p>
@@ -563,9 +585,9 @@ Enum class that contains available relationship types:
 <p> • Usage: To verify the existence of a class in storage. </p><br>
 
 
-<h3> 5. renameClass(String oldName, String newName)</h3>
+<h3> 6. renameClass(String oldName, String newName)</h3>
 
-<p> public static void renameClass(String oldName, String newName)</p>
+<p> public void renameClass(String oldName, String newName)</p>
 
 <p> • Description: Renames an existing UML class by replacing the old name with a new name.</p>
 <p> • Parameters:
@@ -576,6 +598,17 @@ Enum class that contains available relationship types:
 <p>umlClasses map and adds a new entry with newName and the same UMLClass object.</p>
 <p> • If the class with oldName does not exist, an error message is printed.</p>
 <p> • Usage: To rename an existing UML class in the storage.</p><br>
+
+
+<h3> 7. public void clearUMLClasses()</h3>
+
+<p> public void clearUMLClasses()</p>
+
+<p> • Description: Clears umlClasses map of all content.</p>
+<p> • Behavior: </p>
+<p> • Uses Hashmap.clear() method to clear map contents.</p>
+<p> • Once cleared, prints "All UML classes have been cleared."</p>
+<p> • Usage: To clear hashmap of all umlClasses.</p><br>
 
 <h3> Error Handling </h3>
 
