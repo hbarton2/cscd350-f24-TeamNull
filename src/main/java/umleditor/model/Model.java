@@ -6,6 +6,9 @@ import umleditor.model.utilities.Storage;
  * @Model is an adapter class for sprint-2 (temp)
  */
 public class Model {
+  // Singleton Storage instance
+  private static final Storage storage = Storage.getInstance();
+
   /**
    * final product whole Node class information
    * nodeClass = (contains)
@@ -15,7 +18,7 @@ public class Model {
    * relationships list
    */
   public String createClassNode(String nodeClass){ //currently only holds 'class name'
-    Storage.addClass(nodeClass);
+    storage.addClass(nodeClass);
     return nodeClass;
   }
 
