@@ -2,7 +2,10 @@ package umleditor.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -10,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.LinearGradient;
+import javafx.stage.Stage;
 import umleditor.controller.utilities.Functions;
 import umleditor.view.gui.UMLNode;
 
@@ -103,10 +107,8 @@ public class UMLBuilderController {
     @FXML
     private ChoiceBox<String> fieldTypeChoice;
 
-
     @FXML
     private AnchorPane viewAnchorPane;
-
 
     //@FXML
   //  private ScrollPane fieldArea; // field area is the whole area with field box, drop down menu, plus and minus buttons
@@ -125,9 +127,7 @@ public class UMLBuilderController {
             "Add Parameter","Rename Parameter", "Delete Parameter",
             "Add Relationship","Save File","Help");
 
-
     private final String filePath = " \\cscd350-f24-TeamNull\\src\\main\\resources\\sprint1\\hdd\\";
-
 
     private final List<String> dropDownChoices = List.of("Select data type","void","String","int","double","float","char", "boolean","byte", "short", "long","Arrays","Integer", "Object");
 
@@ -174,7 +174,6 @@ public class UMLBuilderController {
         }
     }
 
-
     /**
      * This method activates the functions on the home page based on user selection from the dropdown menu
      * @param event, action listener.
@@ -182,7 +181,6 @@ public class UMLBuilderController {
      */
     @FXML
     void executeUserSelection(ActionEvent event) {
-
 
         infoBox("Option: " + userSelectionDropdown.getValue() +  ", selected.");
 
@@ -201,13 +199,9 @@ public class UMLBuilderController {
                 break;
 
             case "Rename a Class":
-                hideFieldArea();
-                hideRArea();
-                hideMethodArea();
-                hideFieldArea();
 
-                showClassArea();
 
+               renameClass();
                 break;
             case "Add Field (S)":
                 hideFieldArea();
@@ -218,6 +212,10 @@ public class UMLBuilderController {
                 showFieldArea();
 
                 classNameToSaveField.requestFocus();
+                break;
+            case "Rename Field":
+                renameField();
+
                 break;
 
             case "Add Method (S)":
@@ -230,7 +228,9 @@ public class UMLBuilderController {
 
                 classNameToSaveMethod.requestFocus();
                 break;
-
+            case "Rename Method":
+                renameMethod();
+                break;
             case "Add Relationship":
                 hideFieldArea();
                 hideMethodArea();
@@ -240,6 +240,11 @@ public class UMLBuilderController {
                 showRArea();
                 relationshipChoiceBox.requestFocus();
                 break;
+
+            case "Rename Parameter":
+                renameParameter();
+                break;
+
             case "Save File":
 
                 hideRArea();
@@ -267,7 +272,6 @@ public class UMLBuilderController {
         lowerMsgBox.setText(message);
         lowerMsgBox.setEditable(false);
         lowerMsgBox.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
-
     }
 
     /**
@@ -313,7 +317,6 @@ public class UMLBuilderController {
         });
     }
 
-
     @FXML
     public void deleteNode(ActionEvent actionEvent) {
         Functions.clearProgress();
@@ -332,9 +335,9 @@ public class UMLBuilderController {
     /**
      * Add or remove more Fields for user to add
      * depending on the user selection of plus or minus button, this method or removes field
+     * This method adds more Fields on the screen when user clicks the plus button
      */
 
-    // This method adds more Fields on the screen when user clicks the plus button
     @FXML
     public void addField() {
         HBox fieldBox = new HBox(5);
@@ -413,7 +416,6 @@ public class UMLBuilderController {
         System.exit(0);
     }
 
-
     /**
      * This method saves the progress in a file name provided by user
      * Pre-condition, it checks for the file name, if not provided shows a message on the screen
@@ -424,17 +426,14 @@ public class UMLBuilderController {
      */
     public void saveNode(ActionEvent actionEvent) {
 
-
         if(fileName.getText().isEmpty()) {
             showWarning("Please enter a file name");
             fileName.requestFocus();
             return;
         }
-
         Functions.saveProgress(fileName.getText());
         infoBox("Saving file to " + filePath + fileName.getText() + ".json");
     }
-
 
     public void loadNode(ActionEvent actionEvent) {
 
@@ -442,25 +441,20 @@ public class UMLBuilderController {
         textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
         textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
 
-
     }
 
     public void createMockNode(ActionEvent actionEvent) {
 
         infoBox("Creating a new mock node");
-
         node = new UMLNode(node.getClassName());
-
         viewAnchorPane.getChildren().add(node);
     }
-
 
     @FXML
     public void hideClassArea(){
         classNameLable.setVisible(false);
         classNameField.setVisible(false);
         saveClassName.setVisible(false);
-
     }
 
     @FXML
@@ -468,8 +462,6 @@ public class UMLBuilderController {
         classNameLable.setVisible(true);
         classNameField.setVisible(true);
         saveClassName.setVisible(true);
-
-
     }
     @FXML
     public void hideFieldArea(){
@@ -478,7 +470,6 @@ public class UMLBuilderController {
        fieldName.setVisible(false);
        fieldTypeChoice.setVisible(false);
        fieldSaveButton.setVisible(false);
-      // fieldArea.setVisible(false);
 
     }
 
@@ -489,7 +480,6 @@ public class UMLBuilderController {
         fieldName.setVisible(true);
         fieldTypeChoice.setVisible(true);
         fieldSaveButton.setVisible(true);
-
     }
 
     @FXML
@@ -518,12 +508,10 @@ public class UMLBuilderController {
         area.setVisible(true);
     }
 
-
     @FXML
     public void hideFileArea(){
         fileName.setVisible(false);
         saveClassBNT.setVisible(false);
-
     }
 
     @FXML
@@ -531,7 +519,6 @@ public class UMLBuilderController {
         fileName.setVisible(true);
         saveClassBNT.setVisible(true);
     }
-
 
     UMLNode node ;
 
@@ -542,18 +529,11 @@ public class UMLBuilderController {
             showWarning("Class name empty or duplicate !");
             return;
         }
-
             Functions.createClass(classNameField.getText());
-
             node = new UMLNode(classNameField.getText());
             classNameField.setText("");
-
             viewAnchorPane.getChildren().add(node);
-
-
             infoBox("Class name  " + classNameField.getText() + "  Saved. \n File path is: " + filePath);
-
-
         }
 
     /**
@@ -766,5 +746,64 @@ void saveFieldsOnClick(ActionEvent event) {
 
     public void setClassCounter(int classCounter) {
         this.classCounter = classCounter;
+    }
+
+    public void renameClass(){
+        try {
+            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/UML_GUI_Utility.fxml"));
+            Parent root = guiUtilityLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Rename Class Utility");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            System.out.println("Loading GUI Utility controller failed");
+            e.printStackTrace(); // Provides more details about the exception
+        }
+    }
+    public void renameField(){
+        try {
+            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameField.fxml"));
+            Parent root = guiUtilityLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Rename Field Utility");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            System.out.println("Loading Rename Field Utility failed");
+            e.printStackTrace(); // Provides more details about the exception
+        }
+    }
+    public void renameMethod(){
+        try {
+            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameMethod.fxml"));
+            Parent root = guiUtilityLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Rename Method Utility");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            System.out.println("Loading Rename Method Utility failed");
+            e.printStackTrace(); // Provides more details about the exception
+        }
+
+    }
+    public void renameParameter(){
+        try {
+            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameParameter.fxml"));
+            Parent root = guiUtilityLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Rename Parameter Utility");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            System.out.println("Loading Rename Parameter Utility failed");
+            e.printStackTrace(); // Provides more details about the exception
+        }
+
     }
 }
