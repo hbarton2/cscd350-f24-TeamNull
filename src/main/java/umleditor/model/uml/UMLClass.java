@@ -1,14 +1,15 @@
 package umleditor.model.uml;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UMLClass {
 
   private String className;
-  private final List<UMLAttribute> attributes;
-  private final List<MethodSignature> methods;  // Store methods with parameters
-  private final List<UMLRelationship> relationships;
+  private List<UMLAttribute> attributes;
+  private List<MethodSignature> methods;  // Store methods with parameters
+  private List<UMLRelationship> relationships;
 
   // Constructor with class name
   public UMLClass(String className) {
@@ -136,9 +137,6 @@ public class UMLClass {
     return className;
   }
 
-  public void setClassName(String className) {
-    this.className = className;
-  }
 
   public void renameClass(String newName) {
     this.className = newName;
@@ -211,5 +209,70 @@ public class UMLClass {
       }
     }
     return null;
+  }
+
+  // Methods for updating state
+  public void setMethods(List<MethodSignature> methods) {
+    this.methods = methods;
+  }
+
+  public void setAttributes(List<UMLAttribute> attributes) {
+    this.attributes = attributes;
+  }
+
+  public void setRelationships(List<UMLRelationship> relationships) {
+    this.relationships = relationships;
+  }
+
+  public void setClassName(String className) {
+    this.className = className;
+  }
+
+  // Memento for state management
+  public Memento saveToMemento(boolean classExists) {
+    if(classExists) {
+      return new Memento(className, attributes, methods, relationships);
+    }
+    else
+      return new Memento(className, new ArrayList<>(attributes), new ArrayList<>(methods), new ArrayList<>(relationships));
+  }
+
+  public void restoreFromMemento(Memento memento) {
+    this.className = memento.getClassName();
+    this.attributes = new ArrayList<>(memento.getAttributes());
+    this.methods = new ArrayList<>(memento.getMethods());
+    this.relationships = new ArrayList<>(memento.getRelationships());
+  }
+
+  // Nested Memento class
+  public static class Memento {
+    private final String className;
+    private final List<UMLAttribute> attributes;
+    private final List<MethodSignature> methods;
+    private final List<UMLRelationship> relationships;
+
+    private Memento(String className, List<UMLAttribute> attributes, List<MethodSignature> methods, List<UMLRelationship> relationships) {
+      this.className = className;
+      this.attributes = new ArrayList<>(attributes);  // Ensure immutability
+      this.methods = new ArrayList<>(methods);
+      this.relationships = new ArrayList<>(relationships);
+    }
+
+    // Getters to access state
+    public String getClassName() {
+      return className;
+    }
+
+    public List<UMLAttribute> getAttributes() {
+      return Collections.unmodifiableList(attributes);
+    }
+
+    public List<MethodSignature> getMethods() {
+      return Collections.unmodifiableList(methods);
+    }
+
+    public List<UMLRelationship> getRelationships() {
+      return Collections.unmodifiableList(relationships);
+    }
   }
 }
