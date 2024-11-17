@@ -3,75 +3,118 @@ package umleditor.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.LinearGradient;
 import umleditor.controller.utilities.Functions;
 import umleditor.view.gui.UMLNode;
 
+import javax.sound.sampled.Line;
 import java.util.List;
 
 public class UMLBuilderController {
+   // Relationship arrow
+    @FXML
+    private Line relArrow ;
+    @FXML
+    private Line lineArrow ;
+    @FXML
+    private Line relLine2;
 
     @FXML
-    private Button crateMNod;
-
+    private Button goButton;
     @FXML
-    private TextField lowerMsgBox;
-
+    private Button  fieldSaveButton;
+    @FXML
+    private Button loadButton ;
     @FXML
     private Button delete;
     @FXML
     private Button addRelationshipBTN;
+    @FXML
+    private Button crateMNod;
+    @FXML
+    private Button saveClassBNT;
+    @FXML
+    private Button methodSaveButton;
+    @FXML
+    private Button saveClassName;
+    @FXML
+    public Button saveClass;
 
+    @FXML
+    private Label fieldsLabel;
+    @FXML
+    private Label relationshipLabel;
+
+    @FXML
+    private Label classNameLable; // Label on top of the field that shows class name
+    @FXML
+    private Label methodLabel; // label for method area
+
+    @FXML
+    private TextField classNameToSaveField;
+    @FXML
+    private TextField fieldName;
+    @FXML
+    private TextField fileName;
+    @FXML
+    private TextField classNameToSaveMethod;
+    @FXML
+    private TextField methodName;
+    @FXML
+    private TextField parameterName;
+
+    @FXML
+    private TextField lowerMsgBox;
     @FXML
     private TextField classNameToAddRelationship; // source class
     @FXML
     private TextField classNameToAddRelationshipdst; // destination class
+    @FXML
+    private TextField classNameField;
+    @FXML
+    private TextArea textArea;
 
     @FXML
     private HBox fldArea;
     @FXML
     private HBox pramArea;
 
-    //@FXML
-  //  private Button field_Save_Button;
-
     @FXML
-    private Button saveClassBNT;
-
-    @FXML
-    private ScrollPane fieldArea; // field area is the whole area with field box, drop down menu, plus and minus buttons
-
-    @FXML
-    private Label relationshipLabel;
-
-
-   // @FXML
-   // private TextField sysMessage;
-
-    @FXML
-    private ScrollPane area;
-
-    @FXML
-    private ScrollPane methodArea; // method area is the whole area with field box, drop down menu, plus and minus buttons
-    @FXML
-    private Label methodLabel; // label for method area
-
-    @FXML
-    private Button methodSaveButton;
-
-    @FXML
-    private Button saveClassName;
-
-    @FXML
-    private Label classNameLable; // Label on top of the field that shows class name
+    private VBox fieldsBox, methodsBox, relationshipsBox;
 
     // Dropdown menu on home page for user to select an action
     @FXML
     private ChoiceBox<String> userSelectionDropdown;
+
+    @FXML
+    private ChoiceBox<String> methodDataTypeChoice;
+
+    @FXML
+    private ChoiceBox<String> pramRetunDataTypeChoice;
+
+
+    public ChoiceBox<String> relationshipChoiceBox;
+    @FXML
+    private ChoiceBox<String> fieldTypeChoice;
+
+
+    @FXML
+    private AnchorPane viewAnchorPane;
+
+
+    //@FXML
+  //  private ScrollPane fieldArea; // field area is the whole area with field box, drop down menu, plus and minus buttons
+
+    @FXML
+    private ScrollPane area;
+    @FXML
+    private ScrollPane methodArea; // method area is the whole area with field box, drop down menu, plus and minus buttons
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
@@ -82,80 +125,24 @@ public class UMLBuilderController {
             "Add Parameter","Rename Parameter", "Delete Parameter",
             "Add Relationship","Save File","Help");
 
-    Node currentNode = new UMLNode("");
-
-    @FXML
-    private Button goButton;
-
-
-    @FXML
-    private TextField classNameToSaveField;
-
-    @FXML
-    private TextField fieldName;
-
-
-    @FXML
-    private TextField fileName;
-
-    @FXML
-    private Button loadButton ;
-
-
-
-    @FXML
-    private TextField classNameToSaveMethod;
-    @FXML
-    private TextField methodName;
-    @FXML
-    private TextField parameterName;
 
     private final String filePath = " \\cscd350-f24-TeamNull\\src\\main\\resources\\sprint1\\hdd\\";
 
-    @FXML
-    private Label fieldsLabel;
+
     private final List<String> dropDownChoices = List.of("Select data type","void","String","int","double","float","char", "boolean","byte", "short", "long","Arrays","Integer", "Object");
-
-    @FXML
-    private ChoiceBox<String> methodDataTypeChoice;
-
-    @FXML
-    private ChoiceBox<String> pramRetunDataTypeChoice;
-
-    // public TextFlow classShape;
-    @FXML
-    public Button saveClass;
-
-    public ChoiceBox<String> relationshipChoiceBox;
-
-    @FXML
-    private VBox fieldsBox, methodsBox, relationshipsBox;
-
-    @FXML
-    private AnchorPane viewAnchorPane;
-
-    @FXML
-    private TextField classNameField;
-
-    @FXML
-    private TextArea textArea;
-
-    @FXML
-    private ChoiceBox<String> fieldTypeChoice;
-
-    @FXML
-    private Button  fieldSaveButton;
-    // private final List<String> fieldDataTypeList = List.of("Select data type","Non","String","int","double","float","Object");
-
 
     private final List<String> relationshipTypes = List.of("Select Type", "ASSOCIATION", "AGGREGATION",
             "COMPOSITION", "INHERITANCE", "GENERALIZATION", "REALIZATION" ,"DEPENDENCY");
+
     private final String straightLine = "\n__________________________________";
+
     private int classCounter = 0;
 
-
-
-
+    /**
+     * This method initializes all the components when the program runs
+     * At first it hides all the components, it will show the related components, like TextField, TextArea, Buttons... etc
+     * When you user selects the related option from the dropdown menu on the main page and clicks on the "Go" button.
+     */
     @FXML
     public void initialize() {
 
@@ -167,9 +154,6 @@ public class UMLBuilderController {
         saveClass.setVisible(false);
         //delete.setVisible(false);
          loadButton.setVisible(false);
-        // crateMNod.setVisible(false);
-
-
         // Add list of options to the dropdown menu on the home page.
         userSelectionDropdown.getItems().addAll(userSelectionList);
 
@@ -177,8 +161,6 @@ public class UMLBuilderController {
         methodDataTypeChoice.getItems().addAll(dropDownChoices);
         // pramRetunDataTypeChoice.getItems().addAll(pramRetunDataTypeChoiceList); // drop down menu for user to select para meter data type
         pramRetunDataTypeChoice.getItems().addAll(dropDownChoices); // drop down menu for user to select para meter data type
-
-        // fieldTypeChoice.getItems().addAll(fieldDataTypeList); // Field Data Type dropdown menu show list of options
 
         fieldTypeChoice.getItems().addAll(dropDownChoices); // Field Data Type dropdown menu show list of options
 
@@ -190,7 +172,6 @@ public class UMLBuilderController {
             relationshipChoiceBox.getItems().addAll(relationshipTypes);
             relationshipChoiceBox.setValue(relationshipTypes.get(0)); // Set default value
         }
-
     }
 
 
@@ -208,30 +189,26 @@ public class UMLBuilderController {
         switch (userSelectionDropdown.getValue()){
 
             case "Create a Class":
-
                 hideFieldArea();
                 hideRArea();
                 hideMethodArea();
                 hideFieldArea();
 
                 showClassArea();
+
                 classNameField.requestFocus();
-
-
                 lowerMsgBox.setText("Option " + userSelectionDropdown.getValue() +  " selected.");
-
                 break;
+
             case "Rename a Class":
                 hideFieldArea();
-                showClassArea();
                 hideRArea();
                 hideMethodArea();
                 hideFieldArea();
-                classNameField.setPromptText("Old Class Name");
-                classNameField.requestFocus();
 
-                //Functions.renameClass();
+                showClassArea();
 
+                break;
             case "Add Field (S)":
                 hideFieldArea();
                 hideClassArea();
@@ -253,6 +230,7 @@ public class UMLBuilderController {
 
                 classNameToSaveMethod.requestFocus();
                 break;
+
             case "Add Relationship":
                 hideFieldArea();
                 hideMethodArea();
@@ -270,51 +248,19 @@ public class UMLBuilderController {
                 hideClassArea();
 
                 showFileArea();
+
                 fileName.requestFocus();
                 Functions.loadProgress(fieldName.getText());
 
             default:
                 infoBox(relationshipChoiceBox.getValue() + " is in development");
-
         }
-        /**
-        if (userSelectionDropdown.getValue().equalsIgnoreCase("Create a Class")){
-
-            showClassArea();
-            classNameField.requestFocus();
-            sysMessage.setText("Option " + userSelectionDropdown.getValue() +  " selected.");
-
-        }
-
-
-        if(userSelectionDropdown.getValue().equalsIgnoreCase("Save File")){
-            showFileArea();
-            fileName.requestFocus();
-            Functions.loadProgress(fieldName.getText());
-        }
-
-        if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Field (S)")){
-
-            showFieldArea();
-            classNameToSaveField.requestFocus();
-        }
-        if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Method (S)")){
-
-            showMethodArea();
-            classNameToSaveMethod.requestFocus();
-
-        }
-        if (userSelectionDropdown.getValue().equalsIgnoreCase("Add Relationship")){
-
-            showRArea();
-            relationshipChoiceBox.requestFocus();
-        }
-            */
     }
 
-
-
-    // Warning Box
+    /**
+     * This method shows "Warning" message. Text in red color when precondition of a method does not meet.
+     * @param message, message is based on each method pre- or post-condition.
+     */
     private void showWarning(String message) {
 
         lowerMsgBox.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
@@ -322,21 +268,18 @@ public class UMLBuilderController {
         lowerMsgBox.setEditable(false);
         lowerMsgBox.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
 
-
-
     }
 
-    // Information box
+    /**
+     * This method displays a message based on user selection to either confirm or
+     * inform the user action.
+     * @param message, it is based on each method post condition.
+     */
     private void infoBox(String message) {
 
         lowerMsgBox.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
         lowerMsgBox.setText(message);
-       // sysMessage.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
-       // sysMessage.setText(message);
 
-       //textArea.setVisible(true);
-        //textArea.setStyle("-fx-text-fill: green; -fx-font-weight: bold;"); // Red font for error box
-        //textArea.setText(straightLine + "\n" + message + straightLine);
     }
 
     private void resetFields() {
@@ -396,8 +339,6 @@ public class UMLBuilderController {
     public void addField() {
         HBox fieldBox = new HBox(5);
         TextField fieldType = new TextField();
-        //  fieldType.setPromptText("Enter data type");
-
 
         TextField fieldName = new TextField();
         fieldName.setPromptText("Enter field name");
@@ -408,19 +349,11 @@ public class UMLBuilderController {
         fieldTypeChoice.getItems().addAll(dropDownChoices);
 
         Button fieldSaveButton = new Button("Save");
-
-       // Button addButton = new Button("+");
-        //addButton.setOnAction(e -> addField());  // Allows adding more fields
-
-        //ddButton.setOnAction(e -> fieldTypeChoice.getChildren().add(fieldTypeChoice));
-
         Button removeButton = new Button("-");
         removeButton.setOnAction(e -> fieldsBox.getChildren().remove(fieldBox));
 
-       // fieldBox.getChildren().addAll(fieldType, fieldName,fieldTypeChoice, addButton, removeButton, fieldSaveButton);
         fieldsBox.getChildren().add(fieldBox);
     }
-
 
     @FXML
     public void addMethod() {
@@ -439,11 +372,10 @@ public class UMLBuilderController {
         methodTypeChoice.getItems().addAll(relationshipTypes);
 
         Button methodSaveButton = new Button("Save");
-        // Button addButton = new Button("+");
 
         // drop down menu for user to select parameter data type
         ChoiceBox<String> pramReturnDataTypeChoice = new ChoiceBox<>();
-        // pramReturnDataTypeChoice.getItems().addAll(pramRetunDataTypeChoiceList);
+
         pramReturnDataTypeChoice.getItems().addAll(dropDownChoices);
 
         TextField parameterName = new TextField();
@@ -508,9 +440,6 @@ public class UMLBuilderController {
 
         textArea.setVisible(true);
         textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
-
-        //textArea.setText(Functions.loadProgress());
-
         textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
 
 
@@ -520,8 +449,8 @@ public class UMLBuilderController {
 
         infoBox("Creating a new mock node");
 
-        node = new UMLNode("Sweet Class");
-       // node.setPositionAutomatically();
+        node = new UMLNode(node.getClassName());
+
         viewAnchorPane.getChildren().add(node);
     }
 
@@ -544,13 +473,12 @@ public class UMLBuilderController {
     }
     @FXML
     public void hideFieldArea(){
-        fieldsLabel.setVisible(false);
-        classNameToSaveField.setVisible(false);
+       fieldsLabel.setVisible(false);
+       classNameToSaveField.setVisible(false);
        fieldName.setVisible(false);
        fieldTypeChoice.setVisible(false);
-     //  field_Save_Button.setVisible(false);
        fieldSaveButton.setVisible(false);
-       fieldArea.setVisible(false);
+      // fieldArea.setVisible(false);
 
     }
 
@@ -560,17 +488,15 @@ public class UMLBuilderController {
         classNameToSaveField.setVisible(true);
         fieldName.setVisible(true);
         fieldTypeChoice.setVisible(true);
-      //  field_Save_Button.setVisible(true);
         fieldSaveButton.setVisible(true);
 
     }
+
     @FXML
     public void hideMethodArea(){
-
         methodLabel.setVisible(false);
         methodArea.setVisible(false);
         pramArea.setVisible(false);
-
     }
 
     @FXML
@@ -578,7 +504,6 @@ public class UMLBuilderController {
         methodLabel.setVisible(true);
         methodArea.setVisible(true);
         pramArea.setVisible(true);
-
     }
 
     @FXML
@@ -617,25 +542,19 @@ public class UMLBuilderController {
             showWarning("Class name empty or duplicate !");
             return;
         }
-          //  classCounter ++;
+
             Functions.createClass(classNameField.getText());
 
             node = new UMLNode(classNameField.getText());
             classNameField.setText("");
 
-            //node.setPositionAutomatically();
-            //node.setPrefHeight(50);
-
-
             viewAnchorPane.getChildren().add(node);
-           // node.setClassName(classNameField.getText());
+
 
             infoBox("Class name  " + classNameField.getText() + "  Saved. \n File path is: " + filePath);
-            //classNameField.clear();
+
 
         }
-
-
 
     /**
      *  This method saves field in a specific class.
@@ -644,74 +563,6 @@ public class UMLBuilderController {
      *  it saves them and confirm with message on the screen
      * @param event, on the click of the save button
      */
-/**
-    @FXML
-    void saveFieldsOnClick(ActionEvent event) {
-
-
-        if( classNameToSaveField.getText().isEmpty() || Functions.getClassIfExists(classNameToSaveField.getText()) == null) {
-            showWarning("Class name is required !");
-            classNameToSaveField.requestFocus();
-            return;
-        }
-
-        node.setClassName(classNameToSaveField.getText());
-        node.setFieldName(fieldName.getText());
-        node.setFieldType(fieldTypeChoice.getValue());
-
-        Functions.addAttribute(classNameToSaveField.getText(),fieldTypeChoice.getValue(),fieldName.getText());
-
-
-       // node.setPositionAutomatically();
-        viewAnchorPane.getChildren().add(node);
-
-        infoBox("Field name < " + fieldName.getText() + " > saved\n to < " + classNameToSaveField.getText() + " > class.\n file path is: " + filePath);
-
-    }
-
-*/
-/**
-@FXML
-void saveFieldsOnClick(ActionEvent event) {
-    // Validate class name input
-    if (classNameToSaveField.getText().isEmpty()) {
-        showWarning("Class name is required!");
-        classNameToSaveField.requestFocus();
-        return;
-    }
-    // Check if the class exists
-    String className = classNameToSaveField.getText();
-
-    // UMLNode existingNode = Functions.getClassIfExists(className);
-    if (node.getClassName() == null) {
-        showWarning("Class < " + className + " > does not exist!");
-        classNameToSaveField.requestFocus();
-        return;
-    }
-    // Validate field name input
-    if (fieldName.getText().isEmpty()) {
-        showWarning("Field name is required!");
-        fieldName.requestFocus();
-        return;
-    }
-    // Validate field type input
-    if (fieldTypeChoice.getValue() == null) {
-        showWarning("Field type is required!");
-        fieldTypeChoice.requestFocus();
-        return;
-    }
-    // Add field to the class
-    String fieldType = fieldTypeChoice.getValue();
-    String field = fieldName.getText();
-    Functions.addAttribute(className, fieldType, field);
-    // Update the node's fields and refresh its display
-    node.setFieldName(field);
-    node.setFieldType(fieldType);
-    //node.updateLabel();
-    // Show confirmation message
-    infoBox("Field name < " + field + " > saved\n to < " + className + " > class.\nFile path is: " + filePath);
-}
- */
 @FXML
 void saveFieldsOnClick(ActionEvent event) {
     // Validate class name input
@@ -818,38 +669,6 @@ void saveFieldsOnClick(ActionEvent event) {
         infoBox("Method < " + methodName.getText() + " > and parameter < " + parameterName.getText() +
                 " > saved to class < " + className + " >.");
     }
-   // has context menu
-/**
-    @FXML
-    void saveMethodANDPram(ActionEvent event) {
-
-        if(classNameToSaveMethod.getText().isEmpty() || Functions.getClassIfExists(classNameToSaveField.getText()) == null) {
-            showWarning("Class name is required !");
-
-            classNameToSaveMethod.requestFocus();
-            return;
-        }
-
-      //  viewAnchorPane.getChildren().add(node);
-        node.setClassName(classNameToSaveMethod.getText());
-        node.setMethodName(methodName.getText());
-        node.setMethodType(methodDataTypeChoice.getValue());
-
-        node.setParameterName(parameterName.getText());
-        node.setParameterType(pramRetunDataTypeChoice.getValue());
-
-        //Functions.addAttribute(classNameToSaveMethod.getText(), methodDataTypeChoice.getValue(),methodName.getText());
-        Functions.addAttribute(classNameToSaveMethod.getText(), "methodDataTypeChoice.getValue()",methodName.getText());
-        Functions.addParam(classNameToSaveMethod.getText(), methodName.getText(),parameterName.getText(),pramRetunDataTypeChoice.getValue());
-
-       // node.setPositionAutomatically();
-        viewAnchorPane.getChildren().add(node);
-        // here is the section for adding node and setting it on the screen
-
-        infoBox("Method name and return type saved.");
-
-    }
-    */
 
     /**
      * This methods adds selected relationship type
@@ -904,6 +723,21 @@ void saveFieldsOnClick(ActionEvent event) {
         node.setRelationship(relationshipChoiceBox.getValue());
 
         infoBox(relationshipChoiceBox.getValue() + " added.");
+
+
+      // relLine2.equals(node.getLayoutX());
+       // relLine2.equals(node.getLayoutY());
+        //relLine2.getControls();
+/**
+// Set the start and end points based on the nodes' positions
+ relLine2.setStartX(startNode.getLayoutX() + startNode.getWidth() / 2); // Center of the start node
+ relLine2.setStartY(startNode.getLayoutY() + startNode.getHeight() / 2); // Center of the start node
+ relLine2.setEndX(endNode.getLayoutX() + endNode.getWidth() / 2); // Center of the end node
+ relLine2.setEndY(endNode.getLayoutY() + endNode.getHeight() / 2); // Center of the end node
+// Optionally, add the line to a parent container (e.g., Pane)
+
+        viewAnchorPane.getChildren().add(lineArrow);
+*/
     }// end of method
 
 
@@ -922,74 +756,8 @@ void saveFieldsOnClick(ActionEvent event) {
             showWarning("Class name is required.");
             return;
         }
-
         Functions.createClass(classNameField.getText());
-
-
-/**
- // Collect data from the first available dynamic field, method, and relationship
- String fieldType = fieldsBox.getChildren().isEmpty() ? "" :
- ((TextField)((HBox) fieldsBox.getChildren().get(0)).getChildren().get(0)).getText();
- String fieldName = fieldsBox.getChildren().isEmpty() ? "" :
- ((TextField)((HBox) fieldsBox.getChildren().get(0)).getChildren().get(1)).getText();
- String methodType = methodsBox.getChildren().isEmpty() ? "" :
- ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(0)).getText();
- String methodName = methodsBox.getChildren().isEmpty() ? "" :
- ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(1)).getText();
- String parameterType = methodsBox.getChildren().isEmpty() ? "" :
- ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(2)).getText();
- String parameterName = methodsBox.getChildren().isEmpty() ? "" :
- ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(3)).getText();
- String relationship = relationshipsBox.getChildren().isEmpty() ? "None" :
- ((ChoiceBox<String>)((HBox) relationshipsBox.getChildren().get(0)).getChildren().get(0)).getValue();
-
- /**
- //***************************************************************************************My Work Area
- // take the text from class name field and set it as class name.
- Functions.createClass(classNameField.getText());
- Functions.addAttribute(classNameField.getText(),"String",fieldName);
- //Functions.addRelationship(classNameField.getText(), relationshipChoiceBox.getItems().get(1));
- Functions.addMethod(classNameField.getText(),fieldTypeChoice.getValue(),methodName);
- Functions.saveProgress(classNameField.getText());
- */
-
-
-    }
-
-    /**
-     private void updateTextArea(UMLNode node) {
-     textArea.setVisible(true);
-     textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color for details
-     textArea.setText(
-     "Class Name:\n" + node.getClassName() +
-     straightLine + "\nField Name:\n" + node.getFieldName() +
-     straightLine + "\nMethod Name:\n" + node.getMethodName() +
-     "\nParameters: (" + node.getParameterName() + ")" +
-     straightLine + "\nRelationship:\n" + node.getRelationship()
-     );
-     }*/
-
-    private void populateFieldsFromNode(UMLNode node) {
-        classNameField.setText(node.getClassName());
-
-        fieldsBox.getChildren().clear();
-        methodsBox.getChildren().clear();
-        relationshipsBox.getChildren().clear();
-
-        addField(); // Add a new field box to populate
-        ((TextField)((HBox) fieldsBox.getChildren().get(0)).getChildren().get(0)).setText(node.getFieldType());
-        ((TextField)((HBox) fieldsBox.getChildren().get(0)).getChildren().get(1)).setText(node.getFieldName());
-
-        addMethod(); // Add a new method box to populate
-        ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(0)).setText(node.getMethodType());
-        ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(1)).setText(node.getMethodName());
-        ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(2)).setText(node.getParameterType());
-        ((TextField)((HBox) methodsBox.getChildren().get(0)).getChildren().get(3)).setText(node.getParameterName());
-
-        addRelationship(); // Add a new relationship box to populate
-        ((ChoiceBox<String>)((HBox) relationshipsBox.getChildren().get(0)).getChildren().get(0)).setValue(node.getRelationship());
-    }
-
+   }
 
     // Getters and setters for classCounter
     public int getClassCounter() {

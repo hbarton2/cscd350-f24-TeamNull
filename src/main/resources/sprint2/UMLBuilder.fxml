@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.UMLBuilderController">
   <!-- Menu Bar -->
@@ -52,12 +53,12 @@
   <!-- Main SplitPane layout -->
   <SplitPane dividerPositions="0.4551361386138613" VBox.vgrow="ALWAYS">
     <!-- Left control panel with form-style input -->
-    <VBox prefHeight="860.0" prefWidth="579.0" spacing="10">
+    <VBox prefHeight="777.0" prefWidth="553.0" spacing="10">
       <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
          <Label text="Please select an action from drop down menu and press &quot;Go&quot; button" />
-         <ChoiceBox fx:id="userSelectionDropdown" prefHeight="25.0" prefWidth="363.0" />
+         <ChoiceBox fx:id="userSelectionDropdown" prefHeight="25.0" prefWidth="368.0" />
          <Button fx:id="goButton" mnemonicParsing="false" onAction="#executeUserSelection" text="Go" />
       <Label fx:id="classNameLable" style="-fx-font-size: 14px;" text="Class Name" />
       <TextField fx:id="classNameField" prefHeight="25.0" prefWidth="346.0" promptText="Enter class name" />
@@ -69,13 +70,6 @@
    <TextField fx:id="fieldName" prefHeight="25.0" prefWidth="121.0" promptText="Enter field name" />
          <ChoiceBox fx:id="fieldTypeChoice" prefHeight="25.0" prefWidth="83.0" />
          <Button fx:id="fieldSaveButton" mnemonicParsing="false" onAction="#saveFieldsOnClick" prefHeight="25.0" prefWidth="48.0" text="Enter" />
-      <ScrollPane fx:id="fieldArea" fitToWidth="true" prefHeight="43.0" prefWidth="440.0">
-        <VBox fx:id="fieldsBox" spacing="5">
-          <HBox fx:id="fldArea" prefHeight="25.0" prefWidth="328.0" spacing="5">
-            <Button fx:id="field_Save_Button" onAction="#addField" text="+" />
-          </HBox>
-        </VBox>
-      </ScrollPane>
 
       <!-- Methods Section -->
       <Label fx:id="methodLabel" prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
@@ -106,10 +100,10 @@
         </VBox>
       </ScrollPane>
       <TextField fx:id="fileName" prefHeight="25.0" prefWidth="255.0" promptText="Enter file name without extensions for saving, load, or delete operations" />
+      <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="25.0" prefWidth="272.0" text="Save to file" />
 
       <!-- Action Buttons -->
       <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
-      <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="25.0" prefWidth="272.0" text="Save to file" />
          <TextField fx:id="lowerMsgBox" prefHeight="2.0" prefWidth="553.0" promptText="System messages:" />
       <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadNode" prefHeight="25.0" prefWidth="57.0" text="Load" />
       <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="25.0" prefWidth="60.0" text="Create Node (Not on final release)" />
@@ -118,7 +112,10 @@
 
     <!-- Right-side area for draggable nodes -->
     <ScrollPane prefHeight="722.0" prefWidth="581.0">
-      <AnchorPane fx:id="viewAnchorPane" prefHeight="847.0" prefWidth="681.0" />
+      <AnchorPane fx:id="viewAnchorPane" prefHeight="780.0" prefWidth="682.0">
+            <children>
+               <Line endX="100.0" layoutX="122.0" layoutY="28.0" startX="-100.0" strokeWidth="3.0" />
+            </children></AnchorPane>
     </ScrollPane>
   </SplitPane>
 
