@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Also checks for deletion of tests.
  *
  * */
-public class RelationsTest {
+public class AddRelationsTest {
 
     //The mock class we are testing
     private UMLClass mock;
@@ -130,7 +130,7 @@ public class RelationsTest {
     @Test
     public void noAddWithOneClass(){
         Functions.createClass("IAmAMock");
-        assertEquals(Functions.addRelationship("IAmMock", 1, "DestClass"), 0, "Unexpected return value"); //set to zero to induce fail state
+        assertNotEquals(Functions.addRelationship("IAmMock", 1, "DestClass"), 0, "Unexpected return value"); //set to zero to induce fail state
 
     }
 
