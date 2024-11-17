@@ -35,8 +35,8 @@ public class RemoveRelationsTest {
         this.mockSource = "IAmSource";
         this.mockDestination = "IAmDestination";
         this.mockRelationship = new UMLRelationship(mockSource, UMLRelationshipType.GENERALIZATION, mockDestination);
-        storage.addClass(mockSource);
-        storage.addClass(mockDestination);
+        storage.addClass(mockSource, storage.createClass(mockSource));
+        storage.addClass(mockDestination, storage.createClass(mockDestination));
         storage.addRelation(mockRelationship);
     }
 
