@@ -21,7 +21,7 @@
   },
   "addRelationship": {
     "type": "addRelationship",
-    "description": "Adds or updates a relationship in a class. Usage: addRelationship <class_name> <relationship_type(1-7)>"
+    "description": "Adds or updates a relationship in a class. Usage: addRelationship <source_class> <relationship_type(1-7)> <destination_class>"
   },
   "removeField": {
     "type": "removeAttribute",

@@ -72,7 +72,7 @@ public class CommandFactory {
             System.out.println("Error: Relationship type must be an integer (1-4).");
           }
         } else {
-          System.out.println("Error: Provide class name and relationship type.");
+          System.out.println("Error: Provide source class name, relationship type, and destination class name");
         }
       };
       case "removeRelationship" -> args -> {
