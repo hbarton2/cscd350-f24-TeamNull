@@ -221,11 +221,9 @@ public class Functions {
       System.out.println("No classes created.");
       return;
     }
-    for (UMLClass umlClass : storage.getUMLClasses().values()) {
-      if (!umlClass.getRelationships().isEmpty()) {
-        System.out.println("Class: " + umlClass.getClassName());
-        System.out.println("Relationships: " + umlClass.getRelationships());
-        System.out.println();
+    for (UMLRelationship relation : storage.getRelationships()) {
+      if (!storage.getRelationships().isEmpty()) {
+        System.out.println(relation);
       }
     }
   }
