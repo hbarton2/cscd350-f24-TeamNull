@@ -1,4 +1,4 @@
-package sprint1;
+package UMLTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import umleditor.model.utilities.Storage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParserTest {
+public class ClassTests {
 
   private Storage storage;
 

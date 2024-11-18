@@ -1,4 +1,4 @@
-package sprint3;
+package UMLTests.RelationshipTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

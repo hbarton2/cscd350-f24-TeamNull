@@ -1,4 +1,4 @@
-package sprint3;
+package UMLTests.RelationshipTests;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import umleditor.model.uml.UMLRelationship;
 import umleditor.model.uml.UMLRelationshipType;
 import umleditor.model.utilities.Storage;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

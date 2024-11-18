@@ -1,4 +1,4 @@
-package sprint3;
+package UtilTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
