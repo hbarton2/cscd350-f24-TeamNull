@@ -40,7 +40,7 @@ Ensure that the following software is installed on the target machine:
 Download the package https://github.com/hbarton2/cscd350-f24-TeamNull.git
 
 ### Steps to Open Terminal and Run `umleditor-2.0-shaded.jar`
-#### NOTE: CLI must be ran in Linux terminal for access to all features.
+#### NOTE: must be ran in Linux terminal for access to all CLI features.
 2. **Locate `umleditor-2.0-shaded.jar`**:
     - Navigate to the directory where `umleditor-2.0-shaded.jar` is located using your file explorer.
 
@@ -191,7 +191,7 @@ For any inquiries, feel free to reach out to:
 ---
 
 ## Acknowledgments
-- Special thanks to Jimmy, Kate, Colton, Muhammad, and Shane!! :)
+- Special thanks to Michelle, Kate, Colton, Muhammad, Shane, and Jimmy!! :)
 
 ---
 

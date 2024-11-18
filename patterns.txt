@@ -28,7 +28,8 @@ Files:
 
 
 4. Builder: SimpleAutoComplete
-Description: Create LineReader method in class, uses builder pattern to build a new line reader object.
+Description: Create LineReader method in class, uses builder pattern to build a new line reader object. Uses JLine's
+library builder pattern to create a modified linereader object for our purposes (lines 38-41)
 
 Files:
     * src/main/java/umleditor/controller/utilities/SimpleAutoComplete.java
@@ -43,6 +44,17 @@ Files:
 
 
 6. Memento: undo/redo
+Description: uses nested memento class inside UMLClass.java (lines 261-284), to create a memento object of a UMLClass.
+This object gets stored inside an undo stack inside MementoStorage.java, until Functions calls to undo or redo a class,
+then restoreFromMemento is called inside UMLClass (line 242) to restore the object to the previous state.
 
+Files:
+    * src/main/java/umleditor/model/uml/UMLClass
+    * src/main/java/umleditor/controller/utilities/MementoStorage
 
 7. Singleton: undo/redo
+Description: Singleton memento storage class, has private constructor to ensure that functions can only call on one
+instance of our undo redo stack storage.
+
+Files:
+    * src/main/java/umleditor/controller/utilities/MementoStorage

@@ -8,7 +8,8 @@ Technical Documentation
 1. [Entry Point](#Entry Point)
 2. [Controller](#Controller)
    1. [UMLBuilderController](#UMLBuilderController)
-   2. [utilities](#utilities)
+   2. [UMLGUIController](#UMLGUIController)
+   3. [utilities](#utilities)
       1. [CommandAction](#CommandAction)
       2. [CommandFactory](#CommandFactory)
       3. [Commands](#Commands)
@@ -130,6 +131,20 @@ Exits the program for user
 * **Update Text Area:**
     Updates text in node 
 <p>
+
+
+## UMLGUIUtilityController
+
+### Overview:
+Utilities controller for the GUI.
+
+### Features:
+
+* **Perform Rename:**
+  Performs action event of renaming a class in GUI.
+<p> 
+
+
 
 ---
 
@@ -279,10 +294,61 @@ into its previous state.
 * **redo:**
 uses the same logic as undo, to redo the last undo action and restore the class
 to its state before the undo was called.
+<p>
+
+* **getMethodIfExists:**
+private helper method that takes in a String className, and String methodName, searches the 
+specified class to return the method if it exists.
+<p>
+
+* **getClassIfExists:**
+private helper method that takes String className, searches through
+storage of classes and returns class object if it exists.
 ---
 
+## Memento Storage:
 
+## Overview:
 
+Memento storage contains functionality for undo and redo operations. Uses a singleton storage instance
+and saves state within stack.
+
+### Features:
+
+* **Memento Constructor:**
+private constructor that prevents instantiation
+<p>
+
+* **Get Instance:**
+Public method to provide access to single memento storage instance.
+<p>
+
+* **Save State:**
+Saves memento state to undo stack. Then clears the redo stack
+<p>
+
+* **Undo:**
+Pops stack to current state. Calls redo stack to push the current state. Returns the new current state.
+<p>
+
+* **Redo:**
+  Performs a redo operation by moving a state from the redo stack back to the undo stack.
+  returns the memento to restore the redone state, or null if redo is not possible.
+<p>
+
+* **canUndo:**
+return boolean true if stack is not empty false if empty
+<p>
+
+* **canRedo:**
+return boolean true if stack is not empty false if empty
+<p>
+
+* **clearHistory:**
+Clears the undo and redo stacks.
+<p>
+
+---
 
 ## ParsingInputs:
 
@@ -475,7 +541,12 @@ Saves all fields of this class into memento object
 <p>
 
 ### Memento:
-has constructor and getter methods to create a memento clone of this class
+Nested Memento class within UMLClass. Has constructor and getter methods to create a memento clone of this class
+
+**Features:**
+* private Memento constructor
+* getters to access state: className, attributes, methods, and relationships
+
 
 ----
 
