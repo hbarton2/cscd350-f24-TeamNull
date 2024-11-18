@@ -1,4 +1,4 @@
-package sprint2;
+package Demo;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

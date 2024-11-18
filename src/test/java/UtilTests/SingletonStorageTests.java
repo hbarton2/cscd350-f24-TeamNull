@@ -1,8 +1,6 @@
-package sprint3;
+package UtilTests;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import umleditor.controller.utilities.Functions;
 import umleditor.model.utilities.Storage;
 
 import static org.junit.jupiter.api.Assertions.*;

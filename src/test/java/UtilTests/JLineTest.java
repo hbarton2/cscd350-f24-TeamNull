@@ -1,4 +1,4 @@
-package sprint2;
+package UtilTests;
 
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;

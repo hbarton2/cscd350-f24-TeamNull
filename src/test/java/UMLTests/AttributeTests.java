@@ -1,4 +1,4 @@
-package sprint1;
+package UMLTests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
