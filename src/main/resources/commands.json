@@ -21,7 +21,7 @@
   },
   "addRelationship": {
     "type": "addRelationship",
-    "description": "Adds or updates a relationship in a class. Usage: addRelationship <class_name> <relationship_type(1-7)>"
+    "description": "Adds or updates a relationship in a class. Usage: addRelationship <source_class> <relationship_type(1-7)> <destination_class>"
   },
   "removeField": {
     "type": "removeAttribute",
@@ -61,7 +61,7 @@
   },
   "renameMethod": {
     "type": "renameMethod",
-    "description": "Renames a method in a class. Usage: renameMethod <class_name> <old_method_name> <new_method_name> "
+    "description": "Renames a method in a class. Usage: renameMethod <class_name> <old_method_name> <new_method_name>"
   },
   "addParameter": {
     "type": "addParam",
@@ -73,6 +73,14 @@
   },
   "exit": {
     "type": "exitProgram",
-    "description": "exit the program at any time"
+    "description": "Exit the program at any time"
+  },
+  "undo": {
+    "type": "undo",
+    "description": "Reverts the last action performed by the user"
+  },
+  "redo": {
+    "type": "redo",
+    "description": "Restores the most recently undone action"
   }
 }

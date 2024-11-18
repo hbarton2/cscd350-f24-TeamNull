@@ -13,7 +13,7 @@
 
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.collections.FXCollections?>
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.sprint2.controller.UMLBuilderController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.UMLBuilderController">
   <children>
     <!-- Menu Bar -->
     <MenuBar VBox.vgrow="NEVER">

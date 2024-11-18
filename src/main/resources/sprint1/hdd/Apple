@@ -1,0 +1,1 @@
+{"Apple":{"className":"Apple","attributes":[{"name":"Name","type":"String"},{"name":"Type","type":"String"},{"name":"calcPrice","type":"methodDataTypeChoice.getValue()"}],"methods":[],"relationships":[]}}
