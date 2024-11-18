@@ -34,8 +34,8 @@
       <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
     </Menu>
     <Menu mnemonicParsing="false" text="Edit">
-      <MenuItem mnemonicParsing="false" text="Undo" />
-      <MenuItem mnemonicParsing="false" text="Redo" />
+      <MenuItem mnemonicParsing="false" onAction="#undoLastAction" text="Undo" />
+      <MenuItem mnemonicParsing="false" onAction="#redoLastAction" text="Redo" />
       <SeparatorMenuItem />
       <MenuItem mnemonicParsing="false" text="Cut" />
       <MenuItem mnemonicParsing="false" text="Copy" />

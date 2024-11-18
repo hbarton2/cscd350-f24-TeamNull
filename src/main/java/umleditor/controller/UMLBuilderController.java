@@ -806,4 +806,13 @@ void saveFieldsOnClick(ActionEvent event) {
         }
 
     }
+    @FXML
+    void undoLastAction(ActionEvent event) {
+        Functions.undo();
+    }
+
+    @FXML
+    void redoLastAction(ActionEvent event) {
+        Functions.redo();
+    }
 }
