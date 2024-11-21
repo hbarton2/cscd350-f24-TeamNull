@@ -34,3 +34,5 @@ public class UMLGUIUtilityController {
     }
 
 
+// Once ClassRenameController is working,
+// this class can be safely deleted

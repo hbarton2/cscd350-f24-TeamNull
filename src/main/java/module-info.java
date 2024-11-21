@@ -115,7 +115,6 @@ module umleditor {
     opens umleditor to javafx.fxml;
   opens umleditor.controller.utilities to com.google.gson;
   opens umleditor.demo to javafx.fxml;
-  opens umleditor.controller to javafx.fxml;
   opens umleditor.model.uml to com.google.gson;
 
   exports umleditor;
@@ -130,5 +129,6 @@ module umleditor {
   exports umleditor.view.gui;
   exports umleditor.view.cli;
   opens umleditor.view.cli to com.google.gson;
+  opens umleditor.controller to com.google.gson, javafx.fxml;
 
 }
