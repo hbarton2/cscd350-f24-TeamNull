@@ -750,7 +750,7 @@ void saveFieldsOnClick(ActionEvent event) {
 
     public void renameClass(){
         try {
-            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/UML_GUI_Utility.fxml"));
+            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameClass.fxml"));
             Parent root = guiUtilityLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Rename Class Utility");
@@ -764,8 +764,8 @@ void saveFieldsOnClick(ActionEvent event) {
     }
     public void renameField(){
         try {
-            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameField.fxml"));
-            Parent root = guiUtilityLoader.load();
+            FXMLLoader renameFieldLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameField.fxml"));
+            Parent root = renameFieldLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Rename Field Utility");
             stage.setScene(new Scene(root));
