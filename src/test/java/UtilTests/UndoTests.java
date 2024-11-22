@@ -48,8 +48,8 @@ public class UndoTests {
         Assertions.assertFalse(testClass.methodExists("method"));
 
         Functions.undo();
-        Assertions.assertFalse(testClass.methodExists("method"));
-        Assertions.assertTrue(testClass.methodExists("newMethod"));
+        Assertions.assertTrue(testClass.methodExists("method"));
+        Assertions.assertFalse(testClass.methodExists("newMethod"));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class UndoTests {
         Assertions.assertFalse(testClass.attributeExists("field"));
 
         Functions.undo();
-        Assertions.assertFalse(testClass.attributeExists("field"));
-        Assertions.assertTrue(testClass.attributeExists("newField"));
+        Assertions.assertTrue(testClass.attributeExists("field"));
+        Assertions.assertFalse(testClass.attributeExists("newField"));
     }
 }
