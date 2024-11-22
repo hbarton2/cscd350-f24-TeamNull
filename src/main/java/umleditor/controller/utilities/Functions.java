@@ -13,6 +13,7 @@ import umleditor.model.uml.MethodSignature;
 import umleditor.model.uml.UMLClass;
 import umleditor.model.uml.UMLRelationship;
 import umleditor.model.uml.UMLRelationshipType;
+import umleditor.model.utilities.MementoStorage;
 import umleditor.model.utilities.Storage;
 
 public class Functions {
@@ -200,7 +201,7 @@ public class Functions {
     }
     for (UMLClass umlClass : storage.getUMLClasses().values()) {
       System.out.println("Class: " + umlClass.getClassName());
-      System.out.println("Fields: " + umlClass.getAttributes());
+      umlClass.displayAttributes();
       umlClass.displayMethods();
       System.out.println();
     }

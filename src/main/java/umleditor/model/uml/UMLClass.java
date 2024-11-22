@@ -56,8 +56,8 @@ public class UMLClass {
   }
 
   // Helper method to find a method by name and parameter
-  public UMLAttribute findAttribute(String attributeName) {
-    for (UMLAttribute attribute : attributes) {
+  private UMLAttribute findAttribute(String attributeName) {
+    for (UMLAttribute attribute : this.attributes) {
       if (attribute.getName().equals(attributeName)) {
         return attribute;
       }
@@ -164,28 +164,30 @@ public class UMLClass {
   // Debugging helper method to display all methods in the class
   public void displayMethods() {
     System.out.println("Methods in class " + className + ":");
-    for (MethodSignature method : methods) {
+    for (MethodSignature method : this.methods) {
       System.out.println("- " + method);
     }
   }
 
   public void displayAttributes(){
-    System.out.println("Attributes in class " + className + ":");
-    for (UMLAttribute attribute : attributes) {
+    System.out.println("Fields: ");
+    for (UMLAttribute attribute : this.attributes) {
       System.out.println("- " + attribute);
     }
   }
 
   // Method to rename an attribute
   public void renameAttribute(String oldName, String newName) {
-    if (attributeExists(oldName)) {
-      findAttribute(oldName).setName(newName);
+    UMLAttribute oldAttribute = findAttribute(oldName);
+
+    if (oldAttribute != null) {
+      oldAttribute.setName(newName);
       System.out.println(
-        "Field renamed from " + oldName + " to " + newName + " in class " + className
+        "Field renamed from " + oldName + " to " + newName + " in class " + this.className
           + ".");
     } else {
       System.out.println(
-        "Error: Field " + oldName + " does not exist in class " + className + ".");
+        "Error: Field " + oldName + " does not exist in class " + this.className + ".");
     }
   }
 
@@ -242,8 +244,8 @@ public class UMLClass {
   public void restoreFromMemento(Memento memento) {
     Storage storage = Storage.getInstance();
     if(storage.classExists(memento.className)) {
-      this.className = memento.getClassName();
-      this.attributes = new ArrayList<>(memento.getAttributes());
+      setClassName(memento.getClassName());
+      setAttributes(memento.getAttributes());
       this.methods = new ArrayList<>(memento.getMethods());
       this.relationships = new ArrayList<>(memento.getRelationships());
     }
@@ -252,6 +254,7 @@ public class UMLClass {
   }
 
   // Nested Memento class
+  //TODO: Memento fields have the same address as the class attributes. CHANGE THIS
   public static class Memento {
     private final String className;
     private final List<UMLAttribute> attributes;
@@ -271,15 +274,15 @@ public class UMLClass {
     }
 
     public List<UMLAttribute> getAttributes() {
-      return Collections.unmodifiableList(attributes);
+      return Collections.unmodifiableList(this.attributes);
     }
 
     public List<MethodSignature> getMethods() {
-      return Collections.unmodifiableList(methods);
+      return Collections.unmodifiableList(this.methods);
     }
 
     public List<UMLRelationship> getRelationships() {
-      return Collections.unmodifiableList(relationships);
+      return Collections.unmodifiableList(this.relationships);
     }
   }
 }

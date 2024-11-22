@@ -1,4 +1,4 @@
-package umleditor.controller.utilities;
+package umleditor.model.utilities;
 
 import umleditor.model.uml.UMLClass;
 

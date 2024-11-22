@@ -6,6 +6,8 @@ import umleditor.model.uml.UMLClass;
 import umleditor.controller.utilities.Functions;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static umleditor.controller.utilities.Functions.getClassIfExists;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -16,7 +18,9 @@ public class AttributeTests {
 
     @BeforeEach
     public void setUp() {
-        mockClass = new UMLClass("TestClass");
+        Functions.clearProgress();
+        Functions.createClass("TestClass");
+        mockClass = getClassIfExists("TestClass");
 
         // Redirecting output to capture printed messages for validation
         outputStream = new ByteArrayOutputStream();
@@ -89,6 +93,15 @@ public class AttributeTests {
                 .anyMatch(attr -> attr.getName().equals("fullName") && attr.getType().equals("String")));
         assertFalse(mockClass.getAttributes().stream().anyMatch(attr -> attr.getName().equals("name")));
         assertTrue(outputStream.toString().contains("Field renamed from name to fullName in class TestClass."));
+    }
+
+    @Test
+    public void functionsRenameAttribute(){
+        Functions.addAttribute("TestClass", "String", "name");
+        Functions.renameAttribute("TestClass", "name", "newName");
+
+        assertTrue(mockClass.attributeExists("newName"));
+        assertFalse(mockClass.attributeExists("name"));
     }
 
     @Test

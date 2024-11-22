@@ -27,7 +27,7 @@ public class ClassTests {
   }
 
   @Test
-  public void testCreateClassAlreadyExists() {
+  public void testCreateClassAlreadyExistsFunctions() {
     String className = "Dog";
     Functions.createClass(className);  // First creation
     Functions.createClass(className);  // Attempt to create again
@@ -35,6 +35,13 @@ public class ClassTests {
     // Assert that the class still exists and no duplicates
     assertTrue(storage.classExists(className), "Class should exist");
     assertEquals(1, storage.getUMLClasses().size(), "There should be only one instance of the class");
+  }
+
+  @Test
+  public void testCreateClassAlreadyExistsStorage() {
+    String className = "Dog";
+    Functions.createClass(className);
+    assertNull(storage.createClass(className));
   }
 
   @Test
@@ -67,6 +74,18 @@ public class ClassTests {
     // Assert that the class was renamed successfully
     assertFalse(storage.classExists(oldName), "Old class name should not exist");
     assertTrue(storage.classExists(newName), "New class name should exist");
+  }
+
+  @Test
+  public void testRenameClassDoesNotExistStorage(){
+    String oldName = "Cat";
+    String newName = "Feline";
+
+    Functions.createClass("Dog");
+    storage.renameClass(oldName, newName);
+
+    assertFalse(storage.classExists(oldName), "Old class name should not exist");
+    assertTrue(storage.classExists("Dog"), "Dog class name should exist");
   }
 
   @Test
