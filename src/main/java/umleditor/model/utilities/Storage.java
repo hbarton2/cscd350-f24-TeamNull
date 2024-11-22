@@ -106,7 +106,9 @@ public class Storage {
   // Method to rename an existing class in storage
   public void renameClass(String oldName, String newName) {
     if (umlClasses.containsKey(oldName)) {
-      UMLClass umlClass = umlClasses.remove(oldName);  // Remove the old name
+      UMLClass umlClass = umlClasses.get(oldName); //make a temporary umlClass to save old ones methods and params
+      umlClasses.remove(oldName);
+      umlClass.setClassName(newName);
       umlClasses.put(newName, umlClass);  // Add the new name with the existing class data
     } else {
       System.out.println("Error: Class " + oldName + " does not exist.");
