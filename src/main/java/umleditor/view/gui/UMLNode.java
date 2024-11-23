@@ -120,6 +120,7 @@ public class UMLNode extends Pane {
             "Relationship: " + getRelationship();
   }
 
+
   // Setters and Getters
   public void setClassName(String className) {
     Functions.createClass(className); // Set class in UMLClass
