@@ -63,6 +63,8 @@ public class UMLNode extends Pane {
     // Add dragging functionality
     enableDragging();
   }
+
+
   /**
    * Automatically positions nodes in two rows of three.
    */
@@ -127,7 +129,9 @@ public class UMLNode extends Pane {
   public String getClassName() {
     return className;
   }
+
   public void setFieldName(String fieldName) {
+
     this.fieldName = fieldName;
     updateLabel();
   }
@@ -181,6 +185,7 @@ public class UMLNode extends Pane {
   /**
    * Displays an error message in red on the node.
    */
+  /**
   public void showError(String errorMessage) {
     Label errorLabel = new Label(errorMessage);
     errorLabel.setTextFill(Color.RED);
@@ -188,4 +193,5 @@ public class UMLNode extends Pane {
     errorLabel.setFont(new Font("Arial", 12));
     this.getChildren().setAll(background, errorLabel);
   }
+  */
 }

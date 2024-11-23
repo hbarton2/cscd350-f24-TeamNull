@@ -43,33 +43,25 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.FieldRenameController">
+<VBox prefHeight="288.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.ClassRenameController">
   <children>
     <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane>
                <children>
-                  <Label layoutX="47.0" layoutY="94.0" text="Type current class name" />
-                  <Label layoutX="41.0" layoutY="155.0" text="Type new class name" />
-                  <TextField fx:id="newField" layoutX="37.0" layoutY="182.0" promptText="New Field" />
-                  <TextField fx:id="currentField" layoutX="37.0" layoutY="122.0" promptText="Current Field" />
-                  <Button layoutX="67.0" layoutY="222.0" mnemonicParsing="false" onAction="#renameFieldOnClick" text="Rename" />
-                  <TextField fx:id="className" layoutX="37.0" layoutY="58.0" promptText="Class name" />
-                  <Label layoutX="53.0" layoutY="35.0" text="Class name" />
+                  <Label layoutX="40.0" layoutY="23.0" text="Type current class name" />
+                  <Label layoutX="40.0" layoutY="80.0" text="Type new class name" />
+                  <TextField fx:id="newClassName" layoutX="37.0" layoutY="97.0" promptText="New class name" />
+                  <TextField fx:id="currentClassName" layoutX="37.0" layoutY="40.0" promptText="Current class name" />
+                  <Button layoutX="70.0" layoutY="142.0" mnemonicParsing="false" onAction="#renameClassOnClick" text="Rename" />
                </children>
         </AnchorPane>
-        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+        <ScrollPane prefHeight="338.0" prefWidth="426.0">
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="662.0">
                      <children>
-                        <Label layoutX="52.0" layoutY="327.0" prefHeight="27.0" prefWidth="363.0" text="Working on this feature. This feature is in development">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <TextArea fx:id="renameFieldTextArea" layoutX="33.0" layoutY="44.0" prefHeight="200.0" prefWidth="354.0" />
+                        <TextArea fx:id="classTextArea" layoutX="40.0" layoutY="27.0" prefHeight="200.0" prefWidth="401.0" />
                      </children>
             </AnchorPane>
           </content>
