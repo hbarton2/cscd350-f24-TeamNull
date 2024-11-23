@@ -1,4 +1,7 @@
-package umleditor.controller.utilities;
+package umleditor.model.utilities;
+
+import umleditor.controller.utilities.CommandAction;
+import umleditor.controller.utilities.Functions;
 
 /**
  * CommandFactory class to create and handle various command actions.

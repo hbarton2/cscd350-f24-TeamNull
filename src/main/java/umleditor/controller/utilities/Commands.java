@@ -2,6 +2,8 @@ package umleditor.controller.utilities;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import umleditor.model.utilities.CommandFactory;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
