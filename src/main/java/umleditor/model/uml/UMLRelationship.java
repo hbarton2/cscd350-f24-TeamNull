@@ -22,6 +22,13 @@ public class UMLRelationship {
     this.destination = destination;
   }
 
+  //copy constructor
+  public UMLRelationship(UMLRelationship other){
+    this.source = other.source;
+    this.type = other.type;
+    this.destination = other.destination;
+  }
+
   // Getter for relationship type
   public UMLRelationshipType getType() {
     return type;

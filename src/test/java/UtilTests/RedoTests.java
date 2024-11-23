@@ -8,7 +8,7 @@ import umleditor.model.uml.UMLClass;
 
 import static umleditor.controller.utilities.Functions.getClassIfExists;
 
-public class UndoTests {
+public class RedoTests {
 
     private UMLClass testClass;
 
@@ -20,15 +20,17 @@ public class UndoTests {
     }
 
     @Test
-    public void undoCreateMethod(){
+    public void redoCreateMethod(){
         Functions.addMethod("TestClass", "String", "method");
         Assertions.assertTrue(testClass.methodExists("method"));
         Functions.undo();
         Assertions.assertFalse(testClass.methodExists("method"));
+        Functions.redo();
+        Assertions.assertTrue(testClass.methodExists("method"));
     }
 
     @Test
-    public void undoRemoveMethod(){
+    public void redoRemoveMethod(){
         Functions.addMethod("TestClass", "String", "method");
         Assertions.assertTrue(testClass.methodExists("method"));
 
@@ -37,10 +39,13 @@ public class UndoTests {
 
         Functions.undo();
         Assertions.assertTrue(testClass.methodExists("method"));
+
+        Functions.redo();
+        Assertions.assertFalse(testClass.methodExists("method"));
     }
 
     @Test
-    public void undoRenameMethod(){
+    public void redoRenameMethod(){
         Functions.addMethod("TestClass", "String", "method");
         Assertions.assertTrue(testClass.methodExists("method"));
 
@@ -48,21 +53,28 @@ public class UndoTests {
         Assertions.assertFalse(testClass.methodExists("method"));
 
         Functions.undo();
+        Assertions.assertFalse(testClass.methodExists("method"));
+        Assertions.assertTrue(testClass.methodExists("newMethod"));
+
+        Functions.redo();
         Assertions.assertTrue(testClass.methodExists("method"));
         Assertions.assertFalse(testClass.methodExists("newMethod"));
     }
 
     @Test
-    public void undoCreateField(){
+    public void redoCreateField(){
         Functions.addAttribute("TestClass", "String", "field");
         Assertions.assertTrue(testClass.attributeExists("field"));
 
         Functions.undo();
         Assertions.assertFalse(testClass.attributeExists("field"));
+
+        Functions.redo();
+        Assertions.assertTrue(testClass.attributeExists("field"));
     }
 
     @Test
-    public void undoRemoveField(){
+    public void redoRemoveField(){
         Functions.addAttribute("TestClass", "String", "field");
         Assertions.assertTrue(testClass.attributeExists("field"));
 
@@ -71,10 +83,13 @@ public class UndoTests {
 
         Functions.undo();
         Assertions.assertTrue(testClass.attributeExists("field"));
+
+        Functions.redo();
+        Assertions.assertFalse(testClass.attributeExists("field"));
     }
 
     @Test
-    public void undoRenameField(){
+    public void redoRenameField(){
         Functions.addAttribute("TestClass", "String", "field");
         Assertions.assertTrue(testClass.attributeExists("field"));
 
@@ -82,6 +97,10 @@ public class UndoTests {
         Assertions.assertFalse(testClass.attributeExists("field"));
 
         Functions.undo();
+        Assertions.assertFalse(testClass.attributeExists("field"));
+        Assertions.assertTrue(testClass.attributeExists("newField"));
+
+        Functions.redo();
         Assertions.assertTrue(testClass.attributeExists("field"));
         Assertions.assertFalse(testClass.attributeExists("newField"));
     }
