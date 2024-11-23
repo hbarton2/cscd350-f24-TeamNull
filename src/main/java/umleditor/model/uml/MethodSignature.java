@@ -31,6 +31,13 @@ public class MethodSignature {
         this.parameters.add(new UMLParameter("", ""));
     }
 
+    //copy constructor
+    public MethodSignature(MethodSignature other) {
+        this.methodName = other.methodName;
+        this.methodType = other.methodType;
+        this.parameters = other.parameters;
+    }
+
     @Override
     public String toString() {
         return methodType + " " + methodName + "(" +

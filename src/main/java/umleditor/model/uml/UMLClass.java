@@ -230,13 +230,40 @@ public class UMLClass {
     this.className = className;
   }
 
+  private List<UMLAttribute> deepCopyA(List<UMLAttribute> original) {
+    List<UMLAttribute> copy = new ArrayList<>();
+    for (UMLAttribute attribute : original) {
+      copy.add(new UMLAttribute(attribute)); // Assuming UMLAttribute has a copy constructor
+    }
+    return copy;
+  }
+
+  private List<MethodSignature> deepCopyM(List<MethodSignature> original) {
+    List<MethodSignature> copy = new ArrayList<>();
+    for (MethodSignature method : original) {
+      copy.add(new MethodSignature(method)); // Assuming MethodSignature has a copy constructor
+    }
+    return copy;
+  }
+
+  private List<UMLRelationship> deepCopyR(List<UMLRelationship> original) {
+    List<UMLRelationship> copy = new ArrayList<>();
+    for (UMLRelationship relationship : original) {
+      copy.add(new UMLRelationship(relationship)); // Assuming UMLRelationship has a copy constructor
+    }
+    return copy;
+  }
+
+
   // Memento for state management
   public Memento saveToMemento(boolean classExists) {
     if(classExists) {
-      return new Memento(className, attributes, methods, relationships);
+      return new Memento(className, deepCopyA(attributes) , deepCopyM(methods), deepCopyR(relationships));
     }
     else
-      return new Memento(className, new ArrayList<>(attributes), new ArrayList<>(methods), new ArrayList<>(relationships));
+      return new Memento(className, deepCopyA(new ArrayList<>(attributes)),
+              deepCopyM(new ArrayList<>(methods)),
+              deepCopyR( new ArrayList<>(relationships)));
   }
 
   public void restoreFromMemento(Memento memento) {

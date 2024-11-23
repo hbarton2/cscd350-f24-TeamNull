@@ -10,6 +10,12 @@ public class UMLAttribute {
         this.type = type;
     }
 
+    //copy constructor
+    public UMLAttribute(UMLAttribute other){
+        this.name = other.name;
+        this.type = other.type;
+    }
+
     public String getName() {
         return this.name;
     }
