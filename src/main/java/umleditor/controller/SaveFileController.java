@@ -17,6 +17,8 @@ public class SaveFileController {
 
     @FXML
     private TextArea saveTextArea;
+    @FXML
+    private String filePath = "src/main/resources/sprint1/hdd/";
 
     @FXML
     void saveFileOnClick(ActionEvent event) {
@@ -24,9 +26,9 @@ public class SaveFileController {
             saveTextArea.setText("Please enter a file name");
         }
         else {
+
             Functions.saveProgress(fileName.getText());
-            saveTextArea.setText("File saved successfully");
+            saveTextArea.setText("File saved to " + filePath+ fileName.getText() + ".json");
         }
     }
-
 }

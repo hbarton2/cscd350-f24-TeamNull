@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.RelationshipArrowController">
+   <children>
+      <Button fx:id="add" layoutX="22.0" layoutY="593.0" mnemonicParsing="false" onAction="#addLine" text="Add" />
+      <Button layoutX="77.0" layoutY="593.0" mnemonicParsing="false" onAction="#removeLine" text="Remove" />
+      <Button layoutX="157.0" layoutY="593.0" mnemonicParsing="false" text="Save as picture" />
+      <TextArea fx:id="textArea" layoutX="30.0" layoutY="28.0" prefHeight="149.0" prefWidth="138.0" />
+      <TextArea fx:id="textArea1" layoutX="370.0" layoutY="29.0" prefHeight="149.0" prefWidth="138.0" />
+   </children>
+</AnchorPane>
