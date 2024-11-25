@@ -1,6 +1,5 @@
 package umleditor.controller;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -13,15 +12,15 @@ public class HelpController {
 
     @FXML
     private TextArea helpTextArea;
+    @FXML
+    private TextField currentClassName;
 
     @FXML
-    void deleteClass(ActionEvent event) {
+    void helpMethod(ActionEvent event) {
 
+        helpTextArea.clear();
+        helpTextArea.appendText(className.getText() + "\nkeyword to search for help");
 
-        //helpTextArea.appendText(Functions.listClasses("lsa"));
-
-        System.out.printf("Help button clicked");
-
+        System.out.println("Help button clicked");
     }
-
 }

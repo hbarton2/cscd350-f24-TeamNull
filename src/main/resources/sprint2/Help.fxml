@@ -35,7 +35,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -53,17 +52,17 @@
       <items>
         <AnchorPane>
                <children>
-                  <Button layoutX="46.0" layoutY="110.0" mnemonicParsing="false" onAction="#deleteClass" text="Search" />
+                  <Button layoutX="46.0" layoutY="110.0" mnemonicParsing="false" onAction="#helpMethod" text="Search" />
                   <TextField fx:id="className" layoutX="10.0" layoutY="67.0" prefHeight="25.0" prefWidth="138.0" promptText="Type keyword" />
                   <Label layoutX="36.0" layoutY="40.0" text="Type keyword" />
                </children>
         </AnchorPane>
-        <ScrollPane prefHeight="386.0" prefWidth="471.0">
+        <ScrollPane prefHeight="477.0" prefWidth="483.0">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="378.0" prefWidth="463.0">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="366.0" prefWidth="469.0">
                      <children>
-                        <TextArea fx:id="helpTextArea" layoutX="23.0" layoutY="42.0" prefHeight="200.0" prefWidth="354.0" />
-                        <ListView fx:id="listView" layoutX="23.0" layoutY="164.0" prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="helpTextArea" layoutX="25.0" layoutY="54.0" prefHeight="284.0" prefWidth="415.0" />
+                        <Label layoutX="25.0" layoutY="37.0" text="Search result:" />
                      </children>
             </AnchorPane>
           </content>

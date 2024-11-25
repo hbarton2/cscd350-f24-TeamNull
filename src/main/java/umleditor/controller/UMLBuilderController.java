@@ -3,21 +3,19 @@ package umleditor.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.LinearGradient;
 import javafx.stage.Stage;
 import umleditor.controller.utilities.Functions;
 import umleditor.view.gui.UMLNode;
+import umleditor.view.gui.UMLNodeManager;
 
-import javax.sound.sampled.Line;
 import java.util.List;
 
 public class UMLBuilderController {
@@ -134,7 +132,7 @@ public class UMLBuilderController {
      */
     @FXML
     public void initialize() {
-
+        Pane root = new Pane();
         hideClassArea();// to hide the class label, class field and button to save class
         hideFieldArea(); // to hide the field label, field name, drop down menu, and save button
         hideMethodArea(); // to hide method area
@@ -235,6 +233,7 @@ public class UMLBuilderController {
 
                 showRArea();
                 relationshipChoiceBox.requestFocus();
+                startRelationshipArrow();
                 break;
 
             case "Rename Parameter":
@@ -247,12 +246,16 @@ public class UMLBuilderController {
                 break;
 
             case "Help":
+
                 help();
                 break;
             default:
                 infoBox(relationshipChoiceBox.getValue() + " is in development");
         }
     }
+
+
+
 
     /**
      * This method shows "Warning" message. Text in red color when precondition of a method does not meet.
@@ -357,20 +360,20 @@ public class UMLBuilderController {
      */
     @FXML
     public void addRelationship() {
-        HBox relationshipBox = new HBox(5);
+      //  HBox relationshipBox = new HBox(5);
 
-        ChoiceBox<String> relationshipChoice = new ChoiceBox<>();
-        relationshipChoice.getItems().addAll(relationshipTypes);
-        relationshipChoice.setValue(relationshipTypes.get(0)); // Set default value
+      //  ChoiceBox<String> relationshipChoice = new ChoiceBox<>();
+       // relationshipChoice.getItems().addAll(relationshipTypes);
+       // relationshipChoice.setValue(relationshipTypes.get(0)); // Set default value
 
-        Button addButton = new Button("+");
-        addButton.setOnAction(e -> addRelationship());  // Allows adding more relationships
+       // Button addButton = new Button("+");
+      //  addButton.setOnAction(e -> addRelationship());  // Allows adding more relationships
 
-        Button removeButton = new Button("-");
-        removeButton.setOnAction(e -> relationshipsBox.getChildren().remove(relationshipBox));
+       // Button removeButton = new Button("-");
+       // removeButton.setOnAction(e -> relationshipsBox.getChildren().remove(relationshipBox));
 
-        relationshipBox.getChildren().addAll(relationshipChoice, addButton, removeButton);
-        relationshipsBox.getChildren().add(relationshipBox);
+       // relationshipBox.getChildren().addAll(relationshipChoice, addButton, removeButton);
+       // relationshipsBox.getChildren().add(relationshipBox);
     }
 
     public void exitProgram(ActionEvent actionEvent) {
@@ -409,6 +412,7 @@ public class UMLBuilderController {
 
         infoBox("Creating a new mock node");
         node = new UMLNode(node.getClassName());
+
         viewAnchorPane.getChildren().add(node);
     }
 
@@ -482,25 +486,32 @@ public class UMLBuilderController {
         saveClassBNT.setVisible(true);
     }
 
-
-
-
+    /**
+     * Handles the event when the "Save Class Name" button is clicked.
+     *
+     * <p>This method performs the following actions:</p>
+     * <ul>
+     *   <li>Checks if the class name text field is empty. If empty, displays a warning and exits the method.</li>
+     *   <li>Creates a new class with the given class name using the {@code Functions.createClass} method.</li>
+     *   <li>Initializes a {@link UMLNode} with the class name and adds it to the view's anchor pane.</li>
+     *   <li>Displays an informational message with the saved class name and its file path.</li>
+     * </ul>
+     *
+     * @param event The action event triggered by the button click.
+     */
 
     UMLNode node ;
-
     @FXML
     void saveClassNameOnClick(ActionEvent event) {
-
-        if (classNameField.getText().isEmpty()){
+        if (classNameField.getText().isEmpty()) {
             showWarning("Class name empty or duplicate !");
             return;
         }
-        Functions.createClass(classNameField.getText());
 
+        Functions.createClass(classNameField.getText());
         node = new UMLNode(classNameField.getText());
-        classNameField.setText("");
         viewAnchorPane.getChildren().add(node);
-        infoBox("Class name  " + classNameField.getText() + "  Saved. \n File path is: " + filePath);
+        infoBox("Class name " + classNameField.getText() + " Saved. \n File path is: " + filePath);
     }
 
     /**
@@ -914,11 +925,14 @@ public class UMLBuilderController {
             // Load the Help.fxml file
             FXMLLoader helpSceneLoader = new FXMLLoader(getClass().getResource("/sprint2/Help.fxml"));
             Parent root = helpSceneLoader.load();
+
             // Create a new stage and set its title and scene
             Stage stage = new Stage();
             stage.setTitle("Help Utility");
             stage.setScene(new Scene(root));
             stage.show();
+
+
         } catch (Exception e) {
             // Print error message to the console
             System.out.println("Loading Help Utility failed");
@@ -926,6 +940,26 @@ public class UMLBuilderController {
             e.printStackTrace();
         }
     }
+
+private void startRelationshipArrow() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sprint2/Relationships.fxml"));
+        Parent root = loader.load();
+
+        // Create a new stage and set its title and scene
+        Stage stage = new Stage();
+        stage.setTitle("Add Relationship Utility");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+
+    } catch (Exception e) {
+        // Print error message to the console
+        System.out.println("Line loader failed");
+        // Log the exception's stack trace for debugging
+        e.printStackTrace();
+    }
+}
 
     /**
      * This method calls the undo() method in Functions class to
