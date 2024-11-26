@@ -13,6 +13,7 @@ import umleditor.model.uml.MethodSignature;
 import umleditor.model.uml.UMLClass;
 import umleditor.model.uml.UMLRelationship;
 import umleditor.model.uml.UMLRelationshipType;
+import umleditor.model.utilities.MementoSaveData;
 import umleditor.model.utilities.MementoStorage;
 import umleditor.model.utilities.Storage;
 
@@ -251,95 +252,74 @@ public class Functions {
   }
 
   // Save progress to a file or temporary if no filename is provided
-  // Save progress to a file or temporary if no filename is provided
   public static void saveProgress(String filename) {
-    String printOutName;
-    String fileNameForClass = "";
-    String fileNameForRelations = "";
-    if (filename.contains(".json")){
-      fileNameForRelations = filename.substring(0, filename.indexOf('.'));
-      printOutName = filename;
-    }else {
-      fileNameForClass = filename + ".json";
-      printOutName = fileNameForClass;
+    String fileName;
+    if (filename.endsWith(".json")) {
+      fileName = filename;
+    } else {
+      fileName = filename + ".json";
     }
+    String printOutName = fileName;
 
     try {
-      File dir = new File(STORAGE_DIRECTORY);
-      if (!dir.exists()) {
-        dir.mkdirs();
-      }
+      FileWriter writer = getFileWriter(fileName);
+      writer.close();
 
-
-      Gson gson = new Gson();
-
-      String json1 = gson.toJson(storage.getUMLClasses());
-      String json2 = gson.toJson(storage.getRelationships());
-
-      FileWriter writer1;
-      if (fileNameForClass.isEmpty()){
-        writer1 = new FileWriter(new File(STORAGE_DIRECTORY, filename));
-      }else {
-        writer1 = new FileWriter(new File(STORAGE_DIRECTORY, fileNameForClass));
-
-      }
-
-      FileWriter writer2;
-      if (fileNameForRelations.isEmpty()){
-        writer2 = new FileWriter(new File(STORAGE_DIRECTORY, filename + "-Rltn.json"));
-      }else{
-        writer2 = new FileWriter(new File(STORAGE_DIRECTORY, fileNameForRelations + "-Rltn.json"));
-      }
-
-      writer1.write(json1);
-      writer2.write(json2);
       System.out.println("Progress saved to " + STORAGE_DIRECTORY + "/" + printOutName + ".");
-
-      writer1.close();
-      writer2.close();
     } catch (IOException e) {
       System.out.println("Error: Could not save progress to " + printOutName + ".");
     }
   }
 
-  // Load progress from a file or temporary if no filename is provided
-  public static void loadProgress(String filename) {
-    String printOutName;
-    String classFile;
-    String relationFile;
-    File file1;
-    File file2;
-
-    if (filename.contains(".json")){
-      relationFile = filename.substring(0, filename.indexOf('.'));
-      printOutName = filename;
-      file1 = new File(STORAGE_DIRECTORY, filename);
-      file2 = new File(STORAGE_DIRECTORY, relationFile + "-Rltn.json");
-    }else {
-      classFile = filename + ".json";
-      printOutName = classFile;
-      file1 = new File(STORAGE_DIRECTORY, classFile);
-      file2 = new File(STORAGE_DIRECTORY, filename + "-Rltn.json");
+  //Helper method for reading in the file
+  private static FileWriter getFileWriter(String fileName) throws IOException {
+    File dir = new File(STORAGE_DIRECTORY);
+    if (!dir.exists()) {
+      dir.mkdirs();
     }
 
-    if (!file1.exists()) {
+    // Wrap classes and relationships in a container
+    Gson gson = new Gson();
+    MementoSaveData mementoSaveData = new MementoSaveData(storage.getUMLClasses(), storage.getRelationships());
+
+    // Serialize the container to JSON
+    String json = gson.toJson(mementoSaveData);
+
+    // Write the JSON to the file
+    FileWriter writer = new FileWriter(new File(STORAGE_DIRECTORY, fileName));
+    writer.write(json);
+    return writer;
+  }
+
+  // Load progress from a file or temporary if no filename is provided
+  public static void loadProgress(String filename) {
+    String fileName;
+    if (filename.endsWith(".json")) {
+      fileName = filename;
+    } else {
+      fileName = filename + ".json";
+    }
+    String printOutName = fileName;
+
+    File file = new File(STORAGE_DIRECTORY, fileName);
+
+    if (!file.exists()) {
       System.out.println("Error: File " + printOutName + " does not exist.");
       return;
     }
 
-    try{
-      FileReader reader1 = new FileReader(file1);
-      FileReader reader2 = new FileReader(file2);
-      Type type1 = new TypeToken<HashMap<String, UMLClass>>() {}.getType();
-      HashMap<String, UMLClass> classes = new Gson().fromJson(reader1, type1);
-      Type type2 = new TypeToken<ArrayList<UMLRelationship>>() {}.getType();
-      ArrayList<UMLRelationship> relations = new Gson().fromJson(reader2, type2);
+    try {
+      // Read the JSON from the file
+      FileReader reader = new FileReader(file);
 
-     // System.out.println("Type in 'loadedData[0]': " + relations.getClass());
-      storage.setRelationships(relations);
+      // Deserialize the JSON into the container
+      Gson gson = new Gson();
+      Type saveDataType = new TypeToken<MementoSaveData>() {}.getType();
+      MementoSaveData mementoSaveData = gson.fromJson(reader, saveDataType);
 
-     // System.out.println("Type in 'loadedData[1]': " + classes.getClass());
-      storage.setUMLClasses(classes);
+      // Extract classes and relationships from the container
+      storage.setUMLClasses(mementoSaveData.getClasses());
+      Storage.setRelationships(mementoSaveData.getRelationships());
 
       System.out.println("Progress loaded from " + STORAGE_DIRECTORY + "/" + printOutName + ".");
     } catch (IOException e) {
