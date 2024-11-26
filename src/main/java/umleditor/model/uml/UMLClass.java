@@ -163,7 +163,7 @@ public class UMLClass {
 
   // Debugging helper method to display all methods in the class
   public void displayMethods() {
-    System.out.println("Methods in class " + className + ":");
+    System.out.println("Methods:");
     for (MethodSignature method : this.methods) {
       System.out.println("- " + method);
     }
@@ -281,7 +281,6 @@ public class UMLClass {
   }
 
   // Nested Memento class
-  //TODO: Memento fields have the same address as the class attributes. CHANGE THIS
   public static class Memento {
     private final String className;
     private final List<UMLAttribute> attributes;

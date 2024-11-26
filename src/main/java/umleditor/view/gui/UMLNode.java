@@ -7,11 +7,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import umleditor.controller.utilities.Functions;
+import umleditor.model.uml.MethodSignature;
+import umleditor.model.uml.UMLAttribute;
 import umleditor.model.uml.UMLClass;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UMLNode extends Pane {
-    private String className,fieldName,fieldType,methodName,methodType,parameterName,parameterType,relationship;
+    private String className,relationship;
     private UMLClass classObject;
 
 
@@ -34,17 +39,12 @@ public class UMLNode extends Pane {
      * Initializes a new UMLNode with a default or specified class name.
      */
 
-    public UMLNode(String className) {
+    public UMLNode(UMLClass classObject) {
 
-        this.className = (className != null) ? className : "Default Class Name";
-
-        this.fieldName = "";
-        this.fieldType = "";
-        this.methodName = "";
-        this.methodType = "";
-        this.parameterName = "";
-        this.parameterType = "";
+        this.classObject = classObject;
+        this.className = classObject.getClassName();
         this.relationship = "";
+
         // Initialize and style label
         classLabel = new Label(formatNodeContent());
         classLabel.setStyle("-fx-font-weight: bold;");
@@ -99,7 +99,7 @@ public class UMLNode extends Pane {
     /**
      * Updates the node's label and adjusts its size.
      */
-    private void updateLabel() {
+    public void updateLabel() {
         classLabel.setText(formatNodeContent());
         adjustNodeSize();
     }
@@ -120,12 +120,40 @@ public class UMLNode extends Pane {
      */
     private String formatNodeContent() {
         return "Class Name: " + getClassName() + STRAIGHT_LINE +
-                "Fields:\n " + getFieldName() + "   " + getFieldType() + STRAIGHT_LINE +
-                "Method: " + getMethodType() + " "   + getMethodName() + " ( " + getParameterName() + ") : " +
-                getParameterType() + STRAIGHT_LINE +
+                displayFields() + STRAIGHT_LINE +
+                displayMethods() + STRAIGHT_LINE +
                 "Relationship: " + getRelationship();
     }
 
+
+    private String displayMethods() {
+        List<MethodSignature> methods = classObject.getMethods();
+        if (methods.isEmpty()) {
+            return "-";
+        }
+        StringBuilder result = new StringBuilder();
+        for (MethodSignature method : methods) {
+            result.append(method.toString()).append("\n");
+        }
+        return result.toString().trim(); // Remove the trailing newline
+    }
+
+
+    private String displayFields(){
+        List<UMLAttribute> fields = classObject.getAttributes();
+        if (fields.isEmpty()) {
+            return "-";
+        }
+        StringBuilder result = new StringBuilder();
+        for (UMLAttribute field : fields) {
+            result.append(field.toString()).append("\n");
+        }
+        return result.toString().trim(); // Remove the trailing newline
+    }
+
+    private void displayRelationships(){
+
+    }
 
     // Setters and Getters
     public void setClassName(String className) {
@@ -137,55 +165,11 @@ public class UMLNode extends Pane {
         return className;
     }
 
-    public void setFieldName(String fieldName) {
-
-        this.fieldName = fieldName;
-        updateLabel();
-    }
-    public String getFieldName() {
-        return fieldName;
-    }
-    public void setFieldType(String fieldType) {
-
-        this.fieldType = fieldType;
-        updateLabel();
-    }
-    public String getFieldType() {
-        return fieldType;
-    }
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-
-        updateLabel();
-    }
-    public String getMethodName() {
-        return methodName;
-    }
-    public void setMethodType(String methodType) {
-        this.methodType = methodType;
-        updateLabel();
-    }
-    public String getMethodType() {
-        return methodType;
-    }
-    public void setParameterName(String parameterName) {
-        this.parameterName = parameterName;
-        updateLabel();
-    }
-    public String getParameterName() {
-        return parameterName;
-    }
-    public void setParameterType(String parameterType) {
-        this.parameterType = parameterType;
-        updateLabel();
-    }
-    public String getParameterType() {
-        return parameterType;
-    }
     public void setRelationship(String relationship) {
         this.relationship = relationship;
         updateLabel();
     }
+
     public String getRelationship() {
         return relationship;
     }
