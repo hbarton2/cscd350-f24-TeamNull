@@ -3,6 +3,7 @@ package umleditor.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,6 +17,8 @@ public class MovableLine {
    // Circle startPoint, endPoint;
     @FXML
     private Button add;
+    @FXML
+    private TextArea textArea;
 
    @FXML
    private Circle endPoint;
@@ -31,11 +34,10 @@ public class MovableLine {
 
     private void createDraggableLine(Pane root){
         // Create the line
-       // line = new Line(50, 50, 100, 100);
+
         line = new Line(170, 160, 370, 160);
         line.setStroke(Color.RED);
         line.setStrokeWidth(2);
-
 
         // Create the start and end points
         startPoint = createDraggablePoint(line.getStartX(), line.getStartY());
@@ -50,7 +52,6 @@ public class MovableLine {
 
     private void handlePointMouseDragged(MouseEvent event, Line line, Boolean startPoint) {
         Circle point = (Circle) event.getSource();
-
 
         double offsetX = event.getX();
         double offsetY = event.getY();

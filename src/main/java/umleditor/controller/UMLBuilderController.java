@@ -21,17 +21,14 @@ import java.util.List;
 public class UMLBuilderController {
     // Relationship arrow
 
-
     @FXML
     private Button goButton;
     @FXML
     private Button  fieldSaveButton;
     @FXML
     private Button loadButton ;
-
     @FXML
     private Button saveClassBNT;
-
     @FXML
     private Button saveClassName;
     @FXML
@@ -41,7 +38,6 @@ public class UMLBuilderController {
     private Label fieldsLabel;
     @FXML
     private Label relationshipLabel;
-
     @FXML
     private Label classNameLable; // Label on top of the field that shows class name
     @FXML
@@ -59,7 +55,6 @@ public class UMLBuilderController {
     private TextField methodName;
     @FXML
     private TextField parameterName;
-
     @FXML
     private TextField lowerMsgBox;
     @FXML
@@ -75,20 +70,16 @@ public class UMLBuilderController {
     private HBox fldArea;
     @FXML
     private HBox pramArea;
-
     @FXML
     private VBox fieldsBox, methodsBox, relationshipsBox;
 
     // Dropdown menu on home page for user to select an action
     @FXML
     private ChoiceBox<String> userSelectionDropdown;
-
     @FXML
     private ChoiceBox<String> methodDataTypeChoice;
-
     @FXML
     private ChoiceBox<String> pramRetunDataTypeChoice;
-
 
     public ChoiceBox<String> relationshipChoiceBox;
     @FXML
@@ -97,13 +88,12 @@ public class UMLBuilderController {
     @FXML
     private AnchorPane viewAnchorPane;
 
-    //@FXML
-    //  private ScrollPane fieldArea; // field area is the whole area with field box, drop down menu, plus and minus buttons
-
     @FXML
     private ScrollPane area;
     @FXML
     private ScrollPane methodArea; // method area is the whole area with field box, drop down menu, plus and minus buttons
+
+    UMLNode node ;
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
@@ -283,6 +273,7 @@ public class UMLBuilderController {
     @FXML
     public void deleteNode(ActionEvent actionEvent) {
         Functions.clearProgress();
+
         classNameLable.setText("");
 
         node.setVisible(false);
@@ -295,90 +286,8 @@ public class UMLBuilderController {
         // Placeholder for save functionality
     }
 
-    /**
-     * Add or remove more Fields for user to add
-     * depending on the user selection of plus or minus button, this method or removes field
-     * This method adds more Fields on the screen when user clicks the plus button
-     */
-/**
- @FXML
- public void addField() {
- HBox fieldBox = new HBox(5);
- TextField fieldType = new TextField();
 
- TextField fieldName = new TextField();
- fieldName.setPromptText("Enter field name");
 
- //drop down for method data type
- ChoiceBox<String> fieldTypeChoice = new ChoiceBox<>();
- // fieldTypeChoice.getItems().addAll(fieldDataTypeList);
- fieldTypeChoice.getItems().addAll(dropDownChoices);
-
- Button fieldSaveButton = new Button("Save");
- Button removeButton = new Button("-");
- removeButton.setOnAction(e -> fieldsBox.getChildren().remove(fieldBox));
-
- fieldsBox.getChildren().add(fieldBox);
- }
- */
-    /**
-     @FXML
-     public void addMethod() {
-     HBox methodBox = new HBox(5);
-
-     TextField returnType = new TextField();
-     returnType.setPromptText("Enter return type");
-
-     TextField methodName = new TextField();
-     methodName.setPromptText("Enter method name");
-
-     TextField parameterType = new TextField();
-     parameterType.setPromptText("Enter parameter type");
-
-     ChoiceBox<String> methodTypeChoice = new ChoiceBox<>();
-     methodTypeChoice.getItems().addAll(relationshipTypes);
-
-     Button methodSaveButton = new Button("Save");
-
-     // drop down menu for user to select parameter data type
-     ChoiceBox<String> pramReturnDataTypeChoice = new ChoiceBox<>();
-
-     pramReturnDataTypeChoice.getItems().addAll(dropDownChoices);
-
-     TextField parameterName = new TextField();
-     parameterName.setPromptText("Enter parameter name");
-
-     // Button addButton = new Button("+");
-     // addButton.setOnAction(e -> addMethod());  // Allows adding more methods
-
-     Button removeButton = new Button("-");
-     removeButton.setOnAction(e -> methodsBox.getChildren().remove(methodBox));
-
-     //  methodBox.getChildren().addAll(returnType, methodName, methodTypeChoice, parameterType, parameterName,pramReturnDataTypeChoice, addButton, removeButton, methodSaveButton);
-     methodsBox.getChildren().add(methodBox);
-     }
-     */
-    @FXML
-    public void addRelationship() {
-      //  HBox relationshipBox = new HBox(5);
-
-      //  ChoiceBox<String> relationshipChoice = new ChoiceBox<>();
-       // relationshipChoice.getItems().addAll(relationshipTypes);
-       // relationshipChoice.setValue(relationshipTypes.get(0)); // Set default value
-
-       // Button addButton = new Button("+");
-      //  addButton.setOnAction(e -> addRelationship());  // Allows adding more relationships
-
-       // Button removeButton = new Button("-");
-       // removeButton.setOnAction(e -> relationshipsBox.getChildren().remove(relationshipBox));
-
-       // relationshipBox.getChildren().addAll(relationshipChoice, addButton, removeButton);
-       // relationshipsBox.getChildren().add(relationshipBox);
-    }
-
-    public void exitProgram(ActionEvent actionEvent) {
-        System.exit(0);
-    }
 
     /**
      * This method saves the progress in a file name provided by user
@@ -401,19 +310,18 @@ public class UMLBuilderController {
 
 
     public void loadNode(ActionEvent actionEvent) {
-
-        textArea.setVisible(true);
-        textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
-        textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
+       // textArea.setVisible(true);
+       // textArea.setStyle("-fx-text-fill: black;"); // Reset to normal color
+       // textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
 
     }
 
     public void createMockNode(ActionEvent actionEvent) {
 
-        infoBox("Creating a new mock node");
-        node = new UMLNode(node.getClassName());
+      //  infoBox("Creating a new mock node");
+      //  node = new UMLNode(node.getClassName());
 
-        viewAnchorPane.getChildren().add(node);
+       // viewAnchorPane.getChildren().add(node);
     }
 
     @FXML
@@ -486,6 +394,7 @@ public class UMLBuilderController {
         saveClassBNT.setVisible(true);
     }
 
+
     /**
      * Handles the event when the "Save Class Name" button is clicked.
      *
@@ -500,7 +409,6 @@ public class UMLBuilderController {
      * @param event The action event triggered by the button click.
      */
 
-    UMLNode node ;
     @FXML
     void saveClassNameOnClick(ActionEvent event) {
         if (classNameField.getText().isEmpty()) {
@@ -512,6 +420,7 @@ public class UMLBuilderController {
         node = new UMLNode(classNameField.getText());
         viewAnchorPane.getChildren().add(node);
         infoBox("Class name " + classNameField.getText() + " Saved. \n File path is: " + filePath);
+        classNameField.clear();
     }
 
     /**
@@ -557,12 +466,14 @@ public class UMLBuilderController {
         }
 
 
-        Functions.addAttribute(classNameToSaveField.getText(), fieldTypeChoice.getValue(), fieldName.getText());
+
 
         if (!node.getFieldName().isEmpty()) {
             node.setFieldName(node.getFieldName() + "\n" + fieldName.getText() + " : " + fieldTypeChoice.getValue());
         } else {
+
             node.setFieldName(fieldName.getText() + " : " + fieldTypeChoice.getValue());
+            Functions.addAttribute(classNameToSaveField.getText(), fieldTypeChoice.getValue(), fieldName.getText());
         }
 
         // Show confirmation message
@@ -687,9 +598,7 @@ public class UMLBuilderController {
         infoBox(relationshipChoiceBox.getValue() + " added.");
 
 
-        // relLine2.equals(node.getLayoutX());
-        // relLine2.equals(node.getLayoutY());
-        //relLine2.getControls();
+
 /**
  // Set the start and end points based on the nodes' positions
  relLine2.setStartX(startNode.getLayoutX() + startNode.getWidth() / 2); // Center of the start node
@@ -741,8 +650,8 @@ public class UMLBuilderController {
     public void renameClass() {
         try {
             // Load the RenameClass.fxml file
-            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameClass.fxml"));
-            Parent root = guiUtilityLoader.load();
+            FXMLLoader renameClassLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameClass.fxml"));
+            Parent root = renameClassLoader.load();
             // Create a new stage and set its title and scene
             Stage stage = new Stage();
             stage.setTitle("Rename Class Utility");
@@ -767,8 +676,8 @@ public class UMLBuilderController {
     public void deleteClass() {
         try {
             // Load the FXML file for the Delete Class utility
-            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/DeleteClass.fxml"));
-            Parent root = guiUtilityLoader.load();
+            FXMLLoader deleteClassLoader = new FXMLLoader(getClass().getResource("/sprint2/DeleteClass.fxml"));
+            Parent root = deleteClassLoader.load();
             // Create a new stage for the Delete Class utility window
             Stage stage = new Stage();
             stage.setTitle("Delete Class Utility");
@@ -818,8 +727,8 @@ public class UMLBuilderController {
     public void deleteField() {
         try {
             // Load the DeleteField.fxml file
-            FXMLLoader renameFieldLoader = new FXMLLoader(getClass().getResource("/sprint2/DeleteField.fxml"));
-            Parent root = renameFieldLoader.load();
+            FXMLLoader deleteFieldLoader = new FXMLLoader(getClass().getResource("/sprint2/DeleteField.fxml"));
+            Parent root = deleteFieldLoader.load();
             // Create a new stage and set its title and scene
             Stage stage = new Stage();
             stage.setTitle("Delete Field Utility");
@@ -845,8 +754,8 @@ public class UMLBuilderController {
     public void renameMethod() {
         try {
             // Load the RenameMethod.fxml file
-            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameMethod.fxml"));
-            Parent root = guiUtilityLoader.load();
+            FXMLLoader renameMethodLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameMethod.fxml"));
+            Parent root = renameMethodLoader.load();
             // Create a new stage and set its title and scene
             Stage stage = new Stage();
             stage.setTitle("Rename Method Utility");
@@ -871,8 +780,8 @@ public class UMLBuilderController {
     public void renameParameter() {
         try {
             // Load the RenameParameter.fxml file
-            FXMLLoader guiUtilityLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameParameter.fxml"));
-            Parent root = guiUtilityLoader.load();
+            FXMLLoader renameParamLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameParameter.fxml"));
+            Parent root = renameParamLoader.load();
             // Create a new stage and set its title and scene
             Stage stage = new Stage();
             stage.setTitle("Rename Parameter Utility");
@@ -897,8 +806,8 @@ public class UMLBuilderController {
     public void saveFile() {
         try {
             // Load the SaveFile.fxml file
-            FXMLLoader renameFieldLoader = new FXMLLoader(getClass().getResource("/sprint2/SaveFile.fxml"));
-            Parent root = renameFieldLoader.load();
+            FXMLLoader saveFiledLoader = new FXMLLoader(getClass().getResource("/sprint2/SaveFile.fxml"));
+            Parent root = saveFiledLoader.load();
             // Create a new stage and set its title and scene
             Stage stage = new Stage();
             stage.setTitle("Save File Utility");
@@ -952,7 +861,6 @@ private void startRelationshipArrow() {
         stage.setScene(new Scene(root));
         stage.show();
 
-
     } catch (Exception e) {
         // Print error message to the console
         System.out.println("Line loader failed");
@@ -979,5 +887,9 @@ private void startRelationshipArrow() {
     @FXML
     void redoLastAction(ActionEvent event) {
         Functions.redo();
+    }
+
+    public void exitProgram(ActionEvent actionEvent) {
+        System.exit(0);
     }
 }

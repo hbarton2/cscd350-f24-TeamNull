@@ -21,24 +21,29 @@ public class RelationshipArrowController {
     private TextArea textArea;
     @FXML
     private TextArea textArea1;
-    UMLNode node1;
+    UMLNode node;
+
+    @FXML
+    private AnchorPane viewAnchorPane;
+
     @FXML
     void addLine(ActionEvent event) {
-        umleditor.controller.MovableLine newLine = new umleditor.controller.MovableLine(anchorPane);
+
+        MovableLine newLine = new umleditor.controller.MovableLine(anchorPane);
         lines.add(newLine);
 
-        textArea.appendText(newLine.toString());
-        textArea.appendText("\nline added");
-        textArea.appendText("\n\n");
+
         textArea.setEditable(false);
         textArea.setWrapText(true);
-       // textArea.setLayoutX(14);
-       // textArea.setLayoutY(14);
-        textArea1.setEditable(false);
-        textArea1.setWrapText(true);
-        textArea1.appendText("Relationship line added");
-        textArea1.appendText(node1.getClassName());
+        textArea.appendText("\nRelationship line added\n to class 1");
 
+         textArea1.setEditable(false);
+         textArea1.setWrapText(true);
+         textArea1.appendText("\nRelationship line added\n to class 2");
+
+         //Functions.createClass("Test Class");
+        node = new UMLNode("TestClass");
+        viewAnchorPane.getChildren().add(node);
 
     }
 
@@ -55,6 +60,7 @@ public class RelationshipArrowController {
 
         }catch (Exception e) {
             System.out.println("No more lines to remove\n");
+
         }
     }
 }
