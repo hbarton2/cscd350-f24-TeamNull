@@ -2,98 +2,53 @@ package umleditor.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import umleditor.controller.utilities.Functions;
+import umleditor.view.gui.GUIDisplay;
 import umleditor.view.gui.UMLNode;
-import umleditor.view.gui.UMLNodeManager;
 
 import java.util.List;
 
 public class UMLBuilderController {
     // Relationship arrow
+    @FXML
+    private Button goButton, fieldSaveButton, loadButton, saveClassBNT, saveClassName, saveClass;
 
     @FXML
-    private Button goButton;
-    @FXML
-    private Button  fieldSaveButton;
-    @FXML
-    private Button loadButton ;
-    @FXML
-    private Button saveClassBNT;
-    @FXML
-    private Button saveClassName;
-    @FXML
-    public Button saveClass;
+    private Label fieldsLabel, relationshipLabel, classNameLabel, methodLabel;
 
     @FXML
-    private Label fieldsLabel;
-    @FXML
-    private Label relationshipLabel;
-    @FXML
-    private Label classNameLable; // Label on top of the field that shows class name
-    @FXML
-    private Label methodLabel; // label for method area
+    private TextField classNameToSaveField, fieldName, fileName, classNameToSaveMethod, methodName, parameterName,
+    lowerMsgBox, classNameToAddRelationship, classNameToAddRelationshipdst, classNameField ;
 
-    @FXML
-    private TextField classNameToSaveField;
-    @FXML
-    private TextField fieldName;
-    @FXML
-    private TextField fileName;
-    @FXML
-    private TextField classNameToSaveMethod;
-    @FXML
-    private TextField methodName;
-    @FXML
-    private TextField parameterName;
-    @FXML
-    private TextField lowerMsgBox;
-    @FXML
-    private TextField classNameToAddRelationship; // source class
-    @FXML
-    private TextField classNameToAddRelationshipdst; // destination class
-    @FXML
-    private TextField classNameField;
     @FXML
     private TextArea textArea;
 
     @FXML
-    private HBox fldArea;
-    @FXML
-    private HBox pramArea;
+    private HBox fldArea, pramArea;
+
     @FXML
     private VBox fieldsBox, methodsBox, relationshipsBox;
 
     // Dropdown menu on home page for user to select an action
     @FXML
-    private ChoiceBox<String> userSelectionDropdown;
-    @FXML
-    private ChoiceBox<String> methodDataTypeChoice;
-    @FXML
-    private ChoiceBox<String> pramRetunDataTypeChoice;
-
-    public ChoiceBox<String> relationshipChoiceBox;
-    @FXML
-    private ChoiceBox<String> fieldTypeChoice;
+    private ChoiceBox<String> userSelectionDropdown, methodDataTypeChoice, pramRetunDataTypeChoice, relationshipChoiceBox
+            ,fieldTypeChoice;
 
     @FXML
     private AnchorPane viewAnchorPane;
 
     @FXML
-    private ScrollPane area;
-    @FXML
-    private ScrollPane methodArea; // method area is the whole area with field box, drop down menu, plus and minus buttons
+    private ScrollPane area, methodArea; // method area is the whole area with field box, drop down menu, plus and minus buttons
 
     UMLNode node ;
+    guiFunctions functions = new guiFunctions();
+    GUIDisplay display = new GUIDisplay();
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
@@ -177,11 +132,11 @@ public class UMLBuilderController {
 
             case "Rename a Class":
 
-                renameClass();
+                functions.renameClass();
                 break;
 
             case "Delete a Class":
-                deleteClass();
+                functions.deleteClass();
                 break;
 
             case "Add Field (S)":
@@ -189,17 +144,16 @@ public class UMLBuilderController {
                 hideClassArea();
                 hideRArea();
                 hideMethodArea();
-
                 showFieldArea();
 
                 classNameToSaveField.requestFocus();
                 break;
             case "Rename Field":
-                renameField();
+                functions.renameField();
 
                 break;
             case "Delete Field":
-                deleteField();
+                functions.deleteField();
                 break;
 
             case "Add Method (S)":
@@ -213,7 +167,7 @@ public class UMLBuilderController {
                 classNameToSaveMethod.requestFocus();
                 break;
             case "Rename Method":
-                renameMethod();
+                functions.renameMethod();
                 break;
             case "Add Relationship":
                 hideFieldArea();
@@ -223,21 +177,21 @@ public class UMLBuilderController {
 
                 showRArea();
                 relationshipChoiceBox.requestFocus();
-                startRelationshipArrow();
+                functions.startRelationshipArrow();
                 break;
 
             case "Rename Parameter":
-                renameParameter();
+                functions.renameParameter();
                 break;
 
             case "Save File":
 
-                saveFile();
+                functions.saveFile();
                 break;
 
             case "Help":
 
-                help();
+                display.help();
                 break;
             default:
                 infoBox(relationshipChoiceBox.getValue() + " is in development");
@@ -274,7 +228,7 @@ public class UMLBuilderController {
     public void deleteNode(ActionEvent actionEvent) {
         Functions.clearProgress();
 
-        classNameLable.setText("");
+        classNameLabel.setText("");
 
         node.setVisible(false);
         infoBox("All progress has been cleared.");
@@ -315,25 +269,16 @@ public class UMLBuilderController {
        // textArea.setText(straightLine + "\nLoad:\n feature is in development mode." + straightLine);
 
     }
-
-    public void createMockNode(ActionEvent actionEvent) {
-
-      //  infoBox("Creating a new mock node");
-      //  node = new UMLNode(node.getClassName());
-
-       // viewAnchorPane.getChildren().add(node);
-    }
-
     @FXML
     public void hideClassArea(){
-        classNameLable.setVisible(false);
+        classNameLabel.setVisible(false);
         classNameField.setVisible(false);
         saveClassName.setVisible(false);
     }
 
     @FXML
     public void  showClassArea(){
-        classNameLable.setVisible(true);
+        classNameLabel.setVisible(true);
         classNameField.setVisible(true);
         saveClassName.setVisible(true);
     }
@@ -597,18 +542,6 @@ public class UMLBuilderController {
 
         infoBox(relationshipChoiceBox.getValue() + " added.");
 
-
-
-/**
- // Set the start and end points based on the nodes' positions
- relLine2.setStartX(startNode.getLayoutX() + startNode.getWidth() / 2); // Center of the start node
- relLine2.setStartY(startNode.getLayoutY() + startNode.getHeight() / 2); // Center of the start node
- relLine2.setEndX(endNode.getLayoutX() + endNode.getWidth() / 2); // Center of the end node
- relLine2.setEndY(endNode.getLayoutY() + endNode.getHeight() / 2); // Center of the end node
- // Optionally, add the line to a parent container (e.g., Pane)
-
- viewAnchorPane.getChildren().add(lineArrow);
- */
     }// end of method
 
 
@@ -638,236 +571,6 @@ public class UMLBuilderController {
     public void setClassCounter(int classCounter) {
         this.classCounter = classCounter;
     }
-    /**
-     * Opens the "Rename Class Utility" window using a JavaFX stage.
-     *
-     * This method loads the "RenameClass.fxml" file located in the
-     * `/sprint2/` directory and displays it in a new window.
-     *
-     * <p>If the loading process fails, an error message is printed to the console,
-     * and the exception's stack trace is logged for debugging purposes.</p>
-     */
-    public void renameClass() {
-        try {
-            // Load the RenameClass.fxml file
-            FXMLLoader renameClassLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameClass.fxml"));
-            Parent root = renameClassLoader.load();
-            // Create a new stage and set its title and scene
-            Stage stage = new Stage();
-            stage.setTitle("Rename Class Utility");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            // Print error message to the console
-            System.out.println("Loading GUI Utility controller failed");
-            // Log the exception's stack trace for debugging
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Opens the "Delete Class" utility window.
-     * <p>
-     * This method loads the "DeleteClass.fxml" file using {@link FXMLLoader}, initializes
-     * the corresponding GUI, and displays it in a new window (stage). If an exception
-     * occurs during the loading process, it prints an error message to the console and
-     * logs the stack trace for debugging purposes.
-     */
-    public void deleteClass() {
-        try {
-            // Load the FXML file for the Delete Class utility
-            FXMLLoader deleteClassLoader = new FXMLLoader(getClass().getResource("/sprint2/DeleteClass.fxml"));
-            Parent root = deleteClassLoader.load();
-            // Create a new stage for the Delete Class utility window
-            Stage stage = new Stage();
-            stage.setTitle("Delete Class Utility");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            // Log an error message and stack trace if the utility fails to load
-            System.out.println("Loading delete Utility controller failed");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Opens the "Rename Field" utility window.
-     * <p>
-     * This method loads the "RenameField.fxml" file using {@link FXMLLoader}, initializes
-     * the corresponding GUI, and displays it in a new window (stage). If an exception
-     * occurs during the loading process, it prints an error message to the console and
-     * logs the stack trace for debugging purposes.
-     */
-    public void renameField() {
-        try {
-            // Load the FXML file for the Rename Field utility
-            FXMLLoader renameFieldLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameField.fxml"));
-            Parent root = renameFieldLoader.load();
-            // Create a new stage for the Rename Field utility window
-            Stage stage = new Stage();
-            stage.setTitle("Field Rename Utility");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            // Log an error message and stack trace if the utility fails to load
-            System.out.println("Loading Rename Field Utility failed");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Opens the "Delete Field Utility" window using a JavaFX stage.
-     *
-     * This method loads the "DeleteField.fxml" file located in the
-     * `/sprint2/` directory and displays it in a new window.
-     *
-     * <p>If the loading process fails, the method prints an error message
-     * to the console and logs the exception's stack trace for debugging purposes.</p>
-     */
-    public void deleteField() {
-        try {
-            // Load the DeleteField.fxml file
-            FXMLLoader deleteFieldLoader = new FXMLLoader(getClass().getResource("/sprint2/DeleteField.fxml"));
-            Parent root = deleteFieldLoader.load();
-            // Create a new stage and set its title and scene
-            Stage stage = new Stage();
-            stage.setTitle("Delete Field Utility");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            // Print error message to the console
-            System.out.println("Loading Delete Field Utility failed");
-            // Log the exception's stack trace for debugging
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Opens the "Rename Method Utility" window using a JavaFX stage.
-     *
-     * This method loads the "RenameMethod.fxml" file located in the
-     * `/sprint2/` directory and displays it in a new window. If the
-     * loading process fails, an error message is printed to the console,
-     * and the exception's stack trace is logged for debugging purposes.
-     */
-
-    public void renameMethod() {
-        try {
-            // Load the RenameMethod.fxml file
-            FXMLLoader renameMethodLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameMethod.fxml"));
-            Parent root = renameMethodLoader.load();
-            // Create a new stage and set its title and scene
-            Stage stage = new Stage();
-            stage.setTitle("Rename Method Utility");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            // Print error message to the console
-            System.out.println("Loading Rename Method Utility failed");
-            // Log the exception's stack trace for debugging
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Opens the "Rename Parameter Utility" window using a JavaFX stage.
-     *
-     * This method loads the "RenameParameter.fxml" file located in the
-     * `/sprint2/` directory and displays it in a new window. If the
-     * loading process fails, an error message is printed to the console,
-     * and the exception's stack trace is logged for debugging purposes.
-     */
-    public void renameParameter() {
-        try {
-            // Load the RenameParameter.fxml file
-            FXMLLoader renameParamLoader = new FXMLLoader(getClass().getResource("/sprint2/RenameParameter.fxml"));
-            Parent root = renameParamLoader.load();
-            // Create a new stage and set its title and scene
-            Stage stage = new Stage();
-            stage.setTitle("Rename Parameter Utility");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            // Print error message to the console
-            System.out.println("Loading Rename Parameter Utility failed");
-            // Log the exception's stack trace for debugging
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Opens the "Save File Utility" window using a JavaFX stage.
-     *
-     * This method loads the "SaveFile.fxml" file located in the
-     * `/sprint2/` directory and displays it in a new window. If the
-     * loading process fails, an error message is printed to the console,
-     * and the exception's stack trace is logged for debugging purposes.
-     */
-    public void saveFile() {
-        try {
-            // Load the SaveFile.fxml file
-            FXMLLoader saveFiledLoader = new FXMLLoader(getClass().getResource("/sprint2/SaveFile.fxml"));
-            Parent root = saveFiledLoader.load();
-            // Create a new stage and set its title and scene
-            Stage stage = new Stage();
-            stage.setTitle("Save File Utility");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            // Print error message to the console
-            System.out.println("Loading Saving File Utility failed");
-            // Log the exception's stack trace for debugging
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Opens the "Help Utility" window using a JavaFX stage.
-     *
-     * This method attempts to load the "Help.fxml" file located in the
-     * `/sprint2/` directory and displays it in a new window. If the
-     * loading process fails, an error message is printed to the console,
-     * and the exception's stack trace is logged for debugging purposes.
-     */
-    public void help() {
-        try {
-            // Load the Help.fxml file
-            FXMLLoader helpSceneLoader = new FXMLLoader(getClass().getResource("/sprint2/Help.fxml"));
-            Parent root = helpSceneLoader.load();
-
-            // Create a new stage and set its title and scene
-            Stage stage = new Stage();
-            stage.setTitle("Help Utility");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-
-        } catch (Exception e) {
-            // Print error message to the console
-            System.out.println("Loading Help Utility failed");
-            // Log the exception's stack trace for debugging
-            e.printStackTrace();
-        }
-    }
-
-private void startRelationshipArrow() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sprint2/Relationships.fxml"));
-        Parent root = loader.load();
-
-        // Create a new stage and set its title and scene
-        Stage stage = new Stage();
-        stage.setTitle("Add Relationship Utility");
-        stage.setScene(new Scene(root));
-        stage.show();
-
-    } catch (Exception e) {
-        // Print error message to the console
-        System.out.println("Line loader failed");
-        // Log the exception's stack trace for debugging
-        e.printStackTrace();
-    }
-}
 
     /**
      * This method calls the undo() method in Functions class to

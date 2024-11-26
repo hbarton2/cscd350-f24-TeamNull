@@ -7,10 +7,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import umleditor.controller.utilities.Functions;
+import umleditor.model.uml.UMLClass;
 
 
 public class UMLNode extends Pane {
     private String className,fieldName,fieldType,methodName,methodType,parameterName,parameterType,relationship;
+    private UMLClass classObject;
+
 
     private double offsetX;
     private double offsetY;

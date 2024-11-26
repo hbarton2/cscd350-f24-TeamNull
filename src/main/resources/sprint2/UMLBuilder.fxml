@@ -59,7 +59,7 @@
          <Label text="Please select an action from drop down menu and press &quot;Go&quot; button" />
          <ChoiceBox fx:id="userSelectionDropdown" prefHeight="25.0" prefWidth="368.0" />
          <Button fx:id="goButton" mnemonicParsing="false" onAction="#executeUserSelection" text="Go" />
-      <Label fx:id="classNameLable" style="-fx-font-size: 14px;" text="Class Name" />
+      <Label fx:id="classNameLabel" style="-fx-font-size: 14px;" text="Class Name" />
       <TextField fx:id="classNameField" prefHeight="25.0" prefWidth="346.0" promptText="Enter class name" />
          <Button fx:id="saveClassName" mnemonicParsing="false" onAction="#saveClassNameOnClick" text="Enter" />
 
@@ -105,7 +105,6 @@
       <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />
          <TextField fx:id="lowerMsgBox" prefHeight="2.0" prefWidth="553.0" promptText="System messages:" />
       <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadNode" prefHeight="25.0" prefWidth="57.0" text="Load" />
-      <Button mnemonicParsing="false" onAction="#createMockNode" prefHeight="25.0" prefWidth="60.0" text="Create Node (Not on final release)" />
       <Button mnemonicParsing="false" onAction="#deleteNode" prefHeight="25.0" prefWidth="57.0" text="Delete" />
     </VBox>
 
