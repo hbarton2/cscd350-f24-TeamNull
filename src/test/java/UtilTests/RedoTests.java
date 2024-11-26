@@ -53,12 +53,12 @@ public class RedoTests {
         Assertions.assertFalse(testClass.methodExists("method"));
 
         Functions.undo();
-        Assertions.assertFalse(testClass.methodExists("method"));
-        Assertions.assertTrue(testClass.methodExists("newMethod"));
-
-        Functions.redo();
         Assertions.assertTrue(testClass.methodExists("method"));
         Assertions.assertFalse(testClass.methodExists("newMethod"));
+
+        Functions.redo();
+        Assertions.assertFalse(testClass.methodExists("method"));
+        Assertions.assertTrue(testClass.methodExists("newMethod"));
     }
 
     @Test
@@ -97,11 +97,11 @@ public class RedoTests {
         Assertions.assertFalse(testClass.attributeExists("field"));
 
         Functions.undo();
-        Assertions.assertFalse(testClass.attributeExists("field"));
-        Assertions.assertTrue(testClass.attributeExists("newField"));
-
-        Functions.redo();
         Assertions.assertTrue(testClass.attributeExists("field"));
         Assertions.assertFalse(testClass.attributeExists("newField"));
+
+        Functions.redo();
+        Assertions.assertFalse(testClass.attributeExists("field"));
+        Assertions.assertTrue(testClass.attributeExists("newField"));
     }
 }
