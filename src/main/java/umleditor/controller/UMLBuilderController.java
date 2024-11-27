@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import umleditor.controller.utilities.Functions;
+import umleditor.model.utilities.Storage;
 import umleditor.view.gui.GUIDisplay;
 import umleditor.view.gui.UMLNode;
 import umleditor.view.gui.UMLNodeManager;
@@ -51,6 +52,7 @@ public class UMLBuilderController {
     guiFunctions functions = new guiFunctions();
     GUIDisplay display = new GUIDisplay();
     UMLNodeManager nodeManager = UMLNodeManager.getInstance();
+    Storage storage = Storage.getInstance();
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
@@ -364,8 +366,9 @@ public class UMLBuilderController {
         }
 
         Functions.createClass(classNameField.getText());
-        node = new UMLNode(classNameField.getText());
+        node = new UMLNode(storage.getClassObject(classNameField.getText()));
         nodeManager.addNode(node);  //add the node into the list of current nodes
+      
         viewAnchorPane.getChildren().add(node);
         infoBox("Class name " + classNameField.getText() + " Saved. \n File path is: " + filePath);
         classNameField.clear();
@@ -391,7 +394,6 @@ public class UMLBuilderController {
         //get the node using class name
         node = nodeManager.getNodeFromName(classNameToSaveField.getText());
 
-
         if (node.getClassName() == null || !node.getClassName().equals(classNameToSaveField.getText())) {
             showWarning("Class < " + classNameToSaveField.getText() + " > does not exist!");
             classNameToSaveField.requestFocus();
@@ -410,17 +412,8 @@ public class UMLBuilderController {
             return;
         }
 
-
-
-
-        if (!node.getFieldName().isEmpty()) {
-            node.setFieldName(node.getFieldName() + "\n" + fieldName.getText() + " : " + fieldTypeChoice.getValue());
-        } else {
-
-            node.setFieldName(fieldName.getText() + " : " + fieldTypeChoice.getValue());
             Functions.addAttribute(classNameToSaveField.getText(), fieldTypeChoice.getValue(), fieldName.getText());
-        }
-
+            node.updateLabel();
         // Show confirmation message
         infoBox("Field name < " + fieldName.getText() + " > saved\n to < " + classNameToSaveField.getText() + " > class.\nFile path is: " + filePath);
     }
@@ -463,27 +456,11 @@ public class UMLBuilderController {
             pramRetunDataTypeChoice.requestFocus();
             return;
         }
-        // Add method and parameter to the class
-        String method = methodName.getText() + " : " + methodDataTypeChoice.getValue();
-        String parameter = parameterName.getText() + " : " + pramRetunDataTypeChoice.getValue();
         // Update the underlying class data
-        Functions.addAttribute(className, methodDataTypeChoice.getValue(), methodName.getText());
+        Functions.addMethod(className, methodDataTypeChoice.getValue(), methodName.getText());
         Functions.addParam(className, methodName.getText(), parameterName.getText(), pramRetunDataTypeChoice.getValue());
-        // Append the method and parameter to the node's display
-        String existingMethods = node.getMethodName();
-        String existingParameters = node.getParameterName();
-        if (!existingMethods.isEmpty()) {
-            node.setMethodName(existingMethods + "\n" + method);
-        } else {
-            node.setMethodName(method);
-        }
-        if (!existingParameters.isEmpty()) {
-            node.setParameterName(existingParameters + "\n" + parameter);
-        } else {
-            node.setParameterName(parameter);
-        }
-        // Refresh the node's display
-        //node.updateLabel();
+        node.updateLabel();
+
         // Show confirmation message
         infoBox("Method < " + methodName.getText() + " > and parameter < " + parameterName.getText() +
                 " > saved to class < " + className + " >.");

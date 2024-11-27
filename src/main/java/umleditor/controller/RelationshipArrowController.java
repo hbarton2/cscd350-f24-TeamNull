@@ -40,7 +40,7 @@ public class RelationshipArrowController {
          textArea1.appendText("\nRelationship line added\n to class 2");
 
          //Functions.createClass("Test Class");
-        node = new UMLNode("TestClass");
+        //node = new UMLNode("TestClass");
         viewAnchorPane.getChildren().add(node);
 
     }
