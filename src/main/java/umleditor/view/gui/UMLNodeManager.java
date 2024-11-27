@@ -3,6 +3,7 @@ package umleditor.view.gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import umleditor.model.utilities.MementoStorage;
 
 
 import java.util.ArrayList;
@@ -10,18 +11,27 @@ import java.util.List;
 
 public class UMLNodeManager {
 
-    List<UMLNode> nodeList = new ArrayList<>();
-    UMLNode node;
+    private static UMLNodeManager instance;
+    public List<UMLNode> nodeList = new ArrayList<>();
+    private UMLNode node;
     @FXML
     private AnchorPane anchorPane;
 
-    @FXML
-    public void addNode(ActionEvent event) {
+    //Singleton constructor
+    private UMLNodeManager(){
+        nodeList = new ArrayList<UMLNode>();
+    }
 
-        nodeList.add( node);
-       // anchorPane.getChildren().add( node);
+    //public instance getter
+    public static UMLNodeManager getInstance() {
+        if (instance == null) {
+            instance = new UMLNodeManager();
+        }
+        return instance;
+    }
 
-
+    public void addNode(UMLNode newNode) {
+        nodeList.add(newNode);
     }
 
     @FXML
@@ -36,5 +46,19 @@ public class UMLNodeManager {
             System.out.println(node);
 
         }
+    }
+
+    /**
+     * searches for the node object with the specified name
+     * @param className is the name of the node (or class it represents) to search for
+     * @return node object or null if node is not found
+     */
+    public UMLNode getNodeFromName(String className) {
+        for(UMLNode node : nodeList){
+            if(node.getClassName().equals(className)){
+                return node;
+            }
+        }
+        return null;
     }
 }
