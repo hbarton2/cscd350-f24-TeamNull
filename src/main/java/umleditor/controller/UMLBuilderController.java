@@ -456,6 +456,9 @@ public class UMLBuilderController {
             pramRetunDataTypeChoice.requestFocus();
             return;
         }
+
+        node = nodeManager.getNodeFromName(classNameToSaveMethod.getText());
+
         // Update the underlying class data
         Functions.addMethod(className, methodDataTypeChoice.getValue(), methodName.getText());
         Functions.addParam(className, methodName.getText(), parameterName.getText(), pramRetunDataTypeChoice.getValue());
