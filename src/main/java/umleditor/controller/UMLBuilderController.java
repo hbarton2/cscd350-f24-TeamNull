@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import umleditor.controller.utilities.Functions;
 import umleditor.view.gui.GUIDisplay;
 import umleditor.view.gui.UMLNode;
+import umleditor.view.gui.UMLNodeManager;
 
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class UMLBuilderController {
     UMLNode node ;
     guiFunctions functions = new guiFunctions();
     GUIDisplay display = new GUIDisplay();
+    UMLNodeManager nodeManager = UMLNodeManager.getInstance();
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
@@ -363,6 +365,7 @@ public class UMLBuilderController {
 
         Functions.createClass(classNameField.getText());
         node = new UMLNode(classNameField.getText());
+        nodeManager.addNode(node);  //add the node into the list of current nodes
         viewAnchorPane.getChildren().add(node);
         infoBox("Class name " + classNameField.getText() + " Saved. \n File path is: " + filePath);
         classNameField.clear();
@@ -384,13 +387,10 @@ public class UMLBuilderController {
             classNameToSaveField.requestFocus();
             return;
         }
-        // Check if the class exists
-     //   String className = classNameToSaveField.getText();
-        // Append the new field to the node's existing fields
-      //  String existingFields = node.getFieldName();
-        // Add field to the class
-       // String fieldType = fieldTypeChoice.getValue();
-       // String field = fieldName.getText();
+
+        //get the node using class name
+        node = nodeManager.getNodeFromName(classNameToSaveField.getText());
+
 
         if (node.getClassName() == null || !node.getClassName().equals(classNameToSaveField.getText())) {
             showWarning("Class < " + classNameToSaveField.getText() + " > does not exist!");
