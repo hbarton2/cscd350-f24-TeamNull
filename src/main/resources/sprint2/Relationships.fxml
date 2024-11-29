@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.RelationshipArrowController">
    <children>
-      <Button fx:id="add" layoutX="22.0" layoutY="593.0" mnemonicParsing="false" onAction="#addLine" text="Add" />
-      <Button layoutX="77.0" layoutY="593.0" mnemonicParsing="false" onAction="#removeLine" text="Remove" />
-      <Button layoutX="157.0" layoutY="593.0" mnemonicParsing="false" text="Save as picture" />
-      <AnchorPane fx:id="viewAnchorPane" layoutX="8.0" layoutY="14.0" prefHeight="556.0" prefWidth="887.0">
-         <children>
-            <TextArea fx:id="textArea1" layoutX="254.0" layoutY="183.0" prefHeight="149.0" prefWidth="138.0" />
-            <TextArea fx:id="textArea" layoutX="38.0" layoutY="189.0" prefHeight="149.0" prefWidth="138.0" />
-         </children>
-      </AnchorPane>
+      <Button layoutX="477.0" layoutY="600.0" mnemonicParsing="false" onAction="#removeLine" text="Remove" />
+      <Button layoutX="545.0" layoutY="600.0" mnemonicParsing="false" onAction="#saveAsImage" text="Save as an image" />
+      <AnchorPane fx:id="viewAnchorPane" layoutX="7.0" layoutY="2.0" prefHeight="568.0" prefWidth="888.0" />
+      <Button fx:id="add" layoutX="424.0" layoutY="600.0" mnemonicParsing="false" onAction="#addLine" text="Add" />
+      <TextField fx:id="destClass" layoutX="150.0" layoutY="600.0" prefHeight="26.0" prefWidth="122.0" promptText="Dest Class" />
+      <TextField fx:id="srcClass" layoutX="20.0" layoutY="600.0" prefHeight="26.0" prefWidth="122.0" promptText="Source Class" />
+      <ChoiceBox fx:id="relationshipChoiceBox" layoutX="289.0" layoutY="600.0" prefHeight="26.0" prefWidth="122.0" />
    </children>
 </AnchorPane>

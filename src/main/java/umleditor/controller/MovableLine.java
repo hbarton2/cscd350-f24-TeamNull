@@ -27,15 +27,26 @@ public class MovableLine {
     private Circle startPoint;
     @FXML
     private Label label;
+    int startOfX = 215;
+    int endOfX = 460;
 
     public MovableLine(Pane root) {
         createDraggableLine(root);
     }
 
+    @FXML
+    public   void setXStartPoint(int x) {
+        this.startOfX = x;
+    }
+    public void setXEndPoint(int x) {
+        this.endOfX = x;
+
+    }
+
     private void createDraggableLine(Pane root){
         // Create the line
 
-        line = new Line(170, 160, 370, 160);
+        line = new Line(startOfX, 160, endOfX, 160);
         line.setStroke(Color.RED);
         line.setStrokeWidth(2);
 
@@ -71,6 +82,7 @@ public class MovableLine {
 
     private Circle createDraggablePoint(double x, double y) {
         Circle point = new Circle(x, y, 5, Color.BLACK);
+
         point.setStroke(Color.BLACK);
         point.setStrokeWidth(1);
         point.setCenterX(x);

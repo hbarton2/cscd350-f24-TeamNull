@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import umleditor.controller.utilities.Functions;
+import umleditor.view.gui.UMLNode;
+
+//import static umleditor.controller.utilities.Functions.storage;
 
 /**
  * This class represent rename class controller
@@ -52,6 +55,7 @@ public class ClassRenameController {
         classTextArea.setStyle("-fx-text-fill: green;");
         classTextArea.setEditable(false);
         classTextArea.appendText("Class name '" + oldClassName + "' changed to '" + newClassNameText + "'.\n");
+
         // Clear the text fields
         currentClassName.clear();
         newClassName.clear();

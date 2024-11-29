@@ -13,6 +13,7 @@ import umleditor.model.uml.UMLClass;
 
 import java.util.ArrayList;
 import java.util.List;
+import umleditor.controller.MovableLine;
 
 
 public class UMLNode extends Pane {
@@ -79,6 +80,7 @@ public class UMLNode extends Pane {
         setLayoutX(x);
         setLayoutY(y);
         // prints the x & y position of the boxes
+
         System.out.print(" x position is: " + x + " y position is: " + y);
         System.out.println();
         nodeCounter++;
