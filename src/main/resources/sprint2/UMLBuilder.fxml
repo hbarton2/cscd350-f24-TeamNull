@@ -98,8 +98,6 @@
           </HBox>
         </VBox>
       </ScrollPane>
-      <TextField fx:id="fileName" prefHeight="25.0" prefWidth="255.0" promptText="Enter file name without extensions for saving, load, or delete operations" />
-      <Button fx:id="saveClassBNT" mnemonicParsing="false" onAction="#saveNode" onMouseClicked="#saveClassAction" prefHeight="25.0" prefWidth="272.0" text="Save to file" />
 
       <!-- Action Buttons -->
       <Button fx:id="saveClass" onAction="#createClass" prefHeight="31.0" prefWidth="273.0" text="Create Class" />

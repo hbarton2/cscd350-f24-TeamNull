@@ -86,7 +86,7 @@ public class UMLBuilderController {
         hideFieldArea(); // to hide the field label, field name, drop down menu, and save button
         hideMethodArea(); // to hide method area
         hideRArea(); // to hide the relationship area
-        hideFileArea();
+        //hideFileArea();
         saveClass.setVisible(false);
         //delete.setVisible(false);
         loadButton.setVisible(false);
@@ -126,7 +126,7 @@ public class UMLBuilderController {
                 hideFieldArea();
                 hideRArea();
                 hideMethodArea();
-                hideFieldArea();
+
 
                 showClassArea();
 
@@ -144,7 +144,7 @@ public class UMLBuilderController {
                 break;
 
             case "Add Field (S)":
-                hideFieldArea();
+
                 hideClassArea();
                 hideRArea();
                 hideMethodArea();
@@ -164,7 +164,7 @@ public class UMLBuilderController {
                 hideFieldArea();
                 hideClassArea();
                 hideRArea();
-                hideFileArea();
+
 
                 showMethodArea();
 
@@ -176,7 +176,7 @@ public class UMLBuilderController {
             case "Add Relationship":
                 hideFieldArea();
                 hideMethodArea();
-                hideFieldArea();
+
                 hideClassArea();
 
                 showRArea();
@@ -255,6 +255,7 @@ public class UMLBuilderController {
      * with the file location.
      * @param actionEvent, click on the save button
      */
+    /**
     public void saveNode(ActionEvent actionEvent) {
 
         if(fileName.getText().isEmpty()) {
@@ -265,7 +266,7 @@ public class UMLBuilderController {
         Functions.saveProgress(fileName.getText());
         infoBox("Saving file to " + filePath + fileName.getText() + ".json");
     }
-
+*/
 
     public void loadNode(ActionEvent actionEvent) {
        // textArea.setVisible(true);
@@ -330,18 +331,14 @@ public class UMLBuilderController {
         relationshipLabel.setVisible(true);
         area.setVisible(true);
     }
-
+/**
     @FXML
     public void hideFileArea(){
         fileName.setVisible(false);
         saveClassBNT.setVisible(false);
     }
 
-    @FXML
-    public void showFileArea(){
-        fileName.setVisible(true);
-        saveClassBNT.setVisible(true);
-    }
+*/
 
 
     /**
@@ -370,6 +367,7 @@ public class UMLBuilderController {
         nodeManager.addNode(node);  //add the node into the list of current nodes
       
         viewAnchorPane.getChildren().add(node);
+
         infoBox("Class name " + classNameField.getText() + " Saved. \n File path is: " + filePath);
         classNameField.clear();
     }
@@ -534,6 +532,7 @@ public class UMLBuilderController {
      * if it is empty it displays a warning message
      * @param actionEvent, press of save button
      */
+
     @FXML
     public void createClass(ActionEvent actionEvent) {
         if (classNameField.getText().isEmpty()) {
