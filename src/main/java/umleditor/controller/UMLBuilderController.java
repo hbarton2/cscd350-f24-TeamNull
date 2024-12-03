@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import umleditor.controller.utilities.Functions;
+import umleditor.controller.utilities.ScreenCaptureUtil;
 import umleditor.model.utilities.Storage;
 import umleditor.view.gui.GUIDisplay;
 import umleditor.view.gui.UMLNode;
@@ -574,4 +575,22 @@ public class UMLBuilderController {
     public void exitProgram(ActionEvent actionEvent) {
         System.exit(0);
     }
+
+    /**
+     * This method calls the screenshot function in ScreenCaptureUtil class to capture image of GUI
+     * and save as PNG
+     * @param actionEvent select the "Save as Image" button
+     */
+    @FXML
+    public void captureScreen(ActionEvent actionEvent) {
+        // ensure a diagram is available
+        if (viewAnchorPane == null) {
+            showWarning("No UML diagram to save!");
+            return;
+        }
+        // call screenCaptureUtil.captureNode
+        ScreenCaptureUtil.captureNode(viewAnchorPane);
+        infoBox("Screen captured.");
+    }
+
 }
