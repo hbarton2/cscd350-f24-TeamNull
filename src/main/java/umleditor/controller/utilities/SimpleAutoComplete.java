@@ -1,5 +1,6 @@
 package umleditor.controller.utilities;
 
+import org.fusesource.jansi.AnsiConsole;
 import org.jline.reader.Candidate;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
@@ -34,6 +35,7 @@ public class SimpleAutoComplete {
      */
     private LineReader createLineReader() {
         try {
+            AnsiConsole.systemInstall();
             Terminal terminal = TerminalBuilder.builder().system(true).build();
             LineReader lineReader = LineReaderBuilder.builder()
                     .terminal(terminal)
