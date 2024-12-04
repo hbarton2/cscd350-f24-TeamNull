@@ -111,6 +111,7 @@ module umleditor {
   requires java.desktop;
   requires com.google.gson;
     requires org.jline;
+    requires org.fusesource.jansi;
 
     opens umleditor to javafx.fxml;
   opens umleditor.controller.utilities to com.google.gson;
