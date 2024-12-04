@@ -4,11 +4,8 @@ import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
-import javafx.scene.image.PixelWriter;
 import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritablePixelFormat;
-import javafx.scene.image.Image;
-import javafx.scene.canvas.Canvas;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
