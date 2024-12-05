@@ -3,16 +3,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="919.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.RelationshipArrowController">
    <children>
       <Button layoutX="477.0" layoutY="600.0" mnemonicParsing="false" onAction="#removeLine" text="Remove" />
       <Button layoutX="545.0" layoutY="600.0" mnemonicParsing="false" onAction="#saveAsImage" text="Save as an image" />
-      <AnchorPane fx:id="viewAnchorPane" layoutX="7.0" layoutY="2.0" prefHeight="568.0" prefWidth="888.0" />
+      <AnchorPane fx:id="viewAnchorPane" layoutX="7.0" layoutY="2.0" prefHeight="568.0" prefWidth="888.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" />
+         </children></AnchorPane>
       <Button fx:id="add" layoutX="424.0" layoutY="600.0" mnemonicParsing="false" onAction="#addLine" text="Add" />
       <TextField fx:id="destClass" layoutX="150.0" layoutY="600.0" prefHeight="26.0" prefWidth="122.0" promptText="Dest Class" />
       <TextField fx:id="srcClass" layoutX="20.0" layoutY="600.0" prefHeight="26.0" prefWidth="122.0" promptText="Source Class" />
       <ChoiceBox fx:id="relationshipChoiceBox" layoutX="289.0" layoutY="600.0" prefHeight="26.0" prefWidth="122.0" />
+
+
    </children>
 </AnchorPane>

@@ -1,11 +1,9 @@
 package umleditor.view;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import umleditor.controller.ImangeController;
 
 /**
  * Java -jar does not like to start any class with any extents
