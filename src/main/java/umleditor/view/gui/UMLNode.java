@@ -15,12 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import umleditor.controller.MovableLine;
 
-
 public class UMLNode extends Pane {
     private String className,relationship;
     private UMLClass classObject;
-
-
     private double offsetX;
     private double offsetY;
     private static final double DEFAULT_WIDTH = 200;
@@ -32,7 +29,6 @@ public class UMLNode extends Pane {
     private static double baseY = 0;
     private static int nodeCounter = 0;
     private final Label classLabel;
-
     private final Rectangle background;
     private static final String STRAIGHT_LINE = "\n-----------------------------------------\n";
     /**
@@ -122,8 +118,8 @@ public class UMLNode extends Pane {
      */
     private String formatNodeContent() {
         return "Class Name: " + getClassName() + STRAIGHT_LINE +
-                displayFields() + STRAIGHT_LINE +
-                displayMethods() + STRAIGHT_LINE +
+                "Field: " + displayFields() + STRAIGHT_LINE +
+                "Method: " + displayMethods() + STRAIGHT_LINE +
                 "Relationship: " + getRelationship();
     }
 

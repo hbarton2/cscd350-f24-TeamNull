@@ -6,14 +6,19 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.robot.Robot;
 import javafx.stage.FileChooser;
 import umleditor.controller.utilities.Functions;
 import umleditor.model.utilities.Storage;
 import umleditor.view.gui.UMLNode;
 import javafx.scene.image.ImageView;
+
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static umleditor.controller.ImageController.ScreenshotHelper.captureScreenshot;
 
 public class RelationshipArrowController    {
     @FXML
@@ -84,11 +89,14 @@ public class RelationshipArrowController    {
         viewAnchorPane.getChildren().add(srcNode);
         srcNode.setLayoutX(10);
         srcNode.setLayoutY(0);
+        srcNode.setRelationship(relationshipChoiceBox.getValue());
+
 
         destNode = new UMLNode(Storage.getInstance().getClassObject(destClass.getText()));
         viewAnchorPane.getChildren().add(destNode);
         destNode.setLayoutX(450);
         destNode.setLayoutY(0);
+        destNode.setRelationship(relationshipChoiceBox.getValue());
 
         MovableLine newLine = new umleditor.controller.MovableLine(anchorPane);
         lines.add(newLine);
@@ -112,10 +120,12 @@ public class RelationshipArrowController    {
         }
     }
 
-    @FXML
+
+
+        @FXML
     void saveAsImage(ActionEvent event) {
         // Capture the screenshot of the AnchorPane or any other Node
-        WritableImage screenshot = ImageController.ScreenshotHelper.captureScreenshot();
+        WritableImage screenshot = captureScreenshot();
         if (screenshot != null) {
             // Set the captured image in the ImageView (optional)
             imageView.setImage(screenshot);
@@ -125,6 +135,15 @@ public class RelationshipArrowController    {
             if (!outputFile.getParentFile().exists()) {
                 outputFile.getParentFile().mkdirs();
             }
+            Robot robot = new Robot();
+            robot.getScreenCapture(null, 10, 10, 250, 250);
+
+            ImageView imageView = new ImageView();
+            imageView.setFitWidth(600.0);
+            imageView.setFitHeight(400.0);
+
+            WritableImage image = captureScreenshot();
+            imageView.setImage(image);
 
             // allow user to choose location for saving image
             FileChooser fileChooser = new FileChooser();
@@ -136,7 +155,7 @@ public class RelationshipArrowController    {
             File file = fileChooser.showSaveDialog(null);
             // Save the screenshot as a PNG file
 
-            //  ImageIO.write(SwingFXUtils.fromFXImage(screenshot, null), "png", outputFile);
+             //ImageIO.write(SwingFXUtils.fromFXImage(screenshot, null), "png", outputFile);
             // Notify the user about the location of the saved screenshot
             System.out.println("Screenshot saved successfully at: " + outputFile.getAbsolutePath());
         } else {
