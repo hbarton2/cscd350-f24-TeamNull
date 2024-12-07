@@ -33,6 +33,3 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-
-      - name: Generate Dependency Tree
-        run: mvn dependency:tree -OutputFile=dependency-tree.txt
