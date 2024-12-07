@@ -14,10 +14,13 @@ import umleditor.model.uml.UMLClass;
 import java.util.ArrayList;
 import java.util.List;
 import umleditor.controller.MovableLine;
+import umleditor.model.uml.UMLRelationship;
+import umleditor.model.utilities.Storage;
 
 public class UMLNode extends Pane {
-    private String className,relationship;
-    private UMLClass classObject;
+    private String className;
+    private final UMLClass classObject;
+
     private double offsetX;
     private double offsetY;
     private static final double DEFAULT_WIDTH = 200;
@@ -40,7 +43,6 @@ public class UMLNode extends Pane {
 
         this.classObject = classObject;
         this.className = classObject.getClassName();
-        this.relationship = "";
 
         // Initialize and style label
         classLabel = new Label(formatNodeContent());
@@ -120,7 +122,7 @@ public class UMLNode extends Pane {
         return "Class Name: " + getClassName() + STRAIGHT_LINE +
                 "Field: " + displayFields() + STRAIGHT_LINE +
                 "Method: " + displayMethods() + STRAIGHT_LINE +
-                "Relationship: " + getRelationship();
+                "Relationship: " + displayRelationships();
     }
 
 
@@ -149,8 +151,16 @@ public class UMLNode extends Pane {
         return result.toString().trim(); // Remove the trailing newline
     }
 
-    private void displayRelationships(){
-
+    private String displayRelationships(){
+        List<UMLRelationship> relationships = Storage.getInstance().getRelationships();
+        if (relationships.isEmpty()) {
+            return "-";
+        }
+        StringBuilder result = new StringBuilder();
+        for (UMLRelationship relation : relationships) {
+            result.append(relation.StringForNodes()).append("\n");
+        }
+        return result.toString().trim(); // Remove the trailing newline
     }
 
     // Setters and Getters
@@ -163,12 +173,4 @@ public class UMLNode extends Pane {
         return className;
     }
 
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-        updateLabel();
-    }
-
-    public String getRelationship() {
-        return relationship;
-    }
 }
