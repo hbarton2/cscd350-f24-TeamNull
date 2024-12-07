@@ -34,5 +34,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
+      - name: Run Tests
+        run: mvn -B test -Dmaven.test.failure.ignore=true --file pom.xml
+
+      - name: Build Package
         run: mvn -B package --file pom.xml
