@@ -14,6 +14,7 @@ import umleditor.model.utilities.Storage;
 import umleditor.view.gui.GUIDisplay;
 import umleditor.view.gui.UMLNode;
 import umleditor.view.gui.UMLNodeManager;
+import umleditor.view.gui.RelationshipLines;
 
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class UMLBuilderController {
     GUIDisplay display = new GUIDisplay();
     UMLNodeManager nodeManager = UMLNodeManager.getInstance();
     Storage storage = Storage.getInstance();
+    RelationshipLines lines = new RelationshipLines();
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
@@ -523,7 +525,7 @@ public class UMLBuilderController {
         destNode.updateLabel();
 
         // Create the line connecting the nodes
-        viewAnchorPane.getChildren().add(createRelationshipLine(srcNode, destNode));
+        viewAnchorPane.getChildren().add(lines.getLine(srcNode, destNode, relationshipType));
         infoBox(relationshipChoiceBox.getValue() + " added.");
 
         srcNode.toFront();
@@ -532,16 +534,7 @@ public class UMLBuilderController {
     }// end of method
 
 
-    public Line createRelationshipLine(UMLNode src, UMLNode dest){
 
-        Line relationshipLine = new Line();
-        relationshipLine.startXProperty().bind(src.layoutXProperty().add(src.getWidth() / 2));
-        relationshipLine.startYProperty().bind(src.layoutYProperty().add(src.getHeight() / 2));
-        relationshipLine.endXProperty().bind(dest.layoutXProperty().add(dest.getWidth() / 2));
-        relationshipLine.endYProperty().bind(dest.layoutYProperty().add(dest.getHeight() / 2));
-
-        return relationshipLine;
-    }
 
 
     /**
