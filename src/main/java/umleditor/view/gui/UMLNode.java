@@ -15,12 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 import umleditor.controller.MovableLine;
 import umleditor.model.uml.UMLRelationship;
+import umleditor.model.utilities.AnchorPoint;
 import umleditor.model.utilities.Storage;
 
 public class UMLNode extends Pane {
     private String className;
     private final UMLClass classObject;
 
+    private  Circle top;
+    private Circle bottom;
+    private Circle left;
+    private Circle right;
+
+    private ArrayList<AnchorPoint> anchorPoints;
     private double offsetX;
     private double offsetY;
     private static final double DEFAULT_WIDTH = 200;
@@ -60,11 +67,15 @@ public class UMLNode extends Pane {
         // Add background and label to the pane
         this.setPadding(new Insets(10));
         this.getChildren().addAll(background, classLabel);
+        setAnchorPoints();
+
         setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         // Automatically position the node
         setPositionAutomatically();
+
         // Add dragging functionality
         enableDragging();
+
     }
 
     /**
@@ -95,6 +106,7 @@ public class UMLNode extends Pane {
             setLayoutX(event.getSceneX() - offsetX);
             setLayoutY(event.getSceneY() - offsetY);
         });
+        updateAnchorPoints();
     }
     /**
      * Updates the node's label and adjusts its size.
@@ -171,6 +183,43 @@ public class UMLNode extends Pane {
     }
     public String getClassName() {
         return className;
+    }
+
+    private void setAnchorPoints(){
+        this.anchorPoints = new ArrayList<>();
+
+        anchorPoints.add(new AnchorPoint(this.getLayoutX() + this.DEFAULT_WIDTH / 2, this.getLayoutY() + this.DEFAULT_HEIGHT)); //bottom
+        anchorPoints.add(new AnchorPoint(this.getLayoutX() + this.DEFAULT_WIDTH / 2 , this.getLayoutY())); //top
+        anchorPoints.add(new AnchorPoint(this.getLayoutX(),this.getLayoutY() + this.DEFAULT_HEIGHT / 2)); //left
+        anchorPoints.add(new AnchorPoint(this.getLayoutX() + this.DEFAULT_WIDTH, this.getLayoutY() + this.DEFAULT_HEIGHT / 2)); //right
+
+
+        // Create circles for debugging
+        Circle bottom = new Circle(this.anchorPoints.get(0).getX(), this.anchorPoints.get(0).getY(), 5, Color.RED);
+        Circle top = new Circle(this.anchorPoints.get(1).getX(), this.anchorPoints.get(1).getY(), 5, Color.BLUE);
+        Circle right = new Circle(this.anchorPoints.get(2).getX(), this.anchorPoints.get(2).getY(), 5, Color.GREEN);
+        Circle left = new Circle(this.anchorPoints.get(3).getX(), this.anchorPoints.get(3).getY(), 5, Color.YELLOW);
+
+        this.top = top;
+        this.bottom = bottom;
+        this.left = left;
+        this.right = right;
+
+        this.getChildren().add(top);
+        this.getChildren().add(bottom);
+        this.getChildren().add(right);
+        this.getChildren().add(left);
+    }
+
+    private void updateAnchorPoints(){
+        this.anchorPoints.get(0).updatePos(this.getLayoutX() + this.getWidth() / 2, this.getLayoutY() + this.getHeight());
+        this.anchorPoints.get(1).updatePos(this.getLayoutX() + this.getWidth() / 2, this.getLayoutY());
+        this.anchorPoints.get(2).updatePos(this.getLayoutX(),this.getLayoutY() + this.getHeight() / 2);
+        this.anchorPoints.get(3).updatePos(this.getLayoutX() + this.getWidth(), this.getLayoutY() + this.getHeight() / 2);
+    }
+
+    public AnchorPoint getAnchorPoint(int i) {
+        return anchorPoints.get(i);
     }
 
 }
