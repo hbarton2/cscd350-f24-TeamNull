@@ -162,38 +162,106 @@ public class Storage {
    * @param src is the source class argument.
    * @param type is the relationship type argument.
    * @param dest is the destination class argument.
-   * TODO: Un-stub method.
    * */
   public UMLRelationship removeARelation(String src, UMLRelationshipType type, String dest){
+    if(relationships.isEmpty()){
+      System.out.println("Can not remove relationship from an empty list");
+      return null;
+    } else if (src.isEmpty() || type == null || dest.isEmpty()) {
+      System.out.println("Param(s) should not be empty, please try again.");
+      return null;
+    }
+
+    for (int i = 0; i < relationships.size(); i++) {
+      UMLRelationship temp = relationships.get(i);
+
+      if (temp.getSource().equals(src) && temp.getType().equals(type) && temp.getDestination().equals(dest)){
+        relationships.remove(i);
+        return temp;
+      }
+    }
+
     return null;
   }
 
   /**
    * Removes all entries in 'relationships' that match the given type.
    * @param type is the relationship type to be completely removed from 'relationships'.
-   * TODO: Un-stub method.
    * */
   public static int removeType(UMLRelationshipType type){
-    return 0;
+    if (relationships.isEmpty()){
+      System.out.println("Can not remove relationship from an empty list");
+      return -1;
+    }else if(type == null){
+      return  -1;
+    }
+    int numRmvd = 0;
+
+    // Linearly looks through the List and removes all types of relations
+    for(int i = 0; i < relationships.size(); i++){
+      UMLRelationship temp = relationships.get(i);
+      if (temp.getType().equals(type)){
+        relationships.remove(i);
+        numRmvd++;
+        i--;
+      }
+    }
+
+    return numRmvd;
   }
 
   /**
    * Removes all relations of a source class.
    * @param sourceClassName is the source class that will have all it's relationships wiped.
-   * TODO: Un-stub method.
    * */
   public int removeAllClassRelations(String sourceClassName){
-    return 0;
+    if (relationships.isEmpty()){
+      System.out.println("Can not remove relationship from an empty list");
+      return -1;
+    }else if(sourceClassName.isEmpty()){
+      System.out.println("Source name can not be empty!");
+      return -1;
+    }
+    int numRmvd = 0;
+
+    // Linearly looks through List and removes all the source class relations
+    for(int i = 0; i < relationships.size(); i++){
+      UMLRelationship temp = relationships.get(i);
+      if (temp.getSource().equals(sourceClassName)){
+        relationships.remove(i);
+        numRmvd++;
+        i--;
+      }
+    }
+
+    return numRmvd;
   }
 
   /**
    * Removes all relations referencing a class.
    * @param className is the class to remove completely from 'relationships'.
-   * TODO: Un-stub method.
    * */
 
   public int removeAllReferences(String className){
-    return 0;
+    if (relationships.isEmpty()){
+      System.out.println("Can not remove relationship from an empty list");
+      return -1;
+    }else if(className.isEmpty()){
+      System.out.println("Class name can not be empty!");
+      return -1;
+    }
+    int numRmvd = 0;
+
+    for(int i = 0; i < relationships.size(); i++){
+      UMLRelationship temp = relationships.get(i);
+      if (temp.getSource().equals(className) || temp.getDestination().equals(className)){
+        relationships.remove(i);
+        numRmvd++;
+        i--;
+      }
+    }
+
+    return numRmvd;
   }
 
   /**
