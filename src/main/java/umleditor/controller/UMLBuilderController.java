@@ -3,12 +3,16 @@ package umleditor.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.stage.FileChooser;
 import umleditor.controller.utilities.Functions;
 import umleditor.model.utilities.Storage;
 import umleditor.view.gui.GUIDisplay;
@@ -16,6 +20,10 @@ import umleditor.view.gui.UMLNode;
 import umleditor.view.gui.UMLNodeManager;
 import umleditor.view.gui.RelationshipLines;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class UMLBuilderController {
@@ -49,6 +57,9 @@ public class UMLBuilderController {
 
     @FXML
     private ScrollPane area, methodArea; // method area is the whole area with field box, drop down menu, plus and minus buttons
+
+    @FXML
+    private ImageView imageView; // An ImageView to display the screenshot (optional)
 
     UMLNode node ;
     guiFunctions functions = new guiFunctions();
@@ -587,5 +598,67 @@ public class UMLBuilderController {
 
     public void exitProgram(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    @FXML
+    void saveAsImage(ActionEvent event) {
+        // Capture the screenshot of the AnchorPane or any other Node
+        WritableImage screenshot = viewAnchorPane.snapshot(null, null);
+        if (screenshot != null) {
+            // Set the captured image in the ImageView (optional)
+            imageView.setImage(screenshot);
+
+//            Robot robot = new Robot();
+//            robot.getScreenCapture(null, 10, 10, 100, 100);
+//
+//            ImageView imageView = new ImageView();
+//            imageView.setFitWidth(600.0);
+//            imageView.setFitHeight(400.0);
+//
+//            WritableImage image = captureScreenshot();
+
+
+            // Allow the user to choose the location for saving the image
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Screenshot");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Files", "*.png"));
+            File file = fileChooser.showSaveDialog(null);
+
+            if (file != null) {
+                try {
+                    writeImageToFile(screenshot, file);
+                    System.out.println("Screenshot saved successfully at: " + file.getAbsolutePath());
+                } catch (IOException e) {
+                    System.out.println("Error saving the screenshot: " + e.getMessage());
+                }
+            }
+        } else {
+            System.out.println("Failed to capture screenshot.");
+        }
+    }
+
+    /**
+     * Helper method for saving the image as a PNG file.
+     * @param image WritableImage to save.
+     * @param file File to save the image to.
+     * @throws IOException if an error occurs while saving.
+     */
+    private void writeImageToFile(WritableImage image, File file) throws IOException {
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+
+        // Create a BufferedImage
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+        // Copy pixel data from WritableImage to BufferedImage
+        PixelReader pixelReader = image.getPixelReader();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                bufferedImage.setRGB(x, y, pixelReader.getArgb(x, y));
+            }
+        }
+
+        // Write BufferedImage to file
+        ImageIO.write(bufferedImage, "png", file);
     }
 }

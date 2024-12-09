@@ -12,6 +12,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -26,6 +27,7 @@
       <MenuItem mnemonicParsing="false" text="Close" />
       <MenuItem mnemonicParsing="false" text="Save" />
       <MenuItem mnemonicParsing="false" text="Save As…" />
+         <MenuItem fx:id="screenCapture" mnemonicParsing="false" onAction="#saveAsImage" text="Save as Image" />
       <MenuItem mnemonicParsing="false" text="Revert" />
       <SeparatorMenuItem />
       <MenuItem mnemonicParsing="false" text="Preferences…" />
@@ -107,9 +109,11 @@
     </VBox>
 
     <!-- Right-side area for draggable nodes -->
-    <ScrollPane prefHeight="722.0" prefWidth="581.0">
-      <AnchorPane fx:id="viewAnchorPane" prefHeight="780.0" prefWidth="682.0" />
-    </ScrollPane>
+      <ScrollPane prefHeight="722.0" prefWidth="581.0">
+          <AnchorPane fx:id="viewAnchorPane" prefHeight="780.0" prefWidth="682.0">
+              <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="300.0" layoutX="10.0" layoutY="10.0" />
+          </AnchorPane>
+      </ScrollPane>
   </SplitPane>
 
   <!-- Status bar at the bottom -->
