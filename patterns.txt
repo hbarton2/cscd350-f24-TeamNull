@@ -58,3 +58,17 @@ instance of our undo redo stack storage.
 
 Files:
     * src/main/java/umleditor/controller/utilities/MementoStorage
+
+8. Singleton: UMLNodeManager
+Description: Singleton of our UMLNodeManager class, stores all nodes in an array list
+
+Files:
+    * src/main/java/umleditor/view/UMLNodeManager
+
+9. Factory: RelationshipLines
+Description: GetLine() method is a factory, uses generic constructor createRelationshipLines
+but makes different lines based on type.
+
+Files:
+    src/main/java/umleditor/view/gui/RelationshipLines
+

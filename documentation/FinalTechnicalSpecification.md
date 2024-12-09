@@ -11,12 +11,11 @@ Technical Documentation
    2. [UMLGUIController](#UMLGUIController)
    3. [utilities](#utilities)
       1. [CommandAction](#CommandAction)
-      2. [CommandFactory](#CommandFactory)
-      3. [Commands](#Commands)
-      4. [Functions](#Functions)
-      5. [ParsingInputs](#ParsingInputs)
-      6. [SimpleAutoComplete](#SimpleAutoComplete)
-      7. [MementoStorage](#MementoStorage)
+      2. [Commands](#Commands)
+      3. [Functions](#Functions)
+      4. [ParsingInputs](#ParsingInputs)
+      5. [SimpleAutoComplete](#SimpleAutoComplete)
+
 3. [Model](#Model)
    1. [Model](#Model)
    2. [UML](#UML)
@@ -27,9 +26,16 @@ Technical Documentation
       5. [UMLRelationshipType](#UMLRelationshipType)
    3. [utilities](#utilities)
       1. [Storage](#Storage)
+      2. [MementoSaveData](#MementoSaveData)
+      3. [MementoStorage](#MementoStorage)
+      4. [CommandFactory](#CommandFactory)
 4. [View](#View)
    1. [AppStart](#AppStart)
-   2. [gui.UMLNode](#gui.UMLNode)
+   2. [gui](#gui)
+      1. [GUIDisplay](#GUIDisplay)
+      2. [UMLNode](#UMLNode)
+      3. [UMLNodeManager](#UMLNodeManager)
+      4. [RelationshipLines](#RelationshipLines)
    3. [cli.Display](#gui.Display)
 5. [KnownBugs](#KnownBugs)
 6. [Broken Features](#Broken Features)
@@ -714,9 +720,17 @@ Uses double-checked locking approach to prevent thread issues. </p>
 <p> • When renaming a class, if the old class name is not found, the following error message is printed: </p>
 <p> "Error: Class [oldName] does not exist." </p>
 
-
 ---
 
+## MementoSaveData
+
+<h3> Overview: </h3>
+Memento class for saving data of classes and relationships.
+Has private fields; hashmap classes and arrayList relationships.
+both of these fields have accompanying getters and setters.
+
+
+----
 
 # View
 
@@ -731,7 +745,29 @@ Handles launch for GUI.
 <p> Start: <br>
     Creates GUI state for user. Loads and sets scene.</p>
 
-## gui.UMLNode
+----
+# gui:
+package for gui methods:
+
+----
+
+## GUIDisplay:
+
+<h3> Overview: </h3>
+Opens the "Help Utility" window using a JavaFX stage.
+
+<h3> Features: </h3>
+
+* **help:**
+      This method attempts to load the "Help.fxml" file located in the
+      `/sprint2/` directory and displays it in a new window. If the
+      loading process fails, an error message is printed to the console,
+      and the exception's stack trace is logged for debugging purposes.
+  <p>
+
+----
+
+## UMLNode
 
 <h3> Overview: </h3>
 Handles display of class creation and manipulation for user.
@@ -777,6 +813,47 @@ Handles display of class creation and manipulation for user.
 * **Show Error:**
     Displays an error message in red
 <p>
+
+----
+
+## UMLNodeManager
+
+<h3> Overview: </h3>
+Stores and manages all UMLNodes that have been created. Is a singleton 
+so that only one list of all nodes can be accessed
+
+<h3> Features: </h3>
+
+* **addNode():**
+Adds node to private list inside the class
+<p>
+
+* **getInstance():**
+returns instance of UMLNodeManager for accessing list adding/removing nodes
+
+----
+
+## RelationshipLines
+<h3> Overview: </h3>
+Creates the relationship lines that get displayed on the screen connecting the class nodes
+
+<h3> Features: </h3>
+
+* **GetLine():**
+takes in source node, destination node, and relationship type.
+calls specific relationship line constructor to call based on type
+<p>
+
+* **createRelationshipLine():**
+takes in source and destination and returns generic relationship line.
+Defines line start and end positions, currently specified as the center of 
+source and destination node.
+<p>
+
+* ***SpecificLines:***
+Each relationship type has a specific line representation.
+**GetLine()** calls these specific constructor. Any given constructor will 
+**createRelationshipLine()** then modify it and return it.
 
 
 ## cli.Display:
