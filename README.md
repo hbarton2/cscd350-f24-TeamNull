@@ -40,7 +40,8 @@ Ensure that the following software is installed on the target machine:
 Download the package https://github.com/hbarton2/cscd350-f24-TeamNull.git
 
 ### Steps to Open Terminal and Run `umleditor-2.0-shaded.jar`
-#### NOTE: must be ran in Linux terminal for access to all CLI features.
+### URGENT: DO NOT RUN IN LINUX
+*(gui does not work in linux only cli)*
 2. **Locate `umleditor-2.0-shaded.jar`**:
     - Navigate to the directory where `umleditor-2.0-shaded.jar` is located using your file explorer.
 
@@ -48,10 +49,6 @@ Download the package https://github.com/hbarton2/cscd350-f24-TeamNull.git
     - **On Windows**:
         - Right-click inside the folder (not on the file) and select `Open in Terminal` or `Open PowerShell window here`.
     - **On macOS**:
-        - Open Terminal, then type `cd` followed by a space.
-        - Drag and drop the folder containing `umleditor-2.0-shaded.jar` into the Terminal window.
-        - Press `Enter` to navigate to the folder.
-    - **On Linux**:
         - Open Terminal, then type `cd` followed by a space.
         - Drag and drop the folder containing `umleditor-2.0-shaded.jar` into the Terminal window.
         - Press `Enter` to navigate to the folder.
