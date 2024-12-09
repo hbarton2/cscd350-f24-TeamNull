@@ -1,0 +1,167 @@
+UML Editor Application Features
+
+This section provides more details about each feature of the UML Editor Application.
+
+Create a Class:
+---------------------
+
+	1. From the UML Editor Application main page, click on the dropdown menu located
+  
+  	   in the top-left corner. Select the “Create a Class” option.
+
+	2. Click on the “Go” button. Below the “Go” button, the “Class Name” label, a field
+
+	   to enter a class name, and an “Enter” button will appear.
+
+	3. Type a class name and click the “Enter” button.
+
+	4. On the right panel, a class template box will appear with the class
+	
+	  name. The field, method, and relationship sections will be empty, as they have
+
+	   not been added yet.
+
+	5. To add another class, type the class name in the “Class Name” field and click
+	
+	   “Enter.”
+
+	6. You can add as many classes as needed; there is no limit.
+	
+
+Rename a Class:
+-------------------
+
+	1. From the UML Editor Application main page, click on the dropdown menu
+
+	   located in the top-left corner. Select the “Rename a Class” option.
+
+	2. Click on the “Go” button. The Rename Class Utility window will open.
+	
+	3. Type the current class name in the “Current Class Name” field.
+	
+	4. Type the new class name in the “New Class Name” field.
+
+	5. Click the “Rename” button.
+
+	6. On the right-hand panel, a confirmation message will display in green text,
+
+	   confirming that the class was renamed.
+
+	7. If no class exists or the current class name is incorrect, an error 
+
+	   message will display in red text on the right-hand panel.
+
+	8. Click the “X” on the top-right corner of the Rename Class Utility window to
+
+	   close it.
+
+
+Delete a Class:
+------------------
+	
+	1. From the UML Editor Application main page, click on the dropdown menu located in
+
+	   the top-left corner. Select the “Delete a Class” option.
+
+	2. Click on the “Go” button. The Delete Class Utility window will open.
+
+	3. Type the class name you want to delete in the “Class Name” field.
+	
+	4. Click the “Delete” button. If the class name matches an existing class, the class
+	
+	   will be deleted. A confirmation message will display in green text, confirming
+
+	   the deletion.
+	
+	• If the class name does not match, an error message in red text will indicate
+
+	  that the class was not found.
+	
+	5. Click the “X” on the top-right corner of the Delete Class Utility window to
+
+	   close it.
+
+
+Add Field(s):
+---------------
+
+	1. From the UML Editor Application main page, click on the dropdown menu located in
+
+	   the top-left corner. Select the “Add Field(s)” option.
+
+	2. Click on the “Go” button. Below the “Go” button, “Field” options will appear.
+	
+	3. Type the class name to which you want to add a field in the “Enter Class Name”
+
+	  field.
+
+	4. Type a field name in the “Enter Field Name” field.
+
+	5. Select a field type from the dropdown menu.
+	
+	6. Click the “Enter” button.
+
+	7. If the class name matches an existing class, the field will be added, and the
+
+	  class template on the right-hand panel will update with the new field.
+
+	8. If the class name does not match, an error message will be displayed.
+
+
+Add Relationship:
+-------------------
+	1. From the UML Editor Application main page, click on the dropdown menu located in
+
+	   the top-left corner. Select the “Add Relationship” option.
+
+	2- Relationships option will apear below the"Go" button.
+
+	3- Type the name of the source class in the src class field.
+
+	4- Type the name of the destinationi class in the dest class field.
+
+	5- Select Relationships type from the dropdown menu.
+
+	6- Relationship arrow will appear bewtween those classes.
+
+
+Save File:
+-------------
+
+	1. From the UML Editor Application main page, click on the dropdown menu
+	
+	   located in the top-left corner. Select the “Save File” option.
+
+	2. Click on the “Go” button. The Save File Utility window will open.
+
+	3. Type a file name and click the “Save” button.
+	
+	4. The file will be saved, and the file path will be displayed in the text area on
+
+	   the right-hand panel.
+
+	5. Click the “X” on the top-right corner of the Save File Utility window to close it.
+Help:
+-------
+
+	1. From the UML Editor Application main page, click on the dropdown menu located in
+
+	  the top-left corner. Select the “Help” option.
+	
+	2. Click on the “Go” button. Instructions and additional details will display in the
+
+	  text area on the right-hand panel.
+
+---------------------------------------------------------
+
+Instructions for Additional Options:
+
+• Rename Field: Still in development for GUI.
+• Delete Field: Still in development for GUI.
+• Add Method(s): Still in development for GUI.
+• Rename Method: Still in development for GUI.
+• Delete Method: Still in development for GUI.
+• Add Parameter: Still in development for GUI.
+• Rename Parameter: Still in development for GUI.
+• Delete Parameter: Still in development for GUI.
+ 
