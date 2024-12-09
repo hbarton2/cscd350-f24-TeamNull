@@ -3,6 +3,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -105,6 +106,7 @@ public class UMLNode extends Pane {
         this.setOnMouseDragged(event -> {
             setLayoutX(event.getSceneX() - offsetX);
             setLayoutY(event.getSceneY() - offsetY);
+            //updateAnchorPoints();
         });
         //updateAnchorPoints();
     }
