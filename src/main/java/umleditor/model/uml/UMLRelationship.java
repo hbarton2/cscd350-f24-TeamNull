@@ -76,4 +76,8 @@ public class UMLRelationship {
   public String toString() {
     return "Class: " +  this.source + " \r\n" +  this.type.name() + " --> " +  this.destination;
   }
+
+  public String StringForNodes(){
+    return this.type.name() + " " + this.source +  " --> " +  this.destination;
+  }
 }

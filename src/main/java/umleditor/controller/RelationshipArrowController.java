@@ -12,6 +12,7 @@ import umleditor.controller.utilities.Functions;
 import umleditor.model.utilities.Storage;
 import umleditor.view.gui.UMLNode;
 import javafx.scene.image.ImageView;
+import umleditor.view.gui.UMLNodeManager;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -85,22 +86,21 @@ public class RelationshipArrowController    {
 
         Functions.addRelationship(srcClass.getText(), relationshipType, destClass.getText());
 
-        srcNode = new UMLNode(Storage.getInstance().getClassObject(srcClass.getText()));
+        srcNode = UMLNodeManager.getInstance().getNodeFromName(srcClass.getText());
         viewAnchorPane.getChildren().add(srcNode);
         srcNode.setLayoutX(10);
         srcNode.setLayoutY(0);
-        srcNode.setRelationship(relationshipChoiceBox.getValue());
+        srcNode.updateLabel();
 
 
-        destNode = new UMLNode(Storage.getInstance().getClassObject(destClass.getText()));
+        destNode = UMLNodeManager.getInstance().getNodeFromName(destClass.getText());
         viewAnchorPane.getChildren().add(destNode);
         destNode.setLayoutX(450);
         destNode.setLayoutY(0);
-        destNode.setRelationship(relationshipChoiceBox.getValue());
+        destNode.updateLabel();
 
         MovableLine newLine = new umleditor.controller.MovableLine(anchorPane);
         lines.add(newLine);
-
     }
 
     @FXML
