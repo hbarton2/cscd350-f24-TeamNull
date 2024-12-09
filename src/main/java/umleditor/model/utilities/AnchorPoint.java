@@ -1,9 +1,5 @@
 package umleditor.model.utilities;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import umleditor.view.gui.UMLNode;
-
 public class AnchorPoint {
 
     private double xPos;

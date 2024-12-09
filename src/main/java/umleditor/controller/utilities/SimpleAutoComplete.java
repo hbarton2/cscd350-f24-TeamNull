@@ -1,10 +1,8 @@
 package umleditor.controller.utilities;
 
 import org.fusesource.jansi.AnsiConsole;
-import org.jline.reader.Candidate;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
-import org.jline.reader.ParsedLine;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;

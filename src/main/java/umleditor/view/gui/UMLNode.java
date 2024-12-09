@@ -106,7 +106,7 @@ public class UMLNode extends Pane {
             setLayoutX(event.getSceneX() - offsetX);
             setLayoutY(event.getSceneY() - offsetY);
         });
-        updateAnchorPoints();
+        //updateAnchorPoints();
     }
     /**
      * Updates the node's label and adjusts its size.
@@ -195,21 +195,23 @@ public class UMLNode extends Pane {
 
 
         // Create circles for debugging
-        Circle bottom = new Circle(this.anchorPoints.get(0).getX(), this.anchorPoints.get(0).getY(), 5, Color.RED);
-        Circle top = new Circle(this.anchorPoints.get(1).getX(), this.anchorPoints.get(1).getY(), 5, Color.BLUE);
-        Circle right = new Circle(this.anchorPoints.get(2).getX(), this.anchorPoints.get(2).getY(), 5, Color.GREEN);
-        Circle left = new Circle(this.anchorPoints.get(3).getX(), this.anchorPoints.get(3).getY(), 5, Color.YELLOW);
-
-        this.top = top;
-        this.bottom = bottom;
-        this.left = left;
-        this.right = right;
-
-        this.getChildren().add(top);
-        this.getChildren().add(bottom);
-        this.getChildren().add(right);
-        this.getChildren().add(left);
+//        Circle bottom = new Circle(this.anchorPoints.get(0).getX(), this.anchorPoints.get(0).getY(), 5, Color.RED);
+//        System.out.println("Circle x: " + this.anchorPoints.get(0).getX());
+//        Circle top = new Circle(this.anchorPoints.get(1).getX(), this.anchorPoints.get(1).getY(), 5, Color.BLUE);
+//        Circle right = new Circle(this.anchorPoints.get(2).getX(), this.anchorPoints.get(2).getY(), 5, Color.GREEN);
+//        Circle left = new Circle(this.anchorPoints.get(3).getX(), this.anchorPoints.get(3).getY(), 5, Color.YELLOW);
+//
+//        this.top = top;
+//        this.bottom = bottom;
+//        this.left = left;
+//        this.right = right;
+//
+//        this.getChildren().add(top);
+//        this.getChildren().add(bottom);
+//        this.getChildren().add(right);
+//        this.getChildren().add(left);
     }
+    
 
     private void updateAnchorPoints(){
         this.anchorPoints.get(0).updatePos(this.getLayoutX() + this.getWidth() / 2, this.getLayoutY() + this.getHeight());

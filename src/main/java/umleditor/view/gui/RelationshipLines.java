@@ -2,6 +2,7 @@ package umleditor.view.gui;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 
 public class RelationshipLines {
 
@@ -36,15 +37,19 @@ public class RelationshipLines {
     private Line createRelationshipLine(UMLNode src, UMLNode dest){
         Line relationshipLine = new Line();
 
-        //Bind to anchor point
-//        relationshipLine.startXProperty().bind(src.layoutXProperty().add(0 + src.getAnchorPoint(0).getX()));
-//        System.out.println("Src layout-y: " + src.getLayoutY());
-//        relationshipLine.startYProperty().bind(src.layoutYProperty().add(0 + src.getAnchorPoint(0).getY()));
-//        System.out.println("Src layout-y: " + src.getLayoutY());
+//        //Bind to anchor point
+//        System.out.println("src layoutXProperty: " + src.layoutXProperty().get());
+//        relationshipLine.startXProperty().bind(src.getBottomCircle().centerXProperty());
+//        System.out.println("Src anchorpointX: " + src.getAnchorPoint(0).getX());
+//        relationshipLine.startYProperty().bind(src.getBottomCircle().centerXProperty());
+//        System.out.println("Src anchorpointY: " + src.getAnchorPoint(0).getY());
+//        System.out.println("line: " + relationshipLine);
+//
+//
 //        relationshipLine.endXProperty().bind(dest.layoutXProperty().add(dest.getWidth() / 2));
 //        relationshipLine.endYProperty().bind(dest.layoutYProperty().add(dest.getHeight() / 2));
 
-//        Bind to center of node
+      //  Bind to center of node
         relationshipLine.startXProperty().bind(src.layoutXProperty().add(src.getWidth() / 2));
         relationshipLine.startYProperty().bind(src.layoutYProperty().add(src.getHeight() / 2));
         relationshipLine.endXProperty().bind(dest.layoutXProperty().add(dest.getWidth() / 2));
