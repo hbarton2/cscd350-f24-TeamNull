@@ -9,7 +9,8 @@ Technical Documentation
 2. [Controller](#Controller)
    1. [UMLBuilderController](#UMLBuilderController)
    2. [UMLGUIController](#UMLGUIController)
-   3. [utilities](#utilities)
+   3. [guiFunctions](#guiFunctions)
+   4. [utilities](#utilities)
       1. [CommandAction](#CommandAction)
       2. [Commands](#Commands)
       3. [Functions](#Functions)
@@ -151,6 +152,35 @@ Utilities controller for the GUI.
 <p> 
 
 
+
+---
+
+## guiFunctions:
+
+### Overview:
+Container class that holds GUI dropdown menu functions to launch new windows
+
+### Features:
+
+all features Open the "class_name" window using a JavaFX stage.
+This method loads the "class_name.fxml" file located in the
+`/sprint2/` directory and displays it in a new window. If the
+loading process fails, an error message is printed to the console,
+and the exception's stack trace is logged for debugging purposes.
+
+* **saveFile():**
+
+* **renameParameter():**
+
+* **renameMethod():**
+
+* **deleteField()**
+
+* **renameField()**
+
+* **deleteClass()**
+
+* **renameClass()**
 
 ---
 
@@ -876,19 +906,6 @@ Handles all display functionality.
 ---
 
 ## KnownBugs:
-
-![img.png](img.png)
-
-When I type a class name it saves it, I can add fields and methods to that class.
-I can rename it , for example rename the class from Computer to Desktop.
-Now, when I a parameter to Desktop, it shows that the parameter was added to both Computer and Desktop classes
-
-
-add class relationship command:
-
-When adding relationship, this command should also take a source and destination class to define the relationship.
-Right now it only sets relationship name and type (as a string).
----
 
 
 <h3> 1- Label "Class Name", shows the class name.</h3>
