@@ -136,7 +136,11 @@ Exits the program for user
 <p> 
 
 * **Update Text Area:**
-    Updates text in node 
+    Updates text in node
+<p>
+
+* **Save As Image:**
+  Captures an image of UML design and saves as a PNG to a location of user's preference
 <p>
 
 
