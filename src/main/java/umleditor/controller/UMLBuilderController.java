@@ -8,11 +8,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import umleditor.controller.utilities.Functions;
 import umleditor.model.utilities.Storage;
 import umleditor.view.gui.GUIDisplay;
 import umleditor.view.gui.UMLNode;
 import umleditor.view.gui.UMLNodeManager;
+import umleditor.view.gui.RelationshipLines;
 
 import java.util.List;
 
@@ -53,6 +55,7 @@ public class UMLBuilderController {
     GUIDisplay display = new GUIDisplay();
     UMLNodeManager nodeManager = UMLNodeManager.getInstance();
     Storage storage = Storage.getInstance();
+    RelationshipLines lines = new RelationshipLines();
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
@@ -181,7 +184,7 @@ public class UMLBuilderController {
 
                 showRArea();
                 relationshipChoiceBox.requestFocus();
-                functions.startRelationshipArrow();
+                //functions.startRelationshipArrow();   //New Relationship scene
                 break;
 
             case "Rename Parameter":
@@ -515,12 +518,23 @@ public class UMLBuilderController {
         }
 
         Functions.addRelationship(classNameToAddRelationship.getText(), relationshipType,classNameToAddRelationshipdst.getText());
-        node.setClassName(classNameToAddRelationship.getText());
-        node.setRelationship(relationshipChoiceBox.getValue());
+        UMLNode srcNode = nodeManager.getNodeFromName(classNameToAddRelationship.getText());
+        UMLNode destNode = nodeManager.getNodeFromName(classNameToAddRelationshipdst.getText());
 
+        srcNode.updateLabel();
+        destNode.updateLabel();
+
+        // Create the line connecting the nodes
+        viewAnchorPane.getChildren().add(lines.getLine(srcNode, destNode, relationshipType));
         infoBox(relationshipChoiceBox.getValue() + " added.");
 
+        srcNode.toFront();
+        destNode.toFront();
+
     }// end of method
+
+
+
 
 
     /**
