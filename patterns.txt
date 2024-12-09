@@ -72,3 +72,8 @@ but makes different lines based on type.
 Files:
     src/main/java/umleditor/view/gui/RelationshipLines
 
+10. Memento: MementoSaveData
+Description: Memento of storage object to store both list of classes and relationships in one memento object
+
+Files:
+    src/main/java/umleditor/model/utilities/MementoSaveData.java
