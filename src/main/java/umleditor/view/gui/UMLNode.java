@@ -213,7 +213,7 @@ public class UMLNode extends Pane {
 //        this.getChildren().add(right);
 //        this.getChildren().add(left);
     }
-    
+
 
     private void updateAnchorPoints(){
         this.anchorPoints.get(0).updatePos(this.getLayoutX() + this.getWidth() / 2, this.getLayoutY() + this.getHeight());

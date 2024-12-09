@@ -77,21 +77,39 @@ public class RelationshipLines {
         return generalizationLine;
     }
 
-
+    // solid black line, no arrow
     private Line createAssociationLine(UMLNode src, UMLNode dest){
-        return createRelationshipLine(src, dest);
+        Line associationLine = createRelationshipLine(src, dest);
+        return associationLine;
     }
 
+    // solid black line, white diamond
     private Line createAggregationLine(UMLNode src, UMLNode dest){
-        return createRelationshipLine(src, dest);
+        Line aggregationLine = createRelationshipLine(src, dest);
+        Polygon arrowHead = new Polygon();
+        arrowHead.getPoints().addAll(
+                0.0, 0.0,
+                -10.0, -5.0,
+                -10.0, 5.0
+        );
+
+        arrowHead.layoutXProperty().bind(aggregationLine.endXProperty());
+        arrowHead.layoutYProperty().bind(aggregationLine.endYProperty());
+
+        return aggregationLine;
     }
 
-
+    // solid black line, black diamond
     private Line createCompositionLine(UMLNode src, UMLNode dest){
-        return createRelationshipLine(src, dest);
+        Line compositionLine = createRelationshipLine(src, dest);
+        return compositionLine;
     }
 
+    // (realization = implementation)
+    // dashed black line, white arrow
     private Line createRealizationLine(UMLNode src, UMLNode dest){
-        return createRelationshipLine(src, dest);
+        Line realizationLine = createRelationshipLine(src, dest);
+        realizationLine.getStrokeDashArray().addAll(10.0, 5.0);
+        return realizationLine;
     }
 }
