@@ -44,19 +44,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.MethodRenameController">
+<VBox prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.DeleteMethodController">
   <children>
     <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane>
                <children>
-                  <Label layoutX="51.0" layoutY="80.0" text="Type current method" />
-                  <Label layoutX="53.0" layoutY="132.0" text="Type new method" />
-                  <TextField fx:id="newMethod" layoutX="40.0" layoutY="155.0" promptText="New method" />
-                  <TextField fx:id="currentMethod" layoutX="37.0" layoutY="102.0" promptText="Current method" />
-                  <Button layoutX="67.0" layoutY="197.0" mnemonicParsing="false" onAction="#renameMethodOnClick" text="Rename" />
-                  <TextField fx:id="className" layoutX="37.0" layoutY="47.0" promptText="Class name" />
-                  <Label layoutX="53.0" layoutY="21.0" text="Type class name" />
+                  <Label layoutX="29.0" layoutY="80.0" text="Type method name" />
+                  <TextField fx:id="currentMethod" layoutX="14.0" layoutY="98.0" promptText="Method name to delete" />
+                  <Button layoutX="71.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteMethodOnClick" text="Delete" />
+                  <TextField fx:id="className" layoutX="14.0" layoutY="46.0" promptText="Class name" />
+                  <Label layoutX="39.0" layoutY="21.0" text="Type class name" />
                </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">

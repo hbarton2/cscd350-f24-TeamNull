@@ -1,6 +1,6 @@
 UML Editor Application Features
 
-This section provides more details about each feature of the UML Editor Application.
+This section provides more details about each feature of this UML Editor Application.
 
 Create a Class:
 ---------------------
@@ -11,7 +11,7 @@ Create a Class:
 
 	2. Click on the “Go” button. Below the “Go” button, the “Class Name” label, a field
 
-	   to enter a class name, and an “Enter” button will appear.
+	   to enter a class name, and an “Add” button will appear.
 
 	3. Type a class name and click the “Enter” button.
 
@@ -23,7 +23,7 @@ Create a Class:
 
 	5. To add another class, type the class name in the “Class Name” field and click
 	
-	   “Enter.”
+	   “Add”.
 
 	6. You can add as many classes as needed; there is no limit.
 	
@@ -99,7 +99,7 @@ Add Field(s):
 
 	5. Select a field type from the dropdown menu.
 	
-	6. Click the “Enter” button.
+	6. Click the “Add” button to add the field to the class.
 
 	7. If the class name matches an existing class, the field will be added, and the
 
@@ -107,6 +107,144 @@ Add Field(s):
 
 	8. If the class name does not match, an error message will be displayed.
 
+
+
+Rename Field:
+---------------
+	
+	1. From the UML Editor Application main page, click on the dropdown menu located in
+
+	   the top-left corner. Select the “Rename Field” option.
+
+	2. Click on the “Go” button. Field Rename Utility Window will appear.
+
+	3- Type Class name for which you want to rename a field.
+
+	4- Type Current field name in the "Current Field" field.
+
+	5- Type a new name for the field in the " New Field" field.
+
+	6- Click on "Rename" button. 
+	
+	  . If the class name and current field names match the
+		
+	    existing class name and field name a message in the text area on the right hand
+	
+	    side will display a confirmation message.
+
+	   . If the class name and current field names did not match one of the existing
+		
+	     classes and fields, error message in the text area will display and provides.
+	
+	     further instructions on what to do.
+
+Delete Field:
+---------------
+
+	1. From UML Editor Application main page, click on the dropdown menu located in
+
+	   the top-left corner. Select the "Delete Field” option.
+
+	2. Click on the “Go” button. Field Delete Utility Window will appear.
+
+	3- Type Class name for which you want to delete a field.
+
+	4- Click on "Delete" button.
+	
+	. If class and field names match one of the existing classes and feilds, field will
+		
+	  will be deleted and the Detele text area on the rigth had side pannel will display
+	
+	 a confirmation message.
+
+	. If the class name and field names did not match one of the existing class and fields
+
+	  name, an error message will be displayed in the delete field text area on the right 
+
+	  hand side pannel with instructions about the error.
+
+ 
+
+Add Method(s):
+---------------
+
+	1. From UML Editor Application main page, click on the dropdown menu located in
+
+	   the top-left corner. Select the "Add Method(s)” option.
+
+	2. Click on the “Go” button. Method Add option will appear below "Go" button.
+
+	3- Type Class name to add method to.
+
+	4- Type a mthod name
+	
+	5- Select method type from the dropdown menu
+	
+	6- Type parameter name for this method (otptional)
+	
+	7- Select parameter teyp from the dropdown menu
+
+	4- Click on " + " pluss button to add the paramet to specified class.
+
+
+
+Rename Method:
+---------------
+
+	1. From UML Editor Application main page, click on the dropdown menu located in
+
+	   the top-left corner. Select the "Rename Method” option.
+
+	2. Click on the “Go” button. Rename Method Utility Window will appear.
+
+	3- Type class name for which you want to rename the method in the class name field.
+
+	4- Type current method in the current method field.
+
+	5- Type new method name in the new method field.
+
+	6- Click "Rename" button to rename the method.
+
+	. If class name and current method names match one of the existing class and methods 
+	
+	  name, method will be renamed and a confirmation message will be displayed on the
+
+	  right hand side pannel in rename method text rea.
+
+	. If the class name and method name did not match one of the existing class and method
+	 
+          names an error message will appear in the right hand side pannel in the rename
+
+	  method text area showing detailed instrutions.
+
+Delete Method:
+---------------
+
+	1. From UML Editor Application main page, click on the dropdown menu located in
+
+	   the top-left corner. Select the "Delete Method” option.
+
+	2. Click on the “Go” button. Delete Method Utility Window will appear.
+
+	3- Type class name for which you want to delete a method in the class name field.
+
+	4- Type   method name in the current method field.
+
+
+	5- Click "Delete" button to delete the method from the specific class.
+
+	. If class name and method names match one of the existing class and methods 
+	
+	  name, method will be deleted and a confirmation message will be displayed on the
+
+	  right hand side pannel in rename method text rea.
+
+	. If the class name and method name did not match one of the existing class and method
+	 
+          names an error message will appear in the right hand side pannel in the delete
+
+	  method text area showing detailed instrutions.
+ 
 
 Add Relationship:
 -------------------
@@ -116,13 +254,15 @@ Add Relationship:
 
 	2- Relationships option will apear below the"Go" button.
 
-	3- Type the name of the source class in the src class field.
+	3- Select Relationships type from the dropdown menu. 
+	
+	4- Type the name of the source class in the src class field.
 
-	4- Type the name of the destinationi class in the dest class field.
+	5- Type the name of the destinationi class in the dest class field.
 
-	5- Select Relationships type from the dropdown menu.
+	6- Click on "Add" button to add relationship to the class.
 
-	6- Relationship arrow will appear bewtween those classes.
+	7- Relationship arrow will appear bewtween those classes.
 
 
 Save File:
@@ -141,6 +281,19 @@ Save File:
 	   the right-hand panel.
 
 	5. Click the “X” on the top-right corner of the Save File Utility window to close it.
+
+Save as Image:
+----------------
+	1. From the UML Editor Application main page, click on file menu
+	
+	2. Select the “Save as Image” option.
+
+	3. Select a location to save the screenshot of the application.
+
+	4. Type a name for the image.
+
+	5. Click on "Save" button to save the image.
+
 Help:
 -------
 
@@ -152,15 +305,31 @@ Help:
 
 	  text area on the right-hand panel.
 
----------------------------------------------------------
 
-Instructions for Additional Options:
 
-• Rename Field: Still in development for GUI.
-• Delete Field: Still in development for GUI.
-• Add Method(s): Still in development for GUI.
-• Rename Method: Still in development for GUI.
-• Delete Method: Still in development for GUI.
+
+--------------------------------------------------------------------
+School:          Eastern Washington University
+Course:         CSCD 350: Software Development
+Instructor:    Dr. Chris Cain
+Qaurter:        Fall 2024
+Course:         CSCD 350, Priciple of Software Engineering
+Assignment:  Class Project (UML Editor CLI & GUI)
+
+Contributors / Student developers:
+
+1- Colton Knopik
+2- Kate Steeley
+3- Shane
+5- Danish Wahidi
+6- Michelle Ulabita
+7- Jimmy (first 2 sprints)
+
+--------------------------------------------------------------------
+
+
+
+
 • Add Parameter: Still in development for GUI.
 • Rename Parameter: Still in development for GUI.
 • Delete Parameter: Still in development for GUI.

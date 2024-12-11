@@ -29,9 +29,12 @@ public class ClassRenameController {
     @FXML
     private TextArea classTextArea;
 
+
     @FXML
     void renameClassOnClick(ActionEvent event) {
         classTextArea.setStyle("-fx-text-fill: red;");
+        classTextArea.setEditable(false);
+        classTextArea.styleProperty().set("-fx-border-color: red");
         classTextArea.clear();
         String oldClassName = currentClassName.getText();
         String newClassNameText = newClassName.getText();
@@ -53,6 +56,7 @@ public class ClassRenameController {
         // Rename the class
         Functions.renameClass(oldClassName, newClassNameText);
         classTextArea.setStyle("-fx-text-fill: green;");
+        classTextArea.styleProperty().set("-fx-border-color: green");
         classTextArea.setEditable(false);
         classTextArea.appendText("Class name '" + oldClassName + "' changed to '" + newClassNameText + "'.\n");
 

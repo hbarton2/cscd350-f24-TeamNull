@@ -108,6 +108,24 @@ public class guiFunctions {
         }
     }
 
+
+    public void deleteMethod() {
+        try {
+            // Load the RenameMethod.fxml file
+            FXMLLoader renameMethodLoader = new FXMLLoader(getClass().getResource("/sprint2/DeleteMethod.fxml"));
+            Parent root = renameMethodLoader.load();
+            // Create a new stage and set its title and scene
+            Stage stage = new Stage();
+            stage.setTitle("Delete Method Utility");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            // Print error message to the console
+            System.out.println("Loading Delete Method Utility failed");
+            // Log the exception's stack trace for debugging
+            e.printStackTrace();
+        }
+    }
     /**
      * Opens the "Delete Field Utility" window using a JavaFX stage.
      *
