@@ -74,15 +74,13 @@
          <Button fx:id="fieldSaveButton" mnemonicParsing="false" onAction="#saveFieldsOnClick" prefHeight="25.0" prefWidth="48.0" text="Add" />
 
       <!-- Methods Section -->
-      <Label fx:id="methodLabel" prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods      (parameters)" />
+      <Label fx:id="methodLabel" prefHeight="18.0" prefWidth="172.0" style="-fx-font-size: 14px;" text="Methods  " />
       <ScrollPane fx:id="methodArea" fitToWidth="true" prefHeight="28.0" prefWidth="553.0">
         <VBox fx:id="methodsBox" spacing="5">
           <HBox prefHeight="26.0" prefWidth="472.0" spacing="5">
             <TextField fx:id="classNameToSaveMethod" prefHeight="26.0" prefWidth="75.0" promptText="Class name" />
             <TextField fx:id="methodName" prefHeight="26.0" prefWidth="69.0" promptText="Method name" />
                   <ChoiceBox fx:id="methodDataTypeChoice" prefHeight="26.0" prefWidth="74.0" />
-            <TextField fx:id="parameterName" prefHeight="25.0" prefWidth="98.0" promptText="Parameter name" />
-                  <ChoiceBox fx:id="pramRetunDataTypeChoice" prefHeight="26.0" prefWidth="69.0" />
                   <Button fx:id="methodSaveButton" mnemonicParsing="false" onAction="#saveMethodANDPram" prefHeight="26.0" prefWidth="42.0" text="+" />
           </HBox>
         </VBox>

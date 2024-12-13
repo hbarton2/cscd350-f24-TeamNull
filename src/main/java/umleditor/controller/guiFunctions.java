@@ -82,6 +82,33 @@ public class guiFunctions {
     }
 
     /**
+     * Opens the "Add Parameter Utility" window using a JavaFX stage.
+     *
+     * This method loads the "AddParameter.fxml" file located in the
+     * `/sprint2/` directory and displays it in a new window. If the
+     * loading process fails, an error message is printed to the console,
+     * and the exception's stack trace is logged for debugging purposes.
+     */
+
+    public void addParameter() {
+        try {
+            // Load the RenameMethod.fxml file
+            FXMLLoader addParameterLoader = new FXMLLoader(getClass().getResource("/sprint2/AddParameter.fxml"));
+            Parent root = addParameterLoader.load();
+            // Create a new stage and set its title and scene
+            Stage stage = new Stage();
+            stage.setTitle("Add Parameter Utility");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            // Print error message to the console
+            System.out.println("Loading Add Parameter Utility failed");
+            // Log the exception's stack trace for debugging
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Opens the "Rename Method Utility" window using a JavaFX stage.
      *
      * This method loads the "RenameMethod.fxml" file located in the
