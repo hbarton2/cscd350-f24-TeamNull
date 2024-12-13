@@ -38,7 +38,11 @@ public class UMLNodeManager {
     public void removeNode(ActionEvent event) {
         nodeList.remove(node);
        // anchorPane.getChildren().clear();
+    }
 
+    public void deleteNode(UMLNode node){
+        nodeList.remove(node);
+        node.setVisible(false);
     }
     @FXML
     public static void printNode(ArrayList<UMLNode> nodes) {
