@@ -207,6 +207,10 @@ public class UMLBuilderController {
                 //functions.startRelationshipArrow();   //New Relationship scene
                 break;
 
+            case "Add Parameter":
+                functions.addParameter();
+                break;
+
             case "Rename Parameter":
                 functions.renameParameter();
                 break;
