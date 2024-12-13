@@ -114,8 +114,12 @@ public class UMLNode extends Pane {
      * Updates the node's label and adjusts its size.
      */
     public void updateLabel() {
-        classLabel.setText(formatNodeContent());
-        adjustNodeSize();
+        if(classObject != null) {
+            classLabel.setText(formatNodeContent());
+            adjustNodeSize();
+        }
+        else
+            this.setVisible(false);
     }
     /**
      * Adjusts the size of the node to fit its content.

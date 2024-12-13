@@ -48,6 +48,12 @@ public class UMLNodeManager {
         }
     }
 
+    public void updateAllNodes(){
+        for (UMLNode node : nodeList) {
+            node.updateLabel();
+        }
+    }
+
     /**
      * searches for the node object with the specified name
      * @param className is the name of the node (or class it represents) to search for

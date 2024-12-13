@@ -551,6 +551,7 @@ public class UMLBuilderController {
     @FXML
     void undoLastAction(ActionEvent event) {
         Functions.undo();
+        nodeManager.updateAllNodes();
     }
 
     /**
@@ -561,6 +562,7 @@ public class UMLBuilderController {
     @FXML
     void redoLastAction(ActionEvent event) {
         Functions.redo();
+        nodeManager.updateAllNodes();
     }
 
     public void exitProgram(ActionEvent actionEvent) {
