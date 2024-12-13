@@ -32,7 +32,7 @@ public class UMLBuilderController {
     private Label fieldsLabel, relationshipLabel, classNameLabel, methodLabel;
 
     @FXML
-    private TextField classNameToSaveField, fieldName, fileName, classNameToSaveMethod, methodName, parameterName,
+    private TextField classNameToSaveField, fieldName, fileName, classNameToSaveMethod, methodName,
     lowerMsgBox, classNameToAddRelationship, classNameToAddRelationshipdst, classNameField ;
 
     @FXML
@@ -46,7 +46,7 @@ public class UMLBuilderController {
 
     // Dropdown menu on home page for user to select an action
     @FXML
-    private ChoiceBox<String> userSelectionDropdown, methodDataTypeChoice, pramRetunDataTypeChoice, relationshipChoiceBox
+    private ChoiceBox<String> userSelectionDropdown, methodDataTypeChoice, relationshipChoiceBox
             ,fieldTypeChoice;
 
     @FXML
@@ -70,19 +70,19 @@ public class UMLBuilderController {
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
-    /**
+
     private final List<String> userSelectionList = List.of(
             "Create a Class","Rename a Class", "Delete a Class",
             "Add Field (S)","Rename Field", "Delete Field",
             "Add Method (S)","Rename Method", "Delete Method",
             "Add Parameter","Rename Parameter", "Delete Parameter",
             "Add Relationship","Save File","Help");
-    */
-    private final List<String> userSelectionList = List.of(
-            "Create a Class","Rename a Class", "Delete a Class",
-            "Add Field (S)","Rename Field", "Delete Field",
-            "Add Method (S)","Rename Method", "Delete Method",
-            "Add Relationship","Save File","Help");
+
+//    private final List<String> userSelectionList = List.of(
+//            "Create a Class","Rename a Class", "Delete a Class",
+//            "Add Field (S)","Rename Field", "Delete Field",
+//            "Add Method (S)","Rename Method", "Delete Method",
+//            "Add Relationship","Save File","Help");
 
     private final String filePath = " \\cscd350-f24-TeamNull\\src\\main\\resources\\sprint1\\hdd\\";
 
@@ -116,10 +116,7 @@ public class UMLBuilderController {
         // Add list of options to the dropdown menu on the home page.
         userSelectionDropdown.getItems().addAll(userSelectionList);
 
-        // methodDataTypeChoice.getItems().addAll(methodDataTypeChoiceList); // drop down menu for user to select method data type
         methodDataTypeChoice.getItems().addAll(dropDownChoices);
-        // pramRetunDataTypeChoice.getItems().addAll(pramRetunDataTypeChoiceList); // drop down menu for user to select para meter data type
-        pramRetunDataTypeChoice.getItems().addAll(dropDownChoices); // drop down menu for user to select para meter data type
 
         fieldTypeChoice.getItems().addAll(dropDownChoices); // Field Data Type dropdown menu show list of options
 
@@ -427,29 +424,15 @@ public class UMLBuilderController {
             methodDataTypeChoice.requestFocus();
             return;
         }
-      /**  // Validate parameter name input
-        if (parameterName.getText().isEmpty()) {
-            showWarning("Parameter name is required!");
-            parameterName.requestFocus();
-            return;
-        }
-        // Validate parameter type input
-        if (pramRetunDataTypeChoice.getValue() == null) {
-            showWarning("Parameter type is required!");
-            pramRetunDataTypeChoice.requestFocus();
-            return;
-        }
-        */
         node = nodeManager.getNodeFromName(classNameToSaveMethod.getText());
 
         // Update the underlying class data
         Functions.addMethod(className, methodDataTypeChoice.getValue(), methodName.getText());
-        Functions.addParam(className, methodName.getText(), parameterName.getText(), pramRetunDataTypeChoice.getValue());
+        //Functions.addParam(className, methodName.getText(), parameterName.getText(), pramRetunDataTypeChoice.getValue());
         node.updateLabel();
 
         // Show confirmation message
-        infoBox("Method < " + methodName.getText() + " > and parameter < " + parameterName.getText() +
-                " > saved to class < " + className + " >.");
+        infoBox("Method < " + methodName.getText() + " > saved to class < " + className + " >.");
     }
 
     /**
