@@ -135,8 +135,7 @@ public class UMLNode extends Pane {
     private String formatNodeContent() {
         return "Class Name: " + getClassName() + STRAIGHT_LINE +
                 "Field: " + displayFields() + STRAIGHT_LINE +
-                "Method: " + displayMethods() + STRAIGHT_LINE +
-                "Relationship: " + displayRelationships();
+                "Method: " + displayMethods() + STRAIGHT_LINE;
     }
 
 

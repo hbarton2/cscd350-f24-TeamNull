@@ -67,6 +67,11 @@ public class MethodSignature {
         public String toString() {
             return name + "(" + type + ")";
         }
+
+        public void renameParam(String newName){
+            System.out.println(this.name + " -> " + newName);
+            this.name = newName;
+        }
     }
 
     public void addParam(String name, String type){
@@ -85,6 +90,7 @@ public class MethodSignature {
         System.out.println("Param not found: " + name);
     }
 
+
     //Searches based on name
     public boolean paramExists(String paramName){
         for(UMLParameter param : this.parameters){
@@ -93,6 +99,18 @@ public class MethodSignature {
             }
         }
         return false;
+    }
+
+    public UMLParameter getParam(String paramName){
+        if(paramExists(paramName)){
+            for(UMLParameter param : this.parameters){
+                if(param.name.equals(paramName)){
+                    return param;
+                }
+            }
+        }
+        System.out.println("Param not found: " + paramName);
+        return null;
     }
 
 
