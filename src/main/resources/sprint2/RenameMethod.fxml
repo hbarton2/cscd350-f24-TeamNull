@@ -43,7 +43,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="umleditor.controller.MethodRenameController">
   <children>
@@ -62,14 +61,9 @@
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="662.0">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="378.0" prefWidth="435.0">
                      <children>
-                        <Label layoutX="122.0" layoutY="273.0" prefHeight="27.0" prefWidth="363.0" text="Working on: This feature is in development">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <TextArea fx:id="methodRenameTextArea" layoutX="29.0" layoutY="22.0" prefHeight="200.0" prefWidth="446.0" AnchorPane.bottomAnchor="323.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="187.0" AnchorPane.topAnchor="22.0" />
+                        <TextArea fx:id="methodRenameTextArea" layoutX="29.0" layoutY="22.0" prefHeight="228.0" prefWidth="376.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="22.0" />
                      </children>
             </AnchorPane>
           </content>

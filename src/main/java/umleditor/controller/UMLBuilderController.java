@@ -15,10 +15,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import umleditor.controller.utilities.Functions;
 import umleditor.model.utilities.Storage;
-import umleditor.view.gui.GUIDisplay;
-import umleditor.view.gui.UMLNode;
-import umleditor.view.gui.UMLNodeManager;
-import umleditor.view.gui.RelationshipLines;
+import umleditor.view.gui.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -35,7 +32,7 @@ public class UMLBuilderController {
     private Label fieldsLabel, relationshipLabel, classNameLabel, methodLabel;
 
     @FXML
-    private TextField classNameToSaveField, fieldName, fileName, classNameToSaveMethod, methodName, parameterName,
+    private TextField classNameToSaveField, fieldName, fileName, classNameToSaveMethod, methodName,
     lowerMsgBox, classNameToAddRelationship, classNameToAddRelationshipdst, classNameField ;
 
     @FXML
@@ -49,12 +46,13 @@ public class UMLBuilderController {
 
     // Dropdown menu on home page for user to select an action
     @FXML
-    private ChoiceBox<String> userSelectionDropdown, methodDataTypeChoice, pramRetunDataTypeChoice, relationshipChoiceBox
+    private ChoiceBox<String> userSelectionDropdown, methodDataTypeChoice, relationshipChoiceBox
             ,fieldTypeChoice;
 
     @FXML
     private AnchorPane viewAnchorPane;
-
+    @FXML
+    private VBox leftViewPane;
     @FXML
     private ScrollPane area, methodArea; // method area is the whole area with field box, drop down menu, plus and minus buttons
 
@@ -64,18 +62,27 @@ public class UMLBuilderController {
     UMLNode node ;
     guiFunctions functions = new guiFunctions();
     GUIDisplay display = new GUIDisplay();
+
+
     UMLNodeManager nodeManager = UMLNodeManager.getInstance();
     Storage storage = Storage.getInstance();
     RelationshipLines lines = new RelationshipLines();
 
     // List of option for user to chose on the home page
     // This needs to be of an enum class, for now just listing them here.
+
     private final List<String> userSelectionList = List.of(
             "Create a Class","Rename a Class", "Delete a Class",
             "Add Field (S)","Rename Field", "Delete Field",
             "Add Method (S)","Rename Method", "Delete Method",
             "Add Parameter","Rename Parameter", "Delete Parameter",
             "Add Relationship","Save File","Help");
+
+//    private final List<String> userSelectionList = List.of(
+//            "Create a Class","Rename a Class", "Delete a Class",
+//            "Add Field (S)","Rename Field", "Delete Field",
+//            "Add Method (S)","Rename Method", "Delete Method",
+//            "Add Relationship","Save File","Help");
 
     private final String filePath = " \\cscd350-f24-TeamNull\\src\\main\\resources\\sprint1\\hdd\\";
 
@@ -95,6 +102,8 @@ public class UMLBuilderController {
      */
     @FXML
     public void initialize() {
+       // leftViewPane.setMaxHeight(800.00);
+        leftViewPane.setMaxWidth(400.00);
         Pane root = new Pane();
         hideClassArea();// to hide the class label, class field and button to save class
         hideFieldArea(); // to hide the field label, field name, drop down menu, and save button
@@ -107,10 +116,7 @@ public class UMLBuilderController {
         // Add list of options to the dropdown menu on the home page.
         userSelectionDropdown.getItems().addAll(userSelectionList);
 
-        // methodDataTypeChoice.getItems().addAll(methodDataTypeChoiceList); // drop down menu for user to select method data type
         methodDataTypeChoice.getItems().addAll(dropDownChoices);
-        // pramRetunDataTypeChoice.getItems().addAll(pramRetunDataTypeChoiceList); // drop down menu for user to select para meter data type
-        pramRetunDataTypeChoice.getItems().addAll(dropDownChoices); // drop down menu for user to select para meter data type
 
         fieldTypeChoice.getItems().addAll(dropDownChoices); // Field Data Type dropdown menu show list of options
 
@@ -140,7 +146,6 @@ public class UMLBuilderController {
                 hideFieldArea();
                 hideRArea();
                 hideMethodArea();
-
 
                 showClassArea();
 
@@ -179,7 +184,6 @@ public class UMLBuilderController {
                 hideClassArea();
                 hideRArea();
 
-
                 showMethodArea();
 
                 classNameToSaveMethod.requestFocus();
@@ -187,6 +191,11 @@ public class UMLBuilderController {
             case "Rename Method":
                 functions.renameMethod();
                 break;
+
+            case "Delete Method":
+                functions.deleteMethod();
+                break;
+
             case "Add Relationship":
                 hideFieldArea();
                 hideMethodArea();
@@ -196,6 +205,10 @@ public class UMLBuilderController {
                 showRArea();
                 relationshipChoiceBox.requestFocus();
                 //functions.startRelationshipArrow();   //New Relationship scene
+                break;
+
+            case "Add Parameter":
+                functions.addParameter();
                 break;
 
             case "Rename Parameter":
@@ -215,9 +228,6 @@ public class UMLBuilderController {
                 infoBox(relationshipChoiceBox.getValue() + " is in development");
         }
     }
-
-
-
 
     /**
      * This method shows "Warning" message. Text in red color when precondition of a method does not meet.
@@ -252,35 +262,6 @@ public class UMLBuilderController {
         infoBox("All progress has been cleared.");
 
     }
-
-    @FXML
-    public void saveClassAction(MouseEvent event) {
-        // Placeholder for save functionality
-    }
-
-
-
-
-    /**
-     * This method saves the progress in a file name provided by user
-     * Pre-condition, it checks for the file name, if not provided shows a message on the screen
-     * asking user to provide a file name.
-     * Once file name is provide, it saves the file under that name and displays a message to the user
-     * with the file location.
-     * @param actionEvent, click on the save button
-     */
-    /**
-    public void saveNode(ActionEvent actionEvent) {
-
-        if(fileName.getText().isEmpty()) {
-            showWarning("Please enter a file name");
-            fileName.requestFocus();
-            return;
-        }
-        Functions.saveProgress(fileName.getText());
-        infoBox("Saving file to " + filePath + fileName.getText() + ".json");
-    }
-*/
 
     public void loadNode(ActionEvent actionEvent) {
        // textArea.setVisible(true);
@@ -345,15 +326,6 @@ public class UMLBuilderController {
         relationshipLabel.setVisible(true);
         area.setVisible(true);
     }
-/**
-    @FXML
-    public void hideFileArea(){
-        fileName.setVisible(false);
-        saveClassBNT.setVisible(false);
-    }
-
-*/
-
 
     /**
      * Handles the event when the "Save Class Name" button is clicked.
@@ -456,29 +428,15 @@ public class UMLBuilderController {
             methodDataTypeChoice.requestFocus();
             return;
         }
-        // Validate parameter name input
-        if (parameterName.getText().isEmpty()) {
-            showWarning("Parameter name is required!");
-            parameterName.requestFocus();
-            return;
-        }
-        // Validate parameter type input
-        if (pramRetunDataTypeChoice.getValue() == null) {
-            showWarning("Parameter type is required!");
-            pramRetunDataTypeChoice.requestFocus();
-            return;
-        }
-
         node = nodeManager.getNodeFromName(classNameToSaveMethod.getText());
 
         // Update the underlying class data
         Functions.addMethod(className, methodDataTypeChoice.getValue(), methodName.getText());
-        Functions.addParam(className, methodName.getText(), parameterName.getText(), pramRetunDataTypeChoice.getValue());
+        //Functions.addParam(className, methodName.getText(), parameterName.getText(), pramRetunDataTypeChoice.getValue());
         node.updateLabel();
 
         // Show confirmation message
-        infoBox("Method < " + methodName.getText() + " > and parameter < " + parameterName.getText() +
-                " > saved to class < " + className + " >.");
+        infoBox("Method < " + methodName.getText() + " > saved to class < " + className + " >.");
     }
 
     /**
@@ -544,10 +502,6 @@ public class UMLBuilderController {
 
     }// end of method
 
-
-
-
-
     /**
      * This method creates a class
      * once user types class name in the class name field box
@@ -584,6 +538,7 @@ public class UMLBuilderController {
     @FXML
     void undoLastAction(ActionEvent event) {
         Functions.undo();
+        nodeManager.updateAllNodes();
     }
 
     /**
@@ -594,11 +549,18 @@ public class UMLBuilderController {
     @FXML
     void redoLastAction(ActionEvent event) {
         Functions.redo();
+        nodeManager.updateAllNodes();
     }
 
     public void exitProgram(ActionEvent actionEvent) {
         System.exit(0);
     }
+@FXML
+void aboutApplication(ActionEvent event) {
+
+    System.out.println("this is out application");
+}
+
 
     @FXML
     void saveAsImage(ActionEvent event) {
@@ -606,7 +568,7 @@ public class UMLBuilderController {
         WritableImage screenshot = viewAnchorPane.snapshot(null, null);
         if (screenshot != null) {
             // Set the captured image in the ImageView (optional)
-            imageView.setImage(screenshot);
+           // imageView.setImage(screenshot); // Based on Hunter's feedback remove this line.
 
 //            Robot robot = new Robot();
 //            robot.getScreenCapture(null, 10, 10, 100, 100);

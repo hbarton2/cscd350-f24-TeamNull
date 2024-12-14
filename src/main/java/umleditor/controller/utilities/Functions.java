@@ -177,6 +177,21 @@ public class Functions {
     }
   }
 
+  //Rename Parameter in already existing method
+  public static void renameParam(String className, String methodName, String oldParam, String newParam){
+    if(storage.classExists(className)) {
+      UMLClass umlClass = storage.getClassObject(className);
+      MethodSignature method = getMethodIfExists(className, methodName);
+      if (method != null) {
+        MethodSignature.UMLParameter param = method.getParam(oldParam);
+        if(param != null) {
+          param.renameParam(newParam);
+          memStore.saveState(umlClass.saveToMemento(storage.classExists(className)));
+        }
+      }
+    }
+  }
+
   // List all classes, only names or only relationships
   public static void listClasses(String type) {
     switch (type) {
